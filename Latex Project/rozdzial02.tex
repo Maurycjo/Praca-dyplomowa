@@ -1,3 +1,42 @@
 \chapter{Rozdział 2}
-\section{Sekcja rozdziału 2}
-\section{Sekcja 2 rozdziału 2}
+\section{Wymagania funkcjonalne}
+\begin{enumerate}
+	\item W systemie powinny być dostępne 2 rodzaje (role) użytkowników: pracownik i administrator
+	\item Pracownik jest osobą zatrudnioną w firmie i powinien mieć uprawnienia do przeglądania sprzętów które są dostępne w losowaniu
+	\item Pracownik powinien móc zapisywać się do wzięcia udziału w loterii
+	\item Pracownik jest użytkownikiem który może założyć konto z tym że konto może być założone tylko na email firmowy
+	\item Pracownik wybiera sprzęt do którego chce wziąć udział w loterii
+	\item Administrator powinien dodawać do bazy danych sprzęty które będą dostępne w losowaniu
+	\item Administrator może edytować wszystkie parametry sprzętu z bazy danych przez aplikacje
+	\item Administrator może usuwać urządzenia z bazy danych
+	\item Administrator ma wgląd w historię puli losowań
+	\item Administrator określa przez aplikacje pulę losowania, w tej puli odbywa się wiele losowań
+	\item Administrator może archiwizować sprzedane urządzenia
+	\item Administrator może dodawać komponenty komputera do bazy
+	\item Administrator określa jakie sprzęty znajdują się w puli i kiedy ta pula się odbywa
+	\item System umożliwia autouzupełnianie pól dotyczących dodawanego sprzętu przez administratora przy pomocy bazy danych
+	\item System pomaga w szacowaniu ceny sprzętu na podstawie komponentów urządzeń które znajdują się w bazie danych, z tym że to administrator ustala cenę końcową
+	\item System umożliwia export wybranych danych sprzętu przy pomocy pliku JSON z tym że opis stanu technicznego musi określić samodzielnie
+	\item System ma opcjonalną opcję włączaną przez administratora która będzie zwiększała prawdopodobieństwo wylosowania sprzętu przez użytkowników którzy w poprzednim puli losowaniu nic nie kupili
+	\item System ma opcjonalną opcję która zmniejsza prawdopodobieństwo na wylosowanie kolejnego sprzętu przez pracownika który w tej puli już coś wylosował
+	\item System ma opcjonalną opcję która sprawia że jeżeli jest w puli losowania więcej pracowników niż sprzętów to pracownicy którzy już coś wylosowali nie będą brani pod uwagę
+	\item Na każdy sprzęt jest jedna loteria w której biorą udział zapisani pracownicy
+	\item System po losowania wysyła automatyczny mail do zwycięscy loterii
+	\item Pracownik w aplikacji potwierdza lub odrzuca chęć zakupu urządzenia, w przypadku kiedy w wyznaczonym czasie nie potwierdzi chęci zakupu system traktuje to jako odrzucone
+	\item Odrzucone sprzęty mogą być znowu losowane w nowej puli
+
+
+\end{enumerate}
+
+
+\section{Wymagania niefunkcjonalne}
+\begin{enumerate}
+	\item W przypadku odrzucenia chęci zakupu sprzętu przez pracownika lub przez system, sprzęt może być losowany ponownie
+	\item Losowanie odbywa się na podstawie parametrów ustawionych przez administratora
+	\item System nie umożliwia płatności internetowej
+	\item Administrator ostatecznie określa przez aplikacje czy pracownik odebrał sprzęt
+	\item Przeglądanie systemu odbywa się przez aplikacje webową
+	\item Użytkownik z konta administratora nie może brać udziału w losowaniu
+	\item Może odbywać się wiele puli losowań w tym samym czasie
+
+\end{enumerate}
