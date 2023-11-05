@@ -1,19 +1,20 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "Office")
 public class Office {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "adress")
+    @Column(name = "adress", length = 50)
     private String adress;
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -21,10 +22,11 @@ public class Office {
     }
 
     public String getAdress() {
-        return this.adress;
+        return adress;
     }
 
     public void setAdress(String adress) {
         this.adress = adress;
     }
+
 }

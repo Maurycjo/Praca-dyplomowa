@@ -1,22 +1,23 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "Ram")
 public class Ram {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "ram_name")
+    @Column(name = "ram_name", nullable = false, length = 50)
     private String ramName;
 
     @Column(name = "ram_price")
-    private float ramPrice;
+    private Double ramPrice;
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -24,18 +25,19 @@ public class Ram {
     }
 
     public String getRamName() {
-        return this.ramName;
+        return ramName;
     }
 
     public void setRamName(String ramName) {
         this.ramName = ramName;
     }
 
-    public float getRamPrice() {
-        return this.ramPrice;
+    public Double getRamPrice() {
+        return ramPrice;
     }
 
-    public void setRamPrice(float ramPrice) {
+    public void setRamPrice(Double ramPrice) {
         this.ramPrice = ramPrice;
     }
+
 }

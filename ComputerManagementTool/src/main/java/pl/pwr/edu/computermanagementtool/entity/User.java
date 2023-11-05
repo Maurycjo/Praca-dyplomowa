@@ -1,31 +1,32 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "\"User\"")
 public class User {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, length = 50)
     private String username;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = false, length = 50)
     private String surname;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 50)
     private String email;
 
-    @Column(name = "role_id")
-    private Integer roleId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -33,7 +34,7 @@ public class User {
     }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public void setUsername(String username) {
@@ -41,7 +42,7 @@ public class User {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -49,7 +50,7 @@ public class User {
     }
 
     public String getSurname() {
-        return this.surname;
+        return surname;
     }
 
     public void setSurname(String surname) {
@@ -57,18 +58,19 @@ public class User {
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public Integer getRoleId() {
-        return this.roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
+
 }

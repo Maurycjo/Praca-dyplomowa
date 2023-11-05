@@ -1,58 +1,44 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "Computer")
 public class Computer {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "device_name")
+    @Column(name = "device_name", length = 50)
     private String deviceName;
 
     @Column(name = "price")
-    private float price;
+    private Double price;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 100)
     private String description;
 
     @Column(name = "age")
     private Integer age;
 
-    @Column(name = "ready_to_sell")
-    private Boolean readyToSell;
+    @Column(name = "ready_to_sell", nullable = false)
+    private Boolean readyToSell = false;
 
-    @Column(name = "office_ID")
-    private Integer officeId;
-
-    @Column(name = "lotery_ID")
-    private Integer loteryId;
-
-    @Column(name = "serial_number")
+    @Column(name = "serial_number", length = 50)
     private String serialNumber;
 
-    @Column(name = "cpu_id")
-    private Integer cpuId;
-
-    @Column(name = "storage_id")
-    private Integer storageId;
-
-    @Column(name = "ram_id")
-    private Integer ramId;
-
-    @Column(name = "model")
+    @Column(name = "model", length = 50)
     private String model;
 
-    @Column(name = "operating_system")
+    @Column(name = "operating_system", length = 50)
     private String operatingSystem;
 
-    @Column(name = "batery_life")
+    @Column(name = "batery_life", length = 50)
     private String bateryLife;
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -60,23 +46,23 @@ public class Computer {
     }
 
     public String getDeviceName() {
-        return this.deviceName;
+        return deviceName;
     }
 
     public void setDeviceName(String deviceName) {
         this.deviceName = deviceName;
     }
 
-    public float getPrice() {
-        return this.price;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
@@ -84,7 +70,7 @@ public class Computer {
     }
 
     public Integer getAge() {
-        return this.age;
+        return age;
     }
 
     public void setAge(Integer age) {
@@ -92,63 +78,23 @@ public class Computer {
     }
 
     public Boolean getReadyToSell() {
-        return this.readyToSell;
+        return readyToSell;
     }
 
     public void setReadyToSell(Boolean readyToSell) {
         this.readyToSell = readyToSell;
     }
 
-    public Integer getOfficeId() {
-        return this.officeId;
-    }
-
-    public void setOfficeId(Integer officeId) {
-        this.officeId = officeId;
-    }
-
-    public Integer getLoteryId() {
-        return this.loteryId;
-    }
-
-    public void setLoteryId(Integer loteryId) {
-        this.loteryId = loteryId;
-    }
-
     public String getSerialNumber() {
-        return this.serialNumber;
+        return serialNumber;
     }
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
 
-    public Integer getCpuId() {
-        return this.cpuId;
-    }
-
-    public void setCpuId(Integer cpuId) {
-        this.cpuId = cpuId;
-    }
-
-    public Integer getStorageId() {
-        return this.storageId;
-    }
-
-    public void setStorageId(Integer storageId) {
-        this.storageId = storageId;
-    }
-
-    public Integer getRamId() {
-        return this.ramId;
-    }
-
-    public void setRamId(Integer ramId) {
-        this.ramId = ramId;
-    }
-
     public String getModel() {
-        return this.model;
+        return model;
     }
 
     public void setModel(String model) {
@@ -156,7 +102,7 @@ public class Computer {
     }
 
     public String getOperatingSystem() {
-        return this.operatingSystem;
+        return operatingSystem;
     }
 
     public void setOperatingSystem(String operatingSystem) {
@@ -164,10 +110,11 @@ public class Computer {
     }
 
     public String getBateryLife() {
-        return this.bateryLife;
+        return bateryLife;
     }
 
     public void setBateryLife(String bateryLife) {
         this.bateryLife = bateryLife;
     }
+
 }

@@ -1,22 +1,23 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "Cpu")
 public class Cpu {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "cpu_name")
+    @Column(name = "cpu_name", nullable = false, length = 50)
     private String cpuName;
 
     @Column(name = "cpu_price")
-    private float cpuPrice;
+    private Double cpuPrice;
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -24,18 +25,19 @@ public class Cpu {
     }
 
     public String getCpuName() {
-        return this.cpuName;
+        return cpuName;
     }
 
     public void setCpuName(String cpuName) {
         this.cpuName = cpuName;
     }
 
-    public float getCpuPrice() {
-        return this.cpuPrice;
+    public Double getCpuPrice() {
+        return cpuPrice;
     }
 
-    public void setCpuPrice(float cpuPrice) {
+    public void setCpuPrice(Double cpuPrice) {
         this.cpuPrice = cpuPrice;
     }
+
 }

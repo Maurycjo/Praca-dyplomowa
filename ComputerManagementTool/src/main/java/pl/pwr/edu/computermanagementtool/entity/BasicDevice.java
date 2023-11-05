@@ -1,21 +1,22 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "BasicDevice")
 public class BasicDevice {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "device_name")
+    @Column(name = "device_name", length = 50)
     private String deviceName;
 
     @Column(name = "price")
-    private float price;
+    private Double price;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 100)
     private String description;
 
     @Column(name = "age")
@@ -24,14 +25,8 @@ public class BasicDevice {
     @Column(name = "ready_to_sell")
     private Boolean readyToSell;
 
-    @Column(name = "office_ID")
-    private Integer officeId;
-
-    @Column(name = "lotery_ID")
-    private Integer loteryId;
-
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -39,23 +34,23 @@ public class BasicDevice {
     }
 
     public String getDeviceName() {
-        return this.deviceName;
+        return deviceName;
     }
 
     public void setDeviceName(String deviceName) {
         this.deviceName = deviceName;
     }
 
-    public float getPrice() {
-        return this.price;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
@@ -63,7 +58,7 @@ public class BasicDevice {
     }
 
     public Integer getAge() {
-        return this.age;
+        return age;
     }
 
     public void setAge(Integer age) {
@@ -71,26 +66,11 @@ public class BasicDevice {
     }
 
     public Boolean getReadyToSell() {
-        return this.readyToSell;
+        return readyToSell;
     }
 
     public void setReadyToSell(Boolean readyToSell) {
         this.readyToSell = readyToSell;
     }
 
-    public Integer getOfficeId() {
-        return this.officeId;
-    }
-
-    public void setOfficeId(Integer officeId) {
-        this.officeId = officeId;
-    }
-
-    public Integer getLoteryId() {
-        return this.loteryId;
-    }
-
-    public void setLoteryId(Integer loteryId) {
-        this.loteryId = loteryId;
-    }
 }

@@ -1,42 +1,44 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import javax.persistence.*;
-import java.sql.Date;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "Lotery")
 public class Lotery {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "lotery_date")
-    private Date loteryDate;
+    @Column(name = "lotery_date", nullable = false)
+    private LocalDate loteryDate;
 
     @Column(name = "winner_id")
     private Integer winnerId;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive = false;
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public Date getLoteryDate() {
-        return this.loteryDate;
+    public LocalDate getLoteryDate() {
+        return loteryDate;
     }
 
-    public void setLoteryDate(Date loteryDate) {
+    public void setLoteryDate(LocalDate loteryDate) {
         this.loteryDate = loteryDate;
     }
 
     public Integer getWinnerId() {
-        return this.winnerId;
+        return winnerId;
     }
 
     public void setWinnerId(Integer winnerId) {
@@ -44,10 +46,11 @@ public class Lotery {
     }
 
     public Boolean getIsActive() {
-        return this.isActive;
+        return isActive;
     }
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }
+
 }

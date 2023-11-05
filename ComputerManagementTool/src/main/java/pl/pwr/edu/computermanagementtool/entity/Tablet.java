@@ -1,21 +1,20 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Tablet")
 public class Tablet {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "device_name")
+    @Column(name = "device_name", length = 50)
     private String deviceName;
 
     @Column(name = "price")
-    private float price;
+    private Double price;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 100)
     private String description;
 
     @Column(name = "age")
@@ -24,23 +23,25 @@ public class Tablet {
     @Column(name = "ready_to_sell")
     private Boolean readyToSell;
 
-    @Column(name = "office_ID")
-    private Integer officeId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "office_ID", nullable = false)
+    private Office office;
 
-    @Column(name = "lotery_ID")
-    private Integer loteryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lotery_ID")
+    private Lotery lotery;
 
-    @Column(name = "screen_size")
+    @Column(name = "screen_size", length = 50)
     private String screenSize;
 
-    @Column(name = "operating_system")
+    @Column(name = "operating_system", length = 50)
     private String operatingSystem;
 
-    @Column(name = "batery_life")
+    @Column(name = "batery_life", length = 50)
     private String bateryLife;
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -48,23 +49,23 @@ public class Tablet {
     }
 
     public String getDeviceName() {
-        return this.deviceName;
+        return deviceName;
     }
 
     public void setDeviceName(String deviceName) {
         this.deviceName = deviceName;
     }
 
-    public float getPrice() {
-        return this.price;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
@@ -72,7 +73,7 @@ public class Tablet {
     }
 
     public Integer getAge() {
-        return this.age;
+        return age;
     }
 
     public void setAge(Integer age) {
@@ -80,31 +81,31 @@ public class Tablet {
     }
 
     public Boolean getReadyToSell() {
-        return this.readyToSell;
+        return readyToSell;
     }
 
     public void setReadyToSell(Boolean readyToSell) {
         this.readyToSell = readyToSell;
     }
 
-    public Integer getOfficeId() {
-        return this.officeId;
+    public Office getOffice() {
+        return office;
     }
 
-    public void setOfficeId(Integer officeId) {
-        this.officeId = officeId;
+    public void setOffice(Office office) {
+        this.office = office;
     }
 
-    public Integer getLoteryId() {
-        return this.loteryId;
+    public Lotery getLotery() {
+        return lotery;
     }
 
-    public void setLoteryId(Integer loteryId) {
-        this.loteryId = loteryId;
+    public void setLotery(Lotery lotery) {
+        this.lotery = lotery;
     }
 
     public String getScreenSize() {
-        return this.screenSize;
+        return screenSize;
     }
 
     public void setScreenSize(String screenSize) {
@@ -112,7 +113,7 @@ public class Tablet {
     }
 
     public String getOperatingSystem() {
-        return this.operatingSystem;
+        return operatingSystem;
     }
 
     public void setOperatingSystem(String operatingSystem) {
@@ -120,10 +121,11 @@ public class Tablet {
     }
 
     public String getBateryLife() {
-        return this.bateryLife;
+        return bateryLife;
     }
 
     public void setBateryLife(String bateryLife) {
         this.bateryLife = bateryLife;
     }
+
 }

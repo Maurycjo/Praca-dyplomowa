@@ -1,40 +1,35 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "DockingStation")
 public class DockingStation {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "device_name")
+    @Column(name = "device_name", length = 50)
     private String deviceName;
 
     @Column(name = "price")
-    private float price;
+    private Double price;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 50)
     private String description;
 
-    @Column(name = "age")
+    @Column(name = "age", length = 50)
     private String age;
 
-    @Column(name = "ready_to_sell")
+    @Column(name = "ready_to_sell", length = 50)
     private String readyToSell;
 
-    @Column(name = "office_ID")
-    private Integer officeId;
-
-    @Column(name = "lotery_ID")
-    private Integer loteryId;
-
-    @Column(name = "compatibility_with")
+    @Column(name = "compatibility_with", length = 50)
     private String compatibilityWith;
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -42,23 +37,23 @@ public class DockingStation {
     }
 
     public String getDeviceName() {
-        return this.deviceName;
+        return deviceName;
     }
 
     public void setDeviceName(String deviceName) {
         this.deviceName = deviceName;
     }
 
-    public float getPrice() {
-        return this.price;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
@@ -66,7 +61,7 @@ public class DockingStation {
     }
 
     public String getAge() {
-        return this.age;
+        return age;
     }
 
     public void setAge(String age) {
@@ -74,34 +69,19 @@ public class DockingStation {
     }
 
     public String getReadyToSell() {
-        return this.readyToSell;
+        return readyToSell;
     }
 
     public void setReadyToSell(String readyToSell) {
         this.readyToSell = readyToSell;
     }
 
-    public Integer getOfficeId() {
-        return this.officeId;
-    }
-
-    public void setOfficeId(Integer officeId) {
-        this.officeId = officeId;
-    }
-
-    public Integer getLoteryId() {
-        return this.loteryId;
-    }
-
-    public void setLoteryId(Integer loteryId) {
-        this.loteryId = loteryId;
-    }
-
     public String getCompatibilityWith() {
-        return this.compatibilityWith;
+        return compatibilityWith;
     }
 
     public void setCompatibilityWith(String compatibilityWith) {
         this.compatibilityWith = compatibilityWith;
     }
+
 }
