@@ -1,42 +1,53 @@
 \chapter{Rozdział 2}
-\section{Wymagania funkcjonalne}
-\begin{enumerate}
-	\item W systemie powinny być dostępne 2 rodzaje (role) użytkowników: pracownik i administrator
-	\item Pracownik jest osobą zatrudnioną w firmie i powinien mieć uprawnienia do przeglądania sprzętów które są dostępne w losowaniu
-	\item Pracownik powinien móc zapisywać się do wzięcia udziału w loterii
-	\item Pracownik jest użytkownikiem który może założyć konto z tym że konto może być założone tylko na email firmowy
-	\item Pracownik wybiera sprzęt do którego chce wziąć udział w loterii
-	\item Administrator powinien dodawać do bazy danych sprzęty które będą dostępne w losowaniu
-	\item Administrator może edytować wszystkie parametry sprzętu z bazy danych przez aplikacje
-	\item Administrator może usuwać urządzenia z bazy danych
-	\item Administrator ma wgląd w historię puli losowań
-	\item Administrator określa przez aplikacje pulę losowania, w tej puli odbywa się wiele losowań
-	\item Administrator może archiwizować sprzedane urządzenia
-	\item Administrator może dodawać komponenty komputera do bazy
-	\item Administrator określa jakie sprzęty znajdują się w puli i kiedy ta pula się odbywa
-	\item System umożliwia autouzupełnianie pól dotyczących dodawanego sprzętu przez administratora przy pomocy bazy danych
-	\item System pomaga w szacowaniu ceny sprzętu na podstawie komponentów urządzeń które znajdują się w bazie danych, z tym że to administrator ustala cenę końcową
-	\item System umożliwia export wybranych danych sprzętu przy pomocy pliku JSON z tym że opis stanu technicznego musi określić samodzielnie
-	\item System ma opcjonalną opcję włączaną przez administratora która będzie zwiększała prawdopodobieństwo wylosowania sprzętu przez użytkowników którzy w poprzednim puli losowaniu nic nie kupili
-	\item System ma opcjonalną opcję która zmniejsza prawdopodobieństwo na wylosowanie kolejnego sprzętu przez pracownika który w tej puli już coś wylosował
-	\item System ma opcjonalną opcję która sprawia że jeżeli jest w puli losowania więcej pracowników niż sprzętów to pracownicy którzy już coś wylosowali nie będą brani pod uwagę
-	\item Na każdy sprzęt jest jedna loteria w której biorą udział zapisani pracownicy
-	\item System po losowania wysyła automatyczny mail do zwycięscy loterii
-	\item Pracownik w aplikacji potwierdza lub odrzuca chęć zakupu urządzenia, w przypadku kiedy w wyznaczonym czasie nie potwierdzi chęci zakupu system traktuje to jako odrzucone
-	\item Odrzucone sprzęty mogą być znowu losowane w nowej puli
+\section{Przypadki użycia}
+Poniżej zostały przedstawione przypadki użycia które użytkownicy mogą podjąć w systemie. Przypadki użycia zostały pogrupowane na podstawie 4 rzeczy: zakładania konta, logowania, zarządzania loterią oraz zarządzania sprzętem komputerowym.
+
+\section{Założenie konta pracowniczego}
+Pracownik jest osobą pracującą w firmie.Jako że implementowany system jest niezależny od wewnętrznych systemów firmy potrzebne jest założenie kont dla użytkowników. Użytkownik sam zakłada konto do czego wykorzystuje swojego maila firmowego gdzie można potwierdzić jego tożsamość.
+
+\begin{figure}[h]
+    \includegraphics{rys01/zakladanie.jpg}
+    \caption{Przypadek zakładania konta pracowniczego}
+    \label{zakładanie_konta_etykieta}
+\end{figure}
+
+Załączony rysunek Rys.~\ref{zakładanie_konta_etykieta} pokazuje proces rejestracji. Użytkownik najpierw podaje swoje dane. Następnie jeżeli dane są prawidłowe klika w link weryfikacyjny na maili i następuje założenie konta.
+
+\section{Logowanie się do systemu}
+
+\begin{figure}[h]
+    \includegraphics{rys01/logowanie.jpg}
+    \caption{Logowanie do systemu z odpowiednimi uprawnieniami}
+    \label{logowanie_etykieta}
+\end{figure}
+
+W załączonym rysunku Rys.~\ref{logowanie_etykieta} został pokazany proces logowania z odpowiednimi uprawnieniami. Uprawnienia są nadawane na podstawie roli którą pełni użytkownik czyli Pracownik lub Administrator. Uprawnieniami pracownika są: przeglądanie dostępnych loterii, zapisywanie i wypisywanie się z udziału z loterii Rys. ~\ref{loteria_etykieta} Administrator jest osobą zarządzająca loteriami i losowanym sprzętem. Nie może jednak on sam się zapisywać na loterie z konta administracyjnego.
+\newpage
+\section {Loteria}
+
+\begin{figure}[h]
+    \includegraphics[scale=0.8]{rys01/loteria.jpg}
+    \caption{Loteria}
+    \label{loteria_etykieta}
+\end{figure}
 
 
-\end{enumerate}
+W załączonym rysunku Rys.~\ref{loteria_etykieta} opisywany jest przypadek loterii. Pracownik ma tylko wgląd w aktywne loterie. Może je pofiltrować tak aby były wyświetlane tylko te loterie w których bierze udział lub te w których nie bierze udziału. Ma też możliwość zapisania lub wypisywania się z loterii. W informacjach dotyczących loterii znajdują się informacje dotyczące sprzętu, biura z którego można odebrać sprzęt oraz data losowania. Administrator również może przeglądać loterie. Ma on uprawnienia do edycji i dodawania nowych loterii. Jedna loteria dotyczy jednego sprzętu dlatego równolegle może odbywać się wiele loterii. Pozwala to uniknąć sytuacji kiedy pracownik wylosowałby sprzęt który go nie interesuje. Administrator może ustalić datę losowania. Dla lepszej wygody tworzenia losowań istnieje w systemie funkcjonalność która umożliwia tworzeniu wielu losowań na raz. Gdy wylosowany zostanie zwycięzca który jest pracownikiem może on zatwierdzić lub odrzucić swoją wygraną. W przypadku braku potwierdzenia po określonej liczbie dni loteria może zostać uruchomiona ponownie z tymi samymi parametrami.
+
+\section {Sprzęt komputerowy}
+
+Istotną część w systemie zajmuje sprzęt komputerowy. System wspomaga monitorowanie stanu urządzeń takich jak komputery, stacje dokujące czy tabletu. W przypadku kiedy firma chciała by wystawić na sprzedaż inny sprzęt istnieje specjalna tabela w bazie danych odpowiadająca podstawowemu sprzętowi komputerowemu która jako atrybuty ma podstawowe informacje. Sprzęt w bazie danych jest już oddany do odsprzedaży, należy zrobić jego wycenę i podać jego parametry.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.8]{rys01/sprzet.jpg}
+    \caption{Sprzęt komputerowy}
+    \label{sprzet_etykieta}
+\end{figure}
 
 
-\section{Wymagania niefunkcjonalne}
-\begin{enumerate}
-	\item W przypadku odrzucenia chęci zakupu sprzętu przez pracownika lub przez system, sprzęt może być losowany ponownie
-	\item Losowanie odbywa się na podstawie parametrów ustawionych przez administratora
-	\item System nie umożliwia płatności internetowej
-	\item Administrator ostatecznie określa przez aplikacje czy pracownik odebrał sprzęt
-	\item Przeglądanie systemu odbywa się przez aplikacje webową
-	\item Użytkownik z konta administratora nie może brać udziału w losowaniu
-	\item Może odbywać się wiele puli losowań w tym samym czasie
+W załączonym rysunku Rys. \ref{sprzet_etykieta} Jedyną osobą która może zarządzać sprzętem jest administrator. To on dodaje sprzęty do bazy danych przez aplikacje, z tym że system pomaga mu podpowiadając pola takie jak procesor, pamięć i pamięć RAM. System także pomaga oszacować cenę urządzenia na podstawie zaimplementowanego algorytmu szacowania ceny, z tym że ostateczna cena urządzenia jest podawana przez administratora. Pracownik może przeglądać urządzenia i jego parametry ale z poziomu loterii Rys.~\ref{loteria_etykieta}
 
-\end{enumerate}
+
+
+
+
