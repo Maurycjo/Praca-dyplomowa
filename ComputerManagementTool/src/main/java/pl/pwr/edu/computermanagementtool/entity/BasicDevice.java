@@ -1,10 +1,11 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "basic_device")
+
 public class BasicDevice {
     @Id
     @Column(name = "id", nullable = false)
@@ -24,6 +25,16 @@ public class BasicDevice {
 
     @Column(name = "ready_to_sell")
     private Boolean readyToSell;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "office_ID", nullable = false)
+    private Office office;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lotery_ID")
+    private Lotery lotery;
 
     public Integer getId() {
         return id;
@@ -71,6 +82,22 @@ public class BasicDevice {
 
     public void setReadyToSell(Boolean readyToSell) {
         this.readyToSell = readyToSell;
+    }
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
+    }
+
+    public Lotery getLotery() {
+        return lotery;
+    }
+
+    public void setLotery(Lotery lotery) {
+        this.lotery = lotery;
     }
 
 }

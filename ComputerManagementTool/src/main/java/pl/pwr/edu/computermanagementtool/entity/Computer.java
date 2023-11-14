@@ -1,8 +1,6 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Computer {
@@ -25,8 +23,28 @@ public class Computer {
     @Column(name = "ready_to_sell", nullable = false)
     private Boolean readyToSell = false;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "office_ID", nullable = false)
+    private Office office;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lotery_ID")
+    private Lotery lotery;
+
     @Column(name = "serial_number", length = 50)
     private String serialNumber;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cpu_id", nullable = false)
+    private Cpu cpu;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storage_id")
+    private Storage storage;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ram_id")
+    private Ram ram;
 
     @Column(name = "model", length = 50)
     private String model;
@@ -85,12 +103,52 @@ public class Computer {
         this.readyToSell = readyToSell;
     }
 
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
+    }
+
+    public Lotery getLotery() {
+        return lotery;
+    }
+
+    public void setLotery(Lotery lotery) {
+        this.lotery = lotery;
+    }
+
     public String getSerialNumber() {
         return serialNumber;
     }
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
+    }
+
+    public Cpu getCpu() {
+        return cpu;
+    }
+
+    public void setCpu(Cpu cpu) {
+        this.cpu = cpu;
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
+    public Ram getRam() {
+        return ram;
+    }
+
+    public void setRam(Ram ram) {
+        this.ram = ram;
     }
 
     public String getModel() {

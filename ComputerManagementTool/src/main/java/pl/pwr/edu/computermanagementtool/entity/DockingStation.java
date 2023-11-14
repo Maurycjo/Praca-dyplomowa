@@ -1,8 +1,6 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class DockingStation {
@@ -24,6 +22,14 @@ public class DockingStation {
 
     @Column(name = "ready_to_sell", length = 50)
     private String readyToSell;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "office_ID", nullable = false)
+    private Office office;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lotery_ID")
+    private Lotery lotery;
 
     @Column(name = "compatibility_with", length = 50)
     private String compatibilityWith;
@@ -74,6 +80,22 @@ public class DockingStation {
 
     public void setReadyToSell(String readyToSell) {
         this.readyToSell = readyToSell;
+    }
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
+    }
+
+    public Lotery getLotery() {
+        return lotery;
+    }
+
+    public void setLotery(Lotery lotery) {
+        this.lotery = lotery;
     }
 
     public String getCompatibilityWith() {
