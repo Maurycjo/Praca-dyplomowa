@@ -6,10 +6,12 @@ Bazy danych stanowią kluczowy element wielu aplikacji. Pozwalają one na przech
 Do zaprojektowania bazy danych został wykonany diagram związków encji który pokazuję jakiego typu dane są użyte w jakich tabelach oraz jakie są relacje miedzy tymi tabelami.
 
 \begin{figure}[h]
-    \includegraphics[scale=0.3]{rys04/ER_Diagram.jpg}
+		\hspace{-2cm}
+    \includegraphics[scale=0.65]{rys04/ER_Diagram.jpg}
     \caption{Diagram związków encji}
     \label{ErDiagram_etykieta}
 \end{figure}
+
 
 W bazie danych istnieją 4 rodzaje urządzeń:
 \begin{itemize}
@@ -33,4 +35,4 @@ Wszystkie te 4 typy urządzeń mają taką samą funkcje w systemie czyli losowa
 Istnieją też pola które pozwalają na dokładniejszy opis urządzenia ze względu na jego typ. Stacja dokująca posiada informacje do jakiego typu komputera można ją podłączyć. Tablet za to rozmiar ekranu, system operacyjny i żywotność baterii.
  Komputer posiada największą liczbę informacji, jest on sprzętem najczęściej sprzedawanym w firmach dlatego też otrzymał największe wsparcie w systemie. Oprócz informacji takich jak numer seryjny, system, żywotność baterii czy model komputer w bazie danych połączony jest z tabelami dotyczącymi Procesora, pamięci, czy pamięci RAM. Takie połączenie pozwala na podpowiadanie nazwy komponentu komputera biorąc informacje o komponentach z bazy danych. Komponenty te reprezentowane przez tabele Cpu, Storage i Ram posiadają tylko informacje o nazwie i cenie. Cena komponentów pomaga oszacować ostateczną cenę komputera.
 Tabelą wykorzystywaną do losowania, archiwizowania i ustalania daty losowania jest tabela Lotery. Przechowuje ona informacje o dacie, o tym czy losowanie jest aktywne oraz zwycięzce losowania.
-W systemie istnieją dwie role Administrator i Pracownik. Wykorzystanie tabeli Role pozwala na dodaniu dodatkowych ról w systemie w przyszłym rozwoju aplikacji. Użytkownik posiada swoje dane jak nazwa użytkownika, imię nazwisko oraz email firmowy. Email firmowy jest niezbędny do założenia konta, brania udziału w loterii. NIE WIEM JAK HASŁA ZROBIĆ
+W systemie istnieją dwie role Administrator i Pracownik. Wykorzystanie tabeli Role pozwala na dodaniu dodatkowych ról w systemie w przyszłym rozwoju aplikacji. Użytkownik posiada swoje dane jak nazwa użytkownika, imię nazwisko oraz email firmowy. Email firmowy jest niezbędny do założenia konta, brania udziału w loterii.
