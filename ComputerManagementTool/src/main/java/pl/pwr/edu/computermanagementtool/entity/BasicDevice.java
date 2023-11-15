@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "basic_device")
 
-public class BasicDevice {
+public class BasicDevice implements iDevice<BasicDevice>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -37,18 +37,7 @@ public class BasicDevice {
     @JoinColumn(name = "lotery_ID")
     private Lottery lottery;
 
-    public BasicDevice() {
 
-    }
-
-    public BasicDevice(String deviceName, Float price, String description, Integer age, Boolean readyToSell, Office office) {
-        this.deviceName = deviceName;
-        this.price = price;
-        this.description = description;
-        this.age = age;
-        this.readyToSell = readyToSell;
-        this.office = office;
-    }
 
     public Integer getId() {
         return id;
@@ -113,5 +102,20 @@ public class BasicDevice {
     public void setLottery(Lottery lottery) {
         this.lottery = lottery;
     }
+
+
+    public BasicDevice() {
+
+    }
+
+    public BasicDevice(String deviceName, Float price, String description, Integer age, Boolean readyToSell, Office office) {
+        this.deviceName = deviceName;
+        this.price = price;
+        this.description = description;
+        this.age = age;
+        this.readyToSell = readyToSell;
+        this.office = office;
+    }
+
 
 }

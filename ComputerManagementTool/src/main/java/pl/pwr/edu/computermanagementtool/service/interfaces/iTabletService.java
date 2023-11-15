@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface iTabletService {
 
-    Tablet getTabletById(int id);
-    List<Tablet> getAllTablets();
+
 }

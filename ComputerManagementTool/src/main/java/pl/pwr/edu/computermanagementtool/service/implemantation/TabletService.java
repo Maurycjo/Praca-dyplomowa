@@ -1,26 +1,17 @@
 package pl.pwr.edu.computermanagementtool.service.implemantation;
 import org.springframework.stereotype.Service;
 import pl.pwr.edu.computermanagementtool.entity.Tablet;
-import pl.pwr.edu.computermanagementtool.repository.TabletRepository;
+import pl.pwr.edu.computermanagementtool.repository.GenericDeviceRepository;
+import pl.pwr.edu.computermanagementtool.repository.LotteryRepository;
+import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
 import pl.pwr.edu.computermanagementtool.service.interfaces.iTabletService;
 
 import java.util.List;
 
 @Service
-public class TabletService implements iTabletService{
-    private final TabletRepository tabletRepository;
+public class TabletService extends GenericDeviceService<Tablet>{
 
-    public TabletService(TabletRepository tabletRepository) {
-        this.tabletRepository = tabletRepository;
-    }
-
-    @Override
-    public Tablet getTabletById(int id) {
-        return null;
-    }
-
-    @Override
-    public List<Tablet> getAllTablets() {
-        return null;
+    public TabletService(GenericDeviceRepository<Tablet> genericDeviceRepository, OfficeRepository officeRepository, LotteryRepository lotteryRepository) {
+        super(genericDeviceRepository, officeRepository, lotteryRepository);
     }
 }

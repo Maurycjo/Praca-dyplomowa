@@ -1,9 +1,12 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
-public class Computer {
+public class Computer implements iDevice<Computer>{
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -13,7 +16,7 @@ public class Computer {
     private String deviceName;
 
     @Column(name = "price")
-    private Double price;
+    private Float price;
 
     @Column(name = "description", length = 100)
     private String description;
@@ -24,10 +27,12 @@ public class Computer {
     @Column(name = "ready_to_sell", nullable = false)
     private Boolean readyToSell = false;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "office_ID", nullable = false)
     private Office office;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lotery_ID")
     private Lottery lottery;
@@ -35,14 +40,17 @@ public class Computer {
     @Column(name = "serial_number", length = 50)
     private String serialNumber;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cpu_id", nullable = false)
     private Cpu cpu;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storage_id")
     private Storage storage;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ram_id")
     private Ram ram;
@@ -72,11 +80,11 @@ public class Computer {
         this.deviceName = deviceName;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -112,11 +120,11 @@ public class Computer {
         this.office = office;
     }
 
-    public Lottery getLotery() {
+    public Lottery getLottery() {
         return lottery;
     }
 
-    public void setLotery(Lottery lottery) {
+    public void setLottery(Lottery lottery) {
         this.lottery = lottery;
     }
 
@@ -174,6 +182,9 @@ public class Computer {
 
     public void setBateryLife(String bateryLife) {
         this.bateryLife = bateryLife;
+    }
+
+    public Computer() {
     }
 
 }

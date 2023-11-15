@@ -14,7 +14,7 @@ public class DockingStation {
     private String deviceName;
 
     @Column(name = "price")
-    private Double price;
+    private Float price;
 
     @Column(name = "description", length = 50)
     private String description;
@@ -52,11 +52,11 @@ public class DockingStation {
         this.deviceName = deviceName;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -92,11 +92,11 @@ public class DockingStation {
         this.office = office;
     }
 
-    public Lottery getLotery() {
+    public Lottery getLottery() {
         return lottery;
     }
 
-    public void setLotery(Lottery lottery) {
+    public void setLottery(Lottery lottery) {
         this.lottery = lottery;
     }
 

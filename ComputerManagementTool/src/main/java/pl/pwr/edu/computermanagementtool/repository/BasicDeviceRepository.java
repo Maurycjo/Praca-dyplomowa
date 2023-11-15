@@ -1,5 +1,6 @@
 package pl.pwr.edu.computermanagementtool.repository;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.pwr.edu.computermanagementtool.entity.BasicDevice;
@@ -7,9 +8,7 @@ import pl.pwr.edu.computermanagementtool.entity.BasicDevice;
 import java.util.List;
 
 @Repository
-public interface BasicDeviceRepository extends JpaRepository<BasicDevice, Integer> {
+@Primary
+public interface BasicDeviceRepository extends GenericDeviceRepository<BasicDevice>{
 
-    List<BasicDevice> findAllByReadyToSellIsTrue();
-    List<BasicDevice> findAllByReadyToSellIsFalse();
-    List<BasicDevice> findAllByOfficeId(int officeId);
 }

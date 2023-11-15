@@ -1,10 +1,11 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tablet")
-public class Tablet {
+public class Tablet implements iDevice<Tablet>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -14,7 +15,7 @@ public class Tablet {
     private String deviceName;
 
     @Column(name = "price")
-    private Double price;
+    private Float price;
 
     @Column(name = "description", length = 100)
     private String description;
@@ -25,10 +26,12 @@ public class Tablet {
     @Column(name = "ready_to_sell")
     private Boolean readyToSell;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "office_ID", nullable = false)
     private Office office;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lotery_ID")
     private Lottery lottery;
@@ -58,11 +61,11 @@ public class Tablet {
         this.deviceName = deviceName;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -98,11 +101,11 @@ public class Tablet {
         this.office = office;
     }
 
-    public Lottery getLotery() {
+    public Lottery getLottery() {
         return lottery;
     }
 
-    public void setLotery(Lottery lottery) {
+    public void setLottery(Lottery lottery) {
         this.lottery = lottery;
     }
 
