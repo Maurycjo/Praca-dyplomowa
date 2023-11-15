@@ -3,9 +3,10 @@ package pl.pwr.edu.computermanagementtool.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "\"User\"")
+@Table(name = "user")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

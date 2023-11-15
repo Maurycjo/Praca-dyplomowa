@@ -3,8 +3,10 @@ package pl.pwr.edu.computermanagementtool.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name= "docking_station")
 public class DockingStation {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -29,7 +31,7 @@ public class DockingStation {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lotery_ID")
-    private Lotery lotery;
+    private Lottery lottery;
 
     @Column(name = "compatibility_with", length = 50)
     private String compatibilityWith;
@@ -90,12 +92,12 @@ public class DockingStation {
         this.office = office;
     }
 
-    public Lotery getLotery() {
-        return lotery;
+    public Lottery getLotery() {
+        return lottery;
     }
 
-    public void setLotery(Lotery lotery) {
-        this.lotery = lotery;
+    public void setLotery(Lottery lottery) {
+        this.lottery = lottery;
     }
 
     public String getCompatibilityWith() {

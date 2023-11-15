@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class Computer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -29,7 +30,7 @@ public class Computer {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lotery_ID")
-    private Lotery lotery;
+    private Lottery lottery;
 
     @Column(name = "serial_number", length = 50)
     private String serialNumber;
@@ -111,12 +112,12 @@ public class Computer {
         this.office = office;
     }
 
-    public Lotery getLotery() {
-        return lotery;
+    public Lottery getLotery() {
+        return lottery;
     }
 
-    public void setLotery(Lotery lotery) {
-        this.lotery = lotery;
+    public void setLotery(Lottery lottery) {
+        this.lottery = lottery;
     }
 
     public String getSerialNumber() {

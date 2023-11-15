@@ -1,18 +1,18 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
-public class Lotery {
+@Table(name="lottery")
+public class Lottery {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "lotery_date", nullable = false)
+    @Column(name = "lottery_date", nullable = false)
     private LocalDate loteryDate;
 
     @Column(name = "winner_id")
@@ -29,11 +29,11 @@ public class Lotery {
         this.id = id;
     }
 
-    public LocalDate getLoteryDate() {
+    public LocalDate getLotteryDate() {
         return loteryDate;
     }
 
-    public void setLoteryDate(LocalDate loteryDate) {
+    public void setLotteryDate(LocalDate loteryDate) {
         this.loteryDate = loteryDate;
     }
 

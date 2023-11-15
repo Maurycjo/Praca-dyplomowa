@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 public class BasicDevice {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -15,7 +16,7 @@ public class BasicDevice {
     private String deviceName;
 
     @Column(name = "price")
-    private Double price;
+    private Float price;
 
     @Column(name = "description", length = 100)
     private String description;
@@ -34,7 +35,20 @@ public class BasicDevice {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lotery_ID")
-    private Lotery lotery;
+    private Lottery lottery;
+
+    public BasicDevice() {
+
+    }
+
+    public BasicDevice(String deviceName, Float price, String description, Integer age, Boolean readyToSell, Office office) {
+        this.deviceName = deviceName;
+        this.price = price;
+        this.description = description;
+        this.age = age;
+        this.readyToSell = readyToSell;
+        this.office = office;
+    }
 
     public Integer getId() {
         return id;
@@ -52,11 +66,11 @@ public class BasicDevice {
         this.deviceName = deviceName;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -92,12 +106,12 @@ public class BasicDevice {
         this.office = office;
     }
 
-    public Lotery getLotery() {
-        return lotery;
+    public Lottery getLottery() {
+        return lottery;
     }
 
-    public void setLotery(Lotery lotery) {
-        this.lotery = lotery;
+    public void setLottery(Lottery lottery) {
+        this.lottery = lottery;
     }
 
 }

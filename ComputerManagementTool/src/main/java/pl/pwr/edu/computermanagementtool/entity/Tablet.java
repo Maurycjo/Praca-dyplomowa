@@ -3,8 +3,10 @@ package pl.pwr.edu.computermanagementtool.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "tablet")
 public class Tablet {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -29,7 +31,7 @@ public class Tablet {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lotery_ID")
-    private Lotery lotery;
+    private Lottery lottery;
 
     @Column(name = "screen_size", length = 50)
     private String screenSize;
@@ -96,12 +98,12 @@ public class Tablet {
         this.office = office;
     }
 
-    public Lotery getLotery() {
-        return lotery;
+    public Lottery getLotery() {
+        return lottery;
     }
 
-    public void setLotery(Lotery lotery) {
-        this.lotery = lotery;
+    public void setLotery(Lottery lottery) {
+        this.lottery = lottery;
     }
 
     public String getScreenSize() {
