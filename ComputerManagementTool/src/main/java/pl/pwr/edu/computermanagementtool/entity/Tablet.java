@@ -3,7 +3,7 @@ package pl.pwr.edu.computermanagementtool.entity;
 import jakarta.persistence.*;
 
 @Entity
-@DiscriminatorValue("TABLET")
+@Table(name = "tablet")
 public class Tablet extends DeviceCore{
 
     @Column(name = "screen_size", length = 50)

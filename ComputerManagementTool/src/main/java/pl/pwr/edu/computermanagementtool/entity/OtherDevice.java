@@ -5,7 +5,7 @@ import org.hibernate.annotations.DiscriminatorFormula;
 
 
 @Entity
-@DiscriminatorValue("OTHER")
+@Table(name = "other_device")
 public class OtherDevice extends DeviceCore{
 
     @Column(name = "additional_info", length = 100)

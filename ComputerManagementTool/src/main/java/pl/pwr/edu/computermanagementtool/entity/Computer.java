@@ -3,11 +3,12 @@ package pl.pwr.edu.computermanagementtool.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
-
+//@DiscriminatorValue("COMPUTER")
 @Entity
-@DiscriminatorValue("COMPUTER")
+@Table(name = "computer")
 public class Computer extends DeviceCore{
 
+    public static final String DEVICE_TYPE = "COMPUTER";
     @Column(name = "serial_number", length = 50)
     private String serialNumber;
 
@@ -20,18 +21,16 @@ public class Computer extends DeviceCore{
     @Column(name = "model", length = 50)
     private String model;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cpu_id")
     private Cpu cpu;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "storage_id")
     private Storage storage;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ram_id")
     private Ram ram;
 

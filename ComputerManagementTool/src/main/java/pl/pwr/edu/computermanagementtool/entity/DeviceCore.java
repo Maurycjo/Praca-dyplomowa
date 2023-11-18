@@ -6,13 +6,16 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "device_core")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "device_type", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@DiscriminatorColumn(name = "device_type", discriminatorType = DiscriminatorType.STRING)
 public class DeviceCore {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Column(name = "device_type", length = 50)
+    private String deviceType;
 
     @Column(name = "device_name", length = 50)
     private String deviceName;
@@ -33,6 +36,27 @@ public class DeviceCore {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "office_ID", nullable = false)
     private Office office;
+
+    public DeviceCore(String deviceType, String deviceName, Double price, String description, Integer age, Boolean readyToSell, Office office) {
+        this.deviceType = deviceType;
+        this.deviceName = deviceName;
+        this.price = price;
+        this.description = description;
+        this.age = age;
+        this.readyToSell = readyToSell;
+        this.office = office;
+    }
+
+    public DeviceCore() {
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
 
     public Integer getId() {
         return id;
