@@ -3,15 +3,17 @@ package pl.pwr.edu.computermanagementtool.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "\"user\"")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
     @Column(name = "username", nullable = false, length = 50)
     private String username;
+
+    @Column(name = "password", nullable = false, length = 50)
+    private String password;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
@@ -40,6 +42,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {

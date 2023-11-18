@@ -1,17 +1,19 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "office")
 public class Office {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "adress", length = 50)
-    private String adress;
+    @Column(name = "address", nullable = false, length = 50)
+    private String address;
 
     public Integer getId() {
         return id;
@@ -21,12 +23,12 @@ public class Office {
         this.id = id;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 }

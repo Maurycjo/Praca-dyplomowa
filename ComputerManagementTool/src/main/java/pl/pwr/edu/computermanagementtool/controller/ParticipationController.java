@@ -1,4 +1,4 @@
 package pl.pwr.edu.computermanagementtool.controller;
 
-public class ComputerController {
+public class ParticipationController {
 }

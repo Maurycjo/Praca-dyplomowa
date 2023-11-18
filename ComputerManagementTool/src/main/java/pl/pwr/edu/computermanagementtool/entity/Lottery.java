@@ -1,22 +1,24 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name="lottery")
+@Table(name = "lottery")
 public class Lottery {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "lottery_date", nullable = false)
-    private LocalDate loteryDate;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "device_id", nullable = false)
+    private DeviceCore device;
 
-    @Column(name = "winner_id")
-    private Integer winnerId;
+    @Column(name = "lottery_date")
+    private LocalDate lotteryDate;
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
@@ -29,20 +31,20 @@ public class Lottery {
         this.id = id;
     }
 
+    public DeviceCore getDevice() {
+        return device;
+    }
+
+    public void setDevice(DeviceCore device) {
+        this.device = device;
+    }
+
     public LocalDate getLotteryDate() {
-        return loteryDate;
+        return lotteryDate;
     }
 
-    public void setLotteryDate(LocalDate loteryDate) {
-        this.loteryDate = loteryDate;
-    }
-
-    public Integer getWinnerId() {
-        return winnerId;
-    }
-
-    public void setWinnerId(Integer winnerId) {
-        this.winnerId = winnerId;
+    public void setLotteryDate(LocalDate lotteryDate) {
+        this.lotteryDate = lotteryDate;
     }
 
     public Boolean getIsActive() {

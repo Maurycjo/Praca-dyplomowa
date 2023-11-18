@@ -1,12 +1,16 @@
 package pl.pwr.edu.computermanagementtool.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+
 @Entity
-@Table(name= "docking_station")
-public class DockingStation {
+@Table(name = "device_core")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "device_type", discriminatorType = DiscriminatorType.STRING)
+public class DeviceCore {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -14,27 +18,21 @@ public class DockingStation {
     private String deviceName;
 
     @Column(name = "price")
-    private Float price;
+    private Double price;
 
-    @Column(name = "description", length = 50)
+    @Column(name = "description", length = 100)
     private String description;
 
-    @Column(name = "age", length = 50)
-    private String age;
+    @Column(name = "age")
+    private Integer age;
 
-    @Column(name = "ready_to_sell", length = 50)
-    private String readyToSell;
+    @Column(name = "ready_to_sell")
+    private Boolean readyToSell;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "office_ID", nullable = false)
     private Office office;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lotery_ID")
-    private Lottery lottery;
-
-    @Column(name = "compatibility_with", length = 50)
-    private String compatibilityWith;
 
     public Integer getId() {
         return id;
@@ -52,11 +50,11 @@ public class DockingStation {
         this.deviceName = deviceName;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -68,19 +66,19 @@ public class DockingStation {
         this.description = description;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public String getReadyToSell() {
+    public Boolean getReadyToSell() {
         return readyToSell;
     }
 
-    public void setReadyToSell(String readyToSell) {
+    public void setReadyToSell(Boolean readyToSell) {
         this.readyToSell = readyToSell;
     }
 
@@ -90,22 +88,6 @@ public class DockingStation {
 
     public void setOffice(Office office) {
         this.office = office;
-    }
-
-    public Lottery getLottery() {
-        return lottery;
-    }
-
-    public void setLottery(Lottery lottery) {
-        this.lottery = lottery;
-    }
-
-    public String getCompatibilityWith() {
-        return compatibilityWith;
-    }
-
-    public void setCompatibilityWith(String compatibilityWith) {
-        this.compatibilityWith = compatibilityWith;
     }
 
 }
