@@ -2,12 +2,13 @@ package pl.pwr.edu.computermanagementtool.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
 import pl.pwr.edu.computermanagementtool.repository.GenericDeviceRepository;
-import pl.pwr.edu.computermanagementtool.service.implemantation.GenericDeviceService;
+import pl.pwr.edu.computermanagementtool.service.GenericDeviceService;
 
 import java.util.List;
 
@@ -59,6 +60,11 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
         } catch (RuntimeException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @DeleteMapping("/{id}")
+    void deleteDevice(@PathVariable int id){
+        genericDeviceService.deleteDevice(id);
     }
 
 

@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "tablet")
 public class Tablet extends DeviceCore{
 
+    public static final String DEVICE_TYPE = "TABLET";
     @Column(name = "screen_size", length = 50)
     private String screenSize;
 

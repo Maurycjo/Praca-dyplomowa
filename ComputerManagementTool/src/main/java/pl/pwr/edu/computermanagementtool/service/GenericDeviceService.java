@@ -1,4 +1,4 @@
-package pl.pwr.edu.computermanagementtool.service.implemantation;
+package pl.pwr.edu.computermanagementtool.service;
 
 import pl.pwr.edu.computermanagementtool.entity.Computer;
 import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
@@ -48,7 +48,7 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
     public T setReadyToSell(int basicDeviceId) {
 
         Optional<T> deviceOptional = genericRepository.findById(basicDeviceId);
-        T device = deviceOptional.orElseThrow(()-> new RuntimeException("Basic device not fount with id: " + basicDeviceId));
+        T device = deviceOptional.orElseThrow(()-> new RuntimeException("Device not fount with id: " + basicDeviceId));
         device.setReadyToSell(true);
 
         return device;
@@ -56,14 +56,22 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
 
     public T setNotReadyToSell(int basicDeviceId) {
         Optional<T> basicDeviceOptional = genericRepository.findById(basicDeviceId);
-        T basicDevice = basicDeviceOptional.orElseThrow(()-> new RuntimeException("Basic device not fount with id: " + basicDeviceId));
+        T basicDevice = basicDeviceOptional.orElseThrow(()-> new RuntimeException("Device not fount with id: " + basicDeviceId));
         basicDevice.setReadyToSell(false);
 
         return basicDevice;
     }
 
+    public void deleteDevice(int id){
+        genericRepository.deleteById(id);
+    }
+
 
     protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String deviceName, Double price, String description, Integer age, Boolean readyToSell, Integer officeId) {
+
+        if(officeId == null){
+            throw new RuntimeException("Office required");
+        }
         Optional<Office> officeOptional = officeRepository.findById(officeId);
         Office office = officeOptional.orElseThrow(() -> new RuntimeException("Office not found with id: " + officeId));
 

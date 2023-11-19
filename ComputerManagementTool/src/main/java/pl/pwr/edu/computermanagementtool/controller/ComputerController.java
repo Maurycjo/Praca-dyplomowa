@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.pwr.edu.computermanagementtool.entity.Computer;
 import pl.pwr.edu.computermanagementtool.repository.ComputerRepository;
-import pl.pwr.edu.computermanagementtool.repository.GenericDeviceRepository;
-import pl.pwr.edu.computermanagementtool.service.implemantation.ComputerService;
+import pl.pwr.edu.computermanagementtool.service.ComputerService;
 
 @RestController
 @RequestMapping("/computers")

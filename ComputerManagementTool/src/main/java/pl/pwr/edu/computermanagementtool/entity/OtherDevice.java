@@ -8,6 +8,7 @@ import org.hibernate.annotations.DiscriminatorFormula;
 @Table(name = "other_device")
 public class OtherDevice extends DeviceCore{
 
+    public static final String DEVICE_TYPE = "OTHER";
     @Column(name = "additional_info", length = 100)
     private String additionalInfo;
 

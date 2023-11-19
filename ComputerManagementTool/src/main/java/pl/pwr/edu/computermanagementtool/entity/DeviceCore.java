@@ -37,19 +37,6 @@ public class DeviceCore {
     @JoinColumn(name = "office_ID", nullable = false)
     private Office office;
 
-    public DeviceCore(String deviceType, String deviceName, Double price, String description, Integer age, Boolean readyToSell, Office office) {
-        this.deviceType = deviceType;
-        this.deviceName = deviceName;
-        this.price = price;
-        this.description = description;
-        this.age = age;
-        this.readyToSell = readyToSell;
-        this.office = office;
-    }
-
-    public DeviceCore() {
-    }
-
     public String getDeviceType() {
         return deviceType;
     }
