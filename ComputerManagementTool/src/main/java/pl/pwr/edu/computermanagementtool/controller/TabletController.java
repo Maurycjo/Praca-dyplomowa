@@ -8,7 +8,7 @@ import pl.pwr.edu.computermanagementtool.repository.TabletRepository;
 import pl.pwr.edu.computermanagementtool.service.TabletService;
 
 @RestController
-@RequestMapping("/tablet")
+@RequestMapping("/tablets")
 public class TabletController  extends GenericDeviceController<Tablet>{
 
     private final TabletService tabletService;

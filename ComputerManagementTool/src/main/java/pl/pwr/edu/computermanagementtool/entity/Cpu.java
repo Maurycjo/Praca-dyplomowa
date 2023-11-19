@@ -7,39 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cpu")
-public class Cpu {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Integer id;
+public class Cpu extends Component{
 
-    @Column(name = "cpu_name", nullable = false, length = 50)
-    private String cpuName;
-
-    @Column(name = "cpu_price")
-    private Double cpuPrice;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCpuName() {
-        return cpuName;
-    }
-
-    public void setCpuName(String cpuName) {
-        this.cpuName = cpuName;
-    }
-
-    public Double getCpuPrice() {
-        return cpuPrice;
-    }
-
-    public void setCpuPrice(Double cpuPrice) {
-        this.cpuPrice = cpuPrice;
-    }
 
 }

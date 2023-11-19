@@ -4,7 +4,7 @@ import pl.pwr.edu.computermanagementtool.entity.OtherDevice;
 import pl.pwr.edu.computermanagementtool.repository.LotteryRepository;
 import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
 import pl.pwr.edu.computermanagementtool.repository.OtherDeviceRepository;
-import pl.pwr.edu.computermanagementtool.service.interfaces.iOtherDeviceService;
+
 
 @Service
 public class OtherDeviceService extends GenericDeviceService<OtherDevice> {

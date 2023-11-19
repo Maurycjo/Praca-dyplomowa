@@ -35,14 +35,14 @@ public class ComputerController extends GenericDeviceController<Computer>{
             @RequestParam(required = false) String model,
             @RequestParam(required = false) String operatingSystem,
             @RequestParam(required = false) String batteryLife,
-            @RequestParam(required = false) Integer cpuId,
-            @RequestParam(required = false) Integer storageId,
-            @RequestParam(required = false) Integer ramId){
+            @RequestParam(required = false) String cpuName,
+            @RequestParam(required = false) String storageName,
+            @RequestParam(required = false) String ramName){
 
         try{
             Computer newComputer = computerService.addComputer(deviceName, price, description, age, readyToSell,
                                                                      officeId, serialNumber, model, operatingSystem,
-                                                                                batteryLife, cpuId, storageId, ramId);
+                                                                                batteryLife, cpuName, storageName, ramName);
             return new ResponseEntity<>(newComputer, HttpStatus.CREATED);
         } catch (RuntimeException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

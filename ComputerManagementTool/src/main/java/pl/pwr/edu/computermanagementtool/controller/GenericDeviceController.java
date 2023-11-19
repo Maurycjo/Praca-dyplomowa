@@ -43,6 +43,7 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
     List<T> getBasicDevicesByOfficeId(@PathVariable int officeId){
         return genericDeviceService.getAllDeviceByOfficeId(officeId);
     }
+
     @PutMapping("/set-ready-to-sell/{id}")
     public ResponseEntity<T> setReadyToSell(@PathVariable int id){
         try{

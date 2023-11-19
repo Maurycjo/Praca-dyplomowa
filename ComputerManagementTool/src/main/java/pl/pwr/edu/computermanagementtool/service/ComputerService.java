@@ -2,26 +2,52 @@ package pl.pwr.edu.computermanagementtool.service;
 import org.springframework.stereotype.Service;
 import pl.pwr.edu.computermanagementtool.entity.*;
 import pl.pwr.edu.computermanagementtool.repository.*;
-import pl.pwr.edu.computermanagementtool.service.interfaces.iComputerService;
+
 
 import java.util.Optional;
 
 @Service
 public class ComputerService extends GenericDeviceService<Computer>  {
 
-    private final CpuRepository cpuRepository;
-    private final StorageRepository storageRepository;
-    private final RamRepository ramRepository;
+    private final CpuService cpuService;
+    private final StorageService storageService;
+    private final RamService ramService;
     public ComputerService(ComputerRepository computerRepository, LotteryRepository lotteryRepository,
-                                        OfficeRepository officeRepository, CpuRepository cpuRepository,
-                                        StorageRepository storageRepository, RamRepository ramRepository) {
+                                        OfficeRepository officeRepository,CpuService cpuService,
+                                            StorageService storageService, RamService ramService) {
 
         super(computerRepository, lotteryRepository, officeRepository);
-        this.cpuRepository = cpuRepository;
-        this.storageRepository = storageRepository;
-        this.ramRepository = ramRepository;
+        this.cpuService = cpuService;
+        this.storageService = storageService;
+        this.ramService = ramService;
     }
 
+
+    public Computer addComputer(String deviceName, Double price, String description,
+                                Integer age, Boolean readyToSell, Integer officeId, String serialNumber,
+                                String model, String operatingSystem,String batteryLife, String cpuName, String storageName, String ramName){
+
+
+        Integer cpuId = null, storageId = null, ramId = null;
+
+        Cpu cpu = (Cpu) cpuService.addOrGetComponentWithName(cpuName, Cpu.class);
+        Storage storage = (Storage) storageService.addOrGetComponentWithName(storageName, Storage.class);
+        Ram ram = (Ram) ramService.addOrGetComponentWithName(ramName, Ram.class);
+
+        if(cpu != null){
+            cpuId = cpu.getId();
+        }
+        if(storage != null){
+            storageId = storage.getId();
+        }
+        if(ram != null){
+            ramId = ram.getId();
+        }
+
+        return addComputer(deviceName, price, description, age, readyToSell, officeId,
+                                                serialNumber, model, operatingSystem, batteryLife,
+                                                                        cpuId, storageId, ramId);
+    }
 
     public Computer addComputer(String deviceName, Double price, String description,
                                     Integer age, Boolean readyToSell, Integer officeId, String serialNumber,
@@ -35,18 +61,15 @@ public class ComputerService extends GenericDeviceService<Computer>  {
         computer.setBatteryLife(batteryLife);
 
         if(cpuId!=null){
-            Optional<Cpu> cpuOptional = cpuRepository.findById(cpuId);
-            Cpu cpu = cpuOptional.orElseThrow(()->new RuntimeException("Cpu not found with id: " + cpuId));
+            Cpu cpu = cpuService.getById(cpuId);
             computer.setCpu(cpu);
         }
         if(storageId!=null){
-            Optional<Storage> storageOptional = storageRepository.findById(storageId);
-            Storage storage = storageOptional.orElseThrow(()->new RuntimeException("Storage not found with id: " + storageId));
+            Storage storage = storageService.getById(storageId);
             computer.setStorage(storage);
         }
         if(ramId!=null){
-            Optional<Ram> ramOptional = ramRepository.findById(ramId);
-            Ram ram = ramOptional.orElseThrow(()->new RuntimeException("Ram not found with id: " + ramId));
+            Ram ram = ramService.getById(ramId);
             computer.setRam(ram);
         }
 
@@ -80,19 +103,13 @@ public class ComputerService extends GenericDeviceService<Computer>  {
         computer.setOffice(office);
 
         if(cpuId!=null){
-            Optional<Cpu> cpuOptional = cpuRepository.findById(cpuId);
-            Cpu cpu = cpuOptional.orElseThrow(()->new RuntimeException("Cpu not found with id: " + cpuId));
-            computer.setCpu(cpu);
+            Cpu cpu = cpuService.getById(cpuId);
         }
         if(storageId!=null){
-            Optional<Storage> storageOptional = storageRepository.findById(storageId);
-            Storage storage = storageOptional.orElseThrow(()->new RuntimeException("Storage not found with id: " + storageId));
-            computer.setStorage(storage);
+            Storage storage = storageService.getById(storageId);
         }
         if(ramId!=null){
-            Optional<Ram> ramOptional = ramRepository.findById(ramId);
-            Ram ram = ramOptional.orElseThrow(()->new RuntimeException("Ram not found with id: " + ramId));
-            computer.setRam(ram);
+            Ram ram = ramService.getById(ramId);
         }
 
         return computer;
