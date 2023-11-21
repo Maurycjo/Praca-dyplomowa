@@ -48,7 +48,7 @@ public class TabletController  extends GenericDeviceController<Tablet>{
             @RequestParam(required = false) String description,
             @RequestParam(required = false) Integer age,
             @RequestParam(required = false) Boolean readyToSell,
-            @RequestParam(required = true) Integer officeId,
+            @RequestParam(required = false) Integer officeId,
             @RequestParam(required = false) String screenSize,
             @RequestParam(required = false) String operatingSystem,
             @RequestParam(required = false) String batteryLife) {

@@ -73,46 +73,42 @@ public class ComputerService extends GenericDeviceService<Computer>  {
             computer.setRam(ram);
         }
 
-        return genericRepository.save(computer);
+        return genericDeviceRepository.save(computer);
     }
 
     public Computer updateComputer(int id, String deviceName, Double price, String description,
                                 Integer age, Boolean readyToSell, Integer officeId, String serialNumber,
-                                String model, String operatingSystem,String batteryLife, Integer cpuId, Integer storageId, Integer ramId) {
-
-        Optional<Computer> computerOptional = genericRepository.findById(id);
-        Computer computer = computerOptional.orElseThrow(()-> new RuntimeException("Computer not found with id: " + id));
-        computer.setDeviceName(deviceName);
-        computer.setPrice(price);
-        computer.setDescription(description);
-        computer.setAge(age);
-        computer.setReadyToSell(readyToSell);
-
-        computer.setSerialNumber(serialNumber);
-        computer.setModel(model);
-        computer.setOperatingSystem(operatingSystem);
-        computer.setDeviceType(Computer.DEVICE_TYPE);
-        computer.setBatteryLife(batteryLife);
+                                String model, String operatingSystem,String batteryLife, String cpuName, String storageName, String ramName) {
 
 
-        if (officeId== null){
-            throw new RuntimeException("Office required");
-        }
-        Optional<Office> officeOptional = officeRepository.findById(officeId);
-        Office office = officeOptional.orElseThrow(()-> new RuntimeException("Office not found with id: " + officeId));
-        computer.setOffice(office);
+        Computer computer = updateDevice(id, deviceName, price, description, age, readyToSell, officeId);
 
-        if(cpuId!=null){
-            Cpu cpu = cpuService.getById(cpuId);
-        }
-        if(storageId!=null){
-            Storage storage = storageService.getById(storageId);
-        }
-        if(ramId!=null){
-            Ram ram = ramService.getById(ramId);
+        if(serialNumber!=null)  computer.setSerialNumber(serialNumber);
+        if(model!=null)         computer.setModel(model);
+        if(operatingSystem!=null)computer.setOperatingSystem(operatingSystem);
+        if(batteryLife!=null)   computer.setBatteryLife(batteryLife);
+
+        if (officeId != null){
+            Optional<Office> officeOptional = officeRepository.findById(officeId);
+            Office office = officeOptional.orElseThrow(()-> new RuntimeException("Office not found with id: " + officeId));
+            computer.setOffice(office);
         }
 
-        return computer;
+        if(cpuName!=null){
+            Cpu cpu = (Cpu) cpuService.addOrGetComponentWithName(cpuName, Cpu.class);
+            computer.setCpu(cpu);
+        }
+        if(storageName!=null){
+            Storage storage = (Storage) storageService.addOrGetComponentWithName(storageName, Storage.class);
+            computer.setStorage(storage);
+        }
+
+        if(ramName!=null){
+            Ram ram = (Ram) ramService.addOrGetComponentWithName(ramName, Ram.class);
+            computer.setRam(ram);
+        }
+
+        return genericDeviceRepository.save(computer);
     }
 
 
