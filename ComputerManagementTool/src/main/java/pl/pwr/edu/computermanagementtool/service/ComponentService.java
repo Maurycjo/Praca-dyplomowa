@@ -51,4 +51,24 @@ public abstract class ComponentService<T extends Component> {
         componentRepository.deleteById(id);
     }
 
+    public T updateComponent(int id, String name, Double price) throws Exception {
+
+
+        T component = getById(id);
+        Optional<T> checkIfExistComponent = componentRepository.findFirstByNameContains(name);
+
+        if(checkIfExistComponent.isPresent()){
+            T checkNameComponent = checkIfExistComponent.get();
+            if(!name.equals(component.getName())){
+                throw new Exception("Component with name: " + name + "already exist");
+            }
+        }
+
+        if(name!= null) component.setName(name);
+        if(price!=null) component.setPrice(price);
+
+        return componentRepository.save(component);
+    }
+
+
 }

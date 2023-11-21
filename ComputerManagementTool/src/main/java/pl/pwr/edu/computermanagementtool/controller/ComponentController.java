@@ -46,6 +46,23 @@ public abstract class ComponentController<T extends Component> {
         } catch(RuntimeException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<T> updateComponent(
+            @PathVariable Integer id,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Double price){
+
+        try{
+            T updatedComponent = componentService.updateComponent(id, name, price);
+            return new ResponseEntity<>(updatedComponent, HttpStatus.OK);
+        } catch (RuntimeException e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
 
     }
+
 }
