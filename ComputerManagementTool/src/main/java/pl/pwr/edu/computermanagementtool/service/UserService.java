@@ -1,5 +1,6 @@
 package pl.pwr.edu.computermanagementtool.service;
 import org.springframework.stereotype.Service;
+import pl.pwr.edu.computermanagementtool.entity.Role;
 import pl.pwr.edu.computermanagementtool.entity.User;
 import pl.pwr.edu.computermanagementtool.repository.RoleRepository;
 import pl.pwr.edu.computermanagementtool.repository.UserRepository;
@@ -40,7 +41,11 @@ public class UserService implements UserDetailsService{
 
     public User registerUser(String username, String password, String name, String surname, String email){
 
-        return null;
+        Role role = roleRepository.findByRoleName("User")
+                .orElseThrow(()-> new RuntimeException("Role not found"));
+
+        User user = new User(username, password, name, surname, email, role);
+        return userRepository.save(user);
     }
 
     @Override

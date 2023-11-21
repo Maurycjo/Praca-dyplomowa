@@ -1,4 +1,4 @@
-package pl.pwr.edu.computermanagementtool;
+package pl.pwr.edu.computermanagementtool.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,20 +26,21 @@ public class SecurityConfig {
         this.userDetailsService = userDetailsService;
     }
 
+    @Bean
     public static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
         return configuration.getAuthenticationManager();
     }
 
+    @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.formLogin(form -> form
-                .loginPage("/login")
-                .permitAll()
-        );
+        http.httpBasic(Customizer.withDefaults());
+
         return http.build();
     }
 
