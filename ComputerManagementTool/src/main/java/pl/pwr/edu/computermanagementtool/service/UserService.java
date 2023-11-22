@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements UserDetailsService{
 
+    String ROLE_PREFIX = "ROLE_";
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     public UserService(UserRepository userRepository, RoleRepository roleRepository) {
@@ -54,7 +55,7 @@ public class UserService implements UserDetailsService{
         User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
                 .orElseThrow(()-> new UsernameNotFoundException("User not found wit username or email: " + usernameOrEmail));
 
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getRoleName()));
+        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(ROLE_PREFIX + user.getRole().getRoleName()));
 
     return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
 

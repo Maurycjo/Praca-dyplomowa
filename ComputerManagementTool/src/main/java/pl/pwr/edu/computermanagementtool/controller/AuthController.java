@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.pwr.edu.computermanagementtool.entity.User;
 import pl.pwr.edu.computermanagementtool.repository.RoleRepository;
 import pl.pwr.edu.computermanagementtool.repository.UserRepository;
-import pl.pwr.edu.computermanagementtool.security.LoginData;
-import pl.pwr.edu.computermanagementtool.security.RegisterData;
 import pl.pwr.edu.computermanagementtool.service.UserService;
 
 @RestController
@@ -34,20 +32,20 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/sign-in")
+    @PostMapping("/login")
     public ResponseEntity<String> authenticateUser(
-            @RequestParam String userNameOrEmail,
+            @RequestParam String usernameOrEmail,
             @RequestParam String password)  {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                userNameOrEmail, password));
+                usernameOrEmail, password));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
 
     }
 
-    @PostMapping("/sign-up")
+    @PostMapping("/register")
     public ResponseEntity<?> registerUser(
             @RequestParam String username,
             @RequestParam String password,
