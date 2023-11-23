@@ -1,47 +1,59 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-export const Register  = (props) => {
-
-    const[username, setUsername] = useState('');
-    const[email, setEmail] = useState('');
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
+export const Register = (props) => {
+    const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [confirmPass, setConfirmPass] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [username, setUsername] = useState('');
+    
 
-
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault();
         console.log(email);
     }
 
-
     return (
+        <div className="auth-form-container">
+            <h2>Zarejesturuj</h2>
+        <form className="register-form" onSubmit={handleSubmit}>
 
-        <>
-        
-        
-        <form onSubmit={handleSubmit}>
-            <label for = "Username">Nazwa użytkownika</label>
-            <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Nazwa użytkownika" id="username" name = "username"/>
+            <div class ="row">
+                <label htmlFor="name" >Imię</label>
+                <input value={name} name="name" onChange={(e) => setName(e.target.value)} id="name" placeholder="Imię" />
+            </div>
 
-            <label for = "Name">Imię</label>
-            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Imię" id="name" name = "name"/>
+            <div class ="row">
+                <label htmlFor="surname">Nazwisko</label>
+                <input value={surname} name="sursurname" onChange={(e) => setSurname(e.target.value)} id="surname" placeholder="Nazwisko" />
+            </div>
 
-            <label for = "Surname">Nazwisko</label>
-            <input value={surname} onChange={(e) => setSurname(e.target.value)} placeholder="Nazwisko" id="surname" name = "surname"/>
+            <div class ="row">
+                <label htmlFor="username">Nazwa użytkownika</label>
+                <input value={username} username="username" onChange={(e) => setUsername(e.target.value)} id="username" placeholder="Nazwa użytkownika" />
+            </div>
 
-            <label for = "Email">Email</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="youremail@gmail.com" id="email" name = "email"/>
+            <div class ="row">
+                <label htmlFor="email" >Email</label>
+                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="twójemail@example.com" id="email" name="email" />
+            </div>
 
-            <label for = "Password">Hasło</label>
-            <input value={pass} onChange={(e) => setPass(e.target.value)} placeholder="**************" id="password" name = "password"/>
+            <div class ="row">
+                <label htmlFor="password">Hasło</label>
+                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+            </div>
 
-            <label for = "ConfirmPassword">Powtórz Hasło</label>
-            <input value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} placeholder="**************" id="confirmPassowrd" name = "confirmPassword"/>
+            <div class ="row">
+                <label htmlFor="confirmPassword">Powtórz hasło</label>
+                <input value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} type="password" placeholder="********" id="confirmPassword" name="confirmPassword" />
+            </div>
 
+            <button type="submit">Zarejestruj</button>
+
+            
         </form>
-        <button onClick={() => props.onFormSwitch('login')}> Masz konto? Zaloguj się</button>
-        </>
+        <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Masz już konto? Zaloguj się tutaj.</button>
+    </div>
     )
 }
