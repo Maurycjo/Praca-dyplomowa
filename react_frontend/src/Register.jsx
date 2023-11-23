@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom"
 
 export const Register = (props) => {
     const [email, setEmail] = useState('');
@@ -8,6 +9,12 @@ export const Register = (props) => {
     const [surname, setSurname] = useState('');
     const [username, setUsername] = useState('');
     
+    const navigate = useNavigate();
+
+    const handleLogin = () =>{
+        props.onFormSwitch('login')
+        navigate('/auth/login')
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -53,7 +60,7 @@ export const Register = (props) => {
 
             
         </form>
-        <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Masz już konto? Zaloguj się tutaj.</button>
+        <button className="link-btn" onClick={handleLogin}>Masz już konto? Zaloguj się tutaj.</button>
     </div>
     )
 }
