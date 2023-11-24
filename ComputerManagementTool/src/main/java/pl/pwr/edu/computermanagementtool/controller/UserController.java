@@ -17,7 +17,6 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
     @RequestMapping("/all")
     public List<User> getAllUser(){
         return userService.getAllUsers();

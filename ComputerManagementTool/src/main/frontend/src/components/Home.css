@@ -2,16 +2,20 @@
     background-color: #ffffff; /* Białe tło tabeli */
     border-collapse: collapse;
     border: 1px solid #dddddd; /* Rama tabeli */
-    margin-top: 20px; /* Dodatkowy margines od góry */
+    /*margin-top: 20px; !* Dodatkowy margines od góry *!*/
     /*display: table;*/
-    max-width: 80%;
+    width: 100vh;
+    /*align-items: center;*/
+    text-align: center;
 
 }
 
 .styled-table th, .styled-table td {
     border: 1px solid #dddddd; /* Ramka komórek */
     padding: 8px;
-    text-align: left;
+    /*text-align: left;*/
+
+
 
 }
 
@@ -23,11 +27,14 @@
     background-color: #f9f9f9; /* Kolor co drugiego wiersza */
 }
 
-/*.table-container {*/
-/*    max-height: 100vh; !* Maksymalna wysokość na 100% wysokości okna *!*/
-/*    overflow-y: auto;*/
-/*    max-width: 100vh;*/
-/*}*/
+.table-container {
+    max-height: 100vh; /* Maksymalna wysokość na 100% wysokości okna */
+    overflow-y: auto;
+    min-width: 100vh;
+
+
+
+}
 
 .table-header {
     background-color: #007bff; /* Kolor tła nagłówka */

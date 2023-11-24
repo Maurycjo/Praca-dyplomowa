@@ -2,12 +2,7 @@ package pl.pwr.edu.computermanagementtool.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
 import pl.pwr.edu.computermanagementtool.repository.GenericDeviceRepository;
 import pl.pwr.edu.computermanagementtool.service.GenericDeviceService;
@@ -30,8 +25,9 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
         return genericDeviceService.getDeviceById(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     @GetMapping("/all")
+    @CrossOrigin(origins = "*")
     List<T> getAllBasicDevices(){
         return genericDeviceService.getAllDevices();
     }

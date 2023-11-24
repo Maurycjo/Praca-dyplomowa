@@ -1,15 +1,11 @@
 package pl.pwr.edu.computermanagementtool.service;
+import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
 import pl.pwr.edu.computermanagementtool.entity.Role;
 import pl.pwr.edu.computermanagementtool.entity.User;
 import pl.pwr.edu.computermanagementtool.repository.RoleRepository;
 import pl.pwr.edu.computermanagementtool.repository.UserRepository;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +15,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class UserService implements UserDetailsService{
+public class UserService{
 
     String ROLE_PREFIX = "ROLE_";
     private final UserRepository userRepository;
@@ -34,7 +30,7 @@ public class UserService implements UserDetailsService{
     }
     public User getUserByUsernameOrEmail(String userNameOrEmail){
         Optional<User> userOptional = userRepository.findByUsernameOrEmail(userNameOrEmail, userNameOrEmail);
-        return userOptional.orElseThrow(()-> new UsernameNotFoundException("User not found with username or email: " + userNameOrEmail));
+        return userOptional.orElseThrow(()-> new ExpressionException("User not found with username or email: " + userNameOrEmail));
     }
     public List<User> getAllUsers(){
         return userRepository.findAll();
@@ -49,15 +45,4 @@ public class UserService implements UserDetailsService{
         return userRepository.save(user);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-
-        User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
-                .orElseThrow(()-> new UsernameNotFoundException("User not found wit username or email: " + usernameOrEmail));
-
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(ROLE_PREFIX + user.getRole().getRoleName()));
-
-    return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
-
-    }
 }

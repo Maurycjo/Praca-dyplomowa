@@ -1,15 +1,17 @@
 .sidebar-container{
     min-height: 100vh;
     background-color: lightgray;
-    max-width: 10vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    margin-right: 5%;
+    /*width: 30%;*/
 }
 .sidebar {
-    width: 20px;
+
     padding-top: 25px;
     display: flex;
     flex-direction: column;
+    width: 200px;
 }
 
 .sidebar-link{
