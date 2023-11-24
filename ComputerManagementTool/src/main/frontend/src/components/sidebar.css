@@ -1,0 +1,22 @@
+.sidebar-container{
+    min-height: 100vh;
+    background-color: lightgray;
+    max-width: 10vh;
+    display: flex;
+    flex-direction: row;
+}
+.sidebar {
+    width: 20px;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-link{
+    padding: 10px;
+}
+
+.sidebar-link:hover{
+    border-right: 5px solid dimgray;
+    background-color: gainsboro;
+}
