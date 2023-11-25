@@ -5,10 +5,14 @@ import './Home.css'
 import Sidebar from "./Sidebar";
 import SidebarUserConfig from "./SidebarUserConfig";
 import {selectOptions} from "@testing-library/user-event/dist/select-options";
+import ComputerForm from "./ComputerForm";
 const Home = () => {
 
     const [devices, setDevices] = useState([]);
     const [selectedOption, setSelectedOption] = useState('all');
+    const [addComputerPopup, setAddComputerPopup] = useState(false);
+
+
     const fetchData = (option) =>{
         let url;
 
@@ -45,6 +49,10 @@ const Home = () => {
 
     const handleSidebarClick = (selectedOption) => {
         setSelectedOption(selectedOption);
+    };
+
+    const handleAddComputerClick = () =>{
+        setAddComputerPopup(true)
     };
 
     const renderDataForOption = (device, option) => {
@@ -151,9 +159,10 @@ const Home = () => {
         console.log(`Informacje o urządzeniu o ID: ${deviceId}`);
     };
 
+
     return (
-        <Container className="container">
-                <Sidebar onSidebarClick={handleSidebarClick}/>
+        <Container>
+                <Sidebar onSidebarClick={handleSidebarClick} onAddComputerClick={handleAddComputerClick}/>
                 <div className="table-container">
                     <ReactTableScroll className="styled-table">
                         <table className="device table styled-table">
@@ -176,6 +185,7 @@ const Home = () => {
                     </ReactTableScroll>
                 </div>
                 <SidebarUserConfig/>
+            <ComputerForm trigger={addComputerPopup} setTrigger={setAddComputerPopup}></ComputerForm>
         </Container>
     );
 
