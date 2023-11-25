@@ -3,9 +3,26 @@
     background-color: lightgray;
     display: flex;
     flex-direction: column;
-    margin-right: 5%;
+
+    /*margin-right: 5%;*/
     /*width: 30%;*/
 }
+
+.sidebar-container2{
+
+    min-height: 100vh;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    /*margin-left: 5%;*/
+    margin-right: 0%;
+    position: fixed;
+    right: 0;
+
+
+
+}
+
 .sidebar {
 
     padding-top: 25px;
