@@ -26,6 +26,7 @@ public abstract class ComponentController<T extends Component> {
     }
 
     @GetMapping("/all")
+    @CrossOrigin(origins = "*")
     List<T> getAllComponents(){
         return componentRepository.findAll();
     }

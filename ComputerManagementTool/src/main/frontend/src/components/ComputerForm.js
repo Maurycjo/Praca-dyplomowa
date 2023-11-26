@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './ComputerForm.css'
-
+import CpuForm from "./computer_components/CpuForm";
+import StorageForm from "./computer_components/StorageForm";
+import RamForm from "./computer_components/RamForm";
 function ComputerForm(props){
 
     const [formData, setFormData] = useState({
@@ -15,13 +17,58 @@ function ComputerForm(props){
         model: '',
         operatingSystem: '',
         batteryLife: '',
-        cpuName: '',
-        storageName: '',
-        ramName: ''
+        cpu: '',
+        storage: '',
+        ram: ''
     });
 
-    const handleChange = () =>{
+    const [offices, setOffices] = useState([]);
+    const [cpus, setCpus] = useState([]);
+    const [rams, setRams] = useState([]);
+    const [storages, setStorages] = useState([]);
 
+    const [addCpuPopup, setAddCpuPopup] = useState(false);
+    const [addStoragePopup, setAddStoragePopup] = useState(false);
+    const [addRamPopup, setAddRamPopup] = useState(false);
+
+    useEffect(() => {
+        fetch('http://localhost:8080/offices/all')
+            .then(response => response.json())
+            .then(data => setOffices(data))
+            .catch(error => console.error("Error fetching offices:", error));
+
+        fetch('http://localhost:8080/cpus/all')
+            .then(response => response.json())
+            .then(data => setCpus(data))
+            .catch(error => console.error("Erroe fetching offices:", error));
+
+        fetch('http://localhost:8080/storages/all')
+            .then(response => response.json())
+            .then(data => setStorages(data))
+            .catch(error => console.error("Erroe fetching offices:", error));
+
+        fetch('http://localhost:8080/rams/all')
+            .then(response => response.json())
+            .then(data => setRams(data))
+            .catch(error => console.error("Erroe fetching offices:", error));
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+
+    };
+
+    const handleAddCpu = () =>{
+        setAddCpuPopup(true)
+    };
+
+    const handleAddStorage = () =>{
+        setAddStoragePopup(true)
+    };
+
+    const handleAddRam = () =>{
+        setAddRamPopup(true)
     };
 
     const handleAddComputer = () =>{
@@ -32,6 +79,7 @@ function ComputerForm(props){
 
         <div className="popup">
             <div className="popup-inner">
+                <h2>Dodaj Komputer</h2>
                 <form className="computer-form">
                     <div className="form-column-left">
 
@@ -77,13 +125,19 @@ function ComputerForm(props){
                         </label>
                         <label className="form-label">
                             Biuro
-                            <input
+                            <select
                                 className="form-input"
-                                type="text"
                                 name="office"
-                                value={formData.office}
+                                value={formData.office.address}
                                 onChange={handleChange}
-                            />
+                            >
+                                {/*<option value="">Wybierz biuro</option>*/}
+                                {offices.map(office => (
+                                    <option key={office.id} value={office.address}>
+                                        {office.address}
+                                    </option>
+                                ))}
+                            </select>
                         </label>
                         <label className="form-label">
                             Gotowy do sprzedaży
@@ -139,33 +193,72 @@ function ComputerForm(props){
                         </label>
                         <label className="form-label">
                             Procesor
-                            <input
-                                className="form-input"
-                                type="text"
-                                name="cpu"
-                                value={formData.cpuName}
-                                onChange={handleChange}
-                            />
+                            <div className="form-label">
+                                <select
+                                    className="form-input"
+                                    name="cpuName"
+                                    value={formData.cpu.name}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Brak</option>
+                                    {cpus.map(cpu =>(
+                                        <option key={cpu.id} value={cpu.name}>
+                                            {cpu.name}
+                                        </option>
+                                    ))}
+
+                                </select>
+                                <button type="button" onClick={handleAddCpu}>
+                                    Dodaj nowy procesor
+                                </button>
+
+                            </div>
                         </label>
                         <label className="form-label">
-                            Pamięć dyskowa
-                            <input
-                                className="form-input"
-                                type="text"
-                                name="storage"
-                                value={formData.storageName}
-                                onChange={handleChange}
-                            />
+                            Dysk pamięci
+                            <div className="form-label">
+                                <select
+                                    className="form-input"
+                                    name="storageName"
+                                    value={formData.storage.name}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Brak</option>
+                                    {storages.map(storage =>(
+                                        <option key={storage.id} value={storage.name}>
+                                            {storage.name}
+                                        </option>
+                                    ))}
+
+                                </select>
+                                <button type="button" onClick={handleAddStorage}>
+                                    Dodaj nowy dysk
+                                </button>
+
+                            </div>
                         </label>
                         <label className="form-label">
-                            Pamięć Ram
-                            <input
-                                className="form-input"
-                                type="text"
-                                name="ram"
-                                value={formData.ramName}
-                                onChange={handleChange}
-                            />
+                            Ram
+                            <div className="form-label">
+                                <select
+                                    className="form-input"
+                                    name="ramName"
+                                    value={formData.ram.name}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Brak</option>
+                                    {rams.map(ram =>(
+                                        <option key={ram.id} value={ram.name}>
+                                            {ram.name}
+                                        </option>
+                                    ))}
+
+                                </select>
+                                <button type="button" onClick={handleAddRam}>
+                                    Dodaj nowy ram
+                                </button>
+
+                            </div>
                         </label>
 
                     </div>
@@ -178,11 +271,10 @@ function ComputerForm(props){
                             Dodaj komputer
                         </button>
                     </div>
+                    <CpuForm trigger={addCpuPopup} setTrigger={setAddCpuPopup}></CpuForm>
+                    <StorageForm trigger={addStoragePopup} setTrigger={setAddStoragePopup}></StorageForm>
+                    <RamForm trigger={addRamPopup} setTrigger={setAddRamPopup}></RamForm>
                 </form>
-
-
-
-
             </div>
         </div>
     ) : "";
