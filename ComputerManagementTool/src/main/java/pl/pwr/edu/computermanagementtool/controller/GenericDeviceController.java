@@ -32,19 +32,23 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
         return genericDeviceService.getAllDevices();
     }
     @GetMapping("/ready-to-sell")
+    @CrossOrigin(origins = "*")
     List<T> getReadyToSellBasicDevices(){
         return genericDeviceService.getAllReadyToSellDevices();
     }
     @GetMapping("/not-ready-to-sell")
+    @CrossOrigin(origins = "*")
     List<T> getNotReadyToSellBasicDevices(){
         return genericDeviceService.getAllNotReadyToSellDevices();
     }
     @GetMapping("/by-office/{officeId}")
+    @CrossOrigin(origins = "*")
     List<T> getBasicDevicesByOfficeId(@PathVariable int officeId){
         return genericDeviceService.getAllDeviceByOfficeId(officeId);
     }
 
     @PutMapping("/set-ready-to-sell/{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<T> setReadyToSell(@PathVariable int id){
         try{
             T updatedBasicDevice = genericDeviceService.setReadyToSell(id);
@@ -53,7 +57,9 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @PutMapping("/set-not-ready-to-sell/{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<T> setNotReadyToSell(@PathVariable int id){
         try{
             T updatedDevice = genericDeviceService.setNotReadyToSell(id);
@@ -64,6 +70,7 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
     }
 
     @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "*")
     void deleteDevice(@PathVariable int id){
         genericDeviceService.deleteDevice(id);
     }

@@ -59,15 +59,18 @@ function ComputerForm(props){
 
     };
 
-    const handleAddCpu = () =>{
+    const handleAddCpu = (e) =>{
+        e.preventDefault();
         setAddCpuPopup(true)
     };
 
-    const handleAddStorage = () =>{
+    const handleAddStorage = (e) =>{
+        e.preventDefault();
         setAddStoragePopup(true)
     };
 
-    const handleAddRam = () =>{
+    const handleAddRam = (e) =>{
+        e.preventDefault();
         setAddRamPopup(true)
     };
 

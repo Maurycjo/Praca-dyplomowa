@@ -21,6 +21,7 @@ public abstract class ComponentController<T extends Component> {
     }
 
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "*")
     T getComponentById(@PathVariable int id){
         return componentService.getById(id);
     }
@@ -32,11 +33,13 @@ public abstract class ComponentController<T extends Component> {
     }
 
     @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "*")
     void deleteComponent(@PathVariable int id){
         componentService.delete(id);
     }
 
     @PostMapping("/add")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<T> addComponent(
             @RequestParam(required = true) String name,
             @RequestParam(required = false) Double price){
@@ -50,6 +53,7 @@ public abstract class ComponentController<T extends Component> {
     }
 
     @PatchMapping("/update/{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<T> updateComponent(
             @PathVariable Integer id,
             @RequestParam(required = false) String name,

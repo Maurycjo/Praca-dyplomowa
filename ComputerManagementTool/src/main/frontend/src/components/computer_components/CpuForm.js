@@ -1,24 +1,53 @@
 import React, {useEffect, useState} from "react";
-
+import Message from "./Message";
 
 
 function CpuForm(props){
 
     const [formData, setFormData] = useState({
-
         name: '',
         price: null
     });
+    const [message, setMessage] = useState(null);
+    const [messagePopup, setMessagePopup] = useState(false);
+
+    const handleDisplayMessage = (e) =>{
+        setMessagePopup(true);
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
 
+        let parsedValue = value === '' ? null : value;
+
+        if (name === 'price' && value !== '') {
+            parsedValue = parseFloat(value);
+            parsedValue = isNaN(parsedValue) ? null : parsedValue;
+        }
+
+        setFormData({ ...formData, [name]: parsedValue });
     };
 
-    const handleAddCpu = (e) =>{
+    const handleAddCpu = async (e) => {
+        e.preventDefault();
+        const params = new URLSearchParams();
+        params.append('name', formData.name);
+        params.append('price', formData.price);
 
-    }
+        fetch(`http://localhost:8080/cpus/add?${params.toString()}`, {
+            method: 'POST',
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setMessage(`Procesor "${data.name}" został pomyślnie dodany.`)
+            })
+            .catch((err) => {
+                setMessage(`Wystąpił problem podczas dodawania procesora`)
+            })
+
+
+
+    };
 
 
     return (props.trigger) ? (
@@ -33,7 +62,7 @@ function CpuForm(props){
                         <input
                             className="form-input"
                             type="text"
-                            name="deviceName"
+                            name="name"
                             value={formData.name}
                             onChange={handleChange}
                         />
@@ -42,7 +71,7 @@ function CpuForm(props){
                         Cena
                         <input
                             className="form-input"
-                            type="double"
+                            type="number"
                             name="price"
                             value={formData.price}
                             onChange={handleChange}
@@ -55,7 +84,8 @@ function CpuForm(props){
                     <button className="add-button" onClick={handleAddCpu}>
                         Dodaj procesor
                     </button>
-
+                    {/*to do*/}
+                    {/*<Message trigger={messagePopup} setTrigger={setMessagePopup} msg={message}></Message>*/}
                 </form>
 
             </div>

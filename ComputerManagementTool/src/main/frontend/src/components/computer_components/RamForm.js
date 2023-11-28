@@ -33,7 +33,7 @@ function RamForm(props){
                         <input
                             className="form-input"
                             type="text"
-                            name="deviceName"
+                            name="name"
                             value={formData.name}
                             onChange={handleChange}
                         />

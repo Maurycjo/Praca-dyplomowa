@@ -148,7 +148,30 @@ const Home = () => {
     }, [selectedOption]);
 
     const handleDelete = (deviceId) => {
-        console.log(`Usuń urządzenie o ID: ${deviceId}`);
+
+
+
+        fetch(`http://localhost:8080/devices/${deviceId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Wystąpił problem podczas usuwania urządzenia.');
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log('Urządzenie zostało pomyślnie usunięte.');
+            })
+            .catch((err) => {
+                console.error(err.message);
+            });
+
+        const updatedDevices = devices.filter((device) => device.id !== deviceId);
+        setDevices(updatedDevices);
     };
 
     const handleEdit = (deviceId) => {
