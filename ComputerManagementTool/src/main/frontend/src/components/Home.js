@@ -5,12 +5,12 @@ import './Home.css'
 import Sidebar from "./Sidebar";
 import SidebarUserConfig from "./SidebarUserConfig";
 import {selectOptions} from "@testing-library/user-event/dist/select-options";
-import ComputerForm from "./ComputerForm";
+import FormPopup from "./FormPopup";
 const Home = () => {
 
     const [devices, setDevices] = useState([]);
     const [selectedOption, setSelectedOption] = useState('all');
-    const [addComputerPopup, setAddComputerPopup] = useState(false);
+    // const [addComputerPopup, setAddComputerPopup] = useState(false);
 
 
     const fetchData = (option) =>{
@@ -30,8 +30,15 @@ const Home = () => {
             case 'other':
                 url = 'http://localhost:8080/other-devices/all';
                 break;
+            case 'ram':
+                url = 'http://localhost:8080/rams/all';
+                break;
+            case 'storage':
+                url = 'http://localhost:8080/storages/all';
+                break;
             default:
                 url = 'http://localhost:8080/devices/all';
+
         }
 
         fetch(url)
@@ -45,15 +52,18 @@ const Home = () => {
         computer: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży', 'Numer seryjny', 'System', 'Bateria', 'Model', 'Procesor', 'Pamięć', 'Ram'],
         tablet: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży','Ekran', 'System', 'Bateria'],
         other: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży','Dodatkowy opis'],
+        cpu: ['ID', 'Nazwa', 'Cena'],
+        ram: ['ID', 'Nazwa', 'Cena'],
+        storage: ['ID', 'Nazwa', 'Cena'],
     };
 
-    const handleSidebarClick = (selectedOption) => {
+    const handleSidebarChange = (selectedOption) => {
         setSelectedOption(selectedOption);
     };
 
-    const handleAddComputerClick = () =>{
-        setAddComputerPopup(true)
-    };
+    // const handleAddComputerClick = () =>{
+    //     setAddComputerPopup(true)
+    // };
 
     const renderDataForOption = (device, option) => {
         switch (option) {
@@ -149,8 +159,6 @@ const Home = () => {
 
     const handleDelete = (deviceId) => {
 
-
-
         fetch(`http://localhost:8080/devices/${deviceId}`, {
             method: 'DELETE',
             headers: {
@@ -185,8 +193,16 @@ const Home = () => {
 
     return (
         <Container>
-                <Sidebar onSidebarClick={handleSidebarClick} onAddComputerClick={handleAddComputerClick}/>
-                <div className="table-container">
+                {/*<Sidebar onSidebarClick={handleSidebarClick} onAddComputerClick={handleAddComputerClick}/>*/}
+            <div className="outer-position">
+
+                <div className="header-block">
+                    Zarządzanie sprzętem komputerowym
+                </div>
+                <div className="operation-block">
+                    <Sidebar onSidebarChange={handleSidebarChange}/>
+                </div>
+                    <div className="table-container">
                     <ReactTableScroll className="styled-table">
                         <table className="device table styled-table">
                             <thead>
@@ -207,8 +223,9 @@ const Home = () => {
                         </table>
                     </ReactTableScroll>
                 </div>
-                <SidebarUserConfig/>
-            <ComputerForm trigger={addComputerPopup} setTrigger={setAddComputerPopup}></ComputerForm>
+            </div>
+                {/*<SidebarUserConfig/>*/}
+            {/*<FormPopup trigger={addComputerPopup} setTrigger={setAddComputerPopup}></FormPopup>*/}
         </Container>
     );
 

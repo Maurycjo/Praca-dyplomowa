@@ -22,6 +22,7 @@ public class OtherDeviceController extends GenericDeviceController<OtherDevice> 
     }
 
     @PostMapping("/add")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<OtherDevice> addOtherDevice(
             @RequestParam(required = false) String deviceName,
             @RequestParam(required = false) Double price,

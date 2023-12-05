@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "device_core")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-//@DiscriminatorColumn(name = "device_type", discriminatorType = DiscriminatorType.STRING)
 public class DeviceCore {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

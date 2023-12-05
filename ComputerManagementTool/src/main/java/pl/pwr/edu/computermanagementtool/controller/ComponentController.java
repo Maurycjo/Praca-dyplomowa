@@ -14,7 +14,6 @@ public abstract class ComponentController<T extends Component> {
     protected final ComponentService<T> componentService;
     protected final ComponentRepository<T> componentRepository;
 
-
     protected ComponentController(ComponentService<T> componentService, ComponentRepository<T> componentRepository) {
         this.componentService = componentService;
         this.componentRepository = componentRepository;

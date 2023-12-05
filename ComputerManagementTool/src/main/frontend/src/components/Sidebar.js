@@ -1,34 +1,42 @@
-import React, { Component } from "react";
-import './sidebar.css';
-import ComputerForm from "./ComputerForm";
+import React, { useState } from 'react';
+import FormPopup from "./FormPopup";
 
-export default class Sidebar extends Component {
-    handleLinkClick = (selectedOption) => {
-        this.props.onSidebarClick(selectedOption);
-    }
+const Sidebar = ({ onSidebarChange }) => {
+    const [selectedString, setSelectedString] = useState('Wszystkie urządzenia');
+    const stringList = ['Wszystkie urządzenia', 'Komputery', 'Tablety', 'Inne urządzenia'];
+    const [addComputerPopup, setAddComputerPopup] = useState(false);
 
-    // handleAddComputerClick = (state) => {
-    //     state = true
-    //     this.props.onAddComputerClick(); // Nowa funkcja przekazywana przez props
-    // }
+    const optionToStateMap = {
+        'Wszystkie urządzenia': 'all',
+        'Komputery': 'computer',
+        'Tablety': 'tablet',
+        'Inne urządzenia': 'other',
+    };
 
-    render() {
-        const{onSidebarClick, onAddComputerClick} = this.props;
-        return (
-            <div className="sidebar-container">
-                <div className="sidebar">
-                    <a className="sidebar-link" onClick={() => this.handleLinkClick('all')}>Wszystkie urządzenia</a>
-                    <a className="sidebar-link" onClick={() => this.handleLinkClick('computer')}>Wszystkie komputery</a>
-                    <a className="sidebar-link" onClick={() => this.handleLinkClick('tablet')}>Wszystkie tablety</a>
-                    <a className="sidebar-link" onClick={() => this.handleLinkClick('other')}>Wszystkie inne urządzenia</a>
-                    <a className="sidebar-link" onClick={onAddComputerClick}>Dodaj komputer</a>
-                    <a className="sidebar-link">Dodaj tablet</a>
-                    <a className="sidebar-link">Dodaj inne urządzenie</a>
-                    <a className="sidebar-link">Procesory</a>
-                    <a className="sidebar-link">Ram</a>
-                    <a className="sidebar-link">Pamięci</a>
-                </div>
-            </div>
-        );
-    }
-}
+    const handleSelectChange = (event) => {
+        const selectedString = event.target.value;
+        const selectedState = optionToStateMap[selectedString];
+        setSelectedString(selectedString);
+        onSidebarChange(selectedState);
+    };
+
+    const handleAddComputer = () =>{
+        setAddComputerPopup(true)
+    };
+
+    return (
+        <div>
+            <select value={selectedString} onChange={handleSelectChange}>
+                {stringList.map((option) => (
+                    <option key={option} value={option}>
+                        {option}
+                    </option>
+                ))}
+            </select>
+            <button type="button" onClick={handleAddComputer}>Dodaj urządzenie</button>
+            <FormPopup trigger={addComputerPopup} setTrigger={setAddComputerPopup}></FormPopup>
+        </div>
+    );
+};
+
+export default Sidebar;
