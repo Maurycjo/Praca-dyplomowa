@@ -1,13 +1,12 @@
 \chapter{Projektowanie bazy danych}
 \section{Baza danych}
 
-Bazy danych stanowią kluczowy element wielu aplikacji. Pozwalają one na przechowywanie, organizowanie i zarządzanie danymi. Można łatwo do bazy danych dodawać nowe dane i rekordy co sprawia że aplikację można dalej rozwijać. Bazy danych wykorzystują struktury które są zoptymalizowane pod kątem przeszukiwania i pobierania danych. Dodatkowo istnieje wiele narzędzi które pozwalają na integracje z bazami danych takich jak SpringBoot i Hibernate *tabela roz3*
+Bazy danych stanowią kluczowy element wielu aplikacji. Pozwalają one na przechowywanie, organizowanie i zarządzanie danymi. Można łatwo do bazy danych dodawać nowe dane i rekordy co sprawia że aplikację można dalej rozwijać. Bazy danych wykorzystują struktury które są zoptymalizowane pod kątem przeszukiwania i pobierania danych. Dodatkowo istnieje wiele narzędzi które pozwalają na integracje z bazami danych takich jak SpringBoot i Hibernate % TU chyba powinna być referencja do rozdziału/tabeli *tabela roz3*)
 
 Do zaprojektowania bazy danych został wykonany diagram związków encji który pokazuję jakiego typu dane są użyte w jakich tabelach oraz jakie są relacje miedzy tymi tabelami.
-
+% TO DO: ciekaw jestem, jak zapewniona zostanie unikalność kluczy w device_core (bo tam pojawią się identyfikatory z trzech innych tabel, a więc musi być jakiś mechanizm, by te identyfikatory się nie powtórzyły w tych tabelach).
 \begin{figure}[h]
-		\hspace{-2.5cm}
-    \includegraphics[scale=0.65]{rys04/ER_Diagram.jpg}
+    \includegraphics[width=\linewidth]{rys04/ER_Diagram.jpg} % TO DO: prosiłem o wektory, a nie bitmapy (a jeśli bitmapy, to nie jpg!!!)
     \caption{Diagram związków encji}
     \label{ErDiagram_etykieta}
 \end{figure}
