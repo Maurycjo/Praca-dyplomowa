@@ -18,7 +18,6 @@ public abstract class ComponentController<T extends Component> {
         this.componentService = componentService;
         this.componentRepository = componentRepository;
     }
-
     @GetMapping("/{id}")
     @CrossOrigin(origins = "*")
     T getComponentById(@PathVariable int id){

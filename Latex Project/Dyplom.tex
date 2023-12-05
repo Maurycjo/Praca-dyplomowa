@@ -128,18 +128,18 @@
 
 \lstset{
   basicstyle=\small\ttfamily, % lub basicstyle=\footnotesize\ttfamily
-  %%columns=fullflexible,
+  columns=fullflexible,
 	%%showstringspaces=false,
 	%%showspaces=false,
   breaklines=true,
   postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}, 
-  %%numbers=left,  % ta i poniższe linie dotyczą ustawienia numerowania i sposobu jego wyprowadzania
-  %%firstnumber=1, 
-  %%numberfirstline=true, 
-	%%xleftmargin=17pt,
-  %%framexleftmargin=17pt,
-  %%framexrightmargin=5pt,
-  %%framexbottommargin=4pt,
+  numbers=left,  % ta i poniższe linie dotyczą ustawienia numerowania i sposobu jego wyprowadzania
+  firstnumber=1, 
+  numberfirstline=true, 
+	xleftmargin=17pt,
+  framexleftmargin=17pt,
+  framexrightmargin=5pt,
+  framexbottommargin=4pt,
 	belowskip=.5\baselineskip,
 	literate={\_}{{\_\allowbreak}}1 % ta deklaracja przydaje się, jeśli na listingu mają być łamane nazwy zawierające podkreślniki
 }
@@ -214,7 +214,6 @@
 	showtabs=false,
 	captionpos=t
 }
-
 \lstdefinestyle{JavaStyle}{
 basicstyle=\footnotesize\ttfamily,
 keywordstyle=\color{javapurple}\bfseries,
@@ -223,12 +222,25 @@ commentstyle=\color{javagreen},
 morecomment=[s][\color{javadocblue}]{/**}{*/},
 numbers=none,%left,
 numberstyle=\tiny\color{black},
-stepnumber=2,
+stepnumber=1,
 numbersep=10pt,
 tabsize=4,
 showspaces=false,
 showstringspaces=false,
 captionpos=t
+columns=fullflexible,
+	%%showstringspaces=false,
+	%%showspaces=false,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}, 
+  numbers=left,  % ta i poniższe linie dotyczą ustawienia numerowania i sposobu jego wyprowadzania
+  firstnumber=1, 
+  numberfirstline=true, 
+	xleftmargin=17pt,
+  framexleftmargin=17pt,
+  framexrightmargin=5pt,
+  framexbottommargin=4pt,
+	belowskip=.5\baselineskip
 }
 
 \definecolor{pblue}{rgb}{0.13,0.13,1}
@@ -916,6 +928,7 @@ computer equipment} % INFO: tytuł pracy w języku angielskim
 \include{rozdzial03}
 \include{rozdzial04}
 \include{rozdzial05}
+\include{rozdzial06}
 %więcej rozdziałów
 
 % LITERATURA (zostanie wygenerowana automatycznie)
