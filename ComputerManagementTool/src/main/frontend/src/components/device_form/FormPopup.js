@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import './DeviceForm.css'
 
 import ComputerForm from "./add_new/ComputerForm"
+import TabletForm from "./add_new/TabletForm";
+import OtherDeviceForm from "./add_new/OtherDeviceForm";
 
 function FormPopup(props){
 
@@ -31,8 +33,8 @@ function FormPopup(props){
                 </div>
             <div>
                 {selectedString === 'Komputer' && <ComputerForm setTrigger={props.setTrigger} />}
-                {selectedString === 'Tablet' && <ComputerForm setTrigger={props.setTrigger} />}
-                {selectedString === 'Inne' && <ComputerForm setTrigger={props.setTrigger} />}
+                {selectedString === 'Tablet' && <TabletForm setTrigger={props.setTrigger} />}
+                {selectedString === 'Inne' && <OtherDeviceForm setTrigger={props.setTrigger} />}
                 {props.children}
             </div>
         </div>
