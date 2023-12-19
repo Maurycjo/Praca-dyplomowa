@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import { ReactTableScroll } from 'react-table-scroll';
 import { Container } from "react-bootstrap";
 import './Home.css'
-import Sidebar from "./Sidebar";
-import SidebarUserConfig from "./SidebarUserConfig";
-import {selectOptions} from "@testing-library/user-event/dist/select-options";
-import FormPopup from "./FormPopup";
+import AdminHomeBar from "../bar/AdminHomeBar";
+import {useLocation} from 'react-router-dom';
+import axios from "axios";
+
 const Home = () => {
 
     const [devices, setDevices] = useState([]);
@@ -200,7 +200,7 @@ const Home = () => {
                     Zarządzanie sprzętem komputerowym
                 </div>
                 <div className="operation-block">
-                    <Sidebar onSidebarChange={handleSidebarChange}/>
+                    <AdminHomeBar onSidebarChange={handleSidebarChange}/>
                 </div>
                     <div className="table-container">
                     <ReactTableScroll className="styled-table">

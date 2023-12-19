@@ -1,6 +1,6 @@
-import CpuForm from "../computer_components/CpuForm";
-import StorageForm from "../computer_components/StorageForm";
-import RamForm from "../computer_components/RamForm";
+import CpuForm from "../../computer_components/CpuForm";
+import StorageForm from "../../computer_components/StorageForm";
+import RamForm from "../../computer_components/RamForm";
 import React, {useEffect, useState} from "react";
 
 function ComputerForm(props){
@@ -81,7 +81,6 @@ function ComputerForm(props){
 
     return(
     <div className="popup-inner">
-        <div className='popup-header'>Dodaj Komputer</div>
         <form className="computer-form">
             <div className="form-column-left">
 

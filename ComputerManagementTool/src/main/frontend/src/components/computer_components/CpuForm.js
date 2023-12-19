@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Message from "./Message";
+
 
 
 function CpuForm(props){
@@ -8,12 +8,7 @@ function CpuForm(props){
         name: '',
         price: null
     });
-    const [message, setMessage] = useState(null);
-    const [messagePopup, setMessagePopup] = useState(false);
 
-    const handleDisplayMessage = (e) =>{
-        setMessagePopup(true);
-    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,16 +29,10 @@ function CpuForm(props){
         params.append('name', formData.name);
         params.append('price', formData.price);
 
-        fetch(`http://localhost:8080/cpus/add?${params.toString()}`, {
-            method: 'POST',
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setMessage(`Procesor "${data.name}" został pomyślnie dodany.`)
-            })
-            .catch((err) => {
-                setMessage(`Wystąpił problem podczas dodawania procesora`)
-            })
+        // fetch(`http://localhost:8080/cpus/add?${params.toString()}`, {
+        //     method: 'POST',
+        // })
+
 
 
 
