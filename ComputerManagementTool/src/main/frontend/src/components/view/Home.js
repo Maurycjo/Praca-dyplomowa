@@ -10,37 +10,45 @@ const Home = () => {
 
     const [devices, setDevices] = useState([]);
     const [selectedOption, setSelectedOption] = useState('all');
-    // const [addComputerPopup, setAddComputerPopup] = useState(false);
+    const [selectedOffice, setSelectedOffice] =useState('-1');
 
 
-    const fetchData = (option) =>{
+
+    const fetchData = (option, office) =>{
         let url;
 
         switch (option){
 
             case 'all':
-                url = 'http://localhost:8080/devices/all';
+                if(office==='-1'){
+                    url = 'http://localhost:8080/devices/all';
+                } else{
+                    url =`http://localhost:8080/devices/by-office/${office}`;
+                }
                 break;
             case 'computer':
-                url = 'http://localhost:8080/computers/all';
+                if(office==='-1'){
+                    url = 'http://localhost:8080/computers/all';
+                }else{
+                    url = `http://localhost:8080/computers/by-office/${office}`;
+                }
                 break;
             case 'tablet':
-                url = 'http://localhost:8080/tablets/all';
-                break;
-            case 'other':
-                url = 'http://localhost:8080/other-devices/all';
-                break;
-            case 'ram':
-                url = 'http://localhost:8080/rams/all';
-                break;
-            case 'storage':
-                url = 'http://localhost:8080/storages/all';
+                if(office==='-1'){
+                    url = 'http://localhost:8080/tablets/all';
+                } else{
+                    url = `http://localhost:8080/tablets/by-office/${office}`;
+                }
                 break;
             default:
-                url = 'http://localhost:8080/devices/all';
+                if(office==='-1'){
+                    url = 'http://localhost:8080/devices/all';
+                } else{
+                    url =`http://localhost:8080/devices/by-office/${office}`;
+                }
 
         }
-
+        
         fetch(url)
             .then(response =>response.json())
             .then(data => setDevices(data))
@@ -57,8 +65,11 @@ const Home = () => {
         storage: ['ID', 'Nazwa', 'Cena'],
     };
 
-    const handleSidebarChange = (selectedOption) => {
+    const handleDeviceChange = (selectedOption) => {
         setSelectedOption(selectedOption);
+    };
+    const handleOfficeChange = (selectedOffice) =>{
+      setSelectedOffice(selectedOffice);
     };
 
     // const handleAddComputerClick = () =>{
@@ -154,8 +165,8 @@ const Home = () => {
 
 
     useEffect(() => {
-        fetchData(selectedOption);
-    }, [selectedOption]);
+        fetchData(selectedOption, selectedOffice);
+    }, [selectedOption, selectedOffice]);
 
     const handleDelete = (deviceId) => {
 
@@ -200,7 +211,7 @@ const Home = () => {
                     Zarządzanie sprzętem komputerowym
                 </div>
                 <div className="operation-block">
-                    <AdminHomeBar onSidebarChange={handleSidebarChange}/>
+                    <AdminHomeBar onDeviceChange={handleDeviceChange} onOfficeChange={handleOfficeChange}/>
                 </div>
                     <div className="table-container">
                     <ReactTableScroll className="styled-table">
