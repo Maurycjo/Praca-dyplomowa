@@ -21,6 +21,7 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
 
 
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "*")
     T getOneBasicDevice(@PathVariable int id){
         return genericDeviceService.getDeviceById(id);
     }

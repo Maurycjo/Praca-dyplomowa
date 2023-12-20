@@ -1,10 +1,12 @@
-import CpuForm from "../../computer_components/CpuForm";
-import StorageForm from "../../computer_components/StorageForm";
-import RamForm from "../../computer_components/RamForm";
+import CpuForm from "../computer_components/CpuForm";
+import StorageForm from "../computer_components/StorageForm";
+import RamForm from "../computer_components/RamForm";
 import React, {useEffect, useState} from "react";
+import axios from "axios";
 
 function ComputerForm(props){
 
+    const {setTrigger, formType, deviceId} = props;
 
     const [formData, setFormData] = useState({
 
@@ -33,26 +35,60 @@ function ComputerForm(props){
     const [addRamPopup, setAddRamPopup] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:8080/offices/all')
-            .then(response => response.json())
-            .then(data => setOffices(data))
-            .catch(error => console.error("Error fetching offices:", error));
 
-        fetch('http://localhost:8080/cpus/all')
-            .then(response => response.json())
-            .then(data => setCpus(data))
-            .catch(error => console.error("Erroe fetching offices:", error));
+            fetch('http://localhost:8080/offices/all')
+                .then(response => response.json())
+                .then(data => setOffices(data))
+                .catch(error => console.error("Error fetching offices:", error));
 
-        fetch('http://localhost:8080/storages/all')
-            .then(response => response.json())
-            .then(data => setStorages(data))
-            .catch(error => console.error("Erroe fetching offices:", error));
+            fetch('http://localhost:8080/cpus/all')
+                .then(response => response.json())
+                .then(data => setCpus(data))
+                .catch(error => console.error("Erroe fetching offices:", error));
 
-        fetch('http://localhost:8080/rams/all')
-            .then(response => response.json())
-            .then(data => setRams(data))
-            .catch(error => console.error("Erroe fetching offices:", error));
-    }, []);
+            fetch('http://localhost:8080/storages/all')
+                .then(response => response.json())
+                .then(data => setStorages(data))
+                .catch(error => console.error("Erroe fetching offices:", error));
+
+            fetch('http://localhost:8080/rams/all')
+                .then(response => response.json())
+                .then(data => setRams(data))
+                .catch(error => console.error("Erroe fetching offices:", error));
+
+
+        if(formType!=='addNew'){
+
+            axios.get(`http://localhost:8080/computers/${deviceId}`)
+                .then(response => {
+
+                    const responseData = response.data;
+
+                    setFormData(prevFormData =>({
+                        ...prevFormData,
+                        deviceName: responseData.deviceName,
+                        price: responseData.price,
+                        description: responseData.description,
+                        age: responseData.age,
+                        readyToSell: responseData.readyToSell,
+                        office: responseData.office.address,
+                        serialNumber: responseData.serialNumber,
+                        operatingSystem: responseData.operatingSystem,
+                        batteryLife: responseData.batteryLife,
+                        model: responseData.model,
+                        cpu: responseData.cpu===null ? 'Brak' : responseData.cpu,
+                        storage: responseData.storage===null ? 'Brak' : responseData.storage,
+                        ram: responseData.ram===null ? 'Brak' : responseData.ram
+                    }));
+                })
+                .catch(error =>{
+                    console.error("Error fetching data", error);
+                })
+
+        }
+
+
+    }, [formType]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -79,9 +115,14 @@ function ComputerForm(props){
 
     };
 
+    const handleModifyComputer = () =>{
+
+    }
+
     return(
     <div className="popup-inner">
         <form className="computer-form">
+
             <div className="form-column-left">
 
                 <label className="form-label">
@@ -92,6 +133,8 @@ function ComputerForm(props){
                         name="deviceName"
                         value={formData.deviceName}
                         onChange={handleChange}
+                        disabled={formType === 'information'}
+
                     />
                 </label>
                 <label className="form-label">
@@ -102,6 +145,7 @@ function ComputerForm(props){
                         name="price"
                         value={formData.price}
                         onChange={handleChange}
+                        disabled={formType === 'information'}
                     />
                 </label>
                 <label className="form-label">
@@ -112,6 +156,7 @@ function ComputerForm(props){
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
+                        disabled={formType === 'information'}
                     />
                 </label>
                 <label className="form-label">
@@ -122,6 +167,7 @@ function ComputerForm(props){
                         name="age"
                         value={formData.age}
                         onChange={handleChange}
+                        disabled={formType === 'information'}
                     />
                 </label>
                 <label className="form-label">
@@ -131,6 +177,7 @@ function ComputerForm(props){
                         name="office"
                         value={formData.office.address}
                         onChange={handleChange}
+                        disabled={formType === 'information'}
                     >
                         {/*<option value="">Wybierz biuro</option>*/}
                         {offices.map(office => (
@@ -148,6 +195,7 @@ function ComputerForm(props){
                         name="readytoSell"
                         value={formData.readyToSell}
                         onChange={handleChange}
+                        disabled={formType === 'information'}
                     />
                 </label>
                 <label className="form-label">
@@ -158,6 +206,7 @@ function ComputerForm(props){
                         name="serialNumber"
                         value={formData.serialNumber}
                         onChange={handleChange}
+                        disabled={formType === 'information'}
                     />
                 </label>
             </div>
@@ -170,6 +219,7 @@ function ComputerForm(props){
                         name="operatingSystem"
                         value={formData.operatingSystem}
                         onChange={handleChange}
+                        disabled={formType === 'information'}
                     />
                 </label>
                 <label className="form-label">
@@ -180,6 +230,7 @@ function ComputerForm(props){
                         name="battery"
                         value={formData.batteryLife}
                         onChange={handleChange}
+                        disabled={formType === 'information'}
                     />
                 </label>
                 <label className="form-label">
@@ -190,6 +241,7 @@ function ComputerForm(props){
                         name="model"
                         value={formData.model}
                         onChange={handleChange}
+                        disabled={formType === 'information'}
                     />
                 </label>
                 <label className="form-label">
@@ -200,6 +252,7 @@ function ComputerForm(props){
                             name="cpuName"
                             value={formData.cpu.name}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         >
                             <option value="">Brak</option>
                             {cpus.map(cpu =>(
@@ -209,9 +262,12 @@ function ComputerForm(props){
                             ))}
 
                         </select>
-                        <button type="button" onClick={handleAddCpu}>
-                            Dodaj nowy procesor
-                        </button>
+
+                        {formType !== "information" && (
+                            <button type="button" onClick={handleAddCpu}>
+                                Dodaj nowy procesor
+                            </button>
+                        )}
 
                     </div>
                 </label>
@@ -223,6 +279,7 @@ function ComputerForm(props){
                             name="storageName"
                             value={formData.storage.name}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         >
                             <option value="">Brak</option>
                             {storages.map(storage =>(
@@ -232,9 +289,12 @@ function ComputerForm(props){
                             ))}
 
                         </select>
-                        <button type="button" onClick={handleAddStorage}>
-                            Dodaj nowy dysk
-                        </button>
+                        {formType !=="information" &&(
+                            <button type="button" onClick={handleAddStorage}>
+                                Dodaj nowy dysk
+                            </button>
+                        )}
+
 
                     </div>
                 </label>
@@ -246,6 +306,7 @@ function ComputerForm(props){
                             name="ramName"
                             value={formData.ram.name}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         >
                             <option value="">Brak</option>
                             {rams.map(ram =>(
@@ -255,19 +316,30 @@ function ComputerForm(props){
                             ))}
 
                         </select>
-                        <button type="button" onClick={handleAddRam}>
-                            Dodaj nowy ram
-                        </button>
+                        {formType!=="information"&&(
+                            <button type="button" onClick={handleAddRam}>
+                                Dodaj nowy ram
+                            </button>
+                        )}
 
                     </div>
                 </label>
 
             </div>
-            <div className="form-buttons">
 
-                <button className="add-button" onClick={handleAddComputer}>
-                    Dodaj komputer
-                </button>
+            <div className="form-buttons">
+                {formType === "addNew" &&(
+                    <button className="add-button" onClick={handleAddComputer}>
+                        Dodaj komputer
+                    </button>
+                )}
+                {formType === "modify" &&(
+                    <button className="add-button" onClick={handleModifyComputer}>
+                        Modyfikuj komputer
+                    </button>
+                )}
+
+
                 <button className="close-btn" onClick={() => props.setTrigger(false)}>
                     Zamknij
                 </button>

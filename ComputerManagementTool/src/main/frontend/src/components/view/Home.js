@@ -266,7 +266,7 @@ const Home = () => {
                 </div>
             </div>
                 {/*<SidebarUserConfig/>*/}
-            {/*<FormPopup trigger={addComputerPopup} setTrigger={setAddComputerPopup}></FormPopup>*/}
+            {/*<AddNewFormPopup trigger={addComputerPopup} setTrigger={setAddComputerPopup}></AddNewFormPopup>*/}
         </Container>
     );
 

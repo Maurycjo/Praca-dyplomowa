@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css'
-import './../device_form/FormPopup'
+import '../device_form/AddNewFormPopup'
 
 import axios from 'axios';
 const Login = () => {

@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import './DeviceForm.css'
 
-import ComputerForm from "./add_new/ComputerForm"
-import TabletForm from "./add_new/TabletForm";
-import OtherDeviceForm from "./add_new/OtherDeviceForm";
+import ComputerForm from "./ComputerForm"
+import TabletForm from "./TabletForm";
+import OtherDeviceForm from "./OtherDeviceForm";
 
-function FormPopup(props){
+function AddNewFormPopup(props){
 
     const [selectedString, setSelectedString] = useState('Komputer');
     const stringList = ['Komputer', 'Tablet', 'Inne'];
@@ -32,7 +32,7 @@ function FormPopup(props){
                     </select>
                 </div>
             <div>
-                {selectedString === 'Komputer' && <ComputerForm setTrigger={props.setTrigger} />}
+                {selectedString === 'Komputer' && <ComputerForm setTrigger={props.setTrigger} formType={"addNew"} deviceId={502}/>}
                 {selectedString === 'Tablet' && <TabletForm setTrigger={props.setTrigger} />}
                 {selectedString === 'Inne' && <OtherDeviceForm setTrigger={props.setTrigger} />}
                 {props.children}
@@ -41,4 +41,4 @@ function FormPopup(props){
     ) : "";
 }
 
-export default FormPopup
+export default AddNewFormPopup

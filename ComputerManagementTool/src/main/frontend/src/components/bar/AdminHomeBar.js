@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import FormPopup from "../device_form/FormPopup";
+import AddNewFormPopup from "../device_form/AddNewFormPopup";
 import {useNavigate} from 'react-router-dom'
 const AdminHomeBar = ({ onDeviceChange, onOfficeChange }) => {
     const [selectedString, setSelectedString] = useState('Wszystkie urządzenia');
@@ -78,7 +78,7 @@ const AdminHomeBar = ({ onDeviceChange, onOfficeChange }) => {
             </select>
             <button type="button" onClick={handleAddComputer}>Dodaj urządzenie</button>
             <button type="button" onClick={handleDisplayUsers}>Zarządzaj użytkownikami</button>
-            <FormPopup trigger={addComputerPopup} setTrigger={setAddComputerPopup}></FormPopup>
+            <AddNewFormPopup trigger={addComputerPopup} setTrigger={setAddComputerPopup}></AddNewFormPopup>
         </div>
     );
 };
