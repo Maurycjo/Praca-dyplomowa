@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import { ReactTableScroll } from 'react-table-scroll';
-import { Container } from "react-bootstrap";
+import {ReactTableScroll} from 'react-table-scroll';
+import {Container} from "react-bootstrap";
 import './Home.css'
 import AdminHomeBar from "../bar/AdminHomeBar";
-import {useLocation} from 'react-router-dom';
 import axios from "axios";
 
 const Home = () => {
@@ -48,7 +47,7 @@ const Home = () => {
                 }
 
         }
-        
+
         fetch(url)
             .then(response =>response.json())
             .then(data => setDevices(data))
@@ -75,7 +74,33 @@ const Home = () => {
     // const handleAddComputerClick = () =>{
     //     setAddComputerPopup(true)
     // };
+    
+    const handleSetReadyToSell = (deviceId, isReady) =>{
 
+        const endpoint = isReady
+            ? `http://localhost:8080/devices/set-not-ready-to-sell/${deviceId}`
+            : `http://localhost:8080/devices/set-ready-to-sell/${deviceId}`
+
+        axios.put(endpoint)
+            .then(response => {
+                setDevices(prevDevices => {
+                    return prevDevices.map(device => {
+                        if (device.id === deviceId) {
+                            return {...device, readyToSell: !isReady};
+                        }
+                        return device;
+                    });
+                });
+            })
+            .catch(error => {
+                console.error("Error setting ready to sell:", error);
+            });
+
+    };
+
+
+    
+    
     const renderDataForOption = (device, option) => {
         switch (option) {
             case 'all':
@@ -87,7 +112,10 @@ const Home = () => {
                         <td>{device.description}</td>
                         <td>{device.age}</td>
                         <td>{device.office.address}</td>
-                        <td>{device.readyToSell ? 'Tak' : 'Nie'}</td>
+                        <td>
+                            {device.readyToSell ? 'Tak' : 'Nie'}
+                            <button onClick={() => handleSetReadyToSell(device.id, device.readyToSell)}>Zmień</button>
+                        </td>
                         <td>
                             <button onClick={() => handleDelete(device.id)}>Usuń</button>
                             <button onClick={() => handleEdit(device.id)}>Modyfikuj</button>
@@ -200,6 +228,8 @@ const Home = () => {
     const handleInfo = (deviceId) => {
         console.log(`Informacje o urządzeniu o ID: ${deviceId}`);
     };
+
+   
 
 
     return (

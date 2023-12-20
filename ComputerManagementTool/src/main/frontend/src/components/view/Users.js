@@ -3,19 +3,18 @@ import { ReactTableScroll } from 'react-table-scroll';
 import { Container } from "react-bootstrap";
 import ManageUserBar from "../bar/ManageUserBar";
 import {useNavigate} from 'react-router-dom'
+import axios from "axios";
 
 
 const Users = () =>{
 
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
-    const fetchUsers = () =>{
-
-        fetch('localhost:8080/users')
-            .then(response =>response.json())
-            .then(data => setUsers(data))
-            .catch(error => console.error("Error fetchin data:",error));
-    }
+    const fetchUsers = () => {
+        axios.get('http://localhost:8080/users/all')
+            .then(response => setUsers(response.data))
+            .catch(error => console.error("Error fetching data:", error));
+    };
 
 
 
@@ -29,13 +28,16 @@ const Users = () =>{
         return(
             <>
                 <td>{user.id}</td>
+                <td>{user.username}</td>
                 <td>{user.name}</td>
+                <td>{user.surname}</td>
                 <td>{user.email}</td>
+                <td>{user.role.roleName}</td>
                 <td>
                     <button onClick={() => handleDeleteUser(user.id)}> Usuń użytkownika</button>
                 </td>
             </>
-        )
+        );
     }
 
     useEffect(() =>{
@@ -58,10 +60,12 @@ const Users = () =>{
                     <ReactTableScroll className="styled-table">
                         <table className="device table styled-table">
                             <thead>
-                            <td>ID</td>
-                            <td>Username</td>
-                            <td>Email</td>
-                            <td>Usuń użytkownika</td>
+                                <td>ID</td>
+                                <td>Nazwa użytkownika</td>
+                                <td>Imię</td>
+                                <td>Nazwisko</td>
+                                <td>Email</td>
+                                <td>Rola</td>
                             </thead>
 
                             <tbody>

@@ -1,6 +1,7 @@
 package pl.pwr.edu.computermanagementtool.controller;
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.pwr.edu.computermanagementtool.entity.User;
@@ -18,6 +19,7 @@ public class UserController {
         this.userService = userService;
     }
     @RequestMapping("/all")
+    @CrossOrigin(origins = "*")
     public List<User> getAllUser(){
         return userService.getAllUsers();
     }
