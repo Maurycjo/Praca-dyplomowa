@@ -1,5 +1,6 @@
 package pl.pwr.edu.computermanagementtool.service;
 import org.springframework.stereotype.Service;
+import pl.pwr.edu.computermanagementtool.entity.Computer;
 import pl.pwr.edu.computermanagementtool.entity.Tablet;
 import pl.pwr.edu.computermanagementtool.repository.LotteryRepository;
 import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
@@ -21,6 +22,7 @@ public class TabletService extends GenericDeviceService<Tablet>{
 
         tablet.setScreenSize(screenSize);
         tablet.setOperatingSystem(operatingSystem);
+        tablet.setDeviceType(Tablet.DEVICE_TYPE);
         tablet.setBatteryLife(batteryLife);
 
         return genericDeviceRepository.save(tablet);

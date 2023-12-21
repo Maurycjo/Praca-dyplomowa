@@ -32,9 +32,9 @@ function AddNewFormPopup(props){
                     </select>
                 </div>
             <div>
-                {selectedString === 'Komputer' && <ComputerForm setTrigger={props.setTrigger} formType={"addNew"} deviceId={502}/>}
-                {selectedString === 'Tablet' && <TabletForm setTrigger={props.setTrigger} />}
-                {selectedString === 'Inne' && <OtherDeviceForm setTrigger={props.setTrigger} />}
+                {selectedString === 'Komputer' && <ComputerForm setTrigger={props.setTrigger} formType={"addNew"} /*deviceId={502}*//>}
+                {selectedString === 'Tablet' && <TabletForm setTrigger={props.setTrigger} formType={"addNew"} /*deviceId={457}*//>}
+                {selectedString === 'Inne' && <OtherDeviceForm setTrigger={props.setTrigger}  formType={"addNew"} /*deviceId={452}*/ />}
                 {props.children}
             </div>
         </div>

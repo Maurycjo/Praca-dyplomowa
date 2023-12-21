@@ -4,6 +4,7 @@ import {Container} from "react-bootstrap";
 import './Home.css'
 import AdminHomeBar from "../bar/AdminHomeBar";
 import axios from "axios";
+import FormPopup from "../device_form/FormPopup";
 
 const Home = () => {
 
@@ -11,7 +12,10 @@ const Home = () => {
     const [selectedOption, setSelectedOption] = useState('all');
     const [selectedOffice, setSelectedOffice] =useState('-1');
 
-
+    const [deviceFormPopup, setDeviceFormPopup] =useState(false);
+    const [currentDeviceType, setCurrentDeviceType] = useState('');
+    const [currentDeviceId, setCurrentDeviceId] = useState(0);
+    const [currentFormType, setCurrentFormType] = useState('');
 
     const fetchData = (option, office) =>{
         let url;
@@ -39,6 +43,13 @@ const Home = () => {
                     url = `http://localhost:8080/tablets/by-office/${office}`;
                 }
                 break;
+            case 'other':
+                if(office==='-1'){
+                    url = 'http://localhost:8080/other-devices/all';
+                } else{
+                    url = `http://localhost:8080/other-devices/by-office/${office}`;
+                }
+                break;
             default:
                 if(office==='-1'){
                     url = 'http://localhost:8080/devices/all';
@@ -54,14 +65,107 @@ const Home = () => {
             .catch(error => console.error("Error fetchin data:",error));
     }
 
+    useEffect(() => {
+        fetchData(selectedOption, selectedOffice);
+    }, [selectedOption, selectedOffice]);
+
     const headersMap ={
-      all: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży'],
+        all: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży'],
         computer: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży', 'Numer seryjny', 'System', 'Bateria', 'Model', 'Procesor', 'Pamięć', 'Ram'],
         tablet: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży','Ekran', 'System', 'Bateria'],
         other: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży','Dodatkowy opis'],
         cpu: ['ID', 'Nazwa', 'Cena'],
         ram: ['ID', 'Nazwa', 'Cena'],
         storage: ['ID', 'Nazwa', 'Cena'],
+    };
+    const renderDataForOption = (device, option) => {
+        switch (option) {
+            case 'all':
+                return (
+                    <>
+                        <td>{device.id}</td>
+                        <td>{device.deviceName}</td>
+                        <td>{device.price} zł</td>
+                        <td>{device.description}</td>
+                        <td>{device.age}</td>
+                        <td>{device.office.address}</td>
+                        <td>
+                            {device.readyToSell ? 'Tak' : 'Nie'}
+                            <button onClick={() => handleSetReadyToSell(device.id, device.readyToSell)}>Zmień</button>
+                        </td>
+                        <td>
+                            <button onClick={() => handleDelete(device.id)}>Usuń</button>
+                            <button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button>
+                            <button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button>
+                        </td>
+                    </>
+                );
+            case 'computer':
+                return (
+                    <>
+                        <td>{device.id}</td>
+                        <td>{device.deviceName}</td>
+                        <td>{device.price} zł</td>
+                        <td>{device.description}</td>
+                        <td>{device.age}</td>
+                        <td>{device.office.address}</td>
+                        <td>{device.readyToSell ? 'Tak' : 'Nie'}</td>
+                        <td>{device.serialNumber}</td>
+                        <td>{device.operatingSystem}</td>
+                        <td>{device.batteryLife}</td>
+                        <td>{device.model}</td>
+                        <td>{device.cpu ? device.cpu.name : 'Brak'}</td>
+                        <td>{device.storage ? device.storage.name : 'Brak'}</td>
+                        <td>{device.ram ? device.storage.name : 'Brak'}</td>
+                        <td>
+                            <button onClick={() => handleDelete(device.id)}>Usuń</button>
+                            <button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button>
+                            <button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button>
+                        </td>
+                    </>
+                );
+            case 'tablet':
+
+                return (
+                    <>
+                        <td>{device.id}</td>
+                        <td>{device.deviceName}</td>
+                        <td>{device.price} zł</td>
+                        <td>{device.description}</td>
+                        <td>{device.age}</td>
+                        <td>{device.office.address}</td>
+                        <td>{device.readyToSell ? 'Tak' : 'Nie'}</td>
+                        <td>{device.screenSize}</td>
+                        <td>{device.operatingSystem}</td>
+                        <td>{device.batteryLife}</td>
+                        <td>
+                            <button onClick={() => handleDelete(device.id)}>Usuń</button>
+                            <button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button>
+                            <button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button>
+                        </td>
+                    </>
+                );
+            case 'other':
+                return (
+                    <>
+                        <td>{device.id}</td>
+                        <td>{device.deviceName}</td>
+                        <td>{device.price} zł</td>
+                        <td>{device.description}</td>
+                        <td>{device.age}</td>
+                        <td>{device.office.address}</td>
+                        <td>{device.readyToSell ? 'Tak' : 'Nie'}</td>
+                        <td>{device.additionalInfo}</td>
+                        <td>
+                            <button onClick={() => handleDelete(device.id)}>Usuń</button>
+                            <button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button>
+                            <button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button>
+                        </td>
+                    </>
+                );
+            default:
+                return null;
+        }
     };
 
     const handleDeviceChange = (selectedOption) => {
@@ -70,11 +174,6 @@ const Home = () => {
     const handleOfficeChange = (selectedOffice) =>{
       setSelectedOffice(selectedOffice);
     };
-
-    // const handleAddComputerClick = () =>{
-    //     setAddComputerPopup(true)
-    // };
-    
     const handleSetReadyToSell = (deviceId, isReady) =>{
 
         const endpoint = isReady
@@ -98,103 +197,6 @@ const Home = () => {
 
     };
 
-
-    
-    
-    const renderDataForOption = (device, option) => {
-        switch (option) {
-            case 'all':
-                return (
-                    <>
-                        <td>{device.id}</td>
-                        <td>{device.deviceName}</td>
-                        <td>{device.price} zł</td>
-                        <td>{device.description}</td>
-                        <td>{device.age}</td>
-                        <td>{device.office.address}</td>
-                        <td>
-                            {device.readyToSell ? 'Tak' : 'Nie'}
-                            <button onClick={() => handleSetReadyToSell(device.id, device.readyToSell)}>Zmień</button>
-                        </td>
-                        <td>
-                            <button onClick={() => handleDelete(device.id)}>Usuń</button>
-                            <button onClick={() => handleEdit(device.id)}>Modyfikuj</button>
-                            <button onClick={() => handleInfo(device.id)}>Informacje</button>
-                        </td>
-                    </>
-                );
-            case 'computer':
-                return (
-                    <>
-                        <td>{device.id}</td>
-                        <td>{device.deviceName}</td>
-                        <td>{device.price} zł</td>
-                        <td>{device.description}</td>
-                        <td>{device.age}</td>
-                        <td>{device.office.address}</td>
-                        <td>{device.readyToSell ? 'Tak' : 'Nie'}</td>
-                        <td>{device.serialNumber}</td>
-                        <td>{device.operatingSystem}</td>
-                        <td>{device.batteryLife}</td>
-                        <td>{device.model}</td>
-                        <td>{device.cpu ? device.cpu.name : 'Brak'}</td>
-                        <td>{device.storage ? device.storage.name : 'Brak'}</td>
-                        <td>{device.ram ? device.storage.name : 'Brak'}</td>
-                        <td>
-                            <button onClick={() => handleDelete(device.id)}>Usuń</button>
-                            <button onClick={() => handleEdit(device.id)}>Modyfikuj</button>
-                            <button onClick={() => handleInfo(device.id)}>Informacje</button>
-                        </td>
-                    </>
-                );
-            case 'tablet':
-
-                return (
-                    <>
-                        <td>{device.id}</td>
-                        <td>{device.deviceName}</td>
-                        <td>{device.price} zł</td>
-                        <td>{device.description}</td>
-                        <td>{device.age}</td>
-                        <td>{device.office.address}</td>
-                        <td>{device.readyToSell ? 'Tak' : 'Nie'}</td>
-                        <td>{device.screenSize}</td>
-                        <td>{device.operatingSystem}</td>
-                        <td>{device.batteryLife}</td>
-                        <td>
-                            <button onClick={() => handleDelete(device.id)}>Usuń</button>
-                            <button onClick={() => handleEdit(device.id)}>Modyfikuj</button>
-                            <button onClick={() => handleInfo(device.id)}>Informacje</button>
-                        </td>
-                    </>
-                );
-            case 'other':
-                return (
-                    <>
-                        <td>{device.id}</td>
-                        <td>{device.deviceName}</td>
-                        <td>{device.price} zł</td>
-                        <td>{device.description}</td>
-                        <td>{device.age}</td>
-                        <td>{device.office.address}</td>
-                        <td>{device.readyToSell ? 'Tak' : 'Nie'}</td>
-                        <td>{device.additionalInfo}</td>
-                        <td>
-                            <button onClick={() => handleDelete(device.id)}>Usuń</button>
-                            <button onClick={() => handleEdit(device.id)}>Modyfikuj</button>
-                            <button onClick={() => handleInfo(device.id)}>Informacje</button>
-                        </td>
-                    </>
-                );
-            default:
-                return null;
-        }
-    };
-
-
-    useEffect(() => {
-        fetchData(selectedOption, selectedOffice);
-    }, [selectedOption, selectedOffice]);
 
     const handleDelete = (deviceId) => {
 
@@ -221,15 +223,22 @@ const Home = () => {
         setDevices(updatedDevices);
     };
 
-    const handleEdit = (deviceId) => {
-        console.log(`Edytuj urządzenie o ID: ${deviceId}`);
+    const handleEdit = (deviceId, deviceType) => {
+        setCurrentDeviceId(deviceId);
+        setCurrentDeviceType(deviceType);
+        setCurrentFormType("modify")
+        setDeviceFormPopup(true);
     };
 
-    const handleInfo = (deviceId) => {
-        console.log(`Informacje o urządzeniu o ID: ${deviceId}`);
+    const handleInfo = (deviceId, deviceType) => {
+
+        setCurrentDeviceId(deviceId);
+        setCurrentDeviceType(deviceType);
+        setCurrentFormType("information")
+        setDeviceFormPopup(true);
     };
 
-   
+
 
 
     return (
@@ -241,6 +250,7 @@ const Home = () => {
                     Zarządzanie sprzętem komputerowym
                 </div>
                 <div className="operation-block">
+                    <FormPopup trigger={deviceFormPopup} setTrigger={setDeviceFormPopup} deviceType={currentDeviceType} deviceId={currentDeviceId} formType={currentFormType}></FormPopup>
                     <AdminHomeBar onDeviceChange={handleDeviceChange} onOfficeChange={handleOfficeChange}/>
                 </div>
                     <div className="table-container">

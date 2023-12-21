@@ -123,6 +123,15 @@ function ComputerForm(props){
     <div className="popup-inner">
         <form className="computer-form">
 
+            {formType==="information"&&(
+                <div>Informacje o komupterze</div>
+            )}
+
+            {formType==="modify"&&(
+                <div>Modyfikuj komputer</div>
+            )}
+
+
             <div className="form-column-left">
 
                 <label className="form-label">

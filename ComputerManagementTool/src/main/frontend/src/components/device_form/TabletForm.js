@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
+import axios from "axios";
 
 function TabletForm(props){
 
+
+    const {setTrigger, formType, deviceId} = props;
 
     const [formData, setFormData] = useState({
 
@@ -27,7 +30,34 @@ function TabletForm(props){
             .then(data => setOffices(data))
             .catch(error => console.error("Error fetching offices:", error));
 
-    }, []);
+        if(formType!=='addNew'){
+
+            axios.get(`http://localhost:8080/tablets/${deviceId}`)
+                .then(response => {
+
+                    const responseData = response.data;
+
+                    setFormData(prevFormData =>({
+                        ...prevFormData,
+                        deviceName: responseData.deviceName,
+                        price: responseData.price,
+                        description: responseData.description,
+                        age: responseData.age,
+                        readyToSell: responseData.readyToSell,
+                        office: responseData.office.address,
+                        screenSize: responseData.screenSize,
+                        operatingSystem: responseData.operatingSystem,
+                        batteryLife: responseData.batteryLife
+                    }));
+                })
+                .catch(error =>{
+                    console.error("Error fetching data", error);
+                })
+
+        }
+
+
+    }, [formType]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -40,9 +70,23 @@ function TabletForm(props){
 
     };
 
+    const handleModifyTablet = () =>{
+
+    }
+
     return(
         <div className="popup-inner">
             <form className="computer-form">
+
+                {formType==="information"&&(
+                    <div>Informacje o tablecie</div>
+                )}
+
+                {formType==="modify"&&(
+                    <div>Modyfikuj tablet</div>
+                )}
+
+
                 <div className="form-column-left">
 
                     <label className="form-label">
@@ -53,6 +97,7 @@ function TabletForm(props){
                             name="deviceName"
                             value={formData.deviceName}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         />
                     </label>
                     <label className="form-label">
@@ -63,6 +108,7 @@ function TabletForm(props){
                             name="price"
                             value={formData.price}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         />
                     </label>
                     <label className="form-label">
@@ -73,6 +119,7 @@ function TabletForm(props){
                             name="description"
                             value={formData.description}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         />
                     </label>
                     <label className="form-label">
@@ -83,6 +130,7 @@ function TabletForm(props){
                             name="age"
                             value={formData.age}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         />
                     </label>
                     <label className="form-label">
@@ -92,6 +140,7 @@ function TabletForm(props){
                             name="office"
                             value={formData.office.address}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         >
                             {/*<option value="">Wybierz biuro</option>*/}
                             {offices.map(office => (
@@ -112,6 +161,7 @@ function TabletForm(props){
                             name="readytoSell"
                             value={formData.readyToSell}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         />
                     </label>
 
@@ -123,6 +173,7 @@ function TabletForm(props){
                             name="screenSize"
                             value={formData.screenSize}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         />
                     </label>
                     <label className="form-label">
@@ -133,6 +184,7 @@ function TabletForm(props){
                             name="battery"
                             value={formData.batteryLife}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         />
                     </label>
                     <label className="form-label">
@@ -143,15 +195,27 @@ function TabletForm(props){
                             name="operatingSystem"
                             value={formData.operatingSystem}
                             onChange={handleChange}
+                            disabled={formType === 'information'}
                         />
                     </label>
 
                 </div>
                 <div className="form-buttons">
 
-                    <button className="add-button" onClick={handleAddTablet}>
-                        Dodaj Tablet
-                    </button>
+                    {formType === "addNew"&&(
+
+                        <button className="add-button" onClick={handleAddTablet}>
+                            Dodaj Tablet
+                        </button>
+                    )}
+
+                    {formType === "modify"&&(
+
+                        <button className="add-button" onClick={handleModifyTablet}>
+                            Modyfikuj Tablet
+                        </button>
+                    )}
+
                     <button className="close-btn" onClick={() => props.setTrigger(false)}>
                         Zamknij
                     </button>
