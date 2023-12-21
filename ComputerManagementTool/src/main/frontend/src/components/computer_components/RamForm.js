@@ -25,7 +25,7 @@ function RamForm(props){
 
         <div className="popup">
             <div className="popup-inner">
-                <h2>Dodaj Procesor</h2>
+                <h2>Dodaj pamięć RAM</h2>
                 <form className="computer-form">
 
                     <label className="form-label">

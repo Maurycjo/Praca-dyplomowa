@@ -57,6 +57,10 @@ const AdminHomeBar = ({ onDeviceChange, onOfficeChange }) => {
       navigate("/users");
     };
 
+    const handleDisplayComponents = () =>{
+        navigate("/components");
+    }
+
 
     return (
         <div>
@@ -77,6 +81,7 @@ const AdminHomeBar = ({ onDeviceChange, onOfficeChange }) => {
                 ))}
             </select>
             <button type="button" onClick={handleAddComputer}>Dodaj urządzenie</button>
+            <button type="button" onClick={handleDisplayComponents}>Przeglądaj komponenty</button>
             <button type="button" onClick={handleDisplayUsers}>Zarządzaj użytkownikami</button>
             <AddNewFormPopup trigger={addComputerPopup} setTrigger={setAddComputerPopup}></AddNewFormPopup>
         </div>
