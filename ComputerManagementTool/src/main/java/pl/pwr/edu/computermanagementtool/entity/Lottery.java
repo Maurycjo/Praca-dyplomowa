@@ -10,18 +10,28 @@ import java.time.LocalDate;
 public class Lottery {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "device_id", nullable = false)
-    private DeviceCore device;
+    private Computer device;
 
     @Column(name = "lottery_date")
     private LocalDate lotteryDate;
 
-    @Column(name = "is_active", nullable = false)
-    private Boolean isActive = false;
+    @Column(name = "lottery_date_min")
+    private LocalDate lotteryDateMin;
+
+    @Column(name = "lottery_date_max")
+    private LocalDate lotteryDateMax;
+
+    @Column(name = "min_participant")
+    private Integer minParticipant;
+
+    @Column(name ="lottery_days_after_min")
+    private Integer lotteryDaysAfterMin;
 
     public Integer getId() {
         return id;
@@ -31,11 +41,11 @@ public class Lottery {
         this.id = id;
     }
 
-    public DeviceCore getDevice() {
+    public Computer getDevice() {
         return device;
     }
 
-    public void setDevice(DeviceCore device) {
+    public void setDevice(Computer device) {
         this.device = device;
     }
 
@@ -47,12 +57,35 @@ public class Lottery {
         this.lotteryDate = lotteryDate;
     }
 
-    public Boolean getIsActive() {
-        return isActive;
+    public LocalDate getLotteryDateMin() {
+        return lotteryDateMin;
     }
 
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
+    public void setLotteryDateMin(LocalDate lotteryDateMin) {
+        this.lotteryDateMin = lotteryDateMin;
     }
 
+    public LocalDate getLotteryDateMax() {
+        return lotteryDateMax;
+    }
+
+    public void setLotteryDateMax(LocalDate lotteryDateMax) {
+        this.lotteryDateMax = lotteryDateMax;
+    }
+
+    public Integer getMinNumberOfParticipation() {
+        return minParticipant;
+    }
+
+    public void setMinNumberOfParticipation(Integer minNumberOfParticipation) {
+        this.minParticipant = minNumberOfParticipation;
+    }
+
+    public Integer getLotteryDaysAfterMin() {
+        return lotteryDaysAfterMin;
+    }
+
+    public void setLotteryDaysAfterMin(Integer lotteryDaysAfterMin) {
+        this.lotteryDaysAfterMin = lotteryDaysAfterMin;
+    }
 }

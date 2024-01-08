@@ -9,8 +9,8 @@ import pl.pwr.edu.computermanagementtool.repository.TabletRepository;
 @Service
 public class TabletService extends GenericDeviceService<Tablet>{
 
-    public TabletService(TabletRepository tabletRepository, LotteryRepository lotteryRepository, OfficeRepository officeRepository){
-        super(tabletRepository, lotteryRepository, officeRepository);
+    public TabletService(TabletRepository tabletRepository, OfficeRepository officeRepository){
+        super(tabletRepository, officeRepository);
     }
 
     public Tablet addTablet(String deviceName, Double price, String description,

@@ -12,12 +12,10 @@ import java.util.Optional;
 public abstract class GenericDeviceService<T extends DeviceCore> {
 
     protected final GenericDeviceRepository<T> genericDeviceRepository;
-    protected final LotteryRepository lotteryRepository;
     protected final OfficeRepository officeRepository;
 
-    public GenericDeviceService(GenericDeviceRepository<T> genericRepository, LotteryRepository lotteryRepository, OfficeRepository officeRepository) {
+    public GenericDeviceService(GenericDeviceRepository<T> genericRepository, OfficeRepository officeRepository) {
         this.genericDeviceRepository = genericRepository;
-        this.lotteryRepository = lotteryRepository;
         this.officeRepository = officeRepository;
     }
 
@@ -85,6 +83,7 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
         deviceCore.setDescription(description);
         deviceCore.setAge(age);
         deviceCore.setReadyToSell(readyToSell);
+        deviceCore.setIsSold(false);
         deviceCore.setOffice(office);
 
         return deviceCore;

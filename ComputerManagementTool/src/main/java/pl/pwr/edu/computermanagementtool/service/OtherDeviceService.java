@@ -9,8 +9,8 @@ import pl.pwr.edu.computermanagementtool.repository.OtherDeviceRepository;
 @Service
 public class OtherDeviceService extends GenericDeviceService<OtherDevice> {
 
-    public OtherDeviceService(OtherDeviceRepository otherDeviceRepository, LotteryRepository lotteryRepository, OfficeRepository officeRepository) {
-        super(otherDeviceRepository, lotteryRepository, officeRepository);
+    public OtherDeviceService(OtherDeviceRepository otherDeviceRepository, OfficeRepository officeRepository) {
+        super(otherDeviceRepository, officeRepository);
     }
 
 

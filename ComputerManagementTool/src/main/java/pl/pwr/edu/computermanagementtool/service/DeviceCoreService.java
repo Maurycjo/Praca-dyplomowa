@@ -8,8 +8,8 @@ import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
 @Service
 public class DeviceCoreService extends GenericDeviceService<DeviceCore> {
 
-    public DeviceCoreService(DeviceCoreRepository repository, LotteryRepository lotteryRepository, OfficeRepository officeRepository) {
-        super(repository, lotteryRepository, officeRepository);
+    public DeviceCoreService(DeviceCoreRepository repository, OfficeRepository officeRepository) {
+        super(repository, officeRepository);
     }
 
 

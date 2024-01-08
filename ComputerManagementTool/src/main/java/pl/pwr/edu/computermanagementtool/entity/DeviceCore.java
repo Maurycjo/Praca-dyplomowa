@@ -28,6 +28,8 @@ public class DeviceCore {
     @Column(name = "age")
     private Integer age;
 
+    @Column(name = "is_sold")
+    private Boolean isSold;
     @Column(name = "ready_to_sell")
     private Boolean readyToSell;
 
@@ -100,4 +102,11 @@ public class DeviceCore {
         this.office = office;
     }
 
+    public Boolean getIsSold() {
+        return isSold;
+    }
+
+    public void setIsSold(Boolean isSold) {
+        this.isSold = isSold;
+    }
 }

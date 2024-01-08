@@ -12,11 +12,11 @@ public class ComputerService extends GenericDeviceService<Computer>  {
     private final CpuService cpuService;
     private final StorageService storageService;
     private final RamService ramService;
-    public ComputerService(ComputerRepository computerRepository, LotteryRepository lotteryRepository,
+    public ComputerService(ComputerRepository computerRepository,
                                         OfficeRepository officeRepository,CpuService cpuService,
                                             StorageService storageService, RamService ramService) {
 
-        super(computerRepository, lotteryRepository, officeRepository);
+        super(computerRepository, officeRepository);
         this.cpuService = cpuService;
         this.storageService = storageService;
         this.ramService = ramService;
