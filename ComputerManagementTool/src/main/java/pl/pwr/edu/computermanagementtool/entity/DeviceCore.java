@@ -40,10 +40,7 @@ public class DeviceCore {
     @JoinColumn(name = "office_ID", nullable = false)
     private Office office;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToOne
-    @JoinColumn(name = "lottery_ID")
-    private Lottery lottery;
+
 
 
     public String getDeviceType() {
@@ -126,11 +123,4 @@ public class DeviceCore {
         isSold = sold;
     }
 
-    public Lottery getLottery() {
-        return lottery;
-    }
-
-    public void setLottery(Lottery lottery) {
-        this.lottery = lottery;
-    }
 }

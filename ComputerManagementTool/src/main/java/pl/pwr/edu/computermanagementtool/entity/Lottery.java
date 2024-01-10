@@ -28,6 +28,11 @@ public class Lottery {
     @Column(name ="lottery_days_after_min")
     private Integer lotteryDaysAfterMin;
 
+
+    @OneToOne
+    @JoinColumn(name = "device_ID")
+    private DeviceCore deviceCore;
+
     public Integer getId() {
         return id;
     }
@@ -75,5 +80,21 @@ public class Lottery {
 
     public void setLotteryDaysAfterMin(Integer lotteryDaysAfterMin) {
         this.lotteryDaysAfterMin = lotteryDaysAfterMin;
+    }
+
+    public Integer getMinParticipant() {
+        return minParticipant;
+    }
+
+    public void setMinParticipant(Integer minParticipant) {
+        this.minParticipant = minParticipant;
+    }
+
+    public DeviceCore getDeviceCore() {
+        return deviceCore;
+    }
+
+    public void setDeviceCore(DeviceCore deviceCore) {
+        this.deviceCore = deviceCore;
     }
 }

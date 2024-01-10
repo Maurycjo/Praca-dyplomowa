@@ -14,10 +14,11 @@ import java.util.Optional;
 public class LotteryService{
 
     private final LotteryRepository lotteryRepository;
+    private final DeviceCoreService deviceCoreService;
 
-
-    public LotteryService(LotteryRepository lotteryRepository) {
+    public LotteryService(LotteryRepository lotteryRepository, DeviceCoreService deviceCoreService) {
         this.lotteryRepository = lotteryRepository;
+        this.deviceCoreService = deviceCoreService;
 
     }
 
@@ -39,12 +40,18 @@ public class LotteryService{
 
         Lottery lottery = new Lottery();
 
+        if(lotteryRepository.existsByDeviceCoreId(deviceId)){
+            throw new Exception("Lottery with device_id: "+ deviceId+" already exists");
+        }
+
+        DeviceCore deviceCore = deviceCoreService.getDeviceById(deviceId);
 
         lottery.setLotteryDate(lotteryDate);
         lottery.setLotteryDateMin(lotteryDateMin);
         lottery.setLotteryDateMax(lotteryDateMax);
         lottery.setMinNumberOfParticipation(minParticipants);
         lottery.setLotteryDaysAfterMin(lotteryDaysAfterMin);
+        lottery.setDeviceCore(deviceCore);
 
         return lotteryRepository.save(lottery);
     }

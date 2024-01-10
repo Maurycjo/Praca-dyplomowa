@@ -84,7 +84,6 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
         deviceCore.setAge(age);
         deviceCore.setReadyToSell(readyToSell);
         deviceCore.setIsSold(false);
-        deviceCore.setLottery(null);
         deviceCore.setOffice(office);
 
         return deviceCore;
