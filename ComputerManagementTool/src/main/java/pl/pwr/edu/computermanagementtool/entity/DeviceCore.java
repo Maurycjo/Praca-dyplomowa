@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 @Table(name = "device_core")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class DeviceCore {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id", nullable = false)
@@ -37,6 +39,12 @@ public class DeviceCore {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "office_ID", nullable = false)
     private Office office;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToOne
+    @JoinColumn(name = "lottery_ID")
+    private Lottery lottery;
+
 
     public String getDeviceType() {
         return deviceType;
@@ -108,5 +116,21 @@ public class DeviceCore {
 
     public void setIsSold(Boolean isSold) {
         this.isSold = isSold;
+    }
+
+    public Boolean getSold() {
+        return isSold;
+    }
+
+    public void setSold(Boolean sold) {
+        isSold = sold;
+    }
+
+    public Lottery getLottery() {
+        return lottery;
+    }
+
+    public void setLottery(Lottery lottery) {
+        this.lottery = lottery;
     }
 }

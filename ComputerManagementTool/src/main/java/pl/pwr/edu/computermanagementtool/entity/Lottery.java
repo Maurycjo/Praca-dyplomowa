@@ -13,11 +13,6 @@ public class Lottery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "device_id", nullable = false)
-    private Computer device;
-
     @Column(name = "lottery_date")
     private LocalDate lotteryDate;
 
@@ -41,13 +36,6 @@ public class Lottery {
         this.id = id;
     }
 
-    public Computer getDevice() {
-        return device;
-    }
-
-    public void setDevice(Computer device) {
-        this.device = device;
-    }
 
     public LocalDate getLotteryDate() {
         return lotteryDate;

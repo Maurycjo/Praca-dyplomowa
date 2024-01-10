@@ -14,13 +14,14 @@ import java.util.Optional;
 public class LotteryService{
 
     private final LotteryRepository lotteryRepository;
-    private final ComputerService deviceCoreService;
 
-    public LotteryService(LotteryRepository lotteryRepository, ComputerService deviceCoreService) {
+
+    public LotteryService(LotteryRepository lotteryRepository) {
         this.lotteryRepository = lotteryRepository;
-        this.deviceCoreService = deviceCoreService;
+
     }
-    public Lottery getLotteryById(Integer id){
+
+        public Lottery getLotteryById(Integer id){
 
         Optional <Lottery> lotteryOptional = lotteryRepository.findById(id);
         return lotteryOptional.orElseThrow(()-> new RuntimeException("Lottery not found with id: " + id));
@@ -34,15 +35,11 @@ public class LotteryService{
                                  LocalDate lotteryDateMax, Integer minParticipants, Integer lotteryDaysAfterMin) throws Exception{
 
 
-        if(lotteryRepository.existsByDeviceId(deviceId)){
-            throw new Exception("lottery with device_id: " + deviceId + " already exists!");
-        }
+
 
         Lottery lottery = new Lottery();
 
-        Computer deviceCore = deviceCoreService.getDeviceById(deviceId);
 
-        lottery.setDevice(deviceCore);
         lottery.setLotteryDate(lotteryDate);
         lottery.setLotteryDateMin(lotteryDateMin);
         lottery.setLotteryDateMax(lotteryDateMax);

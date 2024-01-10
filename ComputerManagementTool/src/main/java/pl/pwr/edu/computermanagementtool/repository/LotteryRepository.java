@@ -7,6 +7,5 @@ import pl.pwr.edu.computermanagementtool.entity.Lottery;
 @Repository
 public interface LotteryRepository extends JpaRepository<Lottery, Integer> {
 
-    boolean existsByDeviceId(int deviceId);
 
 }

@@ -8,14 +8,14 @@ import jakarta.persistence.*;
 public class Participation {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "lottery_id", nullable = false)
     private Lottery lottery;
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
