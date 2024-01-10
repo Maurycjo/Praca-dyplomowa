@@ -42,6 +42,10 @@ public class ParticipationService{
     }
 
 
+    public List<Participation> getAllParticipants(){
+        return participationRepository.findAll();
+    }
+
     public List<Participation> getAllParticipantsByUserId(int userId){
 
         return participationRepository.findAllByUserId(userId);
@@ -64,12 +68,6 @@ public class ParticipationService{
 
     public List<Participation> getAllParticipantsByLotteryId(int lotteryId){
         return participationRepository.findAllByLotteryId(lotteryId);
-    }
-
-    public void deleteParticipation(int userId, int lotteryId){
-
-        Participation participation = participationRepository.findByUserIdAndLotteryId(userId, lotteryId);
-        participationRepository.delete(participation);
     }
 
     public void deleteParticipation(int participationId){

@@ -34,6 +34,11 @@ public class ParticipationController {
         }
     }
 
+    @GetMapping("/all")
+    List<Participation> getAllParticipants(){
+        return participationService.getAllParticipants();
+    }
+
     @DeleteMapping("/{id}")
     void deleteParticipation(@PathVariable int id){
         participationService.deleteParticipation(id);
@@ -54,6 +59,15 @@ public class ParticipationController {
         return participationService.getAllWonParticipants();
     }
 
+    @GetMapping("/lottery/win/{user_id}")
+    List<Participation> getUserWinsHistory(@PathVariable int user_id){
+        return participationService.getAllParticipantsByUserIdWhereWin(user_id);
+    }
+
+    @GetMapping("/lottery/lose/{user_id}")
+    List<Participation> getUserLoseHistory(@PathVariable int user_id){
+        return participationService.getAllParticipantsByUserIdWhereLose(user_id);
+    }
 
 
 }

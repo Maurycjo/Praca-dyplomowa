@@ -35,9 +35,6 @@ public class LotteryService{
     public Lottery createLottery(Integer deviceId, LocalDate lotteryDate, LocalDate lotteryDateMin,
                                  LocalDate lotteryDateMax, Integer minParticipants, Integer lotteryDaysAfterMin) throws Exception{
 
-
-
-
         Lottery lottery = new Lottery();
 
         if(lotteryRepository.existsByDeviceCoreId(deviceId)){
@@ -59,6 +56,7 @@ public class LotteryService{
     public void cancelLottery(int id){
         lotteryRepository.deleteById(id);
     }
+
 
 
 }
