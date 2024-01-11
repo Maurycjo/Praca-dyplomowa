@@ -15,6 +15,7 @@ function ComputerForm(props){
         description:'',
         age: '',
         readyToSell: false,
+        sold: false,
         office: '',
         serialNumber: '',
         model: '',
