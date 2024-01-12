@@ -4,12 +4,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.pwr.edu.computermanagementtool.entity.Participation;
+import pl.pwr.edu.computermanagementtool.enums.LotteryState;
 import pl.pwr.edu.computermanagementtool.service.ParticipationService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/participation")
+@CrossOrigin(origins = "*")
 public class ParticipationController {
 
     private final ParticipationService participationService;
@@ -69,5 +71,9 @@ public class ParticipationController {
         return participationService.getAllParticipantsByUserIdWhereLose(user_id);
     }
 
+    @GetMapping("/state/{id}")
+    LotteryState getLotteryStateById(@PathVariable int id){
+        return participationService.getLotteryStatus(id);
+    }
 
 }

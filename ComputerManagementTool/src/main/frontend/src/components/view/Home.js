@@ -59,10 +59,37 @@ const Home = () => {
 
         }
 
-        fetch(url)
-            .then(response =>response.json())
-            .then(data => setDevices(data))
-            .catch(error => console.error("Error fetchin data:",error));
+        axios.get(url)
+            .then(response => {
+                const devices = response.data;
+
+                // Pobierz status uczestnictwa w loterii dla każdego urządzenia
+                const fetchLotteryStates = devices.map(device =>
+                    axios.get(`http://localhost:8080/participation/state/${device.id}`)
+                        .then(response => response.data)
+                        .catch(error => {
+                            console.error(`Błąd pobierania stanu loterii dla urządzenia o ID ${device.id}:`, error);
+                            return 'Błąd pobierania stanu loterii';
+                        })
+                );
+
+                // Po zakończeniu wszystkich żądań, ustaw stan urządzeń i stanów loterii
+                Promise.all(fetchLotteryStates)
+                    .then(lotteryStates => {
+                        setDevices(devices.map((device, index) => ({
+                            ...device,
+                            lotteryState: lotteryStates[index]
+                        })));
+                    })
+                    .catch(error => {
+                        console.error('Błąd przy pobieraniu stanów loterii dla urządzeń:', error);
+                    });
+            })
+            .catch(error => {
+                console.error("Błąd pobierania danych:", error);
+            });
+
+
     }
 
     useEffect(() => {
@@ -79,6 +106,8 @@ const Home = () => {
         storage: ['ID', 'Nazwa', 'Cena'],
     };
     const renderDataForOption = (device, option) => {
+
+
         switch (option) {
             case 'all':
                 return (
@@ -97,8 +126,8 @@ const Home = () => {
                         <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
+                        <td>{device.lotteryState}</td>
 
-                        //czy moge tutaj zrobic request localhost:8080/participation/state/device.id
                     </>
                 );
             case 'computer':
@@ -196,9 +225,11 @@ const Home = () => {
             .then(response => {
             return response.data;
         })
-        .catch(error){
+        .catch(error => {
             return 'Error'
-        }
+        });
+
+
     }
 
     const handleCheckLotteryStatusForDevice = (deviceId) =>{

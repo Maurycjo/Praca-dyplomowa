@@ -16,18 +16,8 @@ public class Lottery {
     @Column(name = "lottery_date")
     private LocalDate lotteryDate;
 
-    @Column(name = "lottery_date_min")
-    private LocalDate lotteryDateMin;
-
-    @Column(name = "lottery_date_max")
-    private LocalDate lotteryDateMax;
-
     @Column(name = "min_participant")
     private Integer minParticipant;
-
-    @Column(name ="lottery_days_after_min")
-    private Integer lotteryDaysAfterMin;
-
 
     @OneToOne
     @JoinColumn(name = "device_ID")
@@ -47,23 +37,15 @@ public class Lottery {
     }
 
     public void setLotteryDate(LocalDate lotteryDate) {
-        this.lotteryDate = lotteryDate;
-    }
 
-    public LocalDate getLotteryDateMin() {
-        return lotteryDateMin;
-    }
-
-    public void setLotteryDateMin(LocalDate lotteryDateMin) {
-        this.lotteryDateMin = lotteryDateMin;
-    }
-
-    public LocalDate getLotteryDateMax() {
-        return lotteryDateMax;
-    }
-
-    public void setLotteryDateMax(LocalDate lotteryDateMax) {
-        this.lotteryDateMax = lotteryDateMax;
+        try {
+            if (lotteryDate.isBefore(LocalDate.now())) {
+                throw new RuntimeException("Lottery date can't be before current date!");
+            }
+            this.lotteryDate = lotteryDate;
+        } catch (RuntimeException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public Integer getMinNumberOfParticipation() {
@@ -72,14 +54,6 @@ public class Lottery {
 
     public void setMinNumberOfParticipation(Integer minNumberOfParticipation) {
         this.minParticipant = minNumberOfParticipation;
-    }
-
-    public Integer getLotteryDaysAfterMin() {
-        return lotteryDaysAfterMin;
-    }
-
-    public void setLotteryDaysAfterMin(Integer lotteryDaysAfterMin) {
-        this.lotteryDaysAfterMin = lotteryDaysAfterMin;
     }
 
     public Integer getMinParticipant() {

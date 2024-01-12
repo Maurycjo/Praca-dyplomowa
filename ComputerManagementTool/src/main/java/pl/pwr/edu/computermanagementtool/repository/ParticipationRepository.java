@@ -17,5 +17,7 @@ public interface ParticipationRepository extends JpaRepository<Participation, In
     List<Participation> findAllByIsWinnerIsTrue();
     List<Participation> findAllByLotteryId(int lotteryId);
 
+    int countAllByLotteryId(int lotteryId);
+
 
 }
