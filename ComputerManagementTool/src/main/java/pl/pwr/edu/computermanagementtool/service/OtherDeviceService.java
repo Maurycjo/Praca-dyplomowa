@@ -1,7 +1,6 @@
 package pl.pwr.edu.computermanagementtool.service;
 import org.springframework.stereotype.Service;
 import pl.pwr.edu.computermanagementtool.entity.*;
-import pl.pwr.edu.computermanagementtool.repository.LotteryRepository;
 import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
 import pl.pwr.edu.computermanagementtool.repository.OtherDeviceRepository;
 
@@ -15,10 +14,10 @@ public class OtherDeviceService extends GenericDeviceService<OtherDevice> {
 
 
     public OtherDevice addOtherDevice(String deviceName, Double price, String description,
-                                      Integer age, Boolean readyToSell, Integer officeId, String additionalInfo){
+                                      Integer age, Integer officeId, String additionalInfo){
 
         OtherDevice otherDevice = (OtherDevice) addDevice(OtherDevice.class, deviceName, price,
-                                                        description, age, readyToSell, officeId);
+                                                        description, age, officeId);
         otherDevice.setDeviceType(OtherDevice.DEVICE_TYPE);
         otherDevice.setAdditionalInfo(additionalInfo);
 
@@ -26,10 +25,10 @@ public class OtherDeviceService extends GenericDeviceService<OtherDevice> {
     }
 
     public OtherDevice updateOtherDevice(int id, String deviceName, Double price, String description,
-                                   Integer age, Boolean readyToSell, Integer officeId, String additionalInfo){
+                                   Integer age, Integer officeId, String additionalInfo){
 
 
-        OtherDevice otherDevice = updateDevice(id, deviceName, price, description, age, readyToSell, officeId);
+        OtherDevice otherDevice = updateDevice(id, deviceName, price, description, age, officeId);
 
         if(additionalInfo!=null) otherDevice.setAdditionalInfo(additionalInfo);
 

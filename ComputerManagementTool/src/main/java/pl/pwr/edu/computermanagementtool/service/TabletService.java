@@ -1,8 +1,6 @@
 package pl.pwr.edu.computermanagementtool.service;
 import org.springframework.stereotype.Service;
-import pl.pwr.edu.computermanagementtool.entity.Computer;
 import pl.pwr.edu.computermanagementtool.entity.Tablet;
-import pl.pwr.edu.computermanagementtool.repository.LotteryRepository;
 import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
 import pl.pwr.edu.computermanagementtool.repository.TabletRepository;
 
@@ -14,11 +12,11 @@ public class TabletService extends GenericDeviceService<Tablet>{
     }
 
     public Tablet addTablet(String deviceName, Double price, String description,
-                            Integer age, Boolean readyToSell, Integer officeId,
+                            Integer age, Integer officeId,
                             String screenSize, String operatingSystem, String batteryLife){
 
         Tablet tablet = (Tablet) addDevice(Tablet.class, deviceName, price, description,
-                                                                age, readyToSell, officeId);
+                                                                age, officeId);
 
         tablet.setScreenSize(screenSize);
         tablet.setOperatingSystem(operatingSystem);
@@ -29,10 +27,10 @@ public class TabletService extends GenericDeviceService<Tablet>{
     }
 
     public Tablet updateTablet(int id, String deviceName, Double price, String description,
-                               Integer age, Boolean readyToSell, Integer officeId,
+                               Integer age, Integer officeId,
                                String screenSize, String operatingSystem, String batteryLife) {
 
-        Tablet tablet = updateDevice(id, deviceName, price, description, age, readyToSell, officeId);
+        Tablet tablet = updateDevice(id, deviceName, price, description, age, officeId);
 
 
         tablet.setScreenSize(screenSize);

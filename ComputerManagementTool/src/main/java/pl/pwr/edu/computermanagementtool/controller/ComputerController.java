@@ -26,7 +26,6 @@ public class ComputerController extends GenericDeviceController<Computer>{
             @RequestParam(required = false) Double price,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) Integer age,
-            @RequestParam(required = false) Boolean readyToSell,
             @RequestParam(required = true) Integer officeId,
             @RequestParam(required = false) String serialNumber,
             @RequestParam(required = false) String model,
@@ -37,7 +36,7 @@ public class ComputerController extends GenericDeviceController<Computer>{
             @RequestParam(required = false) String ramName){
 
         try{
-            Computer newComputer = computerService.addComputer(deviceName, price, description, age, readyToSell,
+            Computer newComputer = computerService.addComputer(deviceName, price, description, age,
                                                                      officeId, serialNumber, model, operatingSystem,
                                                                                 batteryLife, cpuName, storageName, ramName);
             return new ResponseEntity<>(newComputer, HttpStatus.CREATED);
@@ -53,7 +52,6 @@ public class ComputerController extends GenericDeviceController<Computer>{
                                                 @RequestParam(required = false) Double price,
                                                 @RequestParam(required = false) String description,
                                                 @RequestParam(required = false) Integer age,
-                                                @RequestParam(required = false) Boolean readyToSell,
                                                 @RequestParam(required = false) Integer officeId,
                                                 @RequestParam(required = false) String serialNumber,
                                                 @RequestParam(required = false) String model,
@@ -64,7 +62,7 @@ public class ComputerController extends GenericDeviceController<Computer>{
                                                 @RequestParam(required = false) String ramName){
 
         try{
-            Computer updatedComputer = computerService.updateComputer(id, deviceName, price, description, age, readyToSell,
+            Computer updatedComputer = computerService.updateComputer(id, deviceName, price, description, age,
                     officeId, serialNumber, model, operatingSystem,
                     batteryLife, cpuName, storageName, ramName);
             return new ResponseEntity<>(updatedComputer, HttpStatus.OK);

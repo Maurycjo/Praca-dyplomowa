@@ -9,7 +9,7 @@ import java.util.List;
 @NoRepositoryBean
 public interface GenericDeviceRepository<T extends DeviceCore> extends JpaRepository<T, Integer> {
 
-    List<T> findAllByReadyToSellIsTrue();
-    List<T> findAllByReadyToSellIsFalse();
+//    List<T> findAllByReadyToSellIsTrue();
+//    List<T> findAllByReadyToSellIsFalse();
     List<T> findAllByOfficeId(int officeId);
 }

@@ -24,7 +24,7 @@ public class ComputerService extends GenericDeviceService<Computer>  {
 
 
     public Computer addComputer(String deviceName, Double price, String description,
-                                Integer age, Boolean readyToSell, Integer officeId, String serialNumber,
+                                Integer age, Integer officeId, String serialNumber,
                                 String model, String operatingSystem,String batteryLife, String cpuName, String storageName, String ramName){
 
 
@@ -44,16 +44,16 @@ public class ComputerService extends GenericDeviceService<Computer>  {
             ramId = ram.getId();
         }
 
-        return addComputer(deviceName, price, description, age, readyToSell, officeId,
+        return addComputer(deviceName, price, description, age, officeId,
                                                 serialNumber, model, operatingSystem, batteryLife,
                                                                         cpuId, storageId, ramId);
     }
 
     public Computer addComputer(String deviceName, Double price, String description,
-                                    Integer age, Boolean readyToSell, Integer officeId, String serialNumber,
+                                    Integer age, Integer officeId, String serialNumber,
                                 String model, String operatingSystem,String batteryLife, Integer cpuId, Integer storageId, Integer ramId) {
 
-        Computer computer = (Computer) addDevice(Computer.class, deviceName, price, description, age, readyToSell, officeId);
+        Computer computer = (Computer) addDevice(Computer.class, deviceName, price, description, age, officeId);
         computer.setSerialNumber(serialNumber);
         computer.setModel(model);
         computer.setOperatingSystem(operatingSystem);
@@ -77,11 +77,11 @@ public class ComputerService extends GenericDeviceService<Computer>  {
     }
 
     public Computer updateComputer(int id, String deviceName, Double price, String description,
-                                Integer age, Boolean readyToSell, Integer officeId, String serialNumber,
+                                Integer age, Integer officeId, String serialNumber,
                                 String model, String operatingSystem,String batteryLife, String cpuName, String storageName, String ramName) {
 
 
-        Computer computer = updateDevice(id, deviceName, price, description, age, readyToSell, officeId);
+        Computer computer = updateDevice(id, deviceName, price, description, age, officeId);
 
         if(serialNumber!=null)  computer.setSerialNumber(serialNumber);
         if(model!=null)         computer.setModel(model);

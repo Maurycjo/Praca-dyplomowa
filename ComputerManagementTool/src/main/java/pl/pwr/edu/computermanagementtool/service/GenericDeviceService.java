@@ -2,7 +2,6 @@ package pl.pwr.edu.computermanagementtool.service;
 
 import pl.pwr.edu.computermanagementtool.entity.*;
 import pl.pwr.edu.computermanagementtool.repository.GenericDeviceRepository;
-import pl.pwr.edu.computermanagementtool.repository.LotteryRepository;
 import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
 
 import java.lang.reflect.InvocationTargetException;
@@ -29,13 +28,13 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
     }
 
 
-    public List<T> getAllReadyToSellDevices() {
-        return genericDeviceRepository.findAllByReadyToSellIsTrue();
-    }
-
-    public List<T> getAllNotReadyToSellDevices(){
-        return genericDeviceRepository.findAllByReadyToSellIsFalse();
-    }
+//    public List<T> getAllReadyToSellDevices() {
+//        return genericDeviceRepository.findAllByReadyToSellIsTrue();
+//    }
+//
+//    public List<T> getAllNotReadyToSellDevices(){
+//        return genericDeviceRepository.findAllByReadyToSellIsFalse();
+//    }
 
     public List<T> getAllDeviceByOfficeId(int officeId) {
         return genericDeviceRepository.findAllByOfficeId(officeId);
@@ -45,7 +44,7 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
 
         Optional<T> deviceOptional = genericDeviceRepository.findById(basicDeviceId);
         T device = deviceOptional.orElseThrow(()-> new RuntimeException("Device not fount with id: " + basicDeviceId));
-        device.setReadyToSell(true);
+        device.setReadyToLottery(true);
 
         return device;
     }
@@ -53,7 +52,7 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
     public T setNotReadyToSell(int basicDeviceId) {
         Optional<T> basicDeviceOptional = genericDeviceRepository.findById(basicDeviceId);
         T basicDevice = basicDeviceOptional.orElseThrow(()-> new RuntimeException("Device not fount with id: " + basicDeviceId));
-        basicDevice.setReadyToSell(false);
+        basicDevice.setReadyToLottery(false);
 
         return basicDevice;
     }
@@ -63,7 +62,7 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
     }
 
 
-    protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String deviceName, Double price, String description, Integer age, Boolean readyToSell, Integer officeId) {
+    protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String deviceName, Double price, String description, Integer age, Integer officeId) {
 
         if(officeId == null){
             throw new RuntimeException("Office required");
@@ -82,16 +81,17 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
         deviceCore.setPrice(price);
         deviceCore.setDescription(description);
         deviceCore.setAge(age);
-        deviceCore.setReadyToSell(readyToSell);
-        deviceCore.setIsSold(false);
         deviceCore.setOffice(office);
+        deviceCore.setReadyToLottery(false);
+        deviceCore.setOrdered(false);
+        deviceCore.setLotteryDate(null);
 
         return deviceCore;
     }
 
     //update shared fields of Computer, OtherDevice, Tablet used to help update in these classes
     protected T updateDevice(int id, String deviceName, Double price, String description,
-                                   Integer age, Boolean readyToSell, Integer officeId){
+                                   Integer age, Integer officeId){
 
         Optional<T> deviceOptional = genericDeviceRepository.findById(id);
         T device = deviceOptional.orElseThrow(()-> new RuntimeException("Device not found with id: " + id));
@@ -100,7 +100,6 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
         if(price!=null)         device.setPrice(price);
         if(description!=null)   device.setDescription(description);
         if(age!=null)           device.setAge(age);
-        if(readyToSell!=null)   device.setReadyToSell(readyToSell);
 
         if (officeId != null){
             Optional<Office> officeOptional = officeRepository.findById(officeId);

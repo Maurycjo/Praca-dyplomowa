@@ -1,14 +1,10 @@
 package pl.pwr.edu.computermanagementtool.service;
 import org.springframework.stereotype.Service;
 import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
-import pl.pwr.edu.computermanagementtool.entity.Lottery;
 import pl.pwr.edu.computermanagementtool.entity.Participation;
 import pl.pwr.edu.computermanagementtool.entity.User;
-import pl.pwr.edu.computermanagementtool.enums.LotteryState;
 import pl.pwr.edu.computermanagementtool.repository.ParticipationRepository;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,32 +12,41 @@ import java.util.List;
 public class ParticipationService{
 
     private final ParticipationRepository participationRepository;
-    private final LotteryService lotteryService;
+    private final DeviceCoreService deviceCoreService;
     private final UserService userService;
 
-    public ParticipationService(ParticipationRepository participationRepository, LotteryService lotteryService, UserService userService) {
+    public ParticipationService(ParticipationRepository participationRepository, DeviceCoreService deviceCoreService, DeviceCoreService deviceCoreService1, UserService userService) {
         this.participationRepository = participationRepository;
-        this.lotteryService = lotteryService;
+        this.deviceCoreService = deviceCoreService1;
         this.userService = userService;
     }
 
 
-    public Participation createParticipation(int lotteryId, int userId) throws Exception{
+    public Participation createParticipation(int deviceId, int userId){
 
-        Participation participation = new Participation();
-        Lottery lottery = lotteryService.getLotteryById(lotteryId);
-        User user = userService.getUserById(userId);
 
-        if(participationRepository.existsByLotteryIdAndUserId(lotteryId, userId)){
+        try{
+            Participation participation = new Participation();
 
-            throw new RuntimeException("Participant with id: "+userId+" already take part in lottery with id: "+lotteryId);
+            DeviceCore device = deviceCoreService.getDeviceById(deviceId);
+            User user = userService.getUserById(userId);
+
+            boolean exist = participationRepository.existsByDeviceCoreId(deviceId);
+
+            if(exist){
+                throw new Exception("Participant already take part in lottery with device_id: " +  deviceId);
+            }
+
+            participation.setUser(user);
+            participation.setIsWinner(false);
+
+            return participationRepository.save(participation);
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("Failed to create participation.", e);
         }
 
-        participation.setLottery(lottery);
-        participation.setUser(user);
-        participation.setIsWinner(false);
 
-        return participationRepository.save(participation);
     }
 
 
@@ -69,37 +74,17 @@ public class ParticipationService{
         return participationRepository.findAllByIsWinnerIsTrue();
     }
 
-    public List<Participation> getAllParticipantsByLotteryId(int lotteryId){
-        return participationRepository.findAllByLotteryId(lotteryId);
-    }
 
     public void deleteParticipation(int participationId){
 
         participationRepository.deleteById(participationId);
     }
 
-
-    public LotteryState getLotteryStatus(int deviceId){
-
-
-        boolean exists = lotteryService.existsByDeviceCoreId(deviceId);
-        if(!exists) return LotteryState.UN_EXISTS;
-
-        Lottery lottery = lotteryService.getLotteryByDeviceId(deviceId);
-        DeviceCore deviceCore = lottery.getDeviceCore();
-        int numberOfParticipation = participationRepository.countAllByLotteryId(lottery.getId());
-
-        if(lottery.getLotteryDate()==null &&(lottery.getMinParticipant() ==null)){
-            return LotteryState.UNDEFINED;
-        }
-        if(lottery.getMinParticipant()>numberOfParticipation){
-            return LotteryState.WAITING_FOR_PARTICIPANTS;
-        }
-        if(lottery.getLotteryDate()==null){
-            lotteryService.updateLotteryDate(lottery.getId(), LocalDate.now());
-        }
-
-        return LotteryState.DEFINED;
+    public List<Participation> getAllParticipantsForDeviceWithId(int deviceId){
+        return participationRepository.findAllByDeviceCoreId(deviceId);
     }
+
+
+
 
 }

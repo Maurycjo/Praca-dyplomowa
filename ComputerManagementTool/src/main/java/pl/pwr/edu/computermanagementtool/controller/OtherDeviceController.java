@@ -28,12 +28,11 @@ public class OtherDeviceController extends GenericDeviceController<OtherDevice> 
             @RequestParam(required = false) Double price,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) Integer age,
-            @RequestParam(required = false) Boolean readyToSell,
             @RequestParam(required = true) Integer officeId,
             @RequestParam(required = false) String additionalInfo){
 
         try {
-            OtherDevice newOtherDevice = otherDeviceService.addOtherDevice(deviceName, price, description, age, readyToSell, officeId, additionalInfo);
+            OtherDevice newOtherDevice = otherDeviceService.addOtherDevice(deviceName, price, description, age, officeId, additionalInfo);
             return new ResponseEntity<>(newOtherDevice, HttpStatus.CREATED);
         } catch (RuntimeException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -47,13 +46,12 @@ public class OtherDeviceController extends GenericDeviceController<OtherDevice> 
             @RequestParam(required = false) Double price,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) Integer age,
-            @RequestParam(required = false) Boolean readyToSell,
             @RequestParam(required = false) Integer officeId,
             @RequestParam(required = false) String additionalInfo){
 
         try{
             OtherDevice updatedOtherDevice = otherDeviceService.updateOtherDevice(id, deviceName, price, description, age,
-                                                                                        readyToSell, officeId, additionalInfo);
+                                                                                         officeId, additionalInfo);
             return new ResponseEntity<>(updatedOtherDevice, HttpStatus.OK);
         } catch (RuntimeException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

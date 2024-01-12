@@ -12,30 +12,19 @@ public class Participation {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "lottery_id", nullable = false)
-    private Lottery lottery;
+    @JoinColumn(name = "device_id", nullable = false)
+    private DeviceCore deviceCore;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "is_winner", nullable = false)
+    @Column(name = "is_winner")
     private Boolean isWinner = false;
+
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Lottery getLottery() {
-        return lottery;
-    }
-
-    public void setLottery(Lottery lottery) {
-        this.lottery = lottery;
     }
 
     public User getUser() {
@@ -52,6 +41,22 @@ public class Participation {
 
     public void setIsWinner(Boolean isWinner) {
         this.isWinner = isWinner;
+    }
+
+    public DeviceCore getDeviceCore() {
+        return deviceCore;
+    }
+
+    public void setDeviceCore(DeviceCore deviceCore) {
+        this.deviceCore = deviceCore;
+    }
+
+    public Boolean getWinner() {
+        return isWinner;
+    }
+
+    public void setWinner(Boolean winner) {
+        isWinner = winner;
     }
 
 }

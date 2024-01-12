@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.pwr.edu.computermanagementtool.entity.Participation;
-import pl.pwr.edu.computermanagementtool.enums.LotteryState;
 import pl.pwr.edu.computermanagementtool.service.ParticipationService;
 
 import java.util.List;
@@ -40,40 +39,33 @@ public class ParticipationController {
     List<Participation> getAllParticipants(){
         return participationService.getAllParticipants();
     }
-
     @DeleteMapping("/{id}")
     void deleteParticipation(@PathVariable int id){
         participationService.deleteParticipation(id);
     }
 
-    @GetMapping("/user/{id}")
-    List<Participation> getAllParticipationByUserId(@PathVariable int id){
-        return participationService.getAllParticipantsByUserId(id);
-    }
-
-    @GetMapping("/lottery/{id}")
-    List<Participation> getAllParticipationByLotteryId(@PathVariable int id){
-        return participationService.getAllParticipantsByLotteryId(id);
-    }
-
-    @GetMapping("/lottery/win")
+    @GetMapping("/all-wins")
     List<Participation> getAllWonParticipants(){
         return participationService.getAllWonParticipants();
     }
 
-    @GetMapping("/lottery/win/{user_id}")
+    @GetMapping("/user-lottery-history/{id}")
+    List<Participation> getAllParticipationByUserId(@PathVariable int id){
+        return participationService.getAllParticipantsByUserId(id);
+    }
+    @GetMapping("/user-win-history/{user_id}")
     List<Participation> getUserWinsHistory(@PathVariable int user_id){
         return participationService.getAllParticipantsByUserIdWhereWin(user_id);
     }
 
-    @GetMapping("/lottery/lose/{user_id}")
+    @GetMapping("/user-lose-history/{user_id}")
     List<Participation> getUserLoseHistory(@PathVariable int user_id){
         return participationService.getAllParticipantsByUserIdWhereLose(user_id);
     }
-
-    @GetMapping("/state/{id}")
-    LotteryState getLotteryStateById(@PathVariable int id){
-        return participationService.getLotteryStatus(id);
+    @GetMapping("/device-participation/{device_id}")
+    List<Participation> getUsersForDevice(@PathVariable int device_id){
+        return participationService.getAllParticipantsByUserIdWhereLose(device_id);
     }
+
 
 }

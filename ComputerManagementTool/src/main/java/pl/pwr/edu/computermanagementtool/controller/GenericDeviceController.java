@@ -32,16 +32,16 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
     List<T> getAllBasicDevices(){
         return genericDeviceService.getAllDevices();
     }
-    @GetMapping("/ready-to-sell")
-    @CrossOrigin(origins = "*")
-    List<T> getReadyToSellBasicDevices(){
-        return genericDeviceService.getAllReadyToSellDevices();
-    }
-    @GetMapping("/not-ready-to-sell")
-    @CrossOrigin(origins = "*")
-    List<T> getNotReadyToSellBasicDevices(){
-        return genericDeviceService.getAllNotReadyToSellDevices();
-    }
+//    @GetMapping("/ready-to-sell")
+//    @CrossOrigin(origins = "*")
+//    List<T> getReadyToSellBasicDevices(){
+//        return genericDeviceService.getAllReadyToSellDevices();
+//    }
+//    @GetMapping("/not-ready-to-sell")
+//    @CrossOrigin(origins = "*")
+//    List<T> getNotReadyToSellBasicDevices(){
+//        return genericDeviceService.getAllNotReadyToSellDevices();
+//    }
     @GetMapping("/by-office/{officeId}")
     @CrossOrigin(origins = "*")
     List<T> getBasicDevicesByOfficeId(@PathVariable int officeId){

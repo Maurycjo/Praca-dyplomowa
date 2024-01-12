@@ -3,6 +3,8 @@ package pl.pwr.edu.computermanagementtool.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "device_core")
@@ -30,18 +32,18 @@ public class DeviceCore {
     @Column(name = "age")
     private Integer age;
 
-    @Column(name = "is_sold")
-    private Boolean isSold;
-    @Column(name = "ready_to_sell")
-    private Boolean readyToSell;
-
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "office_ID", nullable = false)
     private Office office;
 
+    @Column(name = "ready_to_lottery")
+    private Boolean readyToLottery;
+    @Column(name = "lottery_date")
+    private LocalDate lotteryDate;
 
-
+    @Column(name = "is_ordered")
+    private Boolean isOrdered;
 
     public String getDeviceType() {
         return deviceType;
@@ -91,12 +93,12 @@ public class DeviceCore {
         this.age = age;
     }
 
-    public Boolean getReadyToSell() {
-        return readyToSell;
+    public Boolean getReadyToLottery() {
+        return readyToLottery;
     }
 
-    public void setReadyToSell(Boolean readyToSell) {
-        this.readyToSell = readyToSell;
+    public void setReadyToLottery(Boolean readyToLottery) {
+        this.readyToLottery = readyToLottery;
     }
 
     public Office getOffice() {
@@ -107,20 +109,19 @@ public class DeviceCore {
         this.office = office;
     }
 
-    public Boolean getIsSold() {
-        return isSold;
+    public LocalDate getLotteryDate() {
+        return lotteryDate;
     }
 
-    public void setIsSold(Boolean isSold) {
-        this.isSold = isSold;
+    public void setLotteryDate(LocalDate lotteryDate) {
+        this.lotteryDate = lotteryDate;
     }
 
-    public Boolean getSold() {
-        return isSold;
+    public Boolean getOrdered() {
+        return isOrdered;
     }
 
-    public void setSold(Boolean sold) {
-        isSold = sold;
+    public void setOrdered(Boolean ordered) {
+        isOrdered = ordered;
     }
-
 }

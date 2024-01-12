@@ -2,7 +2,6 @@ package pl.pwr.edu.computermanagementtool.service;
 import org.springframework.stereotype.Service;
 import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
 import pl.pwr.edu.computermanagementtool.repository.DeviceCoreRepository;
-import pl.pwr.edu.computermanagementtool.repository.LotteryRepository;
 import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
 
 @Service

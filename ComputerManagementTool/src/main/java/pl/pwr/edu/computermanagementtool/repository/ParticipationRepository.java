@@ -10,14 +10,13 @@ import java.util.List;
 public interface ParticipationRepository extends JpaRepository<Participation, Integer> {
 
 
-    boolean existsByLotteryIdAndUserId(int lotteryId, int userId);
-    Participation findByUserIdAndLotteryId(int userId, int lotteryId);
+
     List<Participation> findAllByUserId(int userId);
     List<Participation> findAllByUserIdAndIsWinner(int userId, boolean isWinner);
     List<Participation> findAllByIsWinnerIsTrue();
-    List<Participation> findAllByLotteryId(int lotteryId);
 
-    int countAllByLotteryId(int lotteryId);
+    List<Participation> findAllByDeviceCoreId(int deviceId);
+    boolean existsByDeviceCoreId(int deviceId);
 
 
 }

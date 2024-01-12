@@ -8,6 +8,13 @@ import FormPopup from "../device_form/FormPopup";
 
 const Home = () => {
 
+    const lotteryWait = "WAITING_FOR_PARTICIPANTS";
+    const lotteryDateDefined = "DEFINED";
+    const lotteryDateUnDefined = "UNDEFINED";
+    const lotteryUnExist = "UN_EXIST";
+
+
+
     const [devices, setDevices] = useState([]);
     const [selectedOption, setSelectedOption] = useState('all');
     const [selectedOffice, setSelectedOffice] =useState('-1');
@@ -63,7 +70,6 @@ const Home = () => {
             .then(response => {
                 const devices = response.data;
 
-                // Pobierz status uczestnictwa w loterii dla każdego urządzenia
                 const fetchLotteryStates = devices.map(device =>
                     axios.get(`http://localhost:8080/participation/state/${device.id}`)
                         .then(response => response.data)
@@ -73,7 +79,6 @@ const Home = () => {
                         })
                 );
 
-                // Po zakończeniu wszystkich żądań, ustaw stan urządzeń i stanów loterii
                 Promise.all(fetchLotteryStates)
                     .then(lotteryStates => {
                         setDevices(devices.map((device, index) => ({
@@ -126,6 +131,10 @@ const Home = () => {
                         <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
+                        {device.lotteryState === lotteryWait &&(
+                            <td>Oczekująca na uczestników</td>
+                        )}
+
                         <td>{device.lotteryState}</td>
 
                     </>
@@ -151,12 +160,6 @@ const Home = () => {
                         <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
-                        {device.sold ===false &&(
-                            <td><button onClick={() => handleCreateLottery(device.id)}>Utwórz</button></td>
-                        )}
-                        {device.sold ===true &&(
-                            <td><button onClick={() => handleManageLottery(device.id)}>Zarządzaj</button></td>
-                        )}
                     </>
                 );
             case 'tablet':
@@ -177,12 +180,6 @@ const Home = () => {
                         <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
-                        {device.sold ===false &&(
-                            <td><button onClick={() => handleCreateLottery(device.id)}>Utwórz</button></td>
-                        )}
-                        {device.sold ===true &&(
-                            <td><button onClick={() => handleManageLottery(device.id)}>Zarządzaj</button></td>
-                        )}
                     </>
                 );
             case 'other':
@@ -228,8 +225,6 @@ const Home = () => {
         .catch(error => {
             return 'Error'
         });
-
-
     }
 
     const handleCheckLotteryStatusForDevice = (deviceId) =>{
