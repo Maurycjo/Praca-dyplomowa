@@ -12,7 +12,6 @@ function OtherDeviceForm(props){
         price: '',
         description:'',
         age: '',
-        readyToSell: false,
         office: '',
         additionalInfo: ''
     });
@@ -41,7 +40,6 @@ function OtherDeviceForm(props){
                         price: responseData.price,
                         description: responseData.description,
                         age: responseData.age,
-                        readyToSell: responseData.readyToSell,
                         office: responseData.office.address,
                        additionalInfo: responseData.additionalInfo
                     }));
@@ -145,17 +143,6 @@ function OtherDeviceForm(props){
                                 </option>
                             ))}
                         </select>
-                    </label>
-                    <label className="form-label">
-                        Gotowy do sprzedaży
-                        <input
-                            className="form-input"
-                            type="bool"
-                            name="readytoSell"
-                            value={formData.readyToSell}
-                            onChange={handleChange}
-                            disabled={formType === 'information'}
-                        />
                     </label>
                     <label className="form-label">
                         Dodatkowe informacje

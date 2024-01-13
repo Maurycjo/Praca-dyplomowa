@@ -48,27 +48,50 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
         return genericDeviceService.getAllDeviceByOfficeId(officeId);
     }
 
-    @PutMapping("/set-ready-to-sell/{id}")
+    @PutMapping("/set-ready-to-lottery/{id}")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<T> setReadyToSell(@PathVariable int id){
+    public ResponseEntity<T> setReadyToLottery(@PathVariable int id){
         try{
-            T updatedBasicDevice = genericDeviceService.setReadyToSell(id);
+            T updatedBasicDevice = genericDeviceService.setReadyToLottery(id);
             return new ResponseEntity<>(updatedBasicDevice, HttpStatus.OK);
         } catch (RuntimeException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping("/set-not-ready-to-sell/{id}")
+    @PutMapping("/set-not-ready-to-lottery/{id}")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<T> setNotReadyToSell(@PathVariable int id){
+    public ResponseEntity<T> setNotReadyToLottery(@PathVariable int id){
         try{
-            T updatedDevice = genericDeviceService.setNotReadyToSell(id);
+            T updatedDevice = genericDeviceService.setNotReadyToLottery(id);
             return new ResponseEntity<>(updatedDevice, HttpStatus.OK);
         } catch (RuntimeException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping("/set-ordered/{id}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<T> setOrdered(@PathVariable int id){
+        try{
+            T updatedBasicDevice = genericDeviceService.setOrdered(id);
+            return new ResponseEntity<>(updatedBasicDevice, HttpStatus.OK);
+        } catch (RuntimeException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/set-not-ordered/{id}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<T> setNotOrdered(@PathVariable int id){
+        try{
+            T updatedDevice = genericDeviceService.setNotOrdered(id);
+            return new ResponseEntity<>(updatedDevice, HttpStatus.OK);
+        } catch (RuntimeException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     @DeleteMapping("/{id}")
     @CrossOrigin(origins = "*")

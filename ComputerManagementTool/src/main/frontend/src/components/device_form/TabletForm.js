@@ -12,7 +12,6 @@ function TabletForm(props){
         price: '',
         description:'',
         age: '',
-        readyToSell: false,
         office: '',
         screenSize: '',
         operatingSystem: '',
@@ -43,7 +42,6 @@ function TabletForm(props){
                         price: responseData.price,
                         description: responseData.description,
                         age: responseData.age,
-                        readyToSell: responseData.readyToSell,
                         office: responseData.office.address,
                         screenSize: responseData.screenSize,
                         operatingSystem: responseData.operatingSystem,
@@ -152,18 +150,6 @@ function TabletForm(props){
                     </label>
                 </div>
                 <div className="form-column-right">
-
-                    <label className="form-label">
-                        Gotowy do sprzedaży
-                        <input
-                            className="form-input"
-                            type="bool"
-                            name="readytoSell"
-                            value={formData.readyToSell}
-                            onChange={handleChange}
-                            disabled={formType === 'information'}
-                        />
-                    </label>
 
                     <label className="form-label">
                         Rozmiar ekranu

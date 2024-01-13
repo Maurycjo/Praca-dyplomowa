@@ -14,8 +14,6 @@ function ComputerForm(props){
         price: '',
         description:'',
         age: '',
-        readyToSell: false,
-        sold: false,
         office: '',
         serialNumber: '',
         model: '',
@@ -71,7 +69,6 @@ function ComputerForm(props){
                         price: responseData.price,
                         description: responseData.description,
                         age: responseData.age,
-                        readyToSell: responseData.readyToSell,
                         office: responseData.office.address,
                         serialNumber: responseData.serialNumber,
                         operatingSystem: responseData.operatingSystem,
@@ -196,17 +193,6 @@ function ComputerForm(props){
                             </option>
                         ))}
                     </select>
-                </label>
-                <label className="form-label">
-                    Gotowy do sprzedaży
-                    <input
-                        className="form-input"
-                        type="bool"
-                        name="readytoSell"
-                        value={formData.readyToSell}
-                        onChange={handleChange}
-                        disabled={formType === 'information'}
-                    />
                 </label>
                 <label className="form-label">
                     Numer seryjny

@@ -40,22 +40,40 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
         return genericDeviceRepository.findAllByOfficeId(officeId);
     }
 
-    public T setReadyToSell(int basicDeviceId) {
+    public T setReadyToLottery(int basicDeviceId) {
 
         Optional<T> deviceOptional = genericDeviceRepository.findById(basicDeviceId);
         T device = deviceOptional.orElseThrow(()-> new RuntimeException("Device not fount with id: " + basicDeviceId));
         device.setReadyToLottery(true);
 
-        return device;
+        return genericDeviceRepository.save(device);
     }
 
-    public T setNotReadyToSell(int basicDeviceId) {
+    public T setNotReadyToLottery(int basicDeviceId) {
         Optional<T> basicDeviceOptional = genericDeviceRepository.findById(basicDeviceId);
         T basicDevice = basicDeviceOptional.orElseThrow(()-> new RuntimeException("Device not fount with id: " + basicDeviceId));
         basicDevice.setReadyToLottery(false);
 
-        return basicDevice;
+        return genericDeviceRepository.save(basicDevice);
     }
+
+    public T setOrdered(int basicDeviceId) {
+
+        Optional<T> deviceOptional = genericDeviceRepository.findById(basicDeviceId);
+        T device = deviceOptional.orElseThrow(()-> new RuntimeException("Device not fount with id: " + basicDeviceId));
+        device.setOrdered(true);
+
+        return genericDeviceRepository.save(device);
+    }
+
+    public T setNotOrdered(int basicDeviceId) {
+        Optional<T> basicDeviceOptional = genericDeviceRepository.findById(basicDeviceId);
+        T basicDevice = basicDeviceOptional.orElseThrow(()-> new RuntimeException("Device not fount with id: " + basicDeviceId));
+        basicDevice.setOrdered(false);
+
+        return genericDeviceRepository.save(basicDevice);
+    }
+
 
     public void deleteDevice(int id){
         genericDeviceRepository.deleteById(id);
