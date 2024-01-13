@@ -38,6 +38,7 @@ public class ParticipationService{
             }
 
             participation.setUser(user);
+            participation.setDeviceCore(device);
             participation.setIsWinner(false);
 
             return participationRepository.save(participation);

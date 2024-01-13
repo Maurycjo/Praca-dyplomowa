@@ -8,10 +8,7 @@ import FormPopup from "../device_form/FormPopup";
 
 const Home = () => {
 
-    const lotteryWait = "WAITING_FOR_PARTICIPANTS";
-    const lotteryDateDefined = "DEFINED";
-    const lotteryDateUnDefined = "UNDEFINED";
-    const lotteryUnExist = "UN_EXIST";
+
 
 
 
@@ -68,27 +65,7 @@ const Home = () => {
 
         axios.get(url)
             .then(response => {
-                const devices = response.data;
-
-                const fetchLotteryStates = devices.map(device =>
-                    axios.get(`http://localhost:8080/participation/state/${device.id}`)
-                        .then(response => response.data)
-                        .catch(error => {
-                            console.error(`Błąd pobierania stanu loterii dla urządzenia o ID ${device.id}:`, error);
-                            return 'Błąd pobierania stanu loterii';
-                        })
-                );
-
-                Promise.all(fetchLotteryStates)
-                    .then(lotteryStates => {
-                        setDevices(devices.map((device, index) => ({
-                            ...device,
-                            lotteryState: lotteryStates[index]
-                        })));
-                    })
-                    .catch(error => {
-                        console.error('Błąd przy pobieraniu stanów loterii dla urządzeń:', error);
-                    });
+                setDevices(response.data);
             })
             .catch(error => {
                 console.error("Błąd pobierania danych:", error);
@@ -102,10 +79,10 @@ const Home = () => {
     }, [selectedOption, selectedOffice]);
 
     const headersMap ={
-        all: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży', 'Czy sprzedany'],
-        computer: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży','Czy sprzedany', 'Numer seryjny', 'System', 'Bateria', 'Model', 'Procesor', 'Pamięć', 'Ram'],
-        tablet: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży','Czy sprzedany','Ekran', 'System', 'Bateria'],
-        other: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży','Czy sprzedany','Dodatkowy opis'],
+        all: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do Losowania', 'Czy sprzedany'],
+        computer: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Numer seryjny', 'System', 'Bateria', 'Model', 'Procesor', 'Pamięć', 'Ram','Gotowy do losowania','Czy sprzedany',],
+        tablet: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży','Czy sprzedany','Ekran', 'System', 'Bateria', 'Gotowy do losowania','Czy sprzedany',],
+        other: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do sprzedaży','Czy sprzedany','Dodatkowy opis', 'Gotowy do losowania','Czy sprzedany',],
         cpu: ['ID', 'Nazwa', 'Cena'],
         ram: ['ID', 'Nazwa', 'Cena'],
         storage: ['ID', 'Nazwa', 'Cena'],
@@ -131,11 +108,11 @@ const Home = () => {
                         <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
-                        {device.lotteryState === lotteryWait &&(
-                            <td>Oczekująca na uczestników</td>
+                        {device.lotteryDate===null ? (
+                            <td><button onClick={() => handleCreateLottery(device.id)}>Losuj</button> </td>
+                        ) : (
+                            <td><button onClick={()=>handleLotteryDetails(device.id)}>Szczegóły</button> </td>
                         )}
-
-                        <td>{device.lotteryState}</td>
 
                     </>
                 );
@@ -160,6 +137,7 @@ const Home = () => {
                         <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
+
                     </>
                 );
             case 'tablet':
@@ -197,13 +175,6 @@ const Home = () => {
                         <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
-                        {device.sold ===false &&(
-                            <td><button onClick={() => handleCreateLottery(device.id)}>Utwórz</button></td>
-                        )}
-                        {device.sold ===true &&(
-                            <td><button onClick={() => handleManageLottery(device.id)}>Zarządzaj</button></td>
-                        )}
-
 
                     </>
                 );
@@ -215,6 +186,10 @@ const Home = () => {
     const handleCreateLottery = (deviceId) => {
 
     };
+
+    const handleLotteryDetails = (deviceId) =>{
+
+    }
 
     const handleManageLottery = (deviceId) =>{
 

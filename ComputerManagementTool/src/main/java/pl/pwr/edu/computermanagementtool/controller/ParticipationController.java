@@ -21,12 +21,12 @@ public class ParticipationController {
 
     @PostMapping("/add")
     public ResponseEntity<Participation> addParticipation(
-            @RequestParam(required = true) Integer lotteryId,
+            @RequestParam(required = true) Integer deviceId,
             @RequestParam(required = true) Integer userId){
 
         try{
 
-            Participation newParticipation = participationService.createParticipation(lotteryId, userId);
+            Participation newParticipation = participationService.createParticipation(deviceId, userId);
             return new ResponseEntity<>(newParticipation, HttpStatus.CREATED);
         } catch (RuntimeException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
