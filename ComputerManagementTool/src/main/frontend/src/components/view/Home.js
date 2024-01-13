@@ -5,6 +5,7 @@ import './Home.css'
 import AdminHomeBar from "../bar/AdminHomeBar";
 import axios from "axios";
 import FormPopup from "../device_form/FormPopup";
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
@@ -20,6 +21,8 @@ const Home = () => {
     const [currentDeviceType, setCurrentDeviceType] = useState('');
     const [currentDeviceId, setCurrentDeviceId] = useState(0);
     const [currentFormType, setCurrentFormType] = useState('');
+
+    const navigate = useNavigate();
 
     const fetchData = (option, office) =>{
         let url;
@@ -333,7 +336,13 @@ const Home = () => {
 
     const handleDisplayUsersFromLottery = (deviceId) =>{
 
-    }
+        navigate(`/users-in-lottery`, {
+            state:{
+                deviceId: deviceId,
+            }
+        });
+
+    };
 
     return (
         <Container>

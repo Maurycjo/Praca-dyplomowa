@@ -32,7 +32,6 @@ const Users = () =>{
                 <td>{user.name}</td>
                 <td>{user.surname}</td>
                 <td>{user.email}</td>
-                <td>{user.role.roleName}</td>
                 <td>
                     <button onClick={() => handleDeleteUser(user.id)}> Usuń użytkownika</button>
                 </td>

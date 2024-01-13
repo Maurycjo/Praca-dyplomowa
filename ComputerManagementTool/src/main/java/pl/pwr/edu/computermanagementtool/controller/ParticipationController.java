@@ -64,7 +64,7 @@ public class ParticipationController {
     }
     @GetMapping("/device-participation/{device_id}")
     List<Participation> getUsersForDevice(@PathVariable int device_id){
-        return participationService.getAllParticipantsByUserIdWhereLose(device_id);
+        return participationService.getAllParticipantsForDeviceWithId(device_id);
     }
 
 

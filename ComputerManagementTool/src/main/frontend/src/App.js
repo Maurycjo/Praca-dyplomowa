@@ -5,6 +5,7 @@ import Register from './components/auth/Register';
 import Home from './components/view/Home';
 import Users from "./components/view/Users";
 import ComputerComponents from "./components/view/ComputerComponents";
+import UsersInLottery from "./components/view/UsersInLottery";
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="/auth/*" element={<Navigate to="/auth/login" />} />
                 <Route path="/users" element={<Users/>}/>
                 <Route path="/components" element={<ComputerComponents/>}/>
+                <Route path="/users-in-lottery" element={<UsersInLottery/>}/>
             </Routes>
         </Router>
     );
