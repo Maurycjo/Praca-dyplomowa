@@ -120,7 +120,7 @@ const Home = () => {
                             <td>{device.lotteryDate}</td>
 
                         ) : device.readyToLottery===true ? (
-                            <td><button onClick={() => handleCreateLottery(device.id)}>Losuj</button> </td>
+                            <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
                         ) : (
                             <td>Oczekuje na zatwierdzenie</td>
                             )
@@ -160,7 +160,7 @@ const Home = () => {
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
                         <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
                         {device.lotteryDate===null ? (
-                            <td><button onClick={() => handleCreateLottery(device.id)}>Losuj</button> </td>
+                            <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
                         ) : (
                             <td>{device.lotteryDate}</td>
                         )}
@@ -194,7 +194,7 @@ const Home = () => {
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
                         <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
                         {device.lotteryDate===null ? (
-                            <td><button onClick={() => handleCreateLottery(device.id)}>Losuj</button> </td>
+                            <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
                         ) : (
                             <td>{device.lotteryDate}</td>
                         )}
@@ -223,7 +223,7 @@ const Home = () => {
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
                         <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
                         {device.lotteryDate===null ? (
-                            <td><button onClick={() => handleCreateLottery(device.id)}>Losuj</button> </td>
+                            <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
                         ) : (
                             <td>{device.lotteryDate}</td>
                         )}
@@ -235,7 +235,7 @@ const Home = () => {
         }
     };
 
-    const handleCreateLottery = (deviceId) => {
+    const handleRandomLotteryWinner = (deviceId) => {
 
 
     };
@@ -290,8 +290,6 @@ const Home = () => {
             });
 
     };
-
-
     const handleDelete = (deviceId) => {
 
         fetch(`http://localhost:8080/devices/${deviceId}`, {

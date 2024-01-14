@@ -12,11 +12,11 @@ public class TabletService extends GenericDeviceService<Tablet>{
     }
 
     public Tablet addTablet(String deviceName, Double price, String description,
-                            Integer age, Integer officeId,
+                            Integer age, String officeAddress,
                             String screenSize, String operatingSystem, String batteryLife){
 
         Tablet tablet = (Tablet) addDevice(Tablet.class, deviceName, price, description,
-                                                                age, officeId);
+                                                                age, officeAddress);
 
         tablet.setScreenSize(screenSize);
         tablet.setOperatingSystem(operatingSystem);
@@ -27,10 +27,10 @@ public class TabletService extends GenericDeviceService<Tablet>{
     }
 
     public Tablet updateTablet(int id, String deviceName, Double price, String description,
-                               Integer age, Integer officeId,
+                               Integer age, String officeAddress,
                                String screenSize, String operatingSystem, String batteryLife) {
 
-        Tablet tablet = updateDevice(id, deviceName, price, description, age, officeId);
+        Tablet tablet = updateDevice(id, deviceName, price, description, age, officeAddress);
 
 
         tablet.setScreenSize(screenSize);

@@ -109,7 +109,35 @@ function ComputerForm(props){
         setAddRamPopup(true)
     };
 
-    const handleAddComputer = () =>{
+    const handleAddComputer = (e) =>{
+        e.preventDefault();
+
+        console.log(offices);
+
+        const computerData ={
+            "deviceName" : formData.deviceName,
+            "price" : formData.price,
+            "description" : formData.description,
+            "age" : formData.age,
+            "officeId" : formData.office,
+            "serialNumber" : formData.serialNumber,
+            "model" : formData.model,
+            "operatingSystem" : formData.model,
+            "batteryLife" : formData.batteryLife,
+            "cpuName" : formData.cpu.name,
+            "storageName" : formData.storage.name,
+            "ramName" : formData.ram.name
+        };
+
+        // axios.post('http://localhost:8080/computers/add', computerData)
+        //     .then(response => {
+        //         console.log('Computer added successfully:', response.data);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error adding computer:', error);
+        //     });
+
+
 
     };
 
@@ -182,7 +210,7 @@ function ComputerForm(props){
                     <select
                         className="form-input"
                         name="office"
-                        value={formData.office.address}
+                        value={formData.office}
                         onChange={handleChange}
                         disabled={formType === 'information'}
                     >

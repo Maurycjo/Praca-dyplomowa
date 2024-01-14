@@ -80,13 +80,12 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
     }
 
 
-    protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String deviceName, Double price, String description, Integer age, Integer officeId) {
+    protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String deviceName, Double price, String description, Integer age, String officeAddress) {
 
-        if(officeId == null){
-            throw new RuntimeException("Office required");
-        }
-        Optional<Office> officeOptional = officeRepository.findById(officeId);
-        Office office = officeOptional.orElseThrow(() -> new RuntimeException("Office not found with id: " + officeId));
+
+
+        Optional <Office> officeOptional = officeRepository.findOfficeByAddress(officeAddress);
+        Office office = officeOptional.orElseThrow(() -> new RuntimeException("Office not found with address: " + officeAddress));
 
         DeviceCore deviceCore;
         try {
@@ -109,7 +108,7 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
 
     //update shared fields of Computer, OtherDevice, Tablet used to help update in these classes
     protected T updateDevice(int id, String deviceName, Double price, String description,
-                                   Integer age, Integer officeId){
+                                   Integer age, String officeAddress){
 
         Optional<T> deviceOptional = genericDeviceRepository.findById(id);
         T device = deviceOptional.orElseThrow(()-> new RuntimeException("Device not found with id: " + id));
@@ -119,11 +118,11 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
         if(description!=null)   device.setDescription(description);
         if(age!=null)           device.setAge(age);
 
-        if (officeId != null){
-            Optional<Office> officeOptional = officeRepository.findById(officeId);
-            Office office = officeOptional.orElseThrow(()-> new RuntimeException("Office not found with id: " + officeId));
-            device.setOffice(office);
-        }
+
+        Optional<Office> officeOptional = officeRepository.findOfficeByAddress(officeAddress);
+        Office office = officeOptional.orElseThrow(()-> new RuntimeException("Office not found with address: " + officeAddress));
+        device.setOffice(office);
+
         return device;
     }
 

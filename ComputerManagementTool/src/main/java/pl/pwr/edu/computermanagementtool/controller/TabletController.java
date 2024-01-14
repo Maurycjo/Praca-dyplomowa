@@ -25,13 +25,13 @@ public class TabletController  extends GenericDeviceController<Tablet>{
             @RequestParam(required = false) Double price,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) Integer age,
-            @RequestParam(required = true) Integer officeId,
+            @RequestParam(required = true) String officeAddress,
             @RequestParam(required = false) String screenSize,
             @RequestParam(required = false) String operatingSystem,
             @RequestParam(required = false) String batteryLife) {
 
         try {
-            Tablet newTablet = tabletService.addTablet(deviceName, price, description, age, officeId,
+            Tablet newTablet = tabletService.addTablet(deviceName, price, description, age, officeAddress,
                                                         screenSize, operatingSystem, batteryLife);
             return new ResponseEntity<>(newTablet, HttpStatus.CREATED);
         } catch (RuntimeException e){
@@ -46,13 +46,13 @@ public class TabletController  extends GenericDeviceController<Tablet>{
             @RequestParam(required = false) Double price,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) Integer age,
-            @RequestParam(required = false) Integer officeId,
+            @RequestParam(required = false) String officeAddress,
             @RequestParam(required = false) String screenSize,
             @RequestParam(required = false) String operatingSystem,
             @RequestParam(required = false) String batteryLife) {
 
         try {
-            Tablet updatedTablet = tabletService.updateTablet(id, deviceName, price, description, age, officeId,
+            Tablet updatedTablet = tabletService.updateTablet(id, deviceName, price, description, age, officeAddress,
                     screenSize, operatingSystem, batteryLife);
             return new ResponseEntity<>(updatedTablet, HttpStatus.OK);
         } catch (RuntimeException e){

@@ -14,10 +14,10 @@ public class OtherDeviceService extends GenericDeviceService<OtherDevice> {
 
 
     public OtherDevice addOtherDevice(String deviceName, Double price, String description,
-                                      Integer age, Integer officeId, String additionalInfo){
+                                      Integer age, String officeAddress, String additionalInfo){
 
         OtherDevice otherDevice = (OtherDevice) addDevice(OtherDevice.class, deviceName, price,
-                                                        description, age, officeId);
+                                                        description, age, officeAddress);
         otherDevice.setDeviceType(OtherDevice.DEVICE_TYPE);
         otherDevice.setAdditionalInfo(additionalInfo);
 
@@ -25,10 +25,10 @@ public class OtherDeviceService extends GenericDeviceService<OtherDevice> {
     }
 
     public OtherDevice updateOtherDevice(int id, String deviceName, Double price, String description,
-                                   Integer age, Integer officeId, String additionalInfo){
+                                   Integer age, String officeAddress, String additionalInfo){
 
 
-        OtherDevice otherDevice = updateDevice(id, deviceName, price, description, age, officeId);
+        OtherDevice otherDevice = updateDevice(id, deviceName, price, description, age, officeAddress);
 
         if(additionalInfo!=null) otherDevice.setAdditionalInfo(additionalInfo);
 

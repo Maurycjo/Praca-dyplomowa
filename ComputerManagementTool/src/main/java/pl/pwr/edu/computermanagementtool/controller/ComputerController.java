@@ -10,6 +10,7 @@ import pl.pwr.edu.computermanagementtool.service.ComputerService;
 
 @RestController
 @RequestMapping("/computers")
+@CrossOrigin(origins = "*")
 public class ComputerController extends GenericDeviceController<Computer>{
 
     private final ComputerService computerService;
@@ -26,7 +27,7 @@ public class ComputerController extends GenericDeviceController<Computer>{
             @RequestParam(required = false) Double price,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) Integer age,
-            @RequestParam(required = true) Integer officeId,
+            @RequestParam(required = true) String officeAddress,
             @RequestParam(required = false) String serialNumber,
             @RequestParam(required = false) String model,
             @RequestParam(required = false) String operatingSystem,
@@ -37,7 +38,7 @@ public class ComputerController extends GenericDeviceController<Computer>{
 
         try{
             Computer newComputer = computerService.addComputer(deviceName, price, description, age,
-                                                                     officeId, serialNumber, model, operatingSystem,
+                    officeAddress, serialNumber, model, operatingSystem,
                                                                                 batteryLife, cpuName, storageName, ramName);
             return new ResponseEntity<>(newComputer, HttpStatus.CREATED);
         } catch (RuntimeException e){
@@ -52,7 +53,7 @@ public class ComputerController extends GenericDeviceController<Computer>{
                                                 @RequestParam(required = false) Double price,
                                                 @RequestParam(required = false) String description,
                                                 @RequestParam(required = false) Integer age,
-                                                @RequestParam(required = false) Integer officeId,
+                                                @RequestParam(required = false) String officeAddress,
                                                 @RequestParam(required = false) String serialNumber,
                                                 @RequestParam(required = false) String model,
                                                 @RequestParam(required = false) String operatingSystem,
@@ -63,7 +64,7 @@ public class ComputerController extends GenericDeviceController<Computer>{
 
         try{
             Computer updatedComputer = computerService.updateComputer(id, deviceName, price, description, age,
-                    officeId, serialNumber, model, operatingSystem,
+                    officeAddress, serialNumber, model, operatingSystem,
                     batteryLife, cpuName, storageName, ramName);
             return new ResponseEntity<>(updatedComputer, HttpStatus.OK);
         } catch (RuntimeException e){
