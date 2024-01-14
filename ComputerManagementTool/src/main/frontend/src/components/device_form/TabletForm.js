@@ -64,7 +64,27 @@ function TabletForm(props){
     };
 
 
-    const handleAddTablet = () =>{
+    const handleAddTablet = async () => {
+
+        try {
+
+            const tabletData = {
+                "deviceName": formData.deviceName,
+                "price": formData.price,
+                "description": formData.description,
+                "age": formData.age,
+                "officeAddress": formData.office,
+                "screenSize": formData.screenSize,
+                "operatingSystem": formData.model,
+                "batteryLife": formData.batteryLife,
+            };
+
+            const response = await axios.post('http://localhost:8080/computers/add', tabletData, {});
+
+        } catch (error) {
+            console.error('Bład dodawania komputera', error)
+        }
+
 
     };
 
@@ -121,14 +141,15 @@ function TabletForm(props){
                         />
                     </label>
                     <label className="form-label">
-                        Wiek
+                        Wiek [Lata]
                         <input
                             className="form-input"
-                            type="int"
+                            type="number"
                             name="age"
                             value={formData.age}
                             onChange={handleChange}
                             disabled={formType === 'information'}
+                            step="1"
                         />
                     </label>
                     <label className="form-label">
@@ -166,8 +187,8 @@ function TabletForm(props){
                         Żywotność baterii
                         <input
                             className="form-input"
-                            type="int"
-                            name="battery"
+                            type="text"
+                            name="batteryLife"
                             value={formData.batteryLife}
                             onChange={handleChange}
                             disabled={formType === 'information'}

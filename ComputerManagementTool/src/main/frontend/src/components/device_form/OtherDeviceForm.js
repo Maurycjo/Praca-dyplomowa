@@ -60,7 +60,26 @@ function OtherDeviceForm(props){
     };
 
 
-    const handleAddOtherDevice = () =>{
+    const handleAddOtherDevice = async () => {
+
+        try {
+
+            const otherDeviceData = {
+                "deviceName": formData.deviceName,
+                "price": formData.price,
+                "description": formData.description,
+                "age": formData.age,
+                "officeAddress": formData.office,
+                "additionalInfo": formData.additionalInfo,
+
+            };
+
+            const response = await axios.post('http://localhost:8080/other-devices/add', otherDeviceData, {});
+
+        } catch (error) {
+            console.error('Bład dodawania innego urzadzenia', error)
+        }
+
 
     };
 
@@ -117,14 +136,15 @@ function OtherDeviceForm(props){
                 </div>
                 <div className="form-column-right">
                     <label className="form-label">
-                        Wiek
+                        Wiek [Lata]
                         <input
                             className="form-input"
-                            type="int"
+                            type="number"
                             name="age"
                             value={formData.age}
                             onChange={handleChange}
                             disabled={formType === 'information'}
+                            step ="1"
                         />
                     </label>
                     <label className="form-label">

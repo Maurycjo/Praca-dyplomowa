@@ -110,7 +110,6 @@ function ComputerForm(props){
     };
 
     const handleAddComputer = async (e) =>{
-        e.preventDefault();
 
         try{
 
@@ -193,14 +192,15 @@ function ComputerForm(props){
                     />
                 </label>
                 <label className="form-label">
-                    Wiek
+                    Wiek [Lata]
                     <input
                         className="form-input"
-                        type="int"
+                        type="number"
                         name="age"
                         value={formData.age}
                         onChange={handleChange}
                         disabled={formType === 'information'}
+                        step ="1"
                     />
                 </label>
                 <label className="form-label">
@@ -248,8 +248,8 @@ function ComputerForm(props){
                     Żywotność baterii
                     <input
                         className="form-input"
-                        type="int"
-                        name="battery"
+                        type="text"
+                        name="batteryLife"
                         value={formData.batteryLife}
                         onChange={handleChange}
                         disabled={formType === 'information'}
