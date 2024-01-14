@@ -5,6 +5,7 @@ import pl.pwr.edu.computermanagementtool.entity.Participation;
 import pl.pwr.edu.computermanagementtool.entity.User;
 import pl.pwr.edu.computermanagementtool.repository.ParticipationRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,7 +40,7 @@ public class ParticipationService{
 
             participation.setUser(user);
             participation.setDeviceCore(device);
-            participation.setIsWinner(false);
+            participation.setWinner(false);
 
             return participationRepository.save(participation);
         } catch (Exception e){
@@ -86,6 +87,22 @@ public class ParticipationService{
     }
 
 
+    //all pending lottery for user
+    public List<Participation> getAllParticipantsByUserIdWhereLotteryDateIsNull(int userId){
+
+        List<Participation> participationList = participationRepository.findAllByUserId(userId);
+
+        List<Participation> pendingList = new ArrayList<>();
+
+        for(var p : participationList){
+            if(p.getDeviceCore().getLotteryDate()==null){
+                pendingList.add(p);
+            }
+        }
+
+        return pendingList;
+
+    }
 
 
 }

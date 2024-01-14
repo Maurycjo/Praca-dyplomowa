@@ -18,5 +18,4 @@ public interface ParticipationRepository extends JpaRepository<Participation, In
     List<Participation> findAllByDeviceCoreId(int deviceId);
     boolean existsByDeviceCoreId(int deviceId);
 
-
 }

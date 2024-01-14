@@ -62,6 +62,12 @@ public class ParticipationController {
     List<Participation> getUserLoseHistory(@PathVariable int user_id){
         return participationService.getAllParticipantsByUserIdWhereLose(user_id);
     }
+
+    @GetMapping("/user-pending-lottery/{user_id}")
+    List<Participation> getUserPendingLottery(@PathVariable int user_id){
+        return participationService.getAllParticipantsByUserIdWhereLotteryDateIsNull(user_id);
+    }
+
     @GetMapping("/device-participation/{device_id}")
     List<Participation> getUsersForDevice(@PathVariable int device_id){
         return participationService.getAllParticipantsForDeviceWithId(device_id);

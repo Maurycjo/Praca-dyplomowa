@@ -35,14 +35,6 @@ public class Participation {
         this.user = user;
     }
 
-    public Boolean getIsWinner() {
-        return isWinner;
-    }
-
-    public void setIsWinner(Boolean isWinner) {
-        this.isWinner = isWinner;
-    }
-
     public DeviceCore getDeviceCore() {
         return deviceCore;
     }
@@ -58,5 +50,4 @@ public class Participation {
     public void setWinner(Boolean winner) {
         isWinner = winner;
     }
-
 }
