@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import axios from "axios";
 
 
 
@@ -25,16 +26,25 @@ function CpuForm(props){
 
     const handleAddCpu = async (e) => {
         e.preventDefault();
-        const params = new URLSearchParams();
-        params.append('name', formData.name);
-        params.append('price', formData.price);
 
-        // fetch(`http://localhost:8080/cpus/add?${params.toString()}`, {
-        //     method: 'POST',
-        // })
+        try {
+
+            const cpuData = {
+                "name": formData.name,
+                "price": formData.price,
+            };
+
+            await axios.post('http://localhost:8080/cpus/add', cpuData, {});
+            const updatedCpus = await axios.get('http://localhost:8080/cpus/all');
+
+            props.setCpus(updatedCpus.data);
+
+        } catch (error) {
+            console.error('Bład dodawania procesora', error)
+        }
 
 
-
+        props.setTrigger(false);
 
     };
 

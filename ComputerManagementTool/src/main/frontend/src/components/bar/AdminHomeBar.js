@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import AddNewFormPopup from "../device_form/AddNewFormPopup";
 import {useNavigate} from 'react-router-dom'
 const AdminHomeBar = ({ onDeviceChange, onOfficeChange }) => {
-    const [selectedString, setSelectedString] = useState('Wszystkie urządzenia');
+    const [selectedString, setSelectedString] = useState('Komputery');
     const deviceStringList = ['Wszystkie urządzenia', 'Komputery', 'Tablety', 'Inne urządzenia'];
 
 

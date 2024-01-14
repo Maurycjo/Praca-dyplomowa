@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import axios from "axios";
 
 
 
@@ -16,8 +17,25 @@ function RamForm(props){
 
     };
 
-    const handleAddRam = (e) =>{
+    const handleAddRam = async (e) => {
+        e.preventDefault();
 
+        try {
+
+            const ramData = {
+                "name": formData.name,
+                "price": formData.price,
+            };
+
+            await axios.post('http://localhost:8080/rams/add', ramData, {});
+            const updatedRams = await axios.get('http://localhost:8080/rams/all');
+
+            props.setRams(updatedRams.data);
+
+        } catch (error) {
+            console.error('Bład dodawania ram', error)
+        }
+        props.setTrigger(false);
     }
 
 

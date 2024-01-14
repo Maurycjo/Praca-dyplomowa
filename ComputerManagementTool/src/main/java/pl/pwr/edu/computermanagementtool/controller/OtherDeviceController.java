@@ -3,14 +3,14 @@ package pl.pwr.edu.computermanagementtool.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.pwr.edu.computermanagementtool.dto.OtherDeviceRequestDTO;
-import pl.pwr.edu.computermanagementtool.entity.Computer;
+import pl.pwr.edu.computermanagementtool.dto.device.OtherDeviceRequestDTO;
 import pl.pwr.edu.computermanagementtool.entity.OtherDevice;
 import pl.pwr.edu.computermanagementtool.repository.OtherDeviceRepository;
 import pl.pwr.edu.computermanagementtool.service.OtherDeviceService;
 
 @RestController
 @RequestMapping("/other-devices")
+@CrossOrigin(origins = "*")
 public class OtherDeviceController extends GenericDeviceController<OtherDevice> {
 
     private final OtherDeviceService otherDeviceService;
@@ -43,23 +43,28 @@ public class OtherDeviceController extends GenericDeviceController<OtherDevice> 
         }
     }
 
-    @PatchMapping("/update/{id}")
+    @PutMapping("/update/{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<OtherDevice> updateOtherDevice(
             @PathVariable Integer id,
-            @RequestParam(required = false) String deviceName,
-            @RequestParam(required = false) Double price,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false) Integer age,
-            @RequestParam(required = false) String officeAddress,
-            @RequestParam(required = false) String additionalInfo){
+            @RequestBody OtherDeviceRequestDTO otherDeviceRequestDTO){
 
-        try{
-            OtherDevice updatedOtherDevice = otherDeviceService.updateOtherDevice(id, deviceName, price, description, age,
-                                                                                         officeAddress, additionalInfo);
-            return new ResponseEntity<>(updatedOtherDevice, HttpStatus.OK);
-        } catch (RuntimeException e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+       try {
+
+        OtherDevice updatedOtherDevice = otherDeviceService.updateOtherDevice(
+                id,
+                otherDeviceRequestDTO.getDeviceName(),
+                otherDeviceRequestDTO.getPrice(),
+                otherDeviceRequestDTO.getDescription(),
+                otherDeviceRequestDTO.getAge(),
+                otherDeviceRequestDTO.getOfficeAddress(),
+                otherDeviceRequestDTO.getAdditionalInfo()
+        );
+
+        return new ResponseEntity<>(updatedOtherDevice, HttpStatus.OK);
+    } catch (RuntimeException e){
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 
     }
 

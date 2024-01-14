@@ -35,10 +35,21 @@ function ComputerForm(props){
 
     useEffect(() => {
 
-            fetch('http://localhost:8080/offices/all')
-                .then(response => response.json())
-                .then(data => setOffices(data))
-                .catch(error => console.error("Error fetching offices:", error));
+        fetch('http://localhost:8080/offices/all')
+            .then(response => response.json())
+            .then(data => {
+                setOffices(data);
+
+                if (data.length > 0) {
+                    setFormData(prevState => ({
+                        ...prevState,
+                        office: data[0].address
+                    }));
+                }
+            })
+            .catch(error => console.error("Error fetching offices:", error));
+
+
 
             fetch('http://localhost:8080/cpus/all')
                 .then(response => response.json())
@@ -110,6 +121,9 @@ function ComputerForm(props){
     };
 
     const handleAddComputer = async (e) =>{
+        e.preventDefault();
+
+        
 
         try{
 
@@ -123,9 +137,9 @@ function ComputerForm(props){
                 "model" : formData.model,
                 "operatingSystem" : formData.model,
                 "batteryLife" : formData.batteryLife,
-                "cpuName" : formData.cpu,
-                "storageName" : formData.storage,
-                "ramName" : formData.ram
+                "cpuName" : formData.cpuName,
+                "storageName" : formData.storageName,
+                "ramName" : formData.ramName
             };
 
             const response = await axios.post('http://localhost:8080/computers/add', compData, {
@@ -138,7 +152,31 @@ function ComputerForm(props){
 
     };
 
-    const handleModifyComputer = () =>{
+    const handleModifyComputer = async () => {
+
+        try {
+
+            const compData = {
+                "deviceName": formData.deviceName,
+                "price": formData.price,
+                "description": formData.description,
+                "age": formData.age,
+                "officeAddress": formData.office,
+                "serialNumber": formData.serialNumber,
+                "model": formData.model,
+                "operatingSystem": formData.model,
+                "batteryLife": formData.batteryLife,
+                "cpuName": formData.cpu,
+                "storageName": formData.storage,
+                "ramName": formData.ram
+            };
+
+            const response = await axios.put(`http://localhost:8080/computers/update/${deviceId}`, compData, {});
+
+        } catch (error) {
+            console.error('Bład modyfikacji komputera', error)
+        }
+
 
     }
 
@@ -212,7 +250,7 @@ function ComputerForm(props){
                         onChange={handleChange}
                         disabled={formType === 'information'}
                     >
-                        {/*<option value="">Wybierz biuro</option>*/}
+
                         {offices.map(office => (
                             <option key={office.id} value={office.address}>
                                 {office.address}
@@ -366,9 +404,9 @@ function ComputerForm(props){
                     Zamknij
                 </button>
             </div>
-            <CpuForm trigger={addCpuPopup} setTrigger={setAddCpuPopup}></CpuForm>
-            <StorageForm trigger={addStoragePopup} setTrigger={setAddStoragePopup}></StorageForm>
-            <RamForm trigger={addRamPopup} setTrigger={setAddRamPopup}></RamForm>
+            <CpuForm trigger={addCpuPopup} setTrigger={setAddCpuPopup} setCpus={setCpus}></CpuForm>
+            <StorageForm trigger={addStoragePopup} setTrigger={setAddStoragePopup} setStorages={setStorages}></StorageForm>
+            <RamForm trigger={addRamPopup} setTrigger={setAddRamPopup} setRams={setRams}></RamForm>
         </form>
     </div>
     )

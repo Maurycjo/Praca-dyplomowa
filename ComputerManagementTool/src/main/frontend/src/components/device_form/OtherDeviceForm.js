@@ -83,7 +83,26 @@ function OtherDeviceForm(props){
 
     };
 
-    const handleModifyOtherDevice = () =>{
+    const handleModifyOtherDevice = async (e) => {
+
+        try {
+
+            const otherDeviceData = {
+                "deviceName": formData.deviceName,
+                "price": formData.price,
+                "description": formData.description,
+                "age": formData.age,
+                "officeAddress": formData.office,
+                "additionalInfo": formData.additionalInfo,
+
+            };
+
+            const response = await axios.put(`http://localhost:8080/other-devices/update/${deviceId}`, otherDeviceData, {});
+
+        } catch (error) {
+            console.error('Bład dodawania innego urzadzenia', error)
+        }
+
 
     }
 

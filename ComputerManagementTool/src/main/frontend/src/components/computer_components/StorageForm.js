@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import axios from "axios";
 
 
 
@@ -16,7 +17,29 @@ function StorageForm(props){
 
     };
 
-    const handleAddStorage = (e) =>{
+    const handleAddStorage = async (e) => {
+
+        e.preventDefault();
+
+        try {
+
+            const storageData = {
+                "name": formData.name,
+                "price": formData.price,
+            };
+
+            await axios.post('http://localhost:8080/storages/add', storageData, {});
+            const updatedStorages = await axios.get('http://localhost:8080/storages/all');
+
+            props.setStorages(updatedStorages.data);
+
+        } catch (error) {
+            console.error('Bład dodawania pamieci', error)
+        }
+
+
+        props.setTrigger(false);
+
 
     }
 
