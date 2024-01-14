@@ -22,6 +22,14 @@ const Users = () =>{
 
     }
 
+    const handleDisplayUserLotteryHistory = (userId) =>{
+
+        navigate('/user-lottery-history', {
+            state:{
+                userId: userId,
+            }
+        });
+    };
 
     const renderUsersData = (user) => {
 
@@ -32,6 +40,9 @@ const Users = () =>{
                 <td>{user.name}</td>
                 <td>{user.surname}</td>
                 <td>{user.email}</td>
+                <td>
+                    <button onClick={()=> handleDisplayUserLotteryHistory(user.id)}>Pokaż historie</button>
+                </td>
                 <td>
                     <button onClick={() => handleDeleteUser(user.id)}> Usuń użytkownika</button>
                 </td>
@@ -59,12 +70,15 @@ const Users = () =>{
                     <ReactTableScroll className="styled-table">
                         <table className="device table styled-table">
                             <thead>
-                                <td>ID</td>
-                                <td>Nazwa użytkownika</td>
-                                <td>Imię</td>
-                                <td>Nazwisko</td>
-                                <td>Email</td>
-                                <td>Rola</td>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Nazwa użytkownika</td>
+                                    <td>Imię</td>
+                                    <td>Nazwisko</td>
+                                    <td>Email</td>
+                                    <td>Historia loterii</td>
+                                    <td>Usuń</td>
+                                </tr>
                             </thead>
 
                             <tbody>

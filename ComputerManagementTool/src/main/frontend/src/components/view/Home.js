@@ -5,11 +5,9 @@ import './Home.css'
 import AdminHomeBar from "../bar/AdminHomeBar";
 import axios from "axios";
 import FormPopup from "../device_form/FormPopup";
-import { Link, useNavigate } from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 
 const Home = () => {
-
-
 
 
 

@@ -6,6 +6,7 @@ import Home from './components/view/Home';
 import Users from "./components/view/Users";
 import ComputerComponents from "./components/view/ComputerComponents";
 import UsersInLottery from "./components/view/UsersInLottery";
+import UserLotteryHistory from "./components/view/UserLotteryHistory";
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path="/users" element={<Users/>}/>
                 <Route path="/components" element={<ComputerComponents/>}/>
                 <Route path="/users-in-lottery" element={<UsersInLottery/>}/>
+                <Route path="/user-lottery-history" element={<UserLotteryHistory/>}/>
             </Routes>
         </Router>
     );
