@@ -3,6 +3,7 @@ package pl.pwr.edu.computermanagementtool.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.pwr.edu.computermanagementtool.dto.OtherDeviceRequestDTO;
 import pl.pwr.edu.computermanagementtool.entity.Computer;
 import pl.pwr.edu.computermanagementtool.entity.OtherDevice;
 import pl.pwr.edu.computermanagementtool.repository.OtherDeviceRepository;
@@ -23,16 +24,19 @@ public class OtherDeviceController extends GenericDeviceController<OtherDevice> 
 
     @PostMapping("/add")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<OtherDevice> addOtherDevice(
-            @RequestParam(required = false) String deviceName,
-            @RequestParam(required = false) Double price,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false) Integer age,
-            @RequestParam(required = true) String officeAddress,
-            @RequestParam(required = false) String additionalInfo){
+    public ResponseEntity<OtherDevice> addOtherDevice(@RequestBody OtherDeviceRequestDTO otherDeviceRequestDTO){
 
         try {
-            OtherDevice newOtherDevice = otherDeviceService.addOtherDevice(deviceName, price, description, age, officeAddress, additionalInfo);
+
+            OtherDevice newOtherDevice = otherDeviceService.addOtherDevice(
+                    otherDeviceRequestDTO.getDeviceName(),
+                    otherDeviceRequestDTO.getPrice(),
+                    otherDeviceRequestDTO.getDescription(),
+                    otherDeviceRequestDTO.getAge(),
+                    otherDeviceRequestDTO.getOfficeAddress(),
+                    otherDeviceRequestDTO.getAdditionalInfo()
+            );
+
             return new ResponseEntity<>(newOtherDevice, HttpStatus.CREATED);
         } catch (RuntimeException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

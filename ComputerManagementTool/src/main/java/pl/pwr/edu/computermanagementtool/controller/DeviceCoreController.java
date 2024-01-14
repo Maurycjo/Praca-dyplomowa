@@ -7,6 +7,7 @@ import pl.pwr.edu.computermanagementtool.service.DeviceCoreService;
 
 @RestController
 @RequestMapping("/devices")
+@CrossOrigin(origins = "*")
 public class DeviceCoreController extends GenericDeviceController<DeviceCore>{
 
 

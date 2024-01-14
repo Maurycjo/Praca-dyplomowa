@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/offices")
+@CrossOrigin(origins = "*")
 public class OfficeController {
 
     private final OfficeRepository officeRepository;
@@ -20,7 +21,7 @@ public class OfficeController {
         this.officeRepository = officeRepository;
     }
 
-    @CrossOrigin(origins = "*")
+
     @RequestMapping("/all")
     List<Office> getAllOffices(){
 

@@ -1,5 +1,6 @@
 package pl.pwr.edu.computermanagementtool.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.pwr.edu.computermanagementtool.entity.Storage;
@@ -8,6 +9,7 @@ import pl.pwr.edu.computermanagementtool.service.StorageService;
 
 @RestController
 @RequestMapping("/storages")
+@CrossOrigin(origins = "*")
 public class StorageController extends ComponentController<Storage> {
 
     private final StorageService storageService;

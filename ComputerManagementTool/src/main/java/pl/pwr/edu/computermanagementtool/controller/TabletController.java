@@ -3,12 +3,14 @@ package pl.pwr.edu.computermanagementtool.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.pwr.edu.computermanagementtool.dto.TabletRequestDTO;
 import pl.pwr.edu.computermanagementtool.entity.Tablet;
 import pl.pwr.edu.computermanagementtool.repository.TabletRepository;
 import pl.pwr.edu.computermanagementtool.service.TabletService;
 
 @RestController
 @RequestMapping("/tablets")
+@CrossOrigin(origins = "*")
 public class TabletController  extends GenericDeviceController<Tablet>{
 
     private final TabletService tabletService;
@@ -20,19 +22,21 @@ public class TabletController  extends GenericDeviceController<Tablet>{
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Tablet> addTablet(
-            @RequestParam(required = false) String deviceName,
-            @RequestParam(required = false) Double price,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false) Integer age,
-            @RequestParam(required = true) String officeAddress,
-            @RequestParam(required = false) String screenSize,
-            @RequestParam(required = false) String operatingSystem,
-            @RequestParam(required = false) String batteryLife) {
+    public ResponseEntity<Tablet> addTablet(@RequestBody TabletRequestDTO tabletRequestDTO){
+
 
         try {
-            Tablet newTablet = tabletService.addTablet(deviceName, price, description, age, officeAddress,
-                                                        screenSize, operatingSystem, batteryLife);
+            Tablet newTablet = tabletService.addTablet(
+                    tabletRequestDTO.getDeviceName(),
+                    tabletRequestDTO.getPrice(),
+                    tabletRequestDTO.getDescription(),
+                    tabletRequestDTO.getAge(),
+                    tabletRequestDTO.getOfficeAddress(),
+                    tabletRequestDTO.getScreenSize(),
+                    tabletRequestDTO.getOperatingSystem(),
+                    tabletRequestDTO.getBatteryLife()
+
+            );
             return new ResponseEntity<>(newTablet, HttpStatus.CREATED);
         } catch (RuntimeException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -69,7 +69,7 @@ function ComputerForm(props){
                         price: responseData.price,
                         description: responseData.description,
                         age: responseData.age,
-                        office: responseData.office.address,
+                        office: responseData.office,
                         serialNumber: responseData.serialNumber,
                         operatingSystem: responseData.operatingSystem,
                         batteryLife: responseData.batteryLife,
@@ -109,35 +109,33 @@ function ComputerForm(props){
         setAddRamPopup(true)
     };
 
-    const handleAddComputer = (e) =>{
+    const handleAddComputer = async (e) =>{
         e.preventDefault();
 
-        console.log(offices);
+        try{
 
-        const computerData ={
-            "deviceName" : formData.deviceName,
-            "price" : formData.price,
-            "description" : formData.description,
-            "age" : formData.age,
-            "officeId" : formData.office,
-            "serialNumber" : formData.serialNumber,
-            "model" : formData.model,
-            "operatingSystem" : formData.model,
-            "batteryLife" : formData.batteryLife,
-            "cpuName" : formData.cpu.name,
-            "storageName" : formData.storage.name,
-            "ramName" : formData.ram.name
-        };
+            const compData ={
+                "deviceName" : formData.deviceName,
+                "price" : formData.price,
+                "description" : formData.description,
+                "age" : formData.age,
+                "officeAddress" : formData.office,
+                "serialNumber" : formData.serialNumber,
+                "model" : formData.model,
+                "operatingSystem" : formData.model,
+                "batteryLife" : formData.batteryLife,
+                "cpuName" : formData.cpu,
+                "storageName" : formData.storage,
+                "ramName" : formData.ram
+            };
 
-        // axios.post('http://localhost:8080/computers/add', computerData)
-        //     .then(response => {
-        //         console.log('Computer added successfully:', response.data);
-        //     })
-        //     .catch(error => {
-        //         console.error('Error adding computer:', error);
-        //     });
+            const response = await axios.post('http://localhost:8080/computers/add', compData, {
 
+            });
 
+        }catch (error){
+            console.error('Bład dodawania komputera', error)
+        }
 
     };
 
