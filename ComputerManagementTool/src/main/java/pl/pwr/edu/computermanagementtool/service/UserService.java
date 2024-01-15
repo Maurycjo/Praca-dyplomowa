@@ -34,6 +34,15 @@ public class UserService{
         return userRepository.findAll();
     }
 
+    public List<User> getAllStandardUser(){
+
+        Optional<Role> optionalRole = roleRepository.findByRoleName("USER");
+        Role role = optionalRole.orElseThrow(()-> new RuntimeException("Role USER not found. Please check if role USER exist in database!"));
+
+        return userRepository.findAllByRoleId(role.getId());
+
+    }
+
     public User registerUser(String username, String password, String name, String surname, String email){
 
         Role role = roleRepository.findByRoleName("User")

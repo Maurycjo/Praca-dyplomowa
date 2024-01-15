@@ -11,7 +11,7 @@ const Users = () =>{
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const fetchUsers = () => {
-        axios.get('http://localhost:8080/users/all')
+        axios.get('http://localhost:8080/users/all-standard')
             .then(response => setUsers(response.data))
             .catch(error => console.error("Error fetching data:", error));
     };
@@ -19,6 +19,28 @@ const Users = () =>{
 
 
     const handleDeleteUser = (userId) =>{
+
+        fetch(`http://localhost:8080/users/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Wystąpił problem podczas usuwania uzytkownika.');
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log('Uzytkownik został pomyślnie usunięty.');
+            })
+            .catch((err) => {
+                console.error(err.message);
+            });
+
+        const updatedUsers = users.filter((user) => user.id !== userId);
+        setUsers(updatedUsers);
 
     }
 

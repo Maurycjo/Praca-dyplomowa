@@ -1,11 +1,9 @@
 package pl.pwr.edu.computermanagementtool.controller;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.pwr.edu.computermanagementtool.entity.User;
+import pl.pwr.edu.computermanagementtool.repository.UserRepository;
 import pl.pwr.edu.computermanagementtool.service.UserService;
 
 import java.util.List;
@@ -16,20 +14,35 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService,
+                          UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
     @RequestMapping("/all")
     @CrossOrigin(origins = "*")
-    public List<User> getAllUser(){
+    public List<User> getAllUsers(){
         return userService.getAllUsers();
+    }
+
+    @RequestMapping("/all-standard")
+    @CrossOrigin(origins = "*")
+    public List<User> getAllStandardUsers(){
+        return userService.getAllStandardUser();
     }
 
     @RequestMapping("/{id}")
     @CrossOrigin(origins = "*")
     public User getUserById(@PathVariable int id){
         return userService.getUserById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "*")
+    public void deleteUserById(@PathVariable int id){
+        userRepository.deleteById(id);
     }
 
 
