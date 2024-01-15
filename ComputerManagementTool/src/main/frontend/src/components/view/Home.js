@@ -25,55 +25,114 @@ const Home = () => {
 
     const navigate = useNavigate();
 
-    const fetchData = (option, office) =>{
+    const fetchData = async (option, office) => {
         let url;
 
-        switch (option){
 
-            case 'all':
-                if(office==='-1'){
-                    url = 'http://localhost:8080/devices/all';
-                } else{
-                    url =`http://localhost:8080/devices/by-office/${office}`;
-                }
-                break;
-            case 'computer':
-                if(office==='-1'){
-                    url = 'http://localhost:8080/computers/all';
-                }else{
-                    url = `http://localhost:8080/computers/by-office/${office}`;
-                }
-                break;
-            case 'tablet':
-                if(office==='-1'){
-                    url = 'http://localhost:8080/tablets/all';
-                } else{
-                    url = `http://localhost:8080/tablets/by-office/${office}`;
-                }
-                break;
-            case 'other':
-                if(office==='-1'){
-                    url = 'http://localhost:8080/other-devices/all';
-                } else{
-                    url = `http://localhost:8080/other-devices/by-office/${office}`;
-                }
-                break;
-            default:
-                if(office==='-1'){
-                    url = 'http://localhost:8080/devices/all';
-                } else{
-                    url =`http://localhost:8080/devices/by-office/${office}`;
-                }
+        if (isAdmin) {
+            switch (option) {
 
+                case 'all':
+                    if (office === '-1') {
+                        url = 'http://localhost:8080/devices/all';
+                    } else {
+                        url = `http://localhost:8080/devices/by-office/${office}`;
+                    }
+                    break;
+                case 'computer':
+                    if (office === '-1') {
+                        url = 'http://localhost:8080/computers/all';
+                    } else {
+                        url = `http://localhost:8080/computers/by-office/${office}`;
+                    }
+                    break;
+                case 'tablet':
+                    if (office === '-1') {
+                        url = 'http://localhost:8080/tablets/all';
+                    } else {
+                        url = `http://localhost:8080/tablets/by-office/${office}`;
+                    }
+                    break;
+                case 'other':
+                    if (office === '-1') {
+                        url = 'http://localhost:8080/other-devices/all';
+                    } else {
+                        url = `http://localhost:8080/other-devices/by-office/${office}`;
+                    }
+                    break;
+                default:
+                    if (office === '-1') {
+                        url = 'http://localhost:8080/devices/all';
+                    } else {
+                        url = `http://localhost:8080/devices/by-office/${office}`;
+                    }
+
+            }
+        } else {
+
+            switch (option) {
+
+                case 'all':
+                    if (office === '-1') {
+                        url = 'http://localhost:8080/devices/all-ready-to-lottery';
+                    } else {
+                        url = `http://localhost:8080/devices/all-ready-to-lottery-by-officeId/${office}`;
+                    }
+                    break;
+                case 'computer':
+                    if (office === '-1') {
+                        url = 'http://localhost:8080/computers/all-ready-to-lottery';
+                    } else {
+                        url = `http://localhost:8080/computers/all-ready-to-lottery-by-officeId/${office}`;
+                    }
+                    break;
+                case 'tablet':
+                    if (office === '-1') {
+                        url = 'http://localhost:8080/tablets/all-ready-to-lottery';
+                    } else {
+                        url = `http://localhost:8080/tablets/all-ready-to-lottery-by-officeId/${office}`;
+                    }
+                    break;
+                case 'other':
+                    if (office === '-1') {
+                        url = 'http://localhost:8080/other-devices/all-ready-to-lottery';
+                    } else {
+                        url = `http://localhost:8080/other-devices/all-ready-to-lottery-by-officeId/${office}`;
+                    }
+                    break;
+                default:
+                    if (office === '-1') {
+                        url = 'http://localhost:8080/devices/all-ready-to-lottery';
+                    } else {
+                        url = `http://localhost:8080/devices/all-ready-to-lottery-by-officeId/${office}`;
+                    }
+
+
+            }
         }
 
-        axios.get(url)
-            .then(response => {
-                setDevices(response.data);
-            })
-            .catch(error => {
-                console.error("Błąd pobierania danych:", error);
-            });
+        try {
+            const response = await axios.get(url);
+            const devicesData = response.data;
+
+            const devicesWithStatus = await Promise.all(devicesData.map(async device => {
+                const isInLottery = await checkIfUserIsInLottery(device.id);
+                return {...device, isInLottery};
+            }));
+
+            setDevices(devicesWithStatus);
+        } catch (error) {
+            console.error("Błąd pobierania danych:", error);
+        }
+
+
+        // axios.get(url)
+        //     .then(response => {
+        //         setDevices(response.data);
+        //     })
+        //     .catch(error => {
+        //         console.error("Błąd pobierania danych:", error);
+        //     });
 
 
     }
@@ -104,12 +163,6 @@ const Home = () => {
                         <td>{device.description}</td>
                         <td>{device.age}</td>
                         <td>{device.office.address}</td>
-                        {isAdmin &&(
-                            <td>
-                                {device.readyToLottery ? 'Tak' : 'Nie'}
-                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
-                            </td>
-                        )}
 
                         <td>
                             {device.ordered ? 'Tak' : 'Nie'}
@@ -118,6 +171,15 @@ const Home = () => {
                             )}
 
                         </td>
+
+                        {isAdmin &&(
+                            <td>
+                                {device.readyToLottery ? 'Tak' : 'Nie'}
+                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
+                            </td>
+                        )}
+
+
                         {isAdmin &&(
                             <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         )}
@@ -140,7 +202,12 @@ const Home = () => {
                                 isAdmin ? (
                                         <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
                                     ) : (
-                                        <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                                        device.isInLottery===true ? (
+                                            <td><button onClick={() => handleCancelPartInLottery(device.id)}>Wypisz się</button> </td>
+                                            ) : (
+                                            <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                                            )
+
                                     )
                         ) : (
                             <td>Oczekuje na zatwierdzenie</td>
@@ -165,12 +232,8 @@ const Home = () => {
                         <td>{device.cpu ? device.cpu.name : 'Brak'}</td>
                         <td>{device.storage ? device.storage.name : 'Brak'}</td>
                         <td>{device.ram ? device.storage.name : 'Brak'}</td>
-                        {isAdmin &&(
-                            <td>
-                                {device.readyToLottery ? 'Tak' : 'Nie'}
-                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
-                            </td>
-                        )}
+
+
                         <td>
                             {device.ordered ? 'Tak' : 'Nie'}
                             {isAdmin &&(
@@ -178,6 +241,14 @@ const Home = () => {
                             )}
 
                         </td>
+
+                        {isAdmin &&(
+                            <td>
+                                {device.readyToLottery ? 'Tak' : 'Nie'}
+                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
+                            </td>
+                        )}
+
                         {isAdmin &&(
                             <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         )}
@@ -200,7 +271,12 @@ const Home = () => {
                             isAdmin ? (
                                 <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
                             ) : (
-                                <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                                device.isInLottery===true ? (
+                                    <td><button onClick={() => handleCancelPartInLottery(device.id)}>Wypisz się</button> </td>
+                                ) : (
+                                    <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                                )
+
                             )
                         ) : (
                             <td>Oczekuje na zatwierdzenie</td>
@@ -219,23 +295,9 @@ const Home = () => {
                         <td>{device.description}</td>
                         <td>{device.age}</td>
                         <td>{device.office.address}</td>
-                        {isAdmin &&(
-                            <td>
-                                {device.readyToLottery ? 'Tak' : 'Nie'}
-                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
-                            </td>
-                        )}
-
                         <td>{device.screenSize}</td>
                         <td>{device.operatingSystem}</td>
                         <td>{device.batteryLife}</td>
-                        <td>
-                            {device.readyToLottery ? 'Tak' : 'Nie'}
-                            {isAdmin &&(
-                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
-                            )}
-
-                        </td>
                         <td>
                             {device.ordered ? 'Tak' : 'Nie'}
                             {isAdmin &&(
@@ -243,6 +305,13 @@ const Home = () => {
                             )}
 
                         </td>
+
+                        {isAdmin &&(
+                            <td>
+                                {device.readyToLottery ? 'Tak' : 'Nie'}
+                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
+                            </td>
+                        )}
                         {isAdmin &&(
                             <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         )}
@@ -265,7 +334,11 @@ const Home = () => {
                             isAdmin ? (
                                 <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
                             ) : (
-                                <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                                device.isInLottery===true ? (
+                                    <td><button onClick={() => handleCancelPartInLottery(device.id)}>Wypisz się</button> </td>
+                                ) : (
+                                    <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                                )
                             )
                         ) : (
                             <td>Oczekuje na zatwierdzenie</td>
@@ -283,19 +356,19 @@ const Home = () => {
                         <td>{device.age}</td>
                         <td>{device.office.address}</td>
                         <td>{device.additionalInfo}</td>
+                        <td>
+                            {device.ordered ? 'Tak' : 'Nie'}
+                            {isAdmin &&(
+                                <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
+                            )}
+                        </td>
+
                         {isAdmin &&(
                             <td>
                                 {device.readyToLottery ? 'Tak' : 'Nie'}
                                 <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
                             </td>
                         )}
-                        <td>
-                            {device.ordered ? 'Tak' : 'Nie'}
-                            {isAdmin &&(
-                                <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
-                            )}
-
-                        </td>
                         {isAdmin &&(
                             <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         )}
@@ -318,7 +391,11 @@ const Home = () => {
                             isAdmin ? (
                                 <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
                             ) : (
-                                <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                                device.isInLottery===true ? (
+                                    <td><button onClick={() => handleCancelPartInLottery(device.id)}>Wypisz się</button> </td>
+                                ) : (
+                                    <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                                )
                             )
                         ) : (
                             <td>Oczekuje na zatwierdzenie</td>
@@ -337,7 +414,43 @@ const Home = () => {
 
     };
 
+    const checkIfUserIsInLottery = async (deviceId) => {
+
+        try {
+            const response = await axios.get(`http://localhost:8080/participation/check-if-user-in-lottery`, {
+
+                params: {
+                    deviceId: deviceId,
+                    userId: userId
+                }
+            })
+            return response.data;
+        } catch (error) {
+            console.error("Błąd przy sprawdzaniu statusu:", error);
+            return false
+        }
+
+    }
+
     const handleTakePartInLottery = (deviceId) =>{
+
+
+        try{
+            const participantData ={
+                "deviceId" : deviceId,
+                "userId" : userId
+            }
+
+            axios.post('http://localhost:8080/participation/add', participantData);
+        } catch (error){
+            console.error("Błąd uczestnictwa", error);
+        }
+
+    }
+
+    const handleCancelPartInLottery = (deviceId) =>{
+
+        // axios.delete('http://localhost:8080/participation/')
 
     }
 

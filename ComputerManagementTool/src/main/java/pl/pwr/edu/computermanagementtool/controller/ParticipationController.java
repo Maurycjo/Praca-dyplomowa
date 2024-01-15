@@ -3,7 +3,9 @@ package pl.pwr.edu.computermanagementtool.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.pwr.edu.computermanagementtool.dto.participation.ParticipationRequestDTO;
 import pl.pwr.edu.computermanagementtool.entity.Participation;
+import pl.pwr.edu.computermanagementtool.repository.ParticipationRepository;
 import pl.pwr.edu.computermanagementtool.service.ParticipationService;
 
 import java.util.List;
@@ -14,19 +16,19 @@ import java.util.List;
 public class ParticipationController {
 
     private final ParticipationService participationService;
+    private final ParticipationRepository participationRepository;
 
-    public ParticipationController(ParticipationService participationService) {
+    public ParticipationController(ParticipationService participationService,
+                                   ParticipationRepository participationRepository) {
         this.participationService = participationService;
+        this.participationRepository = participationRepository;
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Participation> addParticipation(
-            @RequestParam(required = true) Integer deviceId,
-            @RequestParam(required = true) Integer userId){
+    public ResponseEntity<Participation> addParticipation(@RequestBody ParticipationRequestDTO participationRequestDTO){
 
         try{
-
-            Participation newParticipation = participationService.createParticipation(deviceId, userId);
+            Participation newParticipation = participationService.createParticipation(participationRequestDTO.getDeviceId(), participationRequestDTO.getUserId());
             return new ResponseEntity<>(newParticipation, HttpStatus.CREATED);
         } catch (RuntimeException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -71,6 +73,14 @@ public class ParticipationController {
     @GetMapping("/device-participation/{device_id}")
     List<Participation> getUsersForDevice(@PathVariable int device_id){
         return participationService.getAllParticipantsForDeviceWithId(device_id);
+    }
+
+    @GetMapping("/check-if-user-in-lottery")
+    boolean checkIfUserIsInLottery(
+            @RequestParam int userId,
+            @RequestParam int deviceId) {
+
+        return participationRepository.existsByDeviceCoreIdAndUserId(deviceId, userId);
     }
 
 

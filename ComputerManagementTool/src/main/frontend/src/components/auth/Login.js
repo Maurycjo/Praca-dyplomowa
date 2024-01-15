@@ -25,7 +25,7 @@ const Login = () => {
             if(response.data.authenticated === true){
 
                 localStorage.setItem('role', response.data.role);
-                localStorage.setItem('user_id', response.data.user_id)
+                localStorage.setItem('user_id', response.data.userId)
                 localStorage.setItem('authenticated', response.data.authenticated)
                 navigate('/home');
             }else{

@@ -27,14 +27,14 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
         return genericDeviceRepository.findAll();
     }
 
+    public List<T> getAllReadyToLotteryDevices() {
+        return genericDeviceRepository.findAllByReadyToLotteryIsTrue();
+    }
 
-//    public List<T> getAllReadyToSellDevices() {
-//        return genericDeviceRepository.findAllByReadyToSellIsTrue();
-//    }
-//
-//    public List<T> getAllNotReadyToSellDevices(){
-//        return genericDeviceRepository.findAllByReadyToSellIsFalse();
-//    }
+    public List<T> getAllReadyToLotteryAndOfficeId(int officeId){
+        return getAllReadyToLotteryAndOfficeId(officeId);
+    }
+
 
     public List<T> getAllDeviceByOfficeId(int officeId) {
         return genericDeviceRepository.findAllByOfficeId(officeId);
