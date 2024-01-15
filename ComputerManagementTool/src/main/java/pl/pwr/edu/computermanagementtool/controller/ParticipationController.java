@@ -2,6 +2,7 @@ package pl.pwr.edu.computermanagementtool.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.pwr.edu.computermanagementtool.dto.participation.ParticipationRequestDTO;
 import pl.pwr.edu.computermanagementtool.entity.Participation;
@@ -46,6 +47,16 @@ public class ParticipationController {
         participationService.deleteParticipation(id);
     }
 
+    @DeleteMapping("/delete-by-user_id-and-device_id")
+    void deleteParticipantFromLotteryByUserIdAndDeviceId(
+            @RequestParam int userId,
+            @RequestParam int deviceId){
+
+        Participation participation = participationRepository.findByDeviceCoreIdAndUserId(deviceId, userId);
+
+        participationRepository.deleteById(participation.getId());
+    }
+
     @GetMapping("/all-wins")
     List<Participation> getAllWonParticipants(){
         return participationService.getAllWonParticipants();
@@ -82,6 +93,7 @@ public class ParticipationController {
 
         return participationRepository.existsByDeviceCoreIdAndUserId(deviceId, userId);
     }
+
 
 
 }

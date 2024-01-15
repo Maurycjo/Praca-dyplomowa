@@ -233,13 +233,11 @@ const Home = () => {
                         <td>{device.storage ? device.storage.name : 'Brak'}</td>
                         <td>{device.ram ? device.storage.name : 'Brak'}</td>
 
-
                         <td>
                             {device.ordered ? 'Tak' : 'Nie'}
                             {isAdmin &&(
                                 <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
                             )}
-
                         </td>
 
                         {isAdmin &&(
@@ -262,7 +260,6 @@ const Home = () => {
                             <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
                         )}
 
-
                         {device.lotteryDate!==null ? (
 
                             <td>{device.lotteryDate}</td>
@@ -276,7 +273,6 @@ const Home = () => {
                                 ) : (
                                     <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
                                 )
-
                             )
                         ) : (
                             <td>Oczekuje na zatwierdzenie</td>
@@ -324,7 +320,6 @@ const Home = () => {
                         {isAdmin &&(
                             <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
                         )}
-
 
                         {device.lotteryDate!==null ? (
 
@@ -429,30 +424,46 @@ const Home = () => {
             console.error("Błąd przy sprawdzaniu statusu:", error);
             return false
         }
-
     }
-
     const handleTakePartInLottery = (deviceId) =>{
-
 
         try{
             const participantData ={
                 "deviceId" : deviceId,
                 "userId" : userId
             }
-
             axios.post('http://localhost:8080/participation/add', participantData);
+            updateLotteryStatus(deviceId, true)
         } catch (error){
             console.error("Błąd uczestnictwa", error);
         }
 
-    }
+    };
 
-    const handleCancelPartInLottery = (deviceId) =>{
+    const handleCancelPartInLottery = async (deviceId) => {
 
-        // axios.delete('http://localhost:8080/participation/')
+        try {
+            const response = await axios.delete(`http://localhost:8080/participation/delete-by-user_id-and-device_id`, {
 
-    }
+                params: {
+                    "userId": userId,
+                    "deviceId": deviceId
+                }
+            })
+            updateLotteryStatus(deviceId, false)
+        } catch (error) {
+            console.error("Błąd przy usuwaniu uczestnictwa:", error);
+        }
+    };
+
+    const updateLotteryStatus = (deviceId, isInLottery) => {
+        setDevices(prevDevices => {
+            const updatedDevices = prevDevices.map(device =>
+                device.id === deviceId ? {...device, isInLottery} : device
+            );
+            return updatedDevices;
+        });
+    };
 
     const handleSetOrdered = (deviceId, isSold) =>{
 

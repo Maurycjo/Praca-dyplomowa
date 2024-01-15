@@ -82,6 +82,7 @@ public class ParticipationService{
         participationRepository.deleteById(participationId);
     }
 
+
     public List<Participation> getAllParticipantsForDeviceWithId(int deviceId){
         return participationRepository.findAllByDeviceCoreId(deviceId);
     }
