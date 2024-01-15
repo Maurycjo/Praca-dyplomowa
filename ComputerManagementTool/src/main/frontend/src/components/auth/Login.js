@@ -14,28 +14,28 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        try {
+            const response = await axios.post('http://localhost:8080/auth/login', {
+                usernameOrEmail: username,
+                password: password,
+            });
 
-        navigate('/home');
+            console.log(response);
 
-        // try {
-        //     const response = await axios.post('http://localhost:8080/login', {
-        //         name: username,
-        //         password: password,
-        //     });
-        //
-        //     if(response.data.token){
-        //         sessionStorage.setItem('authToken', response.data.token);
-        //         localStorage.setItem('isAdmin', response.data.is_superuser);
-        //         localStorage.setItem("user_id", response.data.user_id)
-        //
-        //         console.log(response.data.is_superuser);
-        //         navigate('/home');
-        //     }
-        //
-        //
-        // } catch (error) {
-        //     setShowError(true);
-        // }
+            if(response.data.authenticated === true){
+
+                localStorage.setItem('role', response.data.role);
+                localStorage.setItem('user_id', response.data.user_id)
+                localStorage.setItem('authenticated', response.data.authenticated)
+                navigate('/home');
+            }else{
+                localStorage.setItem('authenticated', response.data.authenticated)
+            }
+
+
+        } catch (error) {
+            setShowError(true);
+        }
     };
 
 

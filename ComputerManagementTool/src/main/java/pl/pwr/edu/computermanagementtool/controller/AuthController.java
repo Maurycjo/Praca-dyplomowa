@@ -17,8 +17,8 @@ public class AuthController {
 
     private final UserService userService;
 
-
     @PostMapping("/login")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody LoginRequestDTO loginRequestDTO) {
         Map<String, Object> response = userService.authenticateUser(loginRequestDTO.getUsernameOrEmail(), loginRequestDTO.getPassword());
 
@@ -32,6 +32,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<User> registerUser(
             @RequestBody RegisterRequestDTO registerRequestDTO){
 

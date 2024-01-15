@@ -27,6 +27,7 @@ public class UserController {
     }
 
     @RequestMapping("/{id}")
+    @CrossOrigin(origins = "*")
     public User getUserById(@PathVariable int id){
         return userService.getUserById(id);
     }

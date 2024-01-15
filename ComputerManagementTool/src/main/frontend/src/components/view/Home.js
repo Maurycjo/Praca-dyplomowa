@@ -6,9 +6,12 @@ import AdminHomeBar from "../bar/AdminHomeBar";
 import axios from "axios";
 import FormPopup from "../device_form/FormPopup";
 import {Link, useLocation, useNavigate} from 'react-router-dom';
+import UserHomeBar from "../bar/UserHomeBar";
 
 const Home = () => {
 
+    const isAdmin = localStorage.getItem("role")==="ADMIN";
+    const userId = localStorage.getItem("user_id");
 
 
     const [devices, setDevices] = useState([]);
@@ -80,10 +83,10 @@ const Home = () => {
     }, [selectedOption, selectedOffice]);
 
     const headersMap ={
-        all: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Gotowy do Losowania', 'Czy sprzedany'],
-        computer: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Numer seryjny', 'System', 'Bateria', 'Model', 'Procesor', 'Pamięć', 'Ram','Gotowy do losowania','Czy sprzedany',],
-        tablet: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro','Ekran', 'System', 'Bateria', 'Gotowy do losowania','Czy sprzedany',],
-        other: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro','Dodatkowy opis', 'Gotowy do losowania','Czy sprzedany',],
+        all: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Czy sprzedany'],
+        computer: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro', 'Numer seryjny', 'System', 'Bateria', 'Model', 'Procesor', 'Pamięć', 'Ram','Czy sprzedany',],
+        tablet: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro','Ekran', 'System', 'Bateria','Czy sprzedany',],
+        other: ['ID', 'Nazwa', 'Cena', 'Opis', 'Wiek', 'Biuro','Dodatkowy opis','Czy sprzedany',],
         cpu: ['ID', 'Nazwa', 'Cena'],
         ram: ['ID', 'Nazwa', 'Cena'],
         storage: ['ID', 'Nazwa', 'Cena'],
@@ -101,18 +104,32 @@ const Home = () => {
                         <td>{device.description}</td>
                         <td>{device.age}</td>
                         <td>{device.office.address}</td>
-                        <td>
-                            {device.readyToLottery ? 'Tak' : 'Nie'}
-                            <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
-                        </td>
+                        {isAdmin &&(
+                            <td>
+                                {device.readyToLottery ? 'Tak' : 'Nie'}
+                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
+                            </td>
+                        )}
+
                         <td>
                             {device.ordered ? 'Tak' : 'Nie'}
-                            <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
+                            {isAdmin &&(
+                                <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
+                            )}
+
                         </td>
-                        <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
-                        <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
+                        {isAdmin &&(
+                            <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
+                        )}
+                        {isAdmin &&(
+                            <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
+                        )}
+
                         <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
-                        <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
+
+                        {isAdmin &&(
+                            <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
+                        )}
 
 
                         {device.lotteryDate!==null ? (
@@ -120,12 +137,14 @@ const Home = () => {
                             <td>{device.lotteryDate}</td>
 
                         ) : device.readyToLottery===true ? (
-                            <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
+                                isAdmin ? (
+                                        <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
+                                    ) : (
+                                        <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                                    )
                         ) : (
                             <td>Oczekuje na zatwierdzenie</td>
                             )
-
-
                         }
 
                     </>
@@ -146,24 +165,47 @@ const Home = () => {
                         <td>{device.cpu ? device.cpu.name : 'Brak'}</td>
                         <td>{device.storage ? device.storage.name : 'Brak'}</td>
                         <td>{device.ram ? device.storage.name : 'Brak'}</td>
-                        <td>
-                            {device.readyToLottery ? 'Tak' : 'Nie'}
-                            <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
-                        </td>
+                        {isAdmin &&(
+                            <td>
+                                {device.readyToLottery ? 'Tak' : 'Nie'}
+                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
+                            </td>
+                        )}
                         <td>
                             {device.ordered ? 'Tak' : 'Nie'}
-                            <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
-                        </td>
+                            {isAdmin &&(
+                                <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
+                            )}
 
-                        <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
-                        <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
-                        <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
-                        <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
-                        {device.lotteryDate===null ? (
-                            <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
-                        ) : (
-                            <td>{device.lotteryDate}</td>
+                        </td>
+                        {isAdmin &&(
+                            <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         )}
+                        {isAdmin &&(
+                            <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
+                        )}
+
+                        <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
+
+                        {isAdmin &&(
+                            <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
+                        )}
+
+
+                        {device.lotteryDate!==null ? (
+
+                            <td>{device.lotteryDate}</td>
+
+                        ) : device.readyToLottery===true ? (
+                            isAdmin ? (
+                                <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
+                            ) : (
+                                <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                            )
+                        ) : (
+                            <td>Oczekuje na zatwierdzenie</td>
+                        )
+                        }
 
                     </>
                 );
@@ -177,27 +219,58 @@ const Home = () => {
                         <td>{device.description}</td>
                         <td>{device.age}</td>
                         <td>{device.office.address}</td>
-                        <td>{device.readyToLottery ? 'Tak' : 'Nie'}</td>
+                        {isAdmin &&(
+                            <td>
+                                {device.readyToLottery ? 'Tak' : 'Nie'}
+                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
+                            </td>
+                        )}
+
                         <td>{device.screenSize}</td>
                         <td>{device.operatingSystem}</td>
                         <td>{device.batteryLife}</td>
                         <td>
                             {device.readyToLottery ? 'Tak' : 'Nie'}
-                            <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
+                            {isAdmin &&(
+                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
+                            )}
+
                         </td>
                         <td>
                             {device.ordered ? 'Tak' : 'Nie'}
-                            <button onClick={() => handleSetOrdered(device.id, device.sold)}>Zmień</button>
+                            {isAdmin &&(
+                                <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
+                            )}
+
                         </td>
-                        <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
-                        <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
-                        <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
-                        <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
-                        {device.lotteryDate===null ? (
-                            <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
-                        ) : (
-                            <td>{device.lotteryDate}</td>
+                        {isAdmin &&(
+                            <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         )}
+                        {isAdmin &&(
+                            <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
+                        )}
+
+                        <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
+
+                        {isAdmin &&(
+                            <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
+                        )}
+
+
+                        {device.lotteryDate!==null ? (
+
+                            <td>{device.lotteryDate}</td>
+
+                        ) : device.readyToLottery===true ? (
+                            isAdmin ? (
+                                <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
+                            ) : (
+                                <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                            )
+                        ) : (
+                            <td>Oczekuje na zatwierdzenie</td>
+                        )
+                        }
                     </>
                 );
             case 'other':
@@ -210,23 +283,47 @@ const Home = () => {
                         <td>{device.age}</td>
                         <td>{device.office.address}</td>
                         <td>{device.additionalInfo}</td>
-                        <td>
-                            {device.readyToLottery ? 'Tak' : 'Nie'}
-                            <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
-                        </td>
+                        {isAdmin &&(
+                            <td>
+                                {device.readyToLottery ? 'Tak' : 'Nie'}
+                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
+                            </td>
+                        )}
                         <td>
                             {device.ordered ? 'Tak' : 'Nie'}
-                            <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
+                            {isAdmin &&(
+                                <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
+                            )}
+
                         </td>
-                        <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
-                        <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
-                        <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
-                        <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
-                        {device.lotteryDate===null ? (
-                            <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
-                        ) : (
-                            <td>{device.lotteryDate}</td>
+                        {isAdmin &&(
+                            <td><button onClick={() => handleDelete(device.id)}>Usuń</button></td>
                         )}
+                        {isAdmin &&(
+                            <td><button onClick={() => handleEdit(device.id, device.deviceType)}>Modyfikuj</button></td>
+                        )}
+
+                        <td><button onClick={() => handleInfo(device.id, device.deviceType)}>Informacje</button></td>
+
+                        {isAdmin &&(
+                            <td><button onClick={() => handleDisplayUsersFromLottery(device.id)}>Wyświetl</button> </td>
+                        )}
+
+
+                        {device.lotteryDate!==null ? (
+
+                            <td>{device.lotteryDate}</td>
+
+                        ) : device.readyToLottery===true ? (
+                            isAdmin ? (
+                                <td><button onClick={() => handleRandomLotteryWinner(device.id)}>Losuj</button> </td>
+                            ) : (
+                                <td><button onClick={() => handleTakePartInLottery(device.id)}>Weź udział w loterii</button> </td>
+                            )
+                        ) : (
+                            <td>Oczekuje na zatwierdzenie</td>
+                        )
+                        }
 
                     </>
                 );
@@ -239,6 +336,10 @@ const Home = () => {
 
 
     };
+
+    const handleTakePartInLottery = (deviceId) =>{
+
+    }
 
     const handleSetOrdered = (deviceId, isSold) =>{
 
@@ -350,7 +451,12 @@ const Home = () => {
                 </div>
                 <div className="operation-block">
                     <FormPopup trigger={deviceFormPopup} setTrigger={setDeviceFormPopup} deviceType={currentDeviceType} deviceId={currentDeviceId} formType={currentFormType}></FormPopup>
-                    <AdminHomeBar onDeviceChange={handleDeviceChange} onOfficeChange={handleOfficeChange}/>
+                    {isAdmin ? (
+                        <AdminHomeBar onDeviceChange={handleDeviceChange} onOfficeChange={handleOfficeChange}/>
+                    ) : (
+                        <UserHomeBar onDeviceChange={handleDeviceChange} onOfficeCHange={handleOfficeChange}/>
+                    )}
+
                 </div>
                     <div className="table-container">
                     <ReactTableScroll className="styled-table">
@@ -360,10 +466,19 @@ const Home = () => {
                                 {headersMap[selectedOption].map((header, index) => (
                                     <td key={index}>{header}</td>
                                 ))}
-                                <td>Usuń</td>
-                                <td>Modyfikuj</td>
+                                {isAdmin &&(
+                                    <td>Gotowy na losowanie</td>
+                                )}
+                                {isAdmin &&(
+                                    <td>Usuń</td>
+                                )}
+                                {isAdmin && (
+                                    <td>Modyfikuj</td>
+                                )}
                                 <td>Informacje</td>
-                                <td>Lista uczestników</td>
+                                {isAdmin && (
+                                    <td>Lista uczestników</td>
+                                )}
                                 <td>Loteria</td>
                             </tr>
                             </thead>
