@@ -10,7 +10,7 @@ import UserLotteryHistoryBar from "../bar/UserLotteryHistoryBar";
 
 const UserLotteryHistory = () => {
 
-
+    const isAdmin = localStorage.getItem("role")==="ADMIN";
     const location = useLocation();
     const [participation, setParticipation] = useState([]);
 
@@ -22,6 +22,7 @@ const UserLotteryHistory = () => {
     const [currentFormType, setCurrentFormType] = useState('');
 
     const navigate = useNavigate();
+
 
     const fetchParticipation = (option) => {
 
@@ -81,7 +82,16 @@ const UserLotteryHistory = () => {
                         <td>{participation.deviceCore.age}</td>
                         <td>{participation.deviceCore.office.address}</td>
                         <td><button onClick={() => handleInfo(participation.deviceCore.id, participation.deviceCore.deviceType)}>Informacje</button></td>
-                        <td><button onClick={() => handleCancelParticipation(participation.id)}>Wypisz się</button></td>
+
+                        {isAdmin===false && (
+                            participation.deviceCore.lotteryDate === null ? (
+                                <td><button onClick={() => handleCancelParticipation(participation.id)}>Wypisz się</button></td>
+                                ) : (
+                                    <td>Po loterii</td>
+                                )
+
+                        )}
+
                         {participation.deviceCore.lotteryDate!==null ? (
 
                             <td>{participation.deviceCore.lotteryDate}</td>
@@ -149,7 +159,10 @@ const UserLotteryHistory = () => {
                                 <td>Wiek</td>
                                 <td>Biuro</td>
                                 <td>O urządzeniu</td>
-                                <td>Wypisz się</td>
+                                {isAdmin===false &&(
+                                    <td>Wypisz się</td>
+                                )}
+
                                 <td>Loteria</td>
                                 <td>Status uczestnika</td>
                             </tr>

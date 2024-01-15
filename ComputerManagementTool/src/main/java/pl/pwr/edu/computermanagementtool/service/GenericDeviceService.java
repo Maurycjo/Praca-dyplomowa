@@ -5,6 +5,7 @@ import pl.pwr.edu.computermanagementtool.repository.GenericDeviceRepository;
 import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -124,6 +125,15 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
         device.setOffice(office);
 
         return device;
+    }
+
+    public T setLotteryDateToToday(int deviceId){
+
+        Optional<T> deviceOptional = genericDeviceRepository.findById(deviceId);
+        T device = deviceOptional.orElseThrow(()-> new RuntimeException("device not found with id: " + deviceId));
+        device.setLotteryDate(LocalDate.now());
+
+        return genericDeviceRepository.save(device);
     }
 
 

@@ -2,14 +2,17 @@ package pl.pwr.edu.computermanagementtool.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.pwr.edu.computermanagementtool.dto.participation.ParticipationRequestDTO;
+import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
 import pl.pwr.edu.computermanagementtool.entity.Participation;
 import pl.pwr.edu.computermanagementtool.repository.ParticipationRepository;
+import pl.pwr.edu.computermanagementtool.service.DeviceCoreService;
 import pl.pwr.edu.computermanagementtool.service.ParticipationService;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/participation")
@@ -18,11 +21,13 @@ public class ParticipationController {
 
     private final ParticipationService participationService;
     private final ParticipationRepository participationRepository;
+    private final DeviceCoreService deviceCoreService;
 
     public ParticipationController(ParticipationService participationService,
-                                   ParticipationRepository participationRepository) {
+                                   ParticipationRepository participationRepository, DeviceCoreService deviceCoreService) {
         this.participationService = participationService;
         this.participationRepository = participationRepository;
+        this.deviceCoreService = deviceCoreService;
     }
 
     @PostMapping("/add")
@@ -92,6 +97,27 @@ public class ParticipationController {
             @RequestParam int deviceId) {
 
         return participationRepository.existsByDeviceCoreIdAndUserId(deviceId, userId);
+    }
+
+    @GetMapping("/select-random-winner/{deviceId}")
+    Participation getRandomWinner(@PathVariable int deviceId){
+
+        List<Participation> participationList = participationService.getAllParticipantsForDeviceWithId(deviceId);
+
+
+        if(participationList.isEmpty()){
+            return null;
+        }
+
+        Random rand = new Random();
+        Participation randomParticipant = participationList.get(rand.nextInt(participationList.size()));
+
+        randomParticipant.setWinner(true);
+        deviceCoreService.setLotteryDateToToday(deviceId);
+        participationRepository.save(randomParticipant);
+
+
+        return randomParticipant;
     }
 
 

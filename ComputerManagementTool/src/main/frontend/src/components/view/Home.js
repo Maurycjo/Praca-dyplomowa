@@ -404,8 +404,11 @@ const Home = () => {
         }
     };
 
-    const handleRandomLotteryWinner = (deviceId) => {
+    const handleRandomLotteryWinner = async (deviceId) => {
 
+        await axios.get(`http://localhost:8080/participation/select-random-winner/${deviceId}`)
+
+        fetchData(selectedOption, selectedOffice);
 
     };
 
@@ -439,7 +442,6 @@ const Home = () => {
         }
 
     };
-
     const handleCancelPartInLottery = async (deviceId) => {
 
         try {
@@ -464,7 +466,6 @@ const Home = () => {
             return updatedDevices;
         });
     };
-
     const handleSetOrdered = (deviceId, isSold) =>{
 
         const endpoint = isSold

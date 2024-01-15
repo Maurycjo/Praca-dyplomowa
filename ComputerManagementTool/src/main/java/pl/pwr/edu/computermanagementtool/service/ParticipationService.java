@@ -32,7 +32,7 @@ public class ParticipationService{
             DeviceCore device = deviceCoreService.getDeviceById(deviceId);
             User user = userService.getUserById(userId);
 
-            boolean exist = participationRepository.existsByDeviceCoreId(deviceId);
+            boolean exist = participationRepository.existsByDeviceCoreIdAndUserId(deviceId, userId);
 
             if(exist){
                 throw new Exception("Participant already take part in lottery with device_id: " +  deviceId);
