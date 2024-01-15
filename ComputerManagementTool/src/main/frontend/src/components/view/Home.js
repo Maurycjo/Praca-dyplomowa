@@ -173,10 +173,16 @@ const Home = () => {
                         </td>
 
                         {isAdmin &&(
-                            <td>
-                                {device.readyToLottery ? 'Tak' : 'Nie'}
-                                <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
-                            </td>
+
+                            device.lotteryDate!==null ? (
+                                <td>Po losowaniu</td>
+                                ) : (
+
+                                <td>
+                                    {device.readyToLottery ? 'Tak' : 'Nie'}
+                                    <button onClick={() => handleSetReadyToLottery(device.id, device.readyToLottery)}>Zmień</button>
+                                </td>
+                                )
                         )}
 
 
@@ -565,6 +571,10 @@ const Home = () => {
         });
 
     };
+    const handleLogout = () =>{
+
+        navigate("/auth/login");
+    }
 
     return (
         <Container>
@@ -582,6 +592,7 @@ const Home = () => {
                         <UserHomeBar onDeviceChange={handleDeviceChange} onOfficeCHange={handleOfficeChange}/>
                     )}
 
+                    <button onClick={handleLogout}>Wyloguj</button>
                 </div>
                     <div className="table-container">
                     <ReactTableScroll className="styled-table">
