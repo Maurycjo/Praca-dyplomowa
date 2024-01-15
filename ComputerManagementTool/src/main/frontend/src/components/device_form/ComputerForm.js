@@ -80,7 +80,7 @@ function ComputerForm(props){
                         price: responseData.price,
                         description: responseData.description,
                         age: responseData.age,
-                        office: responseData.office,
+                        office: responseData.office.address,
                         serialNumber: responseData.serialNumber,
                         operatingSystem: responseData.operatingSystem,
                         batteryLife: responseData.batteryLife,
@@ -121,9 +121,6 @@ function ComputerForm(props){
     };
 
     const handleAddComputer = async (e) =>{
-        e.preventDefault();
-
-        
 
         try{
 
@@ -152,23 +149,24 @@ function ComputerForm(props){
 
     };
 
-    const handleModifyComputer = async () => {
+    const handleModifyComputer = async (e) => {
+        e.preventDefault();
 
         try {
 
-            const compData = {
-                "deviceName": formData.deviceName,
-                "price": formData.price,
-                "description": formData.description,
-                "age": formData.age,
-                "officeAddress": formData.office,
-                "serialNumber": formData.serialNumber,
-                "model": formData.model,
-                "operatingSystem": formData.model,
-                "batteryLife": formData.batteryLife,
-                "cpuName": formData.cpu,
-                "storageName": formData.storage,
-                "ramName": formData.ram
+            const compData ={
+                "deviceName" : formData.deviceName,
+                "price" : formData.price,
+                "description" : formData.description,
+                "age" : formData.age,
+                "officeAddress" : formData.office,
+                "serialNumber" : formData.serialNumber,
+                "model" : formData.model,
+                "operatingSystem" : formData.model,
+                "batteryLife" : formData.batteryLife,
+                "cpuName" : formData.cpuName,
+                "storageName" : formData.storageName,
+                "ramName" : formData.ramName
             };
 
             const response = await axios.put(`http://localhost:8080/computers/update/${deviceId}`, compData, {});
@@ -310,7 +308,7 @@ function ComputerForm(props){
                         <select
                             className="form-input"
                             name="cpuName"
-                            value={formData.cpu.name}
+                            value={formData.cpu}
                             onChange={handleChange}
                             disabled={formType === 'information'}
                         >
@@ -337,7 +335,7 @@ function ComputerForm(props){
                         <select
                             className="form-input"
                             name="storageName"
-                            value={formData.storage.name}
+                            value={formData.storage}
                             onChange={handleChange}
                             disabled={formType === 'information'}
                         >
@@ -364,7 +362,7 @@ function ComputerForm(props){
                         <select
                             className="form-input"
                             name="ramName"
-                            value={formData.ram.name}
+                            value={formData.ram}
                             onChange={handleChange}
                             disabled={formType === 'information'}
                         >
