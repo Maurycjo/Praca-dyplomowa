@@ -1,23 +1,21 @@
 package pl.pwr.edu.computermanagementtool.service;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
+import pl.pwr.edu.computermanagementtool.PasswordEncoderUtil;
 import pl.pwr.edu.computermanagementtool.entity.Role;
 import pl.pwr.edu.computermanagementtool.entity.User;
 import pl.pwr.edu.computermanagementtool.repository.RoleRepository;
 import pl.pwr.edu.computermanagementtool.repository.UserRepository;
 
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 @Service
 public class UserService{
 
-    String ROLE_PREFIX = "ROLE_";
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     public UserService(UserRepository userRepository, RoleRepository roleRepository) {
@@ -41,8 +39,31 @@ public class UserService{
         Role role = roleRepository.findByRoleName("User")
                 .orElseThrow(()-> new RuntimeException("Role not found"));
 
-        User user = new User(username, password, name, surname, email, role);
+        String hashedPassword = PasswordEncoderUtil.encodePassword(password);
+
+        User user = new User(username, hashedPassword, name, surname, email, role);
         return userRepository.save(user);
+    }
+
+    public Map<String, Object> authenticateUser(String usernameOrEmail, String password){
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("authenticated", false);
+
+        Optional<User> userOptional = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
+
+
+        if(userOptional.isPresent()){
+            User user = userOptional.orElseThrow(()-> new RuntimeException("User not found with username or email: " + usernameOrEmail));
+            String hashedPassword = PasswordEncoderUtil.encodePassword(password);
+            if(PasswordEncoderUtil.matches(password, user.getPassword())){
+                response.put("authenticated", true);
+                response.put("userId", user.getId());
+                response.put("role", user.getRole().getRoleName());
+            }
+        }
+
+        return response;
     }
 
 }
