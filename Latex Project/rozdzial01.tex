@@ -6,25 +6,42 @@ Wymiana i utylizacja sprzętu zwykle jest uwarunkowana jego zdatnością do uży
 
 Pomysł odsprzedaży wysłużonego sprzętu można zrealizować na różne sposoby. Na przykład uruchamiając loterię adresowaną do pracowników danej firmy. Sposób ten daje możność osiągnięcia kilku korzyści: uzyskania częściowego zwrotu kosztów poniesionych na zakup sprzętu, zwiększenia poziomu integracji członków firmy, wdrożenia mechanizmów motywacyjnych itp.
 
-% TO DO: warto byłoby pokazać jakieś przykłady podobnych systemów (systemów aukcyjnych sprzętu wycofywanego z firmy) - by dało się coś zacytować.
-
 Wyniki inwentaryzacji sprzętu zwykle zapisywane są w postaci tabelarycznej. Do ich obsługi (edycji) wykorzystuje się narzędzia typu Office, a mówiąc dokładniej -- edytory arkuszy kalkulacyjnych. W podstawowym scenariuszu aby przygotować i przeprowadzić loterię wystarczy sięgać do odpowiedniego arkusza kalkulacyjnego i nanieść w nim odpowiednie zmiany. Zdarza się jednak, że informacje dotyczące danej loterii jest rozproszona pomiędzy kilkoma arkuszami. Dlatego lepszym rozwiązaniem byłoby uruchomienie osobnej aplikacji, działającej zgodnie z~przyjętymi w firmie regułami. Chęć zaimplementowania takiej aplikacji stała się motywem do zdefiniowana tematu oraz celu niniejszej pracy.
 
-\section{Cel i zakres pracy}
-Celem pracy jest zaprojektowanie i zaimplementowanie narzędzia, które umożliwi ocenę stanu technicznego urządzeń wycofywanych z użytku, pozwoli wycenić ich wartość oraz posłuży jako wsparcie podczas realizacji procesu ich odsprzedaży. 
 
-Projektowane narzędzie powinno pozwalać na inwentaryzowanie sprzętu, tj.\ umożliwiać zapis stanu technicznego urządzeń oraz ich ewentualne usterki (co wymaga zwykle fizycznych oględzin). W trakcie realizacji pracy będzie trzeba dobrze określić model i zakres przechowywanych danych, biorąc pod uwagę fakt, iż większość inwentaryzowanych sprzętów będzie posiadać jakąś specyfikację komponentów składowych, a te powinny być skatalogowane wraz z cennikiem. Na cenę końcową sprzętu powinien wpływać również jego 
-wiek i czas użytkowania, jak również usterki czy uszkodzenia. Można więc rozważyć scenariusz, w którym do wyprzedawanego sprzętu dołączane są egzemplarze, które uległy awarii (i ich naprawa, z punktu widzenia firmy, nie jest opłacalna).
+\section{Przegląd istniejących rozwiązań}
 
+Na rynku aplikacji istnieją rozwiązania które pozwalają zarządzać sprzętem komputerowym. Jednymi z ciekawszych są \textbf{OCS Inventory} oraz \textbf{Microsoft System Center Configuraton Manager}. Oba te rozwiązania zostały stworzone z myślą zarządzania sprzętem a nie jego odsprzedaży. Dodatkowo przez to, że posiadają tyle możliwości, skorzystanie z tych narzędzi jest skomplikowane, co sprawia że nie opłaca ich się wykorzystywać do sprzedaży urządzeń wewnątrz firmy. 
 
-Ponadto narzędzie powinno zapewniać dostęp do informacji wszystkim osobom zaangażowanym: administratorowi (odpowiedzialnemu za edycję rekordów w podległych bazach danych),
-jak również zwykłym użytkownikom (pracownikom zatrudnionym w firmie, zainteresowanym zakupem wyprzedawanego sprzętu). 
+\subsection{OCS Inventory}
+OCS Inventory jest darmowym oprogramowaniem które po instalacji jest w stanie pobrać informacje o sprzęcie. Informacje te dotyczą procesora, pamięci RAM, dysku twardego podłączonych urządzeń peryferyjnych, oprogramowania, kart sieciowych.
+\newline
+Schemat działania
+\begin{itemize}
+	\item Serwer Bazodanowy przechowujący informacje o inwentarzu(mysql)
+	\item Serwer komunikacyjny, który obsługuje komunikacje HTTP między serwerem bazy danych a agentami (Apache, perl i mod\_perl)
+	\item Konsola administracyjna, która pozwala administratorom odpytywać serwer bazy danych za pomocą przeglądarki(Apache, php)
+	\item Serwer wdrażania, który przechowuje wszystkie konfiguracje pakietów (Apache, ssl).
+\end{itemize}
+Rozwiązanie jest wieloplatformowe które działa na systemach: Windows, Mac, Linux oraz Android. Dodatkowo istnieje płatna wersja narzędzia która pozwala na pomoc administratorów OCS Inventory. Narzędzie pozwala na zbieranie danych w postaci tabelarycznej oraz generowania raportów dotyczących sprzętu. 
+\subsection{Microsoft System Center Configuration Manager}
+Firma Microsoft dostarcza bardzo dużego, płatnego rozwiązania, które pozwala na zarządzanie dużą grupą komputerów. Do możliwości narzędzia należą między innymi: zdalny dostęp, menadżer aktualizacji oraz monitorowania stanu technicznego urządzeń. Bardzo dużo możliwości dostarczanych przez ten produkt sprawia, że cena jest nieadekwatna gdy firma chce wykorzystywać to narzędzie tylko do inwentaryzacji sprzętu. Dodatkowe opłaty mogą zostać również wygenerowane przez to, że firma musi wyszkolić pracowników, którzy umieli by zarządzać tym oprogramowaniem.
 
-Zwykli użytkownicy powinni otrzymać opcję zapisu na loterię (zakup używanego sprzętu z przekazaniem środków finansowych firmie), jak również zapisu na charytatywną licytację (zakup używanego sprzętu z przekazaniem środków finansowych na jakiś cel charytatywny). Szczegóły realizacji obu opcji powinny zostać opracowane na etapie analizy wymagań. 
+\section{Cel pracy}
+Celem  pracy jest stworzenie kompleksowego narzędzia, które umożliwi ocenę stanu technicznego urządzeń wycofywanych z użytku. Projekt ma na celu również skonstruowanie efektywnego systemu wyceny wartości tych urządzeń, a także dostarczenie wsparcia w procesie ich odsprzedaży.
 
-W ogólnym zarysie sprzedaż powinna być uruchamiana dopiero wtedy, gdy pula zgromadzonego sprzętu będzie odpowiednio liczna. Rozpoczęcie sprzedaży powinno być anonsowane użytkownikom. Wygrywający loterię lub licytację powinni otrzymywać informację o zakupionym sprzęcie wraz z instrukcjami jego odbioru. Narzędzie powinno również brać pod uwagę dane historyczne -- tj.\ powinno zwiększać szanse na wylosowanie sprzętu tym użytkownikom, którzy wcześniej nic nie wylosowali. W przypadku kiedy jest więcej sprzętu niż pracowników, pracownicy mogą wylosować kilka sprzętów.
+Projektowane narzędzie zakłada przeprowadzenie inwentaryzacji sprzętu, umożliwiając zapisanie stanu technicznego urządzeń oraz ewentualnych usterek, które zazwyczaj wymagają fizycznych oględzin. Po wdrożeniu, system powinien być dostępny na wybranej platformie internetowej, umożliwiając zalogowanym użytkownikom wykonywanie działań zgodnie z nadanymi uprawnieniami. Przewidziane akcje obejmują przeglądanie, modyfikowanie i usuwanie urządzeń oraz zarządzanie loteriami i użytkownikami. Dodatkowo, użytkownicy powinni mieć możliwość uczestniczenia w loteriach oraz przeprowadzania losowań.
 
-Realizacja pracy powinna odbywać się z wykorzystaniem wybranego stosu technologicznego platformy \textbf{Java}. Planowane jest posłużenie się frameworkami \textbf{Springboota} i \textbf{Hibernate}. Interfejs użytkownika stworzonego narzędzia powinien przyjąć postać aplikacji webowej wyświetlanej w oknie przeglądarki internetowej. Do budowy frontendu wykorzystany ma być język \textbf{javascript}. Warstwa danych narzędziem powinna być zaimplementowana z wykorzystaniem \textbf{MS SQL Server} (zarządzanie tą bazą danych odbywać się może z poziomu  \textbf{SSMS} (\textbf{SQL Server Managment Studio}). Do testowania żądań HTTP może być wykorzystany \textbf{Postman}. Końcowy produkt powinien dać się łatwo wdrożyć w środowisku chmurowym.
+Rozwiązanie ma charakteryzować się przyjaznym interfejsem użytkownika, zapewniając łatwą nawigację nawet dla pracowników bez specjalistycznej wiedzy technicznej. Proces przeglądania sprzętu komputerowego powinien być intuicyjny, usprawniając monitorowanie stanu technicznego i statusu loterii. Prostota systemu ma wpłynąć na ogólną wygodę użytkowników oraz przyczynić się do redukcji kosztów związanych z procesem inwentaryzacji.
+
+\section{Zakres pracy}
+Projektowany system składać się będzie z dwóch kluczowych komponentów: \textbf{aplikacji klienckiej} oraz \textbf{aplikacji serwerowej}. Aplikacja serwerowa, będąca centralnym elementem systemu, będzie odpowiedzialna za komunikację z bazą danych oraz dostarczanie interfejsu REST. W celu zapewnienia bezpieczeństwa, wrażliwe dane, takie jak hasła, zostaną przechowywane w formie zaszyfrowanej.
+
+Interfejs REST, udostępniany przez aplikację serwerową, umożliwi płynną komunikację pomiędzy aplikacją serwerową a kliencką. Aplikacja kliencka, z kolei, będzie stanowiła interfejs użytkownika, umożliwiając przeglądanie, usuwanie oraz korektę danych dotyczących urządzeń, historii przeprowadzonych i aktualnych loterii. Dodatkowo, aplikacja kliencka umożliwi przeprowadzenie losowań oraz jednoznaczne wyłonienie zwycięzcy.
+
+System został zaprojektowany z myślą o elastyczności i łatwości zarządzania danymi. Będzie umożliwiał dynamiczne dodawanie, usuwanie i modyfikację danych, zapewniając tym samym pełną funkcjonalność oraz dostosowanie do zmieniających się potrzeb użytkowników.
+
+%Realizacja pracy powinna odbywać się z wykorzystaniem wybranego stosu technologicznego platformy \textbf{Java}. Planowane jest posłużenie się frameworkami \textbf{Springboota} i \textbf{Hibernate}. Interfejs użytkownika stworzonego narzędzia powinien przyjąć postać aplikacji webowej wyświetlanej w oknie przeglądarki internetowej. Do budowy frontendu wykorzystany ma być język \textbf{javascript}. Warstwa danych narzędziem powinna być zaimplementowana z wykorzystaniem \textbf{MS SQL Server} (zarządzanie tą bazą danych odbywać się może z poziomu  \textbf{SSMS} (\textbf{SQL Server Managment Studio}). Do testowania żądań HTTP może być wykorzystany \textbf{Postman}. Końcowy produkt powinien dać się łatwo wdrożyć w środowisku chmurowym.
 
 \section{Układ pracy}
 % TO DO: Będzie trzeba dopisać, co zawierają kolejne rozdziały
