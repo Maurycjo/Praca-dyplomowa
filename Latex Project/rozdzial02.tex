@@ -1,53 +1,169 @@
-\chapter{Analiza wymagań przypadków użycia}
+\chapter{Analiza wymagań}
 \section{Przypadki użycia}
-Poniżej zostały przedstawione przypadki użycia które użytkownicy mogą podjąć w systemie. Przypadki użycia zostały pogrupowane na podstawie 4 rzeczy: zakładania konta, logowania, zarządzania loterią oraz zarządzania sprzętem komputerowym.
-
-\section{Założenie konta pracowniczego}
-Pracownik jest osobą pracującą w firmie.Jako że implementowany system jest niezależny od wewnętrznych systemów firmy potrzebne jest założenie kont dla użytkowników. Użytkownik sam zakłada konto do czego wykorzystuje swojego maila firmowego gdzie można potwierdzić jego tożsamość.
-
-\begin{figure}[h]
-    \includegraphics{rys01/zakladanie.jpg}
-    \caption{Przypadek zakładania konta pracowniczego}
-    \label{zakładanie_konta_etykieta}
-\end{figure}
-
-Załączony rysunek Rys.~\ref{zakładanie_konta_etykieta} pokazuje proces rejestracji. Użytkownik najpierw podaje swoje dane. Następnie jeżeli dane są prawidłowe klika w link weryfikacyjny na maili i następuje założenie konta.
-
-\section{Logowanie się do systemu}
-
-\begin{figure}[h]
-    \includegraphics{rys01/logowanie.jpg}
-    \caption{Logowanie do systemu z odpowiednimi uprawnieniami}
-    \label{logowanie_etykieta}
-\end{figure}
-
-W załączonym rysunku Rys.~\ref{logowanie_etykieta} został pokazany proces logowania z odpowiednimi uprawnieniami. Uprawnienia są nadawane na podstawie roli którą pełni użytkownik czyli Pracownik lub Administrator. Uprawnieniami pracownika są: przeglądanie dostępnych loterii, zapisywanie i wypisywanie się z udziału z loterii Rys. ~\ref{loteria_etykieta} Administrator jest osobą zarządzająca loteriami i losowanym sprzętem. Nie może jednak on sam się zapisywać na loterie z konta administracyjnego.
-\newpage
-\section {Loteria}
-
-\begin{figure}[h]
-    \includegraphics[scale=0.8]{rys01/loteria.jpg}
-    \caption{Loteria}
-    \label{loteria_etykieta}
-\end{figure}
 
 
-W załączonym rysunku Rys.~\ref{loteria_etykieta} opisywany jest przypadek loterii. Pracownik ma tylko wgląd w aktywne loterie. Może je pofiltrować tak aby były wyświetlane tylko te loterie w których bierze udział lub te w których nie bierze udziału. Ma też możliwość zapisania lub wypisywania się z loterii. W informacjach dotyczących loterii znajdują się informacje dotyczące sprzętu, biura z którego można odebrać sprzęt oraz data losowania. Administrator również może przeglądać loterie. Ma on uprawnienia do edycji i dodawania nowych loterii. Jedna loteria dotyczy jednego sprzętu dlatego równolegle może odbywać się wiele loterii. Pozwala to uniknąć sytuacji kiedy pracownik wylosowałby sprzęt który go nie interesuje. Administrator może ustalić datę losowania. Dla lepszej wygody tworzenia losowań istnieje w systemie funkcjonalność która umożliwia tworzeniu wielu losowań na raz. Gdy wylosowany zostanie zwycięzca który jest pracownikiem może on zatwierdzić lub odrzucić swoją wygraną. W przypadku braku potwierdzenia po określonej liczbie dni loteria może zostać uruchomiona ponownie z tymi samymi parametrami.
+% template %
+\newcommand\addrow[2]{#1 & #2\\ \hline}
 
-\section {Sprzęt komputerowy}
+\newcommand\additemizedrow[2]{#1 &
+        \begin{tabenum}
+            #2
+        \end{tabenum}
+        \\ \hline}
 
-Istotną część w systemie zajmuje sprzęt komputerowy. System wspomaga monitorowanie stanu urządzeń takich jak komputery, stacje dokujące czy tabletu. W przypadku kiedy firma chciała by wystawić na sprzedaż inny sprzęt istnieje specjalna tabela w bazie danych odpowiadająca podstawowemu sprzętowi komputerowemu która jako atrybuty ma podstawowe informacje. Sprzęt w bazie danych jest już oddany do odsprzedaży, należy zrobić jego wycenę i podać jego parametry.
+% making stuff convenient %
+\newcommand\name[1]{\addrow{Nazwa}{#1}}
+\newcommand\actor[1]{\addrow{Aktor}{#1}}
+\newcommand\udescription[1]{\addrow{Opis}{#1}}
+\newcommand\precondition[1]{\addrow{Warunki wstępne}{#1}}
+\newcommand\scenario[1]{\additemizedrow{Kroki}{#1}}
+\newcommand\result[1]{\addrow{Wynik}{#1}}
+\newcommand\extend[1]{\additemizedrow{Extend}{#1}}
+\newcommand\includee[1]{\additemizedrow{Include}{#1}}
 
-\begin{figure}[h]
-    \includegraphics[scale=0.8]{rys01/sprzet.jpg}
-    \caption{Sprzęt komputerowy}
-    \label{sprzet_etykieta}
-\end{figure}
+\newenvironment{usecase}{\tabularx{\textwidth}{|0{wl{3cm}}|0{X}|}\hline}{\endtabularx}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
 
 
-W załączonym rysunku Rys. \ref{sprzet_etykieta} Jedyną osobą która może zarządzać sprzętem jest administrator. To on dodaje sprzęty do bazy danych przez aplikacje, z tym że system pomaga mu podpowiadając pola takie jak procesor, pamięć i pamięć RAM. System także pomaga oszacować cenę urządzenia na podstawie zaimplementowanego algorytmu szacowania ceny, z tym że ostateczna cena urządzenia jest podawana przez administratora. Pracownik może przeglądać urządzenia i jego parametry ale z poziomu loterii Rys.~\ref{loteria_etykieta}
+\subsubsection{Rejestracja nowego użytkownika}
 
+\begin{usecase}
+		\udescription{Rejestracja użytkownika ze standardową rolą, przy użyciu maila, nazwy użytkownika, Imienia, nazwiska, hasła i potwierdzenia hasła}
+    \actor{Użytkownik}
+    \precondition{Użytkownik z zadanym emailem oraz loginem nie jest zarejestrowany w systemie}
+    \scenario{
+        \item Podanie w formularzu maila, nazwy użytkownika, Imienia, nazwiska, hasła i potwierdzenia hasła
+        \item Kliknięcie przycisku zarejestruj
+      
+    }
+    \result{Użytkownik został zarejestrowany w systemie}
+  
+        
+    
+\end{usecase}
 
+\subsubsection{Logowanie użytkownika}
+\begin{usecase}
+		\udescription{Logowanie użytkownika przy pomocy emaila lub nazwy użytkownika oraz hasła}
+    \actor{Pracownik, Administrator}
+    \precondition{Użytkownik został wcześniej zarejestrowany w systemie}
+    \scenario{
+        \item Podanie w formularzu nazwy użytkownika lub email oraz podanie hasła
+        \item Kliknięcie przycisku zaloguj
+    }
+    \result{System sprawdza poprawność danych logowania, jeżeli są poprawne to następuje logowanie do systemu i nadanie odpowiednich uprawnień}
+   
+\end{usecase}
 
+\subsubsection{Dodanie urządzenia przez administratora}
+\begin{usecase}
+		\udescription{Administrator może dodawać 3 różne rodzaje urządzeń zdefiniowanych w systemie}
+    \actor{Administrator}
+    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
+		\extend{
+			\item filtrowanie urządzeń po nazwie biura
+			\item filtrowanie urządzenia po ich typie, lub wyświetlanie wszystkich
+			\item dodanie nowego procesora
+			\item dodanie nowej pamięci ram
+			\item dodanie nowej pamięci dyskowej
+		}
+    \scenario{
+        \item Kliknięcie przycisku odpowiedzialnego za dodanie urządzenia
+        \item Wybranie z listy rozwijanej typu urządzenia które będzie dodawane
+				\item System wyświetla odpowiedni rodzaj urządzenia
+				\item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie
+				\item Dodanie urządzenia do systemu
+    }
+    \result{Urządzenie z ustawionymi parametrami zostało dodane do systemu}
+   
+\end{usecase}
 
+\subsubsection{Modyfikacja urządzenia przez administratora}
+\begin{usecase}
+		\udescription{Administrator może modyfikować urządzenia}
+    \actor{Administrator}
+    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
+		\extend{
+			\item filtrowanie urządzeń po nazwie biura
+			\item filtrowanie urządzenia po ich typie, lub wyświetlanie wszystkich
+			\item dodanie nowego procesora
+			\item dodanie nowej pamięci ram
+			\item dodanie nowej pamięci dyskowej
+		}
+    \scenario{
+        \item Kliknięcie przycisku modyfikuj na odpowiednim wierszu reprezentującym urządzenie
+				\item System wykrywa odpowiedni rodzaj urządzenia i wyświetla formularz z poprzednimi danymi urządzenia
+				\item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie
+				\item Modyfikacja urządzenia
+    }
+    \result{Urządzenie z ustawionymi parametrami zostało zmodyfikowane}
+   
+\end{usecase}
 
+\subsubsection{Usunięcie urządzenia przez administratora}
+\begin{usecase}
+		\udescription{Administrator może usuwać urządzenia}
+    \actor{Administrator}
+    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
+		\extend{
+			\item filtrowanie urządzeń po nazwie biura
+			\item filtrowanie urządzenia po ich typie, lub wyświetlanie wszystkich
+		}
+    \scenario{
+        \item Kliknięcie przycisku usuń na odpowiednim wierszu reprezentującym urządzenie
+    }
+    \result{Urządzenie zostało usunięte z systemu}
+   
+\end{usecase}
+
+\subsubsection{Ustawienie gotowości sprzętu do losowania}
+\begin{usecase}
+		\udescription{Administrator zarządza urządzeniem i określa jego gotowość do loterii}
+    \actor{Administrator}
+    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie nie zostało wcześniej wylosowane w loterii}
+		\extend{
+			\item filtrowanie urządzeń po nazwie biura
+			\item filtrowanie urządzenia po ich typie, lub wyświetlanie wszystkich
+		}
+    \scenario{
+        \item Kliknięcie przycisku gotowości do losowania na odpowiednim wierszu reprezentującym urządzenie
+    }
+    \result{Urządzenie jest gotowe do losowania, pracownicy mogą zapisywać się na loterię danego urządzenia}
+   
+\end{usecase}
+
+\subsubsection{Ustawienie statusu sprzętu na sprzedane lub niesprzedane}
+\begin{usecase}
+		\udescription{Administrator kontroluje które sprzęty zostały już sprzedane i dostarczone do pracownika}
+    \actor{Administrator}
+    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie zostało wylosowane w loterii}
+		\extend{
+			\item filtrowanie urządzeń po nazwie biura
+			\item filtrowanie urządzenia po ich typie, lub wyświetlanie wszystkich
+		}
+    \scenario{
+        \item Kliknięcie przycisku odpowiedzialnego za zmianę statusu sprzedane na odpowiednim wierszu reprezentującym urządzenie
+    }
+    \result{Zmiana statusu urządzenia na sprzedane lub niesprzedane}
+   
+\end{usecase}
+
+\subsubsection{Wyświetlanie listy uczestników biorącym udział w losowaniu}
+\begin{usecase}
+		\udescription{Administrator sprawdza jacy użytkownicy biorą udział w losowaniu sprzętu}
+    \actor{Administrator}
+    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Status urządzenia został ustawiony na gotowe do losowania}
+		\extend{
+			\item filtrowanie urządzeń po nazwie biura
+			\item filtrowanie urządzenia po ich typie, lub wyświetlanie wszystkich
+		}
+    \scenario{
+        \item Kliknięcie przycisku odpowiedzialnego za wyświetlanie listy uczestników na odpowiednim wierszu reprezentującym urządzenie
+    }
+    \result{Wyświetlanie widoku uczestników losowania, oraz ich statusu dotyczącego czy już wygrali loterię}
+   
+\end{usecase}
+
+% TODO więcej przypadków użycia oraz odwołania pomiędzy tymi przypadkami
+% skorzystanie z include żeby je uprościć

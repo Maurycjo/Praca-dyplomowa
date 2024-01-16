@@ -21,6 +21,24 @@
 %   \documentclass[a4paper,onecolumn,twoside,10pt]{memoir} 
 %   \renewcommand{\normalsize}{\fontsize{8pt}{10pt}\selectfont}
 
+%Tabele przypadków użycia by Maurycy Niewczas
+\usepackage{enumitem}
+\newlist{tabenum}{enumerate}{1}
+\setlist[tabenum]{label*=\arabic*.,
+                  labelwidth=2em, 
+                  leftmargin=2em, 
+                  nosep,
+                  before=\begin{minipage}[t]{\hsize},
+                  after=\end{minipage}}
+
+\usepackage{tabularx}
+
+\usepackage[column=0]{cellspace}
+\setlength{\cellspacetoplimit}{\tabcolsep}
+\setlength{\cellspacebottomlimit}{\cellspacetoplimit}
+\addparagraphcolumntypes{X}
+
+
 %\usepackage[cp1250]{inputenc} % Proszę zostawić, jeśli kodowanie edytowanych plików to cp1250 
 \usepackage[utf8]{inputenc} % Proszę użyć zamiast powyższego, jeśli kodowanie edytowanych plików to UTF8
 \usepackage[T1]{fontenc}
