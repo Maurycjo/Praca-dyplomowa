@@ -1,37 +1,56 @@
 \chapter{Projektowanie bazy danych}
 \section{Baza danych}
 
-Bazy danych stanowią kluczowy element wielu aplikacji. Pozwalają one na przechowywanie, organizowanie i zarządzanie danymi. Można łatwo do bazy danych dodawać nowe dane i rekordy co sprawia że aplikację można dalej rozwijać. Bazy danych wykorzystują struktury które są zoptymalizowane pod kątem przeszukiwania i pobierania danych. Dodatkowo istnieje wiele narzędzi które pozwalają na integracje z bazami danych takich jak SpringBoot i Hibernate % TU chyba powinna być referencja do rozdziału/tabeli *tabela roz3*)
+Bazy danych pełnią kluczową rolę w strukturze wielu aplikacji, umożliwiając składowanie, organizację i efektywne zarządzanie danymi. Dzięki nim możliwe jest elastyczne dodawanie nowych informacji oraz rozwijanie funkcjonalności systemu. Struktury baz danych są zoptymalizowane pod kątem efektywnego przeszukiwania i pobierania danych, co przyczynia się do wydajnego działania aplikacji. Dodatkowo, istnieje szereg narzędzi, takich jak Spring Boot i Hibernate (tabela \ref{tab:zestawienie_narzędzi})
+,które ułatwiają integrację z bazami danych, usprawniając tym samym proces ich obsługi.
 
-Do zaprojektowania bazy danych został wykonany diagram związków encji który pokazuję jakiego typu dane są użyte w jakich tabelach oraz jakie są relacje miedzy tymi tabelami. Z racji tego że domyślnie w relacyjnych bazach danych nie ma dziedziczenia tabel wykorzystano mechanizm dziedziczenia dostępny w Hibernate. Mechanizm ten  
-% TO DO: ciekaw jestem, jak zapewniona zostanie unikalność kluczy w device_core (bo tam pojawią się identyfikatory z trzech innych tabel, a więc musi być jakiś mechanizm, by te identyfikatory się nie powtórzyły w tych tabelach).
+W celu zdefiniowania struktury bazy danych, został stworzony diagram związków encji (ER), przedstawiony na rysunku \ref{ErDiagram_etykieta}. Diagram ten ilustruje, jakie typy danych są przechowywane w poszczególnych tabelach, a także jakie relacje zachodzą między tymi tabelami. Warto zaznaczyć, że ze względu na brak domyślnego wsparcia dla dziedziczenia tabel w relacyjnych bazach danych, zdecydowano się skorzystać z mechanizmu dziedziczenia dostępnego w Hibernate. W dalszej części rozdziału został omówiony schemat dziedziczenia.
+
+W systemie istnieją różne rodzaje urządzeń, z których każdy jest reprezentowany przez odpowiadającą mu tabelę w bazie danych. Trzy główne kategorie urządzeń to: \textbf{computer (komputer), tablet (tablet)} oraz \textbf{other\_device (inne urządzenie)}. Wszystkie te kategorie dziedziczą swoje cechy od wspólnej tabeli o nazwie \textbf{device\_core}, która stanowi rdzeń dla wszystkich urządzeń.
+
+Wspólny rdzeń, reprezentowany przez tabelę device\_core, zawiera parametry, które są dziedziczone przez wszystkie rodzaje urządzeń. Dzięki tej strukturze, każda tabela reprezentująca konkretny typ urządzenia posiada te same podstawowe atrybuty, ułatwiając jednolite zarządzanie nimi w systemie. Parametry wspólne dla wszystkich typów urządzeń obejmują:
+\begin{itemize}
+	\item ID - identyfikator urządzenia
+	\item device\_type - Typ urządzenia ułatwiający zarządzanie nimi w aplikacji klienckiej
+	\item device\_name - Nazwa urządzenia
+	\item price - Cena urządzenia
+	\item age - Wiek urządzenia
+	\item office\_id - identyfikator biura w którym znajduje się urządzenie
+	\item ready\_to\_lottery - Informacja czy sprzęt jest gotowy do przeprowadzenia loterii
+	\item lottery\_date - Data loterii w której odbyło się losowanie, jeżeli się nie odbyło to wartość jest pusta
+	\item is\_ordered - Informacja czy sprzęt został już odebrany przez pracownika
+\end{itemize}
+
+Pozostałe tabele reprezentujące urządzenia rozszerzają informacje dostarczane przez rdzeń. Komputer dodatkowo posiada informacje odnośnie
+\begin{itemize}
+	\item serial\_number - numer seryjny komputera
+	\item model - model komputera
+	\item operatinng\_system - system operacyjny zainstalowany na komputerze
+	\item battery\_life - żywotność baterii
+	\item cpu\_id - identyfikator reprezentujący procesor posiadany przez komputer
+	\item storage\_id - identyfikator reprezentujący dysk posiadany przez komputer
+	\item ram\_id - identyfikator reprezentujący pamięć RAM posiadaną przez komputer
+\end{itemize}
+
+Tablet posiada dodatkowo informacje odnośnie:
+\begin{itemize}
+	\item screen\_size- parametry wyświetlacza
+	\item operatinng\_system - system operacyjny zainstalowany na tablecie
+	\item battery\_life - żywotność baterii
+\end{itemize}
+
+Inne urządzenie natomiast posiada tylko pole additional\_info które pozwala na podanie szczególnych informacji urządzenia.
+\newline
+\newline
+Rozwiązanie te zostało zaprojektowane z myślą rozszerzania. Wykorzystanie tabeli \textbf{device\_core} ułatwi dodanie ewentualnych tabel. Metody aplikacje serwerowej zostały napisane w ten sposób, że dużą część logiki zarządzania urządzeniami wykorzystuje klase \textbf{device\_core}, a przypadki szczególne są rozpatrywane w klasach potomnych.
+Ważnym aspektem projektu jest zapewnienie unikalności kluczy w kontekście schematu dziedziczenia, szczególnie w przypadku użycia Hibernate z modelem \textbf{table~per~class}. W tym podejściu każda klasa dziedzicząca, tak jak computer, tablet, czy other\_device, ma swój własny identyfikator, ale także dziedziczy z klasy nadrzędnej, DeviceCore. Hibernate automatycznie zarządza unikalnością kluczy dla całej hierarchii dziedziczenia, eliminując ryzyko konfliktów kluczy pomiędzy różnymi klasami. W praktyce, w bazie danych dla każdej klasy dziedziczącej, a także dla samej klasy DeviceCore, zostaną utworzone oddzielne tabele. Tabele te zawierają wszystkie pola związane z daną klasą, a Hibernate zarządza relacjami między nimi. W przypadku klasy device\_core, tabela zawiera podstawowe atrybuty wspólne dla wszystkich typów urządzeń, takie jak device\_name, price, age, itp.
+\newline
+Dla klas dziedziczących, takich jak \textbf{computer, tablet czy other\_device}, Hibernate generuje tabele z dodatkowymi kolumnami specyficznymi dla danej klasy, takimi jak serial\_number czy screen\_size. W efekcie każda tabela reprezentuje pełne zestawienie danych związanych z danym rodzajem urządzenia.
+
+
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{rys04/ER_Diagram.jpg} % TO DO: prosiłem o wektory, a nie bitmapy (a jeśli bitmapy, to nie jpg!!!)
+    \includegraphics[width=\linewidth]{rys04/ER_Diagram.pdf}
     \caption{Diagram związków encji}
     \label{ErDiagram_etykieta}
 \end{figure}
 
-
-W bazie danych istnieją 4 rodzaje urządzeń:
-\begin{itemize}
-	\item Podstawowe urządzenie
-	\item Komputer
-	\item Tablet
-	\item Stacja dokująca
-\end{itemize}
-Podstawowe urządzenie pozwala na dodanie do bazy danych urządzenia nie wliczającego się do pozostałych typów.
-Wszystkie te 4 typy urządzeń mają taką samą funkcje w systemie czyli losowanie i odsprzedaż urządzenia. Każda z tabel: Basic Device, Computer, Tablet, Docking\_Station zawiera podobne pola które system potrzebuje do stworzenia losowania oraz opisania stanu technicznego urządzeń. Polami wspólnymi dla 4 typów urządzeń są:
-\begin{itemize}
-	\item Nazwa urządzenia
-	\item Cena urządzenia
-	\item Opis, czyli stan techniczny i dodatkowe uwagi
-	\item Wiek urządzenia
-	\item Informacja czy sprzęt jest gotowy do odsprzedaży, czy przeszedł inwentaryzacje
-	\item Biuro w którym znajduje się urządzenie
-	\item Opcjonalnie loteria w której będzie losowane to urządzenie
-\end{itemize}
-
-Istnieją też pola które pozwalają na dokładniejszy opis urządzenia ze względu na jego typ. Stacja dokująca posiada informacje do jakiego typu komputera można ją podłączyć. Tablet za to rozmiar ekranu, system operacyjny i żywotność baterii.
- Komputer posiada największą liczbę informacji, jest on sprzętem najczęściej sprzedawanym w firmach dlatego też otrzymał największe wsparcie w systemie. Oprócz informacji takich jak numer seryjny, system, żywotność baterii czy model komputer w bazie danych połączony jest z tabelami dotyczącymi Procesora, pamięci, czy pamięci RAM. Takie połączenie pozwala na podpowiadanie nazwy komponentu komputera biorąc informacje o komponentach z bazy danych. Komponenty te reprezentowane przez tabele Cpu, Storage i Ram posiadają tylko informacje o nazwie i cenie. Cena komponentów pomaga oszacować ostateczną cenę komputera.
-Tabelą wykorzystywaną do losowania, archiwizowania i ustalania daty losowania jest tabela Lotery. Przechowuje ona informacje o dacie, o tym czy losowanie jest aktywne oraz zwycięzce losowania.
-W systemie istnieją dwie role Administrator i Pracownik. Wykorzystanie tabeli Role pozwala na dodaniu dodatkowych ról w systemie w przyszłym rozwoju aplikacji. Użytkownik posiada swoje dane jak nazwa użytkownika, imię nazwisko oraz email firmowy. Email firmowy jest niezbędny do założenia konta, brania udziału w loterii.
