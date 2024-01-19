@@ -10,10 +10,18 @@
 
 
 \section{Aplikacja serwerowa}
-Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona żądania aplikacji klienckiej. Dostarcza ona funkcjonalność uwierzytelniania i autoryzacji. W wyniku zapytań wysłanych przez aplikację kliencką wyświetlane są w aplikacji odpowiednie dane. Możliwe jest też dodawanie i usuwanie odpowiednich rekordów. Implementacja odbywa się z wykorzystywaniem języka Java z frameworkami Spring oraz Hibernate \ref{tab:zestawienie_narzędzi}
+Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona żądania aplikacji klienckiej. Dostarcza ona funkcjonalność uwierzytelniania i autoryzacji. W wyniku zapytań wysłanych przez aplikację kliencką wyświetlane są w aplikacji odpowiednie dane. Możliwe jest też dodawanie i usuwanie odpowiednich rekordów. Implementacja odbywa się z wykorzystywaniem języka Java z frameworkami Spring oraz Hibernate \ref{tab:zestawienie_narzędzi} Graficzną reprezentacje struktury projektu aplikacji serwerowej pokazano na rysunku \ref{backend_struktura:label}
 
 \subsection{Struktura projektu}
-Ścieżka pakietowa wykorzystana jest odwróconą ścieżką domenową Politechniki Wrocławskiej oraz nazwy projektu: pl.pwr.edu.computermanagamenttool. Następnie pakiety które są dołączone do tej ścieżki odpowiadają funkcjom które pełnią klasy. Wyróżnia się tutaj:
+Ścieżka pakietowa wykorzystana jest odwróconą ścieżką domenową Politechniki Wrocławskiej oraz nazwy projektu: pl.edu.pwr.computermanagamenttool. Następnie pakiety które są dołączone do tej ścieżki odpowiadają funkcjom które pełnią klasy. Wyróżnia się tutaj pakiety:
+\begin{itemize}
+\item pl.edu.pwr.computermanagementtool - pakiet ogólny przechowywujący pozostałe pakiety. Klasa ComputerManagementToolApplication posiada metodę Main odpowiedzialną za uruchomienie aplikacji. Klasa JacksonConfig jest konfiguracją odpowiedzialną za serializacje formatu JSON. Natomiast klasa PasswordEncoderUtil jest odpowiedzialna za szyfrowanie haseł użytkowników korzystających z systemu.
+\item controller - pakiet przechowujący w sobie klasy kontrolerów odpowiedzialne za wykonywanie zapytań aplikacji za pomocą interfejsu REST
+\item dto - pakiet który jest odpowiedzialny za przechowywanie klas służących do przechowywania danych i ułatwiania ich przesyłania między różnymi częściami systemu. Wykorzystywany jest w klasach kontrolera.
+\item entity - pakiet przechowujący definicje encji reprezentowanych w bazie danych
+\item repository - pakiet przechowujący repozytoria służące do komunikacji z bazą danych.
+\item service - pakiet przechowujący serwisy które są odpowiedzialne za warstwę logiki biznesowej w systemie
+\end{itemize}
 
 
 \begin{figure}[htb]
@@ -33,10 +41,11 @@ Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona �
   \label{backend_struktura:label}
 \end{figure}
 
+\newpage
 \subsection{Fragmenty implementacji}
-\subsubsection {Przykład encji wykorzystującej schemat dziedziczenia}
+\subsubsection {Fragment kodu klas encji wykorzystującej schemat dziedziczenia}
 
-\begin{lstlisting}[language=Java, style=JavaStyle, caption={Fragment klasy nadrzędnej DeviceCore}, label={entity_deviceCore}]
+\begin{lstlisting}[language=Java, style=JavaStyle, caption={Klasa nadrzędna reprezentująca rdzeń sprzętu: DeviceCore}, label={entity_deviceCore}]
 @Entity
 @Table(name = "device_core")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -51,11 +60,13 @@ public class DeviceCore {
 
     @Column(name = "device_name", length = 50)
     private String deviceName;
+		
+		// Pozostała część klasy
 
 \end{lstlisting}
+W linii 3 listingu klasy DeviceCore \ref{entity_deviceCore} określono schemat dziedziczenia TABLE\_PER\_CLASS. O sposobie dziedziczenia napisano w podrozdziale \ref{dzedziczenie_hibernate:label}. Linia 3 określa strategie generowania klucza. Hibernate tworzy wtedy specjalną tabelę w bazie danych która odpowiedzialna jest za przechowywanie unikalnych kluczy głownych dla encji sprzętu w aplikacji. W listingu kodu \ref{entity_computer} nie trzeba wtedy definować klucza.
 
-
-\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Fragment klasy potomnej Computer}, label={entity_computer}]
+\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa potomna: Computer, reprezentująca komputer}, label={entity_computer}]
 @Entity
 @Table(name = "computer")
 public class Computer extends DeviceCore{
@@ -70,58 +81,115 @@ public class Computer extends DeviceCore{
     @Column(name = "battery_life", length = 50)
     private String batteryLife;
 		
-		@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cpu_id")
-    private Cpu cpu;
-
+		// Pozostała część klasy
 \end{lstlisting}
+W linii 3 określone zostało dziedziczenie po klasie nadrzędnej reprezentującej rdzeń sprzętu. Pola które należy określić w tej klasie są unikalnymi polami tabeli computer. W linii 4 istnieje statyczna zmienna DEVICE\_TYPE która pomaga określić jakiego rodzaju dany sprzęt. Wykorzystywane jest to w aplikacji klienckiej.
 
 
-\subsubsection{Przykład repozytorium dla wszystkich urządzeń}
+\subsubsection{Przykład kodu repozytorium dla urządzeń dziedziczącym po rdzeniu sprzętu}
 Repozytorium sprzętu komputerowego zostało napisane z użyciem wyrażeń generycznych. Wykorzystanie ich przyczynia się do uproszczenia kodu oraz łatwiejszej jego rozbudowy.
 
-\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Generyczne repozytorium sprzętu komputerowego}, label={repo_genericDevice}]
+\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Generyczne repozytorium sprzętu komputerowego:  GenericDeviceRepository}, label={repo_genericDevice}]
 @NoRepositoryBean
 public interface GenericDeviceRepository<T extends DeviceCore> extends JpaRepository<T, Integer> {
-
-    List<T> findAllByReadyToSellIsTrue();
-    List<T> findAllByReadyToSellIsFalse();
+    
+    List<T> findAllByReadyToLotteryIsTrue();
     List<T> findAllByOfficeId(int officeId);
 }
 \end{lstlisting}
 
-W lini 1 adnotacja @NoRepositoryBean jest używana do oznaczenia interfejsów które nie mają mieć swojej instancji. Oznacza to, że nie jest on przeznaczony do utworzenia instancji repozytorium w trakcie uruchomiania aplikacji. Z racji tego że klasy sprzętu komputerowego mają zbliżone funkcjonalności nie trzeba dostarczać tych samych interfejsów we wszystkich repozytoriach tylko zastosować schemat dziedziczenia. To samo dotyczy się kontrolerów co pokazano w następnym podrozdziale.
+W lini 1 adnotacja @NoRepositoryBean jest używana do oznaczenia interfejsów które nie mają mieć swojej instancji. Oznacza to, że nie jest on przeznaczony do utworzenia instancji repozytorium w trakcie uruchomiania aplikacji. W linii 4 i 5 poprzez zdefiniowanie metody możliwe jest wykonanie konkretego zapytania SQL do bazy danych. Z racji, że klasy sprzętu komputerowego mają zbliżone funkcjonalności nie trzeba dostarczać tych samych interfejsów we wszystkich repozytoriach tylko zastosować schemat dziedziczenia.
 
-\subsubsection{Kontroler sprzętu komputerowego}
+\subsubsection{Fragmenty implementacji klasy kontrolerów sprzętu}
 
-\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Wybrane metody generycznego kontrolera sprzętu komputerowego}, label={controller_genericDevice}]
-@GetMapping("/all")
- List<T> getAllBasicDevices(){
- return genericDeviceService.getAllDevices();
-} 
-@DeleteMapping("/{id}")
-void deleteDevice(@PathVariable int id){
-genericDeviceService.deleteDevice(id);
-}
+\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa nadrzędna kontrolera sprzętu: GenericDeviceController}, label={controller_genericDevice}]
+public abstract class GenericDeviceController<T extends DeviceCore> {
 
-@PutMapping("/set-ready-to-lottery/{id}")
-@CrossOrigin(origins = "*")
-public ResponseEntity<T> setReadyToLottery(@PathVariable int id){
-    try{
-        T updatedBasicDevice = genericDeviceService.setReadyToLottery(id);
-        return new ResponseEntity<>(updatedBasicDevice, HttpStatus.OK);
-    } catch (RuntimeException e){
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    protected final GenericDeviceService<T> genericDeviceService;
+    protected final GenericDeviceRepository<T> genericRepository;
+
+    protected GenericDeviceController(GenericDeviceService<T> genericDeviceService, GenericDeviceRepository<T> genericRepository) {
+        this.genericDeviceService = genericDeviceService;
+        this.genericRepository = genericRepository;
+    }
+
+    @GetMapping("/{id}")
+    @CrossOrigin(origins = "*")
+    T getOneBasicDevice(@PathVariable int id){
+        return genericDeviceService.getDeviceById(id);
+    }
+
+    @GetMapping("/all")
+    @CrossOrigin(origins = "*")
+    List<T> getAllBasicDevices(){
+        return genericDeviceService.getAllDevices();
+    }
+
+    @GetMapping("/all-ready-to-lottery")
+    @CrossOrigin(origins = "*")
+    List<T> getAllReadyToLotteryDevice(){
+        return genericDeviceService.getAllReadyToLotteryDevices();
+    }
+		
+		// Pozostała część klasy
+		
+		@PutMapping("/set-ready-to-lottery/{id}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<T> setReadyToLottery(@PathVariable int id){
+        try{
+            T updatedBasicDevice = genericDeviceService.setReadyToLottery(id);
+            return new ResponseEntity<>(updatedBasicDevice, HttpStatus.OK);
+        } catch (RuntimeException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+		
+		// Pozostała część klasy
+		
+\end{lstlisting}
+
+Kontrolery pełnią istotną funkcje w systemie. Umożliwiają one definiowanie zapytań REST które będą wysyłane do serwera. Wykorzystując abstrakcje oraz wyrażenia generyczne możliwe jest wykonanie niektórych requestów bez konieczności ich implementacji w klasach potomnych.
+
+
+\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa potomna reprezentująca ogólną postać sprzętu}, label={controller_device}]
+@RestController
+@RequestMapping("/devices")
+public class DeviceCoreController extends GenericDeviceController<DeviceCore>{
+
+    protected DeviceCoreController(DeviceCoreService deviceCoreService, GenericDeviceRepository<DeviceCore> genericRepository) {
+        super(deviceCoreService, genericRepository);
     }
 }
 \end{lstlisting}
 
-Powyższy Listing kodu \ref{repo_genericDevice} umożliwia jednym zapytaniem uzyskanie wszystkich danych dotyczące urządzeń, wliczając to także dane które są unikalne dla klas potomnych. Dzięki temu można zestawić w tabeli a aplikacji klienckiej ogólne informacje dotyczące sprzętu. Zastosowano mechanizm dziedziczenia, dzięki czemu klasy dziedziczące po generycznym repozytorium umożliwiają uzyskanie tylko danych sprzętów należących do kategorii klasy potomnych. Aby uzyskać właśnie tylko sprzęty klasy potomnej wystarczy zmienić tylko endpoint i nie jest konieczne powielanie kodu. Klasy dziedziczące rozszerzają funkcjonalność generycznego repozytorium dodając metody unikalne dla wybranego sprzętu.
+Powyższa klasa w listingu kodu \ref{controller_device} nie posiada własnych metod. Umożliwia jednak wykonywanie ogólnych operacji dotyczących sprzętu. Możliwe jest między innymi pobranie informacji dotyczące sprzętu bez względu na jego typ co idealanie obrazuje test **referencja do zapytania w postmanie**
 
-\subsubsection{Dodawanie tabletu przy wykorzystaniu rdzenia sprzętu}
-Wszystkie klasy potomne mają wspólne atrybuty dlatego wykorzystano generyczny serwis by zredukować powielenie kodu
 
-\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Dodawanie Tabletu z wykorzystaniem klasy nadrzędnej}, label={service_tablet}]
+\subsubsection{Fragmenty implementacji klas serwisów sprzętu}
+
+
+\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa nadrzędna serwisu sprzętu GenericDeviceService}, label={service_tablet}]
+
+public abstract class GenericDeviceService<T extends DeviceCore> {
+
+    protected final GenericDeviceRepository<T> genericDeviceRepository;
+    protected final OfficeRepository officeRepository;
+
+    public GenericDeviceService(GenericDeviceRepository<T> genericRepository, OfficeRepository officeRepository) {
+        this.genericDeviceRepository = genericRepository;
+        this.officeRepository = officeRepository;
+    }
+
+    public T getDeviceById(int id) {
+        Optional<T> basicDeviceOptional = genericDeviceRepository.findById(id);
+        return basicDeviceOptional.orElseThrow(()-> new RuntimeException("Device not found with id: " + id));
+    }
+
+    public List<T> getAllDevices() {
+        return genericDeviceRepository.findAll();
+    }
+		// Pozostała część klasy
+
 protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String deviceName, Double price, String description, Integer age, Boolean readyToSell, Integer officeId) {
 
         if(officeId == null){
@@ -146,24 +214,40 @@ protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String d
 
         return deviceCore;
     }
+		
+		// Pozostała część klasy
 
-public Tablet addTablet(String deviceName, Double price, String description,
-                            Integer age, Boolean readyToSell, Integer officeId,
+\end{lstlisting}
+Serwisy są odpowiedzialne za warstwe logiki biznesowej systemu. W linii 12 widnieje metoda która pozwala na pobranie sprzętu. W linii 17 natomiast jest możliwe pobranie wszystkich sprzętów. Odbywa się to przy pomocy parametryzowanych typów danych T. Metoda zdefiniowana w linii 22 pozwala uprościć dodawanie sprzętu, implementując część logiki ustawiając parametry charakterystyczne dla rdzenia sprzętu. Jednak aby utworzyć odpowiedni typ niezbędne jest określenie jakiego typu będzie dodawane urządzenie, Dlatego w linii 22 metoda jako parametr przyjmuje Class<? extends DeviceCore> który oznacza typ aplikacji. Tak zdefiniowana metoda może zostać użyta do dodania sprzętu w kalsach potomnych co pokazano w listingu \ref{service_tablet}
+
+\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa potomna serwisu tabletu: TabletService }, label={service_tablet}]
+
+@Service
+public class TabletService extends GenericDeviceService<Tablet>{
+
+    public TabletService(TabletRepository tabletRepository, OfficeRepository officeRepository){
+        super(tabletRepository, officeRepository);
+    }
+
+    public Tablet addTablet(String deviceName, Double price, String description,
+                            Integer age, String officeAddress,
                             String screenSize, String operatingSystem, String batteryLife){
 
         Tablet tablet = (Tablet) addDevice(Tablet.class, deviceName, price, description,
-                                                                age, readyToSell, officeId);
+                                                                age, officeAddress);
 
         tablet.setScreenSize(screenSize);
         tablet.setOperatingSystem(operatingSystem);
+        tablet.setDeviceType(Tablet.DEVICE_TYPE);
         tablet.setBatteryLife(batteryLife);
 
         return genericDeviceRepository.save(tablet);
     }
-
+		\\pozostała część klasy
 \end{lstlisting}
 
-W Listingu \ref{service_tablet} metoda w linii 1 z klasy generycznej oprócz atrybutów pól przyjmuję też jako argument obiekt typu Class. Wykorzystywany jest on w linii 11 do stworzenia instancji klasy. Dzięki temu we wszystkich klasach potomnych, wspólne atrybuty są ustawiane przez klasę nadrzędną(linie 16-21). Przykład ustawiania unikalnych pól klasy podrzędnej są w liniach 33-35.
+Serwis klasy TabletService dziedziczy i parametryzuje metody klasy GenericDeviceService. Wykorzystuje on w linii 13 metode klasy nadrzędnej co upraszaq implementacje metody dodającej sprzęt(linia 9)
+
 
 
 \section {Aplikacja kliencka}
