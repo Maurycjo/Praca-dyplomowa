@@ -1,9 +1,7 @@
-package pl.pwr.edu.computermanagementtool.service;
+package pl.edu.pwr.computermanagementtool.service;
 import org.springframework.stereotype.Service;
-import pl.pwr.edu.computermanagementtool.entity.Cpu;
-import pl.pwr.edu.computermanagementtool.entity.Ram;
-import pl.pwr.edu.computermanagementtool.repository.ComponentRepository;
-import pl.pwr.edu.computermanagementtool.repository.CpuRepository;
+import pl.edu.pwr.computermanagementtool.entity.Cpu;
+import pl.edu.pwr.computermanagementtool.repository.CpuRepository;
 
 import java.util.Optional;
 

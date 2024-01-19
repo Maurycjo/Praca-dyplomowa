@@ -1,8 +1,8 @@
-package pl.pwr.edu.computermanagementtool.repository;
+package pl.edu.pwr.computermanagementtool.repository;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
-import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
+import pl.edu.pwr.computermanagementtool.entity.DeviceCore;
 
 @Repository
 @Primary

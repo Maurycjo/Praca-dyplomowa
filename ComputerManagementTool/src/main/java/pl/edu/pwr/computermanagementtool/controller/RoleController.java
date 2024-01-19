@@ -1,4 +1,4 @@
-package pl.pwr.edu.computermanagementtool.controller;
+package pl.edu.pwr.computermanagementtool.controller;
 
 public class RoleController {
 }

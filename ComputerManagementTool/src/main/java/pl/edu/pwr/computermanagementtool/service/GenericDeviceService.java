@@ -1,8 +1,10 @@
-package pl.pwr.edu.computermanagementtool.service;
+package pl.edu.pwr.computermanagementtool.service;
 
+import pl.edu.pwr.computermanagementtool.entity.DeviceCore;
+import pl.edu.pwr.computermanagementtool.entity.Office;
+import pl.edu.pwr.computermanagementtool.repository.OfficeRepository;
 import pl.pwr.edu.computermanagementtool.entity.*;
-import pl.pwr.edu.computermanagementtool.repository.GenericDeviceRepository;
-import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
+import pl.edu.pwr.computermanagementtool.repository.GenericDeviceRepository;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;

@@ -1,12 +1,12 @@
-package pl.pwr.edu.computermanagementtool.controller;
+package pl.edu.pwr.computermanagementtool.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.pwr.edu.computermanagementtool.dto.device.OtherDeviceRequestDTO;
-import pl.pwr.edu.computermanagementtool.entity.OtherDevice;
-import pl.pwr.edu.computermanagementtool.repository.OtherDeviceRepository;
-import pl.pwr.edu.computermanagementtool.service.OtherDeviceService;
+import pl.edu.pwr.computermanagementtool.dto.device.OtherDeviceRequestDTO;
+import pl.edu.pwr.computermanagementtool.entity.OtherDevice;
+import pl.edu.pwr.computermanagementtool.repository.OtherDeviceRepository;
+import pl.edu.pwr.computermanagementtool.service.OtherDeviceService;
 
 @RestController
 @RequestMapping("/other-devices")

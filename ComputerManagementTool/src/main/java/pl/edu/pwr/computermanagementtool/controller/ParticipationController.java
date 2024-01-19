@@ -1,16 +1,14 @@
-package pl.pwr.edu.computermanagementtool.controller;
+package pl.edu.pwr.computermanagementtool.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.pwr.edu.computermanagementtool.dto.participation.ParticipationRequestDTO;
-import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
-import pl.pwr.edu.computermanagementtool.entity.Participation;
-import pl.pwr.edu.computermanagementtool.repository.ParticipationRepository;
-import pl.pwr.edu.computermanagementtool.service.DeviceCoreService;
-import pl.pwr.edu.computermanagementtool.service.ParticipationService;
+import pl.edu.pwr.computermanagementtool.dto.participation.ParticipationRequestDTO;
+import pl.edu.pwr.computermanagementtool.entity.Participation;
+import pl.edu.pwr.computermanagementtool.repository.ParticipationRepository;
+import pl.edu.pwr.computermanagementtool.service.DeviceCoreService;
+import pl.edu.pwr.computermanagementtool.service.ParticipationService;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 

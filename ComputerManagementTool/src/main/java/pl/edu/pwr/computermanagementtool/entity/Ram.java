@@ -1,4 +1,4 @@
-package pl.pwr.edu.computermanagementtool.entity;
+package pl.edu.pwr.computermanagementtool.entity;
 
 import jakarta.persistence.*;
 

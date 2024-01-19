@@ -1,5 +1,8 @@
-package pl.pwr.edu.computermanagementtool.service;
+package pl.edu.pwr.computermanagementtool.service;
 import org.springframework.stereotype.Service;
+import pl.edu.pwr.computermanagementtool.entity.*;
+import pl.edu.pwr.computermanagementtool.repository.ComputerRepository;
+import pl.edu.pwr.computermanagementtool.repository.OfficeRepository;
 import pl.pwr.edu.computermanagementtool.entity.*;
 import pl.pwr.edu.computermanagementtool.repository.*;
 
@@ -13,8 +16,8 @@ public class ComputerService extends GenericDeviceService<Computer>  {
     private final StorageService storageService;
     private final RamService ramService;
     public ComputerService(ComputerRepository computerRepository,
-                                        OfficeRepository officeRepository,CpuService cpuService,
-                                            StorageService storageService, RamService ramService) {
+                           OfficeRepository officeRepository, CpuService cpuService,
+                           StorageService storageService, RamService ramService) {
 
         super(computerRepository, officeRepository);
         this.cpuService = cpuService;

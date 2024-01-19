@@ -1,16 +1,14 @@
-package pl.pwr.edu.computermanagementtool.service;
-import com.fasterxml.jackson.databind.util.JSONPObject;
+package pl.edu.pwr.computermanagementtool.service;
 import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
-import pl.pwr.edu.computermanagementtool.PasswordEncoderUtil;
-import pl.pwr.edu.computermanagementtool.entity.Role;
-import pl.pwr.edu.computermanagementtool.entity.User;
-import pl.pwr.edu.computermanagementtool.repository.RoleRepository;
-import pl.pwr.edu.computermanagementtool.repository.UserRepository;
+import pl.edu.pwr.computermanagementtool.PasswordEncoderUtil;
+import pl.edu.pwr.computermanagementtool.entity.Role;
+import pl.edu.pwr.computermanagementtool.entity.User;
+import pl.edu.pwr.computermanagementtool.repository.RoleRepository;
+import pl.edu.pwr.computermanagementtool.repository.UserRepository;
 
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Service

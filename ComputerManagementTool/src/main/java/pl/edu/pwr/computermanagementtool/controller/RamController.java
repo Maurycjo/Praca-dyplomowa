@@ -1,11 +1,11 @@
-package pl.pwr.edu.computermanagementtool.controller;
+package pl.edu.pwr.computermanagementtool.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.pwr.edu.computermanagementtool.entity.Ram;
-import pl.pwr.edu.computermanagementtool.repository.RamRepository;
-import pl.pwr.edu.computermanagementtool.service.RamService;
+import pl.edu.pwr.computermanagementtool.entity.Ram;
+import pl.edu.pwr.computermanagementtool.repository.RamRepository;
+import pl.edu.pwr.computermanagementtool.service.RamService;
 
 @RestController
 @RequestMapping("/rams")

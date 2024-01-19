@@ -1,13 +1,13 @@
-package pl.pwr.edu.computermanagementtool.controller;
+package pl.edu.pwr.computermanagementtool.controller;
 
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.pwr.edu.computermanagementtool.dto.device.ComputerRequestDTO;
-import pl.pwr.edu.computermanagementtool.entity.Computer;
-import pl.pwr.edu.computermanagementtool.repository.ComputerRepository;
-import pl.pwr.edu.computermanagementtool.service.ComputerService;
+import pl.edu.pwr.computermanagementtool.dto.device.ComputerRequestDTO;
+import pl.edu.pwr.computermanagementtool.entity.Computer;
+import pl.edu.pwr.computermanagementtool.repository.ComputerRepository;
+import pl.edu.pwr.computermanagementtool.service.ComputerService;
 
 @RestController
 @RequestMapping("/computers")

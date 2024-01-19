@@ -1,7 +1,7 @@
-package pl.pwr.edu.computermanagementtool.service;
+package pl.edu.pwr.computermanagementtool.service;
 
-import pl.pwr.edu.computermanagementtool.entity.Component;
-import pl.pwr.edu.computermanagementtool.repository.ComponentRepository;
+import pl.edu.pwr.computermanagementtool.entity.Component;
+import pl.edu.pwr.computermanagementtool.repository.ComponentRepository;
 
 import java.util.Optional;
 

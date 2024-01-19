@@ -1,6 +1,5 @@
-package pl.pwr.edu.computermanagementtool.entity;
+package pl.edu.pwr.computermanagementtool.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity

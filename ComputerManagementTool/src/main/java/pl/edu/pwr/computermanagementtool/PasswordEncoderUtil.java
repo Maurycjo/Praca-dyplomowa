@@ -1,4 +1,4 @@
-package pl.pwr.edu.computermanagementtool;
+package pl.edu.pwr.computermanagementtool;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

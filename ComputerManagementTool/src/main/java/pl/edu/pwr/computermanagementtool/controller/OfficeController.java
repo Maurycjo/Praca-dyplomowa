@@ -1,11 +1,10 @@
-package pl.pwr.edu.computermanagementtool.controller;
+package pl.edu.pwr.computermanagementtool.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.pwr.edu.computermanagementtool.entity.Office;
-import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
-import pl.pwr.edu.computermanagementtool.service.OfficeService;
+import pl.edu.pwr.computermanagementtool.entity.Office;
+import pl.edu.pwr.computermanagementtool.repository.OfficeRepository;
 
 import java.util.List;
 

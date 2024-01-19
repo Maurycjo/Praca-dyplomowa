@@ -1,10 +1,7 @@
-package pl.pwr.edu.computermanagementtool.repository;
+package pl.edu.pwr.computermanagementtool.repository;
 
 import org.springframework.stereotype.Repository;
-import pl.pwr.edu.computermanagementtool.entity.Computer;
-import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
-
-import java.util.List;
+import pl.edu.pwr.computermanagementtool.entity.Computer;
 
 @Repository
 public interface ComputerRepository extends GenericDeviceRepository<Computer> {

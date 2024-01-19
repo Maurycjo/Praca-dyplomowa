@@ -1,4 +1,4 @@
-package pl.pwr.edu.computermanagementtool.dto.components;
+package pl.edu.pwr.computermanagementtool.dto.components;
 
 public class ComponentRequestDTO {
 

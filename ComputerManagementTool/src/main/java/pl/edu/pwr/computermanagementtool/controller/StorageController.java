@@ -1,11 +1,11 @@
-package pl.pwr.edu.computermanagementtool.controller;
+package pl.edu.pwr.computermanagementtool.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.pwr.edu.computermanagementtool.entity.Storage;
-import pl.pwr.edu.computermanagementtool.repository.StorageRepository;
-import pl.pwr.edu.computermanagementtool.service.StorageService;
+import pl.edu.pwr.computermanagementtool.entity.Storage;
+import pl.edu.pwr.computermanagementtool.repository.StorageRepository;
+import pl.edu.pwr.computermanagementtool.service.StorageService;
 
 @RestController
 @RequestMapping("/storages")

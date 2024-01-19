@@ -1,4 +1,4 @@
-package pl.pwr.edu.computermanagementtool.service;
+package pl.edu.pwr.computermanagementtool.service;
 import org.springframework.stereotype.Service;
 
 

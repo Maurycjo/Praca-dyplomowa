@@ -1,4 +1,4 @@
-package pl.pwr.edu.computermanagementtool.dto.device;
+package pl.edu.pwr.computermanagementtool.dto.device;
 
 public class ComputerRequestDTO {
 

@@ -1,12 +1,12 @@
-package pl.pwr.edu.computermanagementtool.controller;
+package pl.edu.pwr.computermanagementtool.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.pwr.edu.computermanagementtool.dto.auth.LoginRequestDTO;
-import pl.pwr.edu.computermanagementtool.dto.auth.RegisterRequestDTO;
-import pl.pwr.edu.computermanagementtool.entity.User;
-import pl.pwr.edu.computermanagementtool.service.UserService;
+import pl.edu.pwr.computermanagementtool.dto.auth.LoginRequestDTO;
+import pl.edu.pwr.computermanagementtool.dto.auth.RegisterRequestDTO;
+import pl.edu.pwr.computermanagementtool.entity.User;
+import pl.edu.pwr.computermanagementtool.service.UserService;
 
 import java.util.Map;
 

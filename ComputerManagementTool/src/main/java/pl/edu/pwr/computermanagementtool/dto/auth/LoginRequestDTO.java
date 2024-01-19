@@ -1,4 +1,4 @@
-package pl.pwr.edu.computermanagementtool.dto.auth;
+package pl.edu.pwr.computermanagementtool.dto.auth;
 
 public class LoginRequestDTO {
 

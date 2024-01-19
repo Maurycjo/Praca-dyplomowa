@@ -1,8 +1,9 @@
-package pl.pwr.edu.computermanagementtool.service;
+package pl.edu.pwr.computermanagementtool.service;
 import org.springframework.stereotype.Service;
+import pl.edu.pwr.computermanagementtool.entity.OtherDevice;
 import pl.pwr.edu.computermanagementtool.entity.*;
-import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
-import pl.pwr.edu.computermanagementtool.repository.OtherDeviceRepository;
+import pl.edu.pwr.computermanagementtool.repository.OfficeRepository;
+import pl.edu.pwr.computermanagementtool.repository.OtherDeviceRepository;
 
 
 @Service

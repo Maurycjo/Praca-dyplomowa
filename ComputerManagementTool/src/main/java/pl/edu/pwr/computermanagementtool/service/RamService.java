@@ -1,7 +1,7 @@
-package pl.pwr.edu.computermanagementtool.service;
+package pl.edu.pwr.computermanagementtool.service;
 import org.springframework.stereotype.Service;
-import pl.pwr.edu.computermanagementtool.entity.Ram;
-import pl.pwr.edu.computermanagementtool.repository.RamRepository;
+import pl.edu.pwr.computermanagementtool.entity.Ram;
+import pl.edu.pwr.computermanagementtool.repository.RamRepository;
 
 import java.util.Optional;
 

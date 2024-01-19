@@ -1,9 +1,8 @@
-package pl.pwr.edu.computermanagementtool.repository;
+package pl.edu.pwr.computermanagementtool.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
-import pl.pwr.edu.computermanagementtool.entity.Computer;
-import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
+import pl.edu.pwr.computermanagementtool.entity.DeviceCore;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package pl.pwr.edu.computermanagementtool.service;
+package pl.edu.pwr.computermanagementtool.service;
 import org.springframework.stereotype.Service;
-import pl.pwr.edu.computermanagementtool.entity.Tablet;
-import pl.pwr.edu.computermanagementtool.repository.OfficeRepository;
-import pl.pwr.edu.computermanagementtool.repository.TabletRepository;
+import pl.edu.pwr.computermanagementtool.entity.Tablet;
+import pl.edu.pwr.computermanagementtool.repository.OfficeRepository;
+import pl.edu.pwr.computermanagementtool.repository.TabletRepository;
 
 @Service
 public class TabletService extends GenericDeviceService<Tablet>{

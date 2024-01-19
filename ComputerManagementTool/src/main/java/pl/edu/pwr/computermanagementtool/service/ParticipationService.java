@@ -1,9 +1,9 @@
-package pl.pwr.edu.computermanagementtool.service;
+package pl.edu.pwr.computermanagementtool.service;
 import org.springframework.stereotype.Service;
-import pl.pwr.edu.computermanagementtool.entity.DeviceCore;
-import pl.pwr.edu.computermanagementtool.entity.Participation;
-import pl.pwr.edu.computermanagementtool.entity.User;
-import pl.pwr.edu.computermanagementtool.repository.ParticipationRepository;
+import pl.edu.pwr.computermanagementtool.entity.DeviceCore;
+import pl.edu.pwr.computermanagementtool.entity.Participation;
+import pl.edu.pwr.computermanagementtool.entity.User;
+import pl.edu.pwr.computermanagementtool.repository.ParticipationRepository;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
-package pl.pwr.edu.computermanagementtool.controller;
+package pl.edu.pwr.computermanagementtool.controller;
 
 
 import org.springframework.web.bind.annotation.*;
-import pl.pwr.edu.computermanagementtool.entity.User;
-import pl.pwr.edu.computermanagementtool.repository.UserRepository;
-import pl.pwr.edu.computermanagementtool.service.UserService;
+import pl.edu.pwr.computermanagementtool.entity.User;
+import pl.edu.pwr.computermanagementtool.repository.UserRepository;
+import pl.edu.pwr.computermanagementtool.service.UserService;
 
 import java.util.List;
 

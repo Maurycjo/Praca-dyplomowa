@@ -1,12 +1,12 @@
-package pl.pwr.edu.computermanagementtool.controller;
+package pl.edu.pwr.computermanagementtool.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.pwr.edu.computermanagementtool.dto.device.TabletRequestDTO;
-import pl.pwr.edu.computermanagementtool.entity.Tablet;
-import pl.pwr.edu.computermanagementtool.repository.TabletRepository;
-import pl.pwr.edu.computermanagementtool.service.TabletService;
+import pl.edu.pwr.computermanagementtool.dto.device.TabletRequestDTO;
+import pl.edu.pwr.computermanagementtool.entity.Tablet;
+import pl.edu.pwr.computermanagementtool.repository.TabletRepository;
+import pl.edu.pwr.computermanagementtool.service.TabletService;
 
 @RestController
 @RequestMapping("/tablets")

@@ -1,4 +1,4 @@
-package pl.pwr.edu.computermanagementtool.dto.participation;
+package pl.edu.pwr.computermanagementtool.dto.participation;
 
 public class ParticipationRequestDTO {
 
