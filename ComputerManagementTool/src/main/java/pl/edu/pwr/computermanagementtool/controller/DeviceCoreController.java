@@ -10,7 +10,6 @@ import pl.edu.pwr.computermanagementtool.service.DeviceCoreService;
 @CrossOrigin(origins = "*")
 public class DeviceCoreController extends GenericDeviceController<DeviceCore>{
 
-
     protected DeviceCoreController(DeviceCoreService deviceCoreService, GenericDeviceRepository<DeviceCore> genericRepository) {
         super(deviceCoreService, genericRepository);
     }

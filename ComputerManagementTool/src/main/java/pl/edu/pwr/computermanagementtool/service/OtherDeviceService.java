@@ -1,7 +1,6 @@
 package pl.edu.pwr.computermanagementtool.service;
 import org.springframework.stereotype.Service;
 import pl.edu.pwr.computermanagementtool.entity.OtherDevice;
-import pl.pwr.edu.computermanagementtool.entity.*;
 import pl.edu.pwr.computermanagementtool.repository.OfficeRepository;
 import pl.edu.pwr.computermanagementtool.repository.OtherDeviceRepository;
 

@@ -3,8 +3,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.pwr.computermanagementtool.entity.*;
 import pl.edu.pwr.computermanagementtool.repository.ComputerRepository;
 import pl.edu.pwr.computermanagementtool.repository.OfficeRepository;
-import pl.pwr.edu.computermanagementtool.entity.*;
-import pl.pwr.edu.computermanagementtool.repository.*;
+
 
 
 import java.util.Optional;
