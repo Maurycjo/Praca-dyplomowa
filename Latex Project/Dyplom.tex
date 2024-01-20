@@ -25,13 +25,23 @@
 
 %Tabele przypadków użycia by Maurycy Niewczas
 \usepackage{enumitem}
-\newlist{tabenum}{enumerate}{1}
-\setlist[tabenum]{label*=\arabic*.,
-                  labelwidth=2em, 
-                  leftmargin=2em, 
-                  nosep,
-                  before=\begin{minipage}[t]{\hsize},
-                  after=\end{minipage}}
+%%\newlist{tabenum}{enumerate}{1}
+%%\setlist[tabenum]{label*=\arabic*.,
+                  %%labelwidth=2em, 
+                  %%leftmargin=2em, 
+                  %%nosep,
+                  %%before=\begin{minipage}[t]{\hsize},
+                  %%after=\end{minipage}}
+\setlist{noitemsep,topsep=4pt,parsep=0pt,partopsep=4pt,leftmargin=*} % zadeklarowane parametry pozwalają uzyskać 'zwartą' postać wypunktowania bądź wyliczenia
+\setenumerate{labelindent=0pt,itemindent=0pt,leftmargin=!,label=\arabic*.} % można zmienić \arabic na \alph, jeśli wyliczenia mają być z literkami
+\SetEnumitemKey{noparskip}{nosep, topsep=-\parskip}
+\setlistdepth{4} % definiujemy głębokość zagnieżdżenia list wyliczeniowych do 4 poziomów
+\setlist[itemize,1]{label=$\bullet$}  % definiujemy, jaki symbol ma być użyty w wyliczeniu na danym poziomie
+\setlist[itemize,2]{label=\normalfont\bfseries\textendash}
+\setlist[itemize,3]{label=$\ast$}
+\setlist[itemize,4]{label=$\cdot$}
+\renewlist{itemize}{itemize}{4}
+
 
 \usepackage{tabularx}
 \usepackage{longtable}
@@ -126,6 +136,7 @@
 %\usepackage{longtable}
 %\usepackage{ltxtable}
 %\usepackage{tabulary}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Pakiet do wstawiania fragmentów kodu
@@ -390,14 +401,14 @@ columns=fullflexible,
 %%  Pakiety i komendy zastosowane tylko do zamieszczenia informacji o użytych komendach i fontach w tym szablonie.
 %%  Normalnie nie są one potrzebne. Proszę poniższe deklaracje zamarkować podczas redakcji pracy !!!!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{memlays}     % extra layout diagrams, zastosowane w szblonie do 'debuggowania', używa pakietu layouts
-%\usepackage{layouts}
-\usepackage{printlen} % pakiet do wyświetlania wartości zdefiniowanych długości, stosowany do 'debuggowania'
-\usepackage{enumitem} % pakiet do numerowania 1.1 1.2 w sekcji enumrate
-\uselengthunit{pt}
-\makeatletter
-\newcommand{\showFontSize}{\f@size pt} % makro wypisujące wielkość bieżącej czcionki
-\makeatother
+%%\usepackage{memlays}     % extra layout diagrams, zastosowane w szblonie do 'debuggowania', używa pakietu layouts
+%%%\usepackage{layouts}
+%%\usepackage{printlen} % pakiet do wyświetlania wartości zdefiniowanych długości, stosowany do 'debuggowania'
+%%\usepackage{enumitem} % pakiet do numerowania 1.1 1.2 w sekcji enumrate
+%%\uselengthunit{pt}
+%%\makeatletter
+%%\newcommand{\showFontSize}{\f@size pt} % makro wypisujące wielkość bieżącej czcionki
+%%\makeatother
 % do pokazania ramek można byłoby użyć:
 %\usepackage{showframe} 
 
@@ -514,6 +525,7 @@ columns=fullflexible,
 \pdfcompresslevel=9
 \pdfoutput=1
 
+
 % Dobrze przygotowany dokument pdf to taki, który zawiera metadane.
 % Poniżej zadeklarowano pola metadanych, jakie będą włączone do dokumentu pdf.
 % Można je zmodyfikować w zależności od potrzeb
@@ -608,7 +620,7 @@ columns=fullflexible,
 %\renewcommand*{\lotheadstart}{\vspace*{\linespace}}
 %\renewcommand*{\lofheadstart}{\vspace*{\linespace}}
 
-\usepackage{cleveref} %odwolania 
+%\usepackage{cleveref} %odwolania 
 
 % INFO: Czcionka do podpisów tabel, rysunków, listingów
 \captionnamefont{\small}
@@ -875,7 +887,7 @@ computer equipment} % INFO: tytuł pracy w języku angielskim
 \wydzial{Wydział Informatyki i Telekomunikacji} % INFO: nazwa wydziału
 \kierunek{Informatyka techniczna (ITE)} % IFO: nazwa kierunku
 \specjalnosc{Inżynieria systemów informatycznych (INS)} % INFO: nazwa specjalności
-\promotor{dr inż. Tomasz Kubik} % INFO: dane promotora 
+\promotor{dr inż.\ Tomasz Kubik} % INFO: dane promotora 
 \kvpl{raz, dwa, trzy} % INFO: słowa kluczowe po polsku
 \kven{one, two, three} % INFO: słowa kluczowe po angielsku
 \date{WROCŁAW, 2023} % INFO: miejscowość, rok złożenia pracy dyplomowej
