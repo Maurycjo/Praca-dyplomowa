@@ -534,16 +534,133 @@ const handleAddComputer = async (e) =>{
 
 Powyższy listing kodu \ref{addComputer:label} ukazuje w jaki sposób aplikacje kliencka komunikuje się z serwerem. Po podaniu odpowiednich danych w formularzu i kliknięciu przycisku następuje wysłanie żądania typu POST do serwera które dodaje nowy komputer. 
 
-
-\subsubsection{Widoki aplikacji}
-%TODO opisy scieżek w aplikacji
-
-
 \subsection{Instrukcja użytkowania}
-\subsubsection{Logowanie i rejestracja}
 
-\subsubsection{Administrator}
-\subsubsection{Pracownik}
+Zdefiniowano widoki aplikacji i pogrupowano je ze względu na typ które pełnią.
+\begin{itemize}
+	\item W-1 - Widok logowania i rejestracji, rysunek \ref{authview:label}
+	\item W-2 - Widok strony domowej zawierający urządzenia oraz loterię tych urządzeń, rysunek \ref{home:label}
+	\item W-3 - Widok formularzy urządzeń z wariantami dotyczących funkcjonalności które pełnią, rysunek \ref{forms:label}
+	\item W-4 - Widok użytkowników i uczestników, rysunek \ref{manageUsers:label}
+	\item W-5 - Widok historii loterii użytkownika, rysunek \ref{lotteryHistory:label}
+	\item W-6 - Widok komponentów komputera, rysunek 
+	\item W-7 - Widok formularzy komponentów komputera, rysunek
+\end{itemize} 
 
 
 
+
+
+\begin{figure}[htb]
+  \centering
+	\begin{tabular}{@{}ll@{}}
+	a) & b) \\
+  \includegraphics[width=0.35\textwidth]{rys05/view/login.pdf} & 
+	\includegraphics[width=0.35\textwidth]{rys05/view/register.pdf}
+	\end{tabular}
+  \caption{Widok W-1, Logowanie i Rejestracja a) logowanie, b) rejestracja}
+  \label{authview:label}
+\end{figure}
+
+
+Widok W-1 formularzy logowania i rejestracji pokazany na rysunku \ref{authview:label} jest początkowym widokiem aplikacji. Każdy użytkownik musi się zalogować podając poprawne dane logowania na W-1a. W przypadku braku konta możliwa jest rejestracja klikając na odnośnik "`Nie masz konta? Zarejestruj się"' Po kliknięciu odnośnika następuje przekierowanie na W-1b. Po pomyślnym zarejestrowaniu następuje przekierowanie do W-1a. Możliwe jest tez kliknięcie odnośnika "`Masz już konto? Zaloguj się"' aby przejśc do formularza logowania W-1a.
+
+
+
+\begin{figure}[htb]
+  \centering
+	\begin{tabular}{@{}lll@{}}
+	a)\\
+  \includegraphics[width=\textwidth]{rys05/view/alldevices.pdf} \\
+	
+	b)\\
+	\includegraphics[width=\textwidth]{rys05/view/compGrun.pdf} \\
+	c) \\
+	\includegraphics[width=\textwidth]{rys05/view/pracownikHome.pdf}
+	\end{tabular}
+  \caption{Widok W-2, Strona domowa a)Administrator bez filtrowania, b)Administrator z filtrowaniem c) Pracownik bez filtrowania}
+  \label{home:label}
+\end{figure}
+
+
+Na rysunkach \ref{home:label} pokazany jest widok W-2 który posiada tabelę urządzeń z loteriami. Na każdym widoku istnieje przycisk wyloguj odpowiedzialny za wylogowywanie i przekierowanie do widoku W-1a \ref{authview:label}.Na widokach stron domowych W-2 możliwe jest filtrowanie urządzeń po typie urządzenia oraz po biurze w którym się znajdują oraz wyświetlanie szczegółowych informacji o urządzeniu. W widoku W-2b pokazane zostały tylko komputery które znajdują się w biurze Grunwaldzka. Wyśiwetlanie informacji o urządzeniu pokazuje na widoku wariant formularza W-3e dla odpowiadającego typu urządzenia: W-3a, W-3b, W-3c, rysunek \ref{forms:label}. Widok W-1a jest widokiem administratora który posiada wiele funkcjonalności:
+\begin{itemize}
+	\item Kliknięcie przycisku "`Dodaj urządzenie"' sprawia, że na ekranie wyświetlany jest formularz W-3a. Możliwa jest zmiana typu formularza na W-3b lub W-3c, która się odbywa poprzez wybór typu urządzenia z listy rozwijanej.
+	\item Kliknięcie przycisku "`Przeglądaj komponenty"' sprawia, że następuje przekierowanie do widoku komponentów W-6.
+	\item Kliknięcie przycisku "`Zarządzaj użytkownikami"' przekierowuje do widoku zarejestrowanych pracowników W-4a, rysunek \ref{manageUsers:label}
+	\item Kliknięcie przycisku "`Zmień"' w kolumnie czy sprzedany ustawia status sprzętu na sprzedany lub nie. Jest to informacja czy sprzęt został dostarczony do pracownika.
+	\item Kliknięcie przycisku w kolumnie "`Gotowy na losowanie"' możliwe jest tylko wtedy gdy losowanie się nie odbyło. Sprawia ono, że operacja "`Losuj"' w kolumnie loteria jest możliwa. Sprzęty które mają status gotowe do losowania są wyświetlane na widoku pracownika W-2c.
+	\item Kliknięcie przycisku "`Usuń"' usuwa z systemu odpowiedni sprzęt.
+	\item Kliknięcie przycisku "`Modyfikuj"' wyświetla na widoku wariant formularza W-3d, rysunek \ref{forms:label}. Wariant ten jest dostosowywany na podstawie odpowiadającemu mu rodzajowi sprzętu: W-3a, W-3b, W3-c.
+	\item Kliknięcie przycisku "`Wyświetl"' w kolumnie "`Lista uczestników"' przekierowuje do widoku pracowników biorących udział w loterii wybranego sprzętu W-4b \ref{manageUsers:label}
+	\item Kliknięcie przycisku "`Losuj"' w kolumnie loteria możliwe jest w przypadku gdy urządzenie jest gotowe do losowania oraz loteria się jeszcze nie odbyła. Następnie po kliknięciu przycisku ustawiana data losowania jest na dzisiejszą oraz losowany jest zwycięzca losowania. W przypadku braku uczestników losowanie nie odbędzie się.
+\end{itemize}
+Widok W-2c \ref{home:label} jest widokiem pracownika. Nie posiada on tak zaawansowanych funkcjonalności jak administrator. 
+\begin{itemize}
+	\item Kliknięcie przycisku w kolumnie loteria umożliwia zapisywanie lub wypisywanie z uczestnictwa w losowaniu. Zapis na loterie możliwy jest wtedy kiedy losowanie się jeszcze nie odbyło.
+	\item Kliknięcie przycisku "`Przeglądaj swoje loterie"' przekierowuje do widoku W-5, rysunek \ref{lotteryHistory:label}. Widok ten posiada historię loterii dla aktualnie zalogowanego użytkownika.
+\end{itemize}
+
+
+
+\begin{figure}[htb]
+  \centering
+	\begin{tabular}{@{}lll@{}}
+	a) & b) & c) \\
+	\vtop{\vskip-2ex\hbox{\fbox{\includegraphics[width=0.3\linewidth]{rys05/view/addComputer.pdf}}}} & 
+	\vtop{\vskip-2ex\hbox{\fbox{\includegraphics[width=0.3\linewidth]{rys05/view/addTablet.pdf}}}} & 
+	\vtop{\vskip-2ex\hbox{\fbox{\includegraphics[width=0.3\linewidth]{rys05/view/addInne.pdf}}}} \\
+ 
+	d) & e) \\
+	
+	\vtop{\vskip-2ex\hbox{\fbox{\includegraphics[width=0.3\linewidth]{rys05/view/modifyComp.pdf}}}} & 
+	\vtop{\vskip-2ex\hbox{\fbox{\includegraphics[width=0.3\linewidth]{rys05/view/infoComp.pdf}}}} & 
+ 
+	\end{tabular}
+  \caption{Widok W-3, Formularze a) dodawania komputera, b) dodawania tabletu, c) dodawania innego sprzętu, d) wariant modyfikacji, e) wariant informacji}
+  \label{forms:label}
+\end{figure}
+
+
+Formularze W-3 ukazane na rysunku \ref{forms:label} wyświetlane są jako wyskakujące okno. Każdy z trzech formularzy W-3a, W-3b, W-3c oprócz wersji podstawowej odpowiadający mu wariant W-3d i W3e. Wariant podstawowy W-3a, W-3b, W-3c odpowiada za dodawanie nowego sprzętu. Możliwa jest zmiana typu sprzętu wybierając opcje z listy rozwijanej. Wariant W-3d służy to modyfikacji urządzenia i po jego pojawieniu się posiada aktualne dane urządzenia. Wariant W-3e odpowiada za wyświetlanie informacji o urządzeniu. Możliwość zmieniania danych na tym formularzu jest zablokowana. Formularz W-3a oraz odpowiadający mu W-3d posiada przyciski "`Dodaj nowy procesor"', "`Dodaj nowy dysk"', "`Dodaj nowy ram"'. W przypadku gdy administrator nie znajdzie z list rozwijanych interesującego go komponentu może kliknąć odpowiedni przycisk. Kliknięcie to powoduje pojawienie się formularza dla odpowiadającego go przycisku W-7a, W-7b, W-7c. ref*** Po dodaniu komponentu z widoku W-7 możliwe jest teraz z listy rozwijanej wybranie dodanego komponentu. \newline
+
+
+
+\begin{figure}[htb]
+  \centering
+	\begin{tabular}{@{}lll@{}}
+	a)\\
+  \includegraphics[width=\textwidth]{rys05/view/manageUsers.pdf} \\
+	
+	b)\\
+	\includegraphics[width=\textwidth]{rys05/view/participation.pdf} \\
+	
+	\end{tabular}
+  \caption{Widok W-4, Informacje o uzytkownikach a)Zarządzanie użytkownikami przez administratora, b)Przeglądanie uczestników losowania}
+  \label{manageUsers:label}
+\end{figure}
+
+
+Widok W-4 \ref{manageUsers:label} posiada informacje o użytkownikach. W-4a jest widokiem dostępnym tylko dla administratora
+\begin{itemize}
+	\item kliknięcie przycisku powrót do urządzeń przekierowuje do strony domowej W-2 \ref{home:label}
+	\item kliknięcie przycisku "`Pokaż historię"' w kolumnie Historia loterii przekierowuje do widoku historii loterii  W-5 \ref{lotteryHistory:label} dla odpowiadającego pracownika
+	\item kliknicie przycisku "`Usuń użytkownika"' usuwa z systemu użytkownika
+\end{itemize}
+Widok W-4b też jest widokiem tylko dostępnym dla administratora. Posiada on listę uczestników oraz informacje o wygranej przegranej każdego poszczególnego uczestnika dla wybranej loterii.\newline
+
+
+\begin{figure}[h]
+		\centering
+    \includegraphics[width=0.7\linewidth]{rys05/view/lotteryHistory.pdf}
+    \caption{Widok W-5, Historia loteri pracownika}
+    \label{lotteryHistory:label}
+\end{figure}
+
+
+Widok W-5 pozwala wyświetlić historię loterii użytkownika, rysunek \ref{lotteryHistory:label}. Pozwala on na pracownikowi przeglądanie własnej historii. Administrator może skorzystać z tego widoku aby sprawdzić historię loterii wybranego pracownika.
+\begin {itemize}
+	\item Możliwe jest tutaj filtrowanie loterii na podstawie statusu uczestnika. Są dostępne 3 opcje: "`Wszystkie loterie użytkownika"', "`Wygrana"' i "`Trwająca"'
+	\item Kliknięcie przycisku "`Informacje"' wyświetla szczegółowe informacje o sprzęcie, wariant W-3e dla formularzy W-3a, W-3b, W-3c, rysunek \ref{forms:label} 
+	\item Kliknięcie przycisku "`Wypisz się"' możliwe jest wtedy kiedy loteria się jeszcze nie odbyła. Po kliknięcui tego przycisku pracownik rezygnuje z uczestnictwa w losowaniu wybranego sprzętu.
+\end{itemize} 
