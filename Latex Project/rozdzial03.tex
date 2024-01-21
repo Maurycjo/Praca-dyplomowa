@@ -3,11 +3,9 @@
 \section{Wymagania funkcjonalne}
 
 Projektowany system powinien zapewnieć szereg funkcji które mogły by być wykorzystywane przez użytkowników systemu.
-
-
 \begin{enumerate}[label={\textbf{FR}-\bfseries\arabic*}]
     \item \textbf{Zarządzanie użytkownikami}
-    \begin{enumerate}[label={FR-\arabic{enumi}.\arabic*}]
+    \begin{enumerate}[label={FR-\arabic{enumi}.\arabic*},noparskip]
         \item Rejestracja użytkownika
         \item Logowanie użytkownika
         \item Usuwanie pracownika
@@ -16,7 +14,7 @@ Projektowany system powinien zapewnieć szereg funkcji które mogły by być wyk
     \end{enumerate}
 		
 		\item \textbf{Zarządzanie sprzętem komputerowym}
-    \begin{enumerate}[label={FR-\arabic{enumi}.\arabic*}]
+    \begin{enumerate}[label={FR-\arabic{enumi}.\arabic*},noparskip]
         \item Przeglądanie sprzętu komputerowego
         \item Dodawanie nowego sprzętu komputerowego
         \item Modyfikacja sprzętu komputerowego
@@ -25,7 +23,7 @@ Projektowany system powinien zapewnieć szereg funkcji które mogły by być wyk
 		\end{enumerate}
 		
 		\item \textbf{Zarządzanie komponentami komputera}
-			\begin{enumerate}[label={FR-\arabic{enumi}.\arabic*}]		
+			\begin{enumerate}[label={FR-\arabic{enumi}.\arabic*},noparskip]		
 				\item Przeglądanie komponentów komputera
 				\item Dodawanie komponentu(procesora, ram, dysku) dla komputera
 				\item Modyfikacja komponentu komputera
@@ -34,7 +32,7 @@ Projektowany system powinien zapewnieć szereg funkcji które mogły by być wyk
 		
 		
 		\item \textbf{Zarządzanie loterią wybranego sprzętu komputerowego}
-		\begin{enumerate}[label={FR-\arabic{enumi}.\arabic*}]
+		\begin{enumerate}[label={FR-\arabic{enumi}.\arabic*},noparskip]
         \item Zmiana gotowości sprzętu do losowania
         \item Zmiana statusu sprzętu na sprzedane lub niesprzedane
 				\item Wyświetlanie listy uczestników biorących udział w losowaniu
@@ -42,7 +40,7 @@ Projektowany system powinien zapewnieć szereg funkcji które mogły by być wyk
     \end{enumerate}
 		
 		\item \textbf{Zarządzanie uczestnictem w loterii}
-			\begin{enumerate}[label={FR-\arabic{enumi}.\arabic*}]
+			\begin{enumerate}[label={FR-\arabic{enumi}.\arabic*},noparskip]
         \item Przeglądanie historii loterii wybranego użytkownika
         \item Zapisywanie się na loterię urządzenia
 				\item Wypisywanie się z loterii urządzenia
@@ -51,6 +49,10 @@ Projektowany system powinien zapewnieć szereg funkcji które mogły by być wyk
 		
 		
 \end{enumerate}
+
+
+
+
 
 % template %
 \newcommand\addrow[2]{#1 & #2\\ \hline}
@@ -75,360 +77,330 @@ Projektowany system powinien zapewnieć szereg funkcji które mogły by być wyk
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1em}
 
+\paragraph{\underline{FR-1.1 Rejestracja użytkownika}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Rejestracja użytkownika ze standardową rolą, przy użyciu maila, nazwy użytkownika, imienia, nazwiska, hasła i potwierdzenia hasła.\\
+	\noindent\textbf{Aktorzy:} Pracownik\\
+	\textbf{Warunki początkowe:} Brak\\
+	\textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Podanie w formularzu maila, nazwy użytkownika, Imienia, nazwiska, hasła i potwierdzenia hasła
+    \item Kliknięcie przycisku zarejestruj
+		\item Przekierowanie do okna logowania
+	\end{enumerate}
+	\textbf{Przebieg alternatywny 1 (odrzucenie próby logowania):}
+	\begin{enumerate}[noparskip]\setcounter{enumi}{4}
+		\item Użytkownik wprowadził 2 różne hasła w polach hasło i powtórz hasło przez co rejestracja nie powiodła się
+		\item Użytkownik o zadanym mailu lub nazwie użytkownika istnieje przez co rejestracja nie powiodła się
+	\end{enumerate}	
+%%  \textbf{Warunki końcowe:} Brak. %\mbox{}\\[-4mm]
 
-\subsubsection{FR-1.1 Rejestracja użytkownika}
+\paragraph{\underline{FR-1.2 Logowanie użytkownika}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Logowanie użytkownika przy pomocy email lub nazwy użytkownika oraz hasła.\\
+	\noindent\textbf{Aktorzy:} Pracownik, Administrator\\
+	\textbf{Warunki początkowe:} Użytkownik został wcześniej zarejestrowany w systemie\\
+	\textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Podanie w formularzu nazwy użytkownika lub email oraz podanie hasła
+    \item Kliknięcie przycisku zaloguj
+		\item Nadanie użytkownikowi odpowiednich uprawnień
+		\item Przekierowanie na stronę domową
+	\end{enumerate} 
+	\indent \textbf{Przebieg alternatywny 1 (odrzucenie próby logowania):}
+	\begin{enumerate}[noparskip]\setcounter{enumi}{3}
+		\item Podane dane w formularzu są nieprawidłowe, przez co nie następuje logowanie i pozostaje na stronie logowania
+	\end{enumerate}	
 
-\begin{usecase}
-		\udescription{Rejestracja użytkownika ze standardową rolą, przy użyciu maila, nazwy użytkownika, imienia, nazwiska, hasła i potwierdzenia hasła}
-    \actor{Pracownik}
-    \precondition{Brak}
-    \scenario{
-        \item Podanie w formularzu maila, nazwy użytkownika, Imienia, nazwiska, hasła i potwierdzenia hasła
-        \item Kliknięcie przycisku zarejestruj
-				\item Przekierowanie do okna logowania
-    }
-		\alternateScenario{
-			\item [3] Użytkownik wprowadził 2 różne hasła w polach hasło i powtórz hasło przez co rejestracja nie powiodła się
-			\item [4] Użytkownik o zadanym mailu lub nazwie użytkownika istnieje przez co rejestracja nie powiodła się
-		}
-  
-     
-\end{usecase}
+\paragraph{\underline{FR-1.3 Usuwanie pracownika}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:}	Administrator jako zarządca systemu może usunąć użytkownika.\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-1.5 Przeglądanie zarejestrowanych pracowników	
+	\end{enumerate}
+  \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku usuń na wierszu reprezentującym pracownika
+    \item Usunięcie z bazy danych pracownika oraz jego historii uczestnictwa w loteriach
+	\end{enumerate}
 
-\subsubsection{FR-1.2 Logowanie użytkownika}
+\paragraph{\underline{FR-1.4 Wylogowywanie użytkownika}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Wylogowywanie z systemu\\
+	\noindent\textbf{Aktorzy:} Pracownik, Administrator\\
+	\textbf{Warunki początkowe:} Użytkownik został wcześniej zalogowany\\
+	\textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku wyloguj
+		\item Przejście na stronę logowania
+	\end{enumerate} 
 
-\begin{usecase}
-		\udescription{Logowanie użytkownika przy pomocy email lub nazwy użytkownika oraz hasła}
-    \actor{Pracownik, Administrator}
-    \precondition{Użytkownik został wcześniej zarejestrowany w systemie}
-    \scenario{
-        \item Podanie w formularzu nazwy użytkownika lub email oraz podanie hasła
-        \item Kliknięcie przycisku zaloguj
-				\item Nadanie użytkownikowi odpowiednich uprawnień
-				\item Przekierowanie na stronę domową
-    }
-    \alternateScenario{
-			\item [4] Podane dane w formularzu są nieprawidłowe, przez co nie następuje logowanie i pozostaje na stronie logowania
-		}
-\end{usecase}
-
-\subsubsection{FR-1.3 Usuwanie pracownika}
-\begin{usecase}
-		\udescription{Administrator jako zarządca systemu może usunąć urzytkownika}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
-		\includee{
-			\item FR-1.5 Przeglądanie zarejestrowanych pracowników
-		}
-	
-    \scenario{
-        \item Kliknięcie przycisku usuń na wierszu reprezentującym pracownika
-				\item Usunięcie z bazy danych pracownika oraz jego historii uczestnictwa w loteriach
-    }
-\end{usecase}
-
-\subsubsection{FR-1.4 Wylogowywanie użytkownika}
-\begin{usecase}
-		\udescription{Wylogowywanie z systemu}
-    \actor{Administrator, Pracownik}
-    \precondition{Użytkownik został wcześniej zalogowany}
-    \scenario{
-        \item Kliknięcie przycisku wyloguj
-				\item Przejście na stronę logowania
-    }
-\end{usecase}
-
-\subsubsection{FR-1.5 Przeglądanie zarejestrowanych pracowników}
-\begin{usecase}
-		\udescription{Możliwe jest wyświetlanie wszystkich użytkowników z rolą Pracownik}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
-    \scenario{
-        \item Kliknięcie przycisku zarządzaj użytkownikami
-				\item Wyświetlenie widoku użytkowników
-    }
-\end{usecase}
-
-\subsubsection{FR-2.1 Przeglądanie sprzętu komputerowego}
-\begin{usecase}
-		\udescription{Administrator widzi wszystkie sprzęty dodane w systemie, natomiast pracownik tylko te któe są gotowe do loterii}
-    \actor{Administrator, Pracownik}
-    \precondition{Użytkownik jest zalogowany w systemie}
-		\extend{
-			\item Filtrowanie jaki rodzaj sprzętu ma być wyświetlany na widoku lub wybranie wszystkich rodzajów
-			\item Filtrowanie sprzętu po biurze w jakim się znajdują
-		}
-    \scenario{
-				\item Wyświetlenie widoku sprzętów komputerowych na stronie domowej, z dostępnymi operacjami zarządzania sprzętem i loteriami tych sprzętów
-    }
-		\alternateScenario{
-			\item [1b] Użytkownik o dostępie pracownika nie ma dostępu do operacji zarządzania sprzętem
-		}
-\end{usecase}
+\paragraph{\underline{FR-1.5 Przeglądanie zarejestrowanych pracowników}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Możliwe jest wyświetlanie wszystkich użytkowników z rolą Pracownik\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku zarządzaj użytkownikami
+		\item Wyświetlenie widoku użytkowników
+	\end{enumerate} 
 
 
-\subsubsection{FR-2.2 Dodanie nowego sprzętu komputerowego}
-\begin{usecase}
-		\udescription{Administrator może dodawać 3 różne rodzaje urządzeń zdefiniowanych w systemie}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
-		\extend{
-			\item FR-3.2 Dodawanie komponentu dla komputera
-		}
-    \scenario{
-        \item Kliknięcie przycisku odpowiedzialnego za dodanie urządzenia
-        \item Wybranie z listy rozwijanej typu urządzenia które będzie dodawane
-				\item System wyświetla formularz z odpowiednim rodzajem urządzenia
-				\item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie
-				\item Dodanie urządzenia do systemu
-    }
-    \alternateScenario{
-			\item [4] Administrator nie znalazł w formularzu komputera; procesora, ram, lub dysku i postanowił dodać taki klikając odpowiedni przycisk: dodaj procesor, dodaj ram lub dodaj pamięć
-			\item [5] Następuje teraz wykonanie przypadku FR-3.2 Dodawanie komponentu dla komputera
-			\item [6] Kontynuacja uzupełniania formularza
-			\item [7] Dodanie nowego komputera
-			}
-\end{usecase}
+\paragraph{\underline{FR-2.1 Przeglądanie sprzętu komputerowego}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Administrator widzi wszystkie sprzęty dodane w systemie, natomiast pracownik tylko te któe są gotowe do loterii\\
+	\noindent\textbf{Aktorzy:} Pracownik, Administrator\\
+	\textbf{Warunki początkowe:} Użytkownik jest zalogowany w systemie\\
+	\textbf{Extend:} 
+	\begin{enumerate}[noparskip]
+		\item Filtrowanie jaki rodzaj sprzętu ma być wyświetlany na widoku lub wybranie wszystkich rodzajów
+		\item Filtrowanie sprzętu po biurze w jakim się znajdują
+	\end{enumerate}
+	\textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Wyświetlenie widoku sprzętów komputerowych na stronie domowej, z dostępnymi operacjami zarządzania sprzętem i loteriami tych sprzętów
+	\end{enumerate} 
+	\textbf{Przebieg alternatywny:}
+	\begin{enumerate}[noparskip]
+		\item[1b] Użytkownik o dostępie pracownika nie ma dostępu do operacji zarządzania sprzętem
+	\end{enumerate} 
 
-\subsubsection{FR-2.3 Modyfikacja sprzętu komputerowego}
-\begin{usecase}
-		\udescription{Możliwa jest korekta urządzeń lub podanie brakujących parametrów urządzenia}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
-		\includee{
-			\item FR-2.1 Przeglądanie sprzętu komputerowego
-		}
+\paragraph{\underline{FR-2.2 Dodanie nowego sprzętu komputerowego}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Administrator może dodawać 3 różne rodzaje urządzeń zdefiniowanych w systemie\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Extend:} 
+	\begin{enumerate}[noparskip]
+		\item FR-3.2 Dodawanie komponentu dla komputera
+	\end{enumerate}
+	\textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku odpowiedzialnego za dodanie urządzenia
+    \item Wybranie z listy rozwijanej typu urządzenia które będzie dodawane
+		\item System wyświetla formularz z odpowiednim rodzajem urządzenia
+		\item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie
+		\item Dodanie urządzenia do systemu	\end{enumerate} 
+	\textbf{Przebieg alternatywny:}
+	\begin{enumerate}[noparskip]\setcounter{enumi}{3}
+		\item Administrator nie znalazł w formularzu komputera; procesora, ram, lub dysku i postanowił dodać taki klikając odpowiedni przycisk: dodaj procesor, dodaj ram lub dodaj pamięć
+		\item Następuje teraz wykonanie przypadku FR-3.2 Dodawanie komponentu dla komputera
+		\item Kontynuacja uzupełniania formularza
+		\item Dodanie nowego komputera
+	\end{enumerate} 
 
-    \scenario{
-        \item Kliknięcie przycisku modyfikuj na odpowiednim wierszu reprezentującym urządzenie
-				\item System wykrywa odpowiedni rodzaj urządzenia i wyświetla formularz z poprzednimi danymi urządzenia
-				\item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie
-				\item Modyfikacja urządzenia
-    }
-		\alternateScenario{
-			
-			\item [3] Administrator nie znalazł w formularzu komputera; procesora, ram, lub dysku i postanowił dodać taki klikając odpowiedni przycisk: dodaj procesor, dodaj ram lub dodaj pamięć
-			\item [4] Następuje teraz wykonanie przypadku FR-3.2 Dodawanie komponentu dla komputera
-			\item [5] Kontynuacja uzupełniania formularza
-			\item [6] Modyfikacja komputera
-		
-		}
-\end{usecase}
-
-\subsubsection{FR-2.4 Usuwanie sprzętu komputerowego}
-\begin{usecase}
-		\udescription{Administrator może usuwać urządzenia}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
-		\includee{
+\paragraph{\underline{FR-2.3 Modyfikacja sprzętu komputerowego}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Możliwa jest korekta urządzeń lub podanie brakujących parametrów urządzenia\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
 		\item FR-2.1 Przeglądanie sprzętu komputerowego
-		}
-    \scenario{
-        \item Kliknięcie przycisku usuń na odpowiednim wierszu reprezentującym urządzenie
-				\item Usunięcie sprzętu z systemu
-    }
-\end{usecase}
+	\end{enumerate}
+	\textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+    \item Kliknięcie przycisku modyfikuj na odpowiednim wierszu reprezentującym urządzenie
+	  \item System wykrywa odpowiedni rodzaj urządzenia i wyświetla formularz z poprzednimi danymi urządzenia
+	  \item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie
+	  \item Modyfikacja urządzenia
+	\end{enumerate} 
+	\textbf{Przebieg alternatywny:}
+	\begin{enumerate}[noparskip]\setcounter{enumi}{4}
+		\item Administrator nie znalazł w formularzu komputera; procesora, ram, lub dysku i postanowił dodać taki klikając odpowiedni przycisk: dodaj procesor, dodaj ram lub dodaj pamięć
+		\item Następuje teraz wykonanie przypadku FR-3.2 Dodawanie komponentu dla komputera
+		\item Kontynuacja uzupełniania formularza
+		\item Modyfikacja komputera
+	\end{enumerate} 
+\paragraph{\underline{FR-2.4 Usuwanie sprzętu komputerowego}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Administrator może usuwać urządzenia\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-2.1 Przeglądanie sprzętu komputerowego
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku usuń na odpowiednim wierszu reprezentującym urządzenie
+		\item Usunięcie sprzętu z systemu
+    \end{enumerate}
 
-\subsubsection{FR-2.5 Wyświetlanie szczegółowych informacji dotyczących sprzętu}
-\begin{usecase}
-		\udescription{Możliwe jest szczegółowe sprawdzenie dotyczące parametrów sprzętów w specjalnym formularzu}
-    \actor{Administrator, Pracownik}
-    \precondition{Użytkownik został zalogowany do systemu}
-		\includee{
-			\item FR-2.1 Przeglądanie sprzętu komputerowego
-		}
-		
-    \scenario{
-        \item Kliknięcie przycisku informacji o urządzeniu na odpowiednim wierszu reprezentującym urządzenie
-				\item System wykrywa odpowiedni rodzaj urządzenia i wyświetla formularz urządzenia z zablokowanymi polami 
-    }
- 
-\end{usecase}
+\paragraph{\underline{FR-2.5 Wyświetlanie szczegółowych informacji dotyczących sprzętu}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Możliwe jest szczegółowe sprawdzenie dotyczące parametrów sprzętów w specjalnym formularzu\\
+	\noindent\textbf{Aktorzy:} Administrator, Pracownik\\
+	\textbf{Warunki początkowe:} Użytkownik został zalogowany do systemu\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-2.1 Przeglądanie sprzętu komputerowego
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku informacji o urządzeniu na odpowiednim wierszu reprezentującym urządzenie
+		\item System wykrywa odpowiedni rodzaj urządzenia i wyświetla formularz urządzenia z zablokowanymi polami 
+    \end{enumerate}
 
+\paragraph{\underline{FR-3.1 Przeglądanie komponentów komputera}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Do lepszego oszacowania ceny sprzętu Administrator ma widok komponentów które może posiadać komputer\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Extend:}
+    \begin{enumerate}[noparskip]
+		\item filtrowanie komponentów po rodzaju: procesor, ram, dysk pamięci
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku odpowiedzialnego za widok komponentów
+		\item Wyświetlenie widoku na stronie
+    \end{enumerate}
 
-
-\subsubsection{FR-3.1 Przeglądanie komponentów komputera}
-\begin{usecase}
-		\udescription{Do lepszego oszacowania ceny sprzętu Administrator ma widok komponentów które może posiadać komputer}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
-		\extend{
-			\item filtrowanie komponentów po rodzaju: procesor, ram, dysk pamięci
-		}
-    \scenario{
-        \item Kliknięcie przycisku odpowiedzialnego za widok komponentów
-				\item Wyświetlenie widoku na stronie
-    }
-   
-\end{usecase}
-
-
-\subsubsection{FR-3.2 Dodawanie nowego komponentu komputera}
-\begin{usecase}
-		\udescription{Możliwe jest dodawanie komponentu na który składa się cena i nazwa}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
-    \scenario{
-				\item Wykonanie przypadku FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera
+\paragraph{\underline{FR-3.2 Dodawanie nowego komponentu komputera}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Możliwe jest dodawanie komponentu na który składa się cena i nazwa\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+    \textbf{Przebieg podstawowy:}
+    \begin{enumerate}[noparskip]
+		\item Wykonanie przypadku FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera
         \item Kliknięcie przycisku dodaj procesor, dodaj RAM lub dodaj dysk
-				\item System wyświetla formularz komponentu
-				\item Wpisanie nazwy i ceny komponentu
-				\item Dodanie komponentu do bazy danych
-    }
-		\alternateScenario{
-			\item [1b] Administrator wykonuje dodanie z poziomu formularza dodawania komputera
-			\item [4] Administrator podał nazwę komponentu która istnieje w bazie danych
-			\item [5] Następuje modyfikacja podanej ceny istniejącego komponentu zamiast dodania nowego
-		}
-\end{usecase}
+		\item System wyświetla formularz komponentu
+		\item Wpisanie nazwy i ceny komponentu
+		\item Dodanie komponentu do bazy danych
+    \end{enumerate}
+    \textbf{Przebieg podstawowy:}
+    \begin{enumerate}[noparskip]
+		\item[1b] Administrator wykonuje dodanie z poziomu formularza dodawania komputera
+		\item[4] Administrator podał nazwę komponentu która istnieje w bazie danych
+		\item[5] Następuje modyfikacja podanej ceny istniejącego komponentu zamiast dodania nowego
+    \end{enumerate}
 
+\paragraph{\underline{FR-3.3 Modyfikacja komponentu komputera}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Możliwe jest modyfikowanie komponentu na który składa się cena i nazwa\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku modyfikuj na odpowiednim wierszu reprezentującym komponent
+		\item Modyfikacja komponentu w bazie danych
+    \end{enumerate}
 
-\subsubsection{FR-3.3 Modyfikacja komponentu komputera}
-\begin{usecase}
-		\udescription{Możliwe jest modyfikowanie komponentu na który składa się cena i nazwa}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
-		\includee{
-			\item FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera
-		}
-    \scenario{
-        \item Kliknięcie przycisku modyfikuj na odpowiednim wierszu reprezentującym komponent
-				\item Modyfikacja komponentu w bazie danych
-    }
-\end{usecase}
+\paragraph{\underline{FR-3.4 Usuwanie komponentu komputera}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Możliwe jest usuwanie komponentów wchodzącym w skład komputera\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku usuń na odpowiednim wierszu reprezentującym komponent
+		\item Usunięcie komponentu z bazy, oraz ustawienie wszystkich odwołań w komputerach do danego komponentu na null
+    \end{enumerate}
 
-\subsubsection{FR-3.4 Usuwanie komponentu komputera}
-\begin{usecase}
-		\udescription{Możliwe jest usuwanie komponentów wchodzącym w skład komputera}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora}
-		\includee{
-			\item FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera
-		}
-    \scenario{
-        \item Kliknięcie przycisku usuń na odpowiednim wierszu reprezentującym komponent
-				\item Usunięcie komponentu z bazy, oraz ustawienie wszystkich odwołań w komputerach do danego komponentu na null
-    }
-\end{usecase}
+\paragraph{\underline{FR-4.1 Zmiana gotowości sprzętu do losowania}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Administrator zarządza urządzeniem i określa jego gotowość do loterii\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie nie zostało wcześniej wylosowane w loterii\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-2.1 Przeglądanie sprzętu komputerowego
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku gotowości do losowania na odpowiednim wierszu reprezentującym urządzenie
+		\item Zmiana gotowości losowania na przeciwny do poprzedniego
+    \end{enumerate}
 
+\paragraph{\underline{FR-4.2 Zmiana statusu sprzętu na sprzedane lub niesprzedane}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Administrator kontroluje które sprzęty zostały już sprzedane i dostarczone do pracownika\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie zostało wylosowane w loterii\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-2.1 Przeglądanie sprzętu komputerowego
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku odpowiedzialnego za zmianę statusu sprzedane na odpowiednim wierszu reprezentującym urządzenie
+		\item Aktualizacja statusu sprzedane urządzenia w systemie
+    \end{enumerate}
 
+\paragraph{\underline{FR-4.3 Wyświetlanie listy uczestników biorącym udział w losowaniu}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Administrator sprawdza jacy użytkownicy biorą udział w losowaniu sprzętu\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Status urządzenia został ustawiony na gotowe do losowania\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-2.1 Przeglądanie sprzętu komputerowego
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku odpowiedzialnego za wyświetlanie listy uczestników na odpowiednim wierszu reprezentującym urządzenie
+		\item Przekierowanie do widoku użytkowników biorącym udział w losowaniu wybranego sprzętu
+		\item Wyświetlanie widoku uczestników losowania, oraz ich statusu dotyczącego czy już wygrali loterię
+    \end{enumerate}
 
-\subsubsection{FR-4.1 Zmiana gotowości sprzętu do losowania}
-\begin{usecase}
-		\udescription{Administrator zarządza urządzeniem i określa jego gotowość do loterii}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie nie zostało wcześniej wylosowane w loterii}
-		\includee{
-			\item FR-2.1 Przeglądanie sprzętu komputerowego
-		}
-    \scenario{
-        \item Kliknięcie przycisku gotowości do losowania na odpowiednim wierszu reprezentującym urządzenie
-				\item Zmiana gotowości losowania na przeciwny do poprzedniego
-    }
-   
-\end{usecase}
+\paragraph{\underline{FR-4.4 Losowanie zwycięzcy loterii}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Administrator losuje zwycięzce spośród tych pracowników którzy zapisali się a loterię\\
+	\noindent\textbf{Aktorzy:} Administrator\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Status urządzenia został ustawiony na gotowe do losowania, Przynajmniej jeden pracownik jest zapisany na losowanie\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-2.1 Przeglądanie sprzętu komputerowego
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku odpowiedzialnego za losowanie zwycięzcy na odpowiednim wierszu reprezentującym urządzenie
+		\item Ustawienie daty losowania na dzisiejszą
+		\item Ustawienie wylosowanego pracownika jako zwycięzce losowania 
+    \end{enumerate}
 
+\paragraph{\underline{FR-5.1 Przeglądanie historii loterii wybranego użytkownika}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} W systemie istnieje filtrowanie dotyczących historii loterii\\
+	\noindent\textbf{Aktorzy:} Administrator, Pracownik\\
+	\textbf{Warunki początkowe:} Użytkownik został zalogowany w systemie\\
+	\textbf{Extend:} 
+	\begin{enumerate}[noparskip]
+		\item Filtrowanie loterii po statusie uczestnika: wygrana, przegrana, trwająca
+		\item FR-2.5 Wyświetlanie szczegółowych informacji dotyczących sprzętu komputerowego
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Kliknięcie przycisku pokaż historie na odpowiednim wierszu reprezentującym użytkownika
+		\item Wyświetlenie sprzętu, daty loterii oraz statusu użytkownika w odniesieniu do bieżącej loterii 
+    \end{enumerate}
+    \textbf{Przebieg alternatywny:}
+	\begin{enumerate}[noparskip]
+		\item [1b] Kliknięcie przycisku pokaż historie użytkownika który jest właśnie zalogowany
+	\end{enumerate}
 
-\subsubsection{FR-4.2 Zmiana statusu sprzętu na sprzedane lub niesprzedane}
-\begin{usecase}
-		\udescription{Administrator kontroluje które sprzęty zostały już sprzedane i dostarczone do pracownika}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie zostało wylosowane w loterii}
-		\includee{
-			\item FR-2.1 Przeglądanie sprzętu komputerowego
-		}
-    \scenario{
-        \item Kliknięcie przycisku odpowiedzialnego za zmianę statusu sprzedane na odpowiednim wierszu reprezentującym urządzenie
-				\item Aktualizacja statusu sprzedane urządzenia w systemie
-    }
-   
-\end{usecase}
+\paragraph{\underline{FR-5.2 Zapisywanie się na loterię urządzenia}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Pracownik przeglądając specyfikacje sprzętu może być zainteresowany wzięciem udziału w loterii\\
+	\noindent\textbf{Aktorzy:} Pracownik\\
+	\textbf{Warunki początkowe:} Pracownik został wcześniej zalogowany w systemie i posiada uprawnienia pracownika, sprzęt nie został wcześniej wylosowany, pracownik wcześniej nie zapisał się na loterię dotyczącego tego sprzętu\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-2.1 Przeglądanie sprzętu komputerowego
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Pracownik klika przycisk weź udział na odpowiednim wierszu reprezentującym urządzenie
+		\item Do systemu zostaje dodane uczestnictwo w loterii wybranego urządzenia
+    \end{enumerate}
 
-
-
-\subsubsection{FR-4.3 Wyświetlanie listy uczestników biorącym udział w losowaniu}
-\begin{usecase}
-		\udescription{Administrator sprawdza jacy użytkownicy biorą udział w losowaniu sprzętu}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Status urządzenia został ustawiony na gotowe do losowania}
-		\includee{
-			\item FR-2.1 Przeglądanie sprzętu komputerowego
-		}
-    \scenario{
-        \item Kliknięcie przycisku odpowiedzialnego za wyświetlanie listy uczestników na odpowiednim wierszu reprezentującym urządzenie
-				\item Przekierowanie do widoku użytkowników biorącym udział w losowaniu wybranego sprzętu
-				\item Wyświetlanie widoku uczestników losowania, oraz ich statusu dotyczącego czy już wygrali loterię
-    }
-\end{usecase}
-
-
-\subsubsection{FR-4.4 Losowanie zwycięzcy loterii}
-\begin{usecase}
-		\udescription{Administrator losuje zwycięzce spośród tych pracowników którzy zapisali się a loterię}
-    \actor{Administrator}
-    \precondition{Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Status urządzenia został ustawiony na gotowe do losowania, Przynajmniej jeden pracownik jest zapisany na losowanie}
-		\includee{
-			\item FR-2.1 Przeglądanie sprzętu komputerowego
-		}
-    \scenario{
-        \item Kliknięcie przycisku odpowiedzialnego za losowanie zwycięzcy na odpowiednim wierszu reprezentującym urządzenie
-				\item Ustawienie daty losowania na dzisiejszą
-				\item Ustawienie wylosowanego pracownika jako zwycięzce losowania 
-    }
-   
-\end{usecase}
-
-
-\subsubsection{FR-5.1 Przeglądanie historii loterii wybranego użytkownika}
-\begin{usecase}
-		\udescription{W systemie istnieje filtrowanie dotyczących historii loterii}
-    \actor{Administrator, Pracownik}
-    \precondition{Użytkownik został zalogowany w systemie}
-		
-		\extend{
-			\item Filtrowanie loterii po statusie uczestnika: wygrana, przegrana, trwająca
-			\item FR-2.5 Wyświetlanie szczegółowych informacji dotyczących sprzętu komputerowego
-		}
-		
-    \scenario{
-        \item Kliknięcie przycisku pokaż historie na odpowiednim wierszu reprezentującym użytkownika
-				\item Wyświetlenie sprzętu, daty loterii oraz statusu użytkownika w odniesieniu do bieżącej loterii 
-    }
-		\alternateScenario{
-			\item [1b] Kliknięcie przycisku pokaż historie użytkownika który jest właśnie zalogowany
-		}
-		
-\end{usecase}
-
-
-\subsubsection{FR-5.2 Zapisywanie się na loterię urządzenia}
-\begin{usecase}
-		\udescription{Pracownik przeglądając specyfikacje sprzętu może być zainteresowany wzięciem udziału w loterii}
-    \actor{Pracownik}
-    \precondition{Pracownik został wcześniej zalogowany w systemie i posiada uprawnienia pracownika, sprzęt nie został wcześniej wylosowany, pracownik wcześniej nie zapisał się na loterię dotyczącego tego sprzętu}
-		\includee{
-			\item FR-2.1 Przeglądanie sprzętu komputerowego
-		}
-    \scenario{
-        \item Pracownik klika przycisk weź udział na odpowiednim wierszu reprezentującym urządzenie
-				\item Do systemu zostaje dodane uczestnictwo w loterii wybranego urządzenia
-    }
-\end{usecase}
-
-\subsubsection{FR-5.3 Wypisanie się z loterii}
-\begin{usecase}
-		\udescription{Pracownik może chcieć się wypisać z loterii}
-    \actor{Pracownik}
-    \precondition{Pracownik został wcześniej zalogowany w systemie i posiada uprawnienia pracownika, sprzęt nie został wcześniej wylosowany, pracownik wcześniej zapisał się na loterię dotyczącego wybranego sprzętu}
-		\includee{
-			\item FR-2.1 Przeglądanie sprzętu komputerowego
-		}
-    \scenario{
-        \item Pracownik klika przycisk wypisz się na odpowiednim wierszu reprezentującym urządzenie
-				\item Z systemu zostaje usunięte uczestnictwo w loterii wybranego urządzenia
-    }
-\end{usecase}
-
+\paragraph{\underline{FR-5.3 Wypisanie się z loterii}}\mbox{}\\[1mm]
+	\noindent\textbf{Opis:} Pracownik może chcieć się wypisać z loterii\\
+	\noindent\textbf{Aktorzy:} Pracownik\\
+	\textbf{Warunki początkowe:} Pracownik został wcześniej zalogowany w systemie i posiada uprawnienia pracownika, sprzęt nie został wcześniej wylosowany, pracownik wcześniej zapisał się na loterię dotyczącego wybranego sprzętu\\
+	\textbf{Include:} 
+	\begin{enumerate}[noparskip]
+		\item FR-2.1 Przeglądanie sprzętu komputerowego
+	\end{enumerate}
+    \textbf{Przebieg podstawowy:}
+	\begin{enumerate}[noparskip]
+		\item Pracownik klika przycisk wypisz się na odpowiednim wierszu reprezentującym urządzenie
+		\item Z systemu zostaje usunięte uczestnictwo w loterii wybranego urządzenia
+    \end{enumerate}
 
 \section{Wymagania niefunkcjonalne}
 

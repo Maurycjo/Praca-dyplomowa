@@ -12,21 +12,21 @@ W celu zdefiniowania struktury bazy danych, został stworzony diagram związków
 
 W systemie istnieją różne rodzaje urządzeń, z których każdy jest reprezentowany przez odpowiadającą mu tabelę w bazie danych. Trzy główne kategorie urządzeń to: \textbf{computer (komputer), tablet (tablet)} oraz \textbf{other\_device (inne urządzenie)}. Wszystkie te kategorie dziedziczą swoje cechy od wspólnej tabeli o nazwie \textbf{device\_core}, która stanowi rdzeń dla wszystkich urządzeń.
 
-Wspólny rdzeń, reprezentowany przez tabelę device\_core, zawiera parametry, które są dziedziczone przez wszystkie rodzaje urządzeń. Dzięki tej strukturze, każda tabela reprezentująca konkretny typ urządzenia posiada te same podstawowe atrybuty, ułatwiając jednolite zarządzanie nimi w systemie. Parametry wspólne dla wszystkich typów urządzeń obejmują:
+Wspólny rdzeń, reprezentowany przez tabelę device\_core, zawiera parametry, które są dziedziczone przez wszystkie rodzaje urządzeń. Dzięki tej strukturze, każda tabela reprezentująca konkretny typ urządzenia posiada te same podstawowe atrybuty, ułatwiając jednolite zarządzanie nimi w systemie. Parametry wspólne dla wszystkich typów urządzeń obejmują: 
 \begin{itemize}
-	\item ID - identyfikator urządzenia
-	\item device\_type - Typ urządzenia ułatwiający zarządzanie nimi w aplikacji klienckiej
-	\item device\_name - Nazwa urządzenia
-	\item price - Cena urządzenia
-	\item age - Wiek urządzenia
-	\item office\_id - identyfikator biura w którym znajduje się urządzenie
-	\item ready\_to\_lottery - Informacja czy sprzęt jest gotowy do przeprowadzenia loterii
-	\item lottery\_date - Data loterii w której odbyło się losowanie, jeżeli się nie odbyło to wartość jest pusta
-	\item is\_ordered - Informacja czy sprzęt został już odebrany przez pracownika
+	\item \texttt{ID} - identyfikator urządzenia
+	\item \texttt{device\_type} - Typ urządzenia ułatwiający zarządzanie nimi w aplikacji klienckiej
+	\item \texttt{device\_name} - Nazwa urządzenia
+	\item \texttt{price} - Cena urządzenia
+	\item \texttt{age} - Wiek urządzenia
+	\item \texttt{office\_id} - identyfikator biura w którym znajduje się urządzenie
+	\item \texttt{ready\_to\_lottery} - Informacja czy sprzęt jest gotowy do przeprowadzenia loterii
+	\item \texttt{lottery\_date} - Data loterii w której odbyło się losowanie, jeżeli się nie odbyło to wartość jest pusta
+	\item \texttt{is\_ordered} - Informacja czy sprzęt został już odebrany przez pracownika
 \end{itemize}
 
 Pozostałe tabele reprezentujące urządzenia rozszerzają informacje dostarczane przez rdzeń. Komputer dodatkowo posiada informacje odnośnie
-\begin{itemize}
+\begin{itemize} % TO DO: poprawić czcionkę na maszynową jak w wyliczeniu powyżej (przypominam - czcionką maszynową piszemy kod, nazwy klas itd.)
 	\item serial\_number - numer seryjny komputera
 	\item model - model komputera
 	\item operatinng\_system - system operacyjny zainstalowany na komputerze

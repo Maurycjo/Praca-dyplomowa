@@ -4,35 +4,28 @@
 
 
 \subsection{Struktura interfejsu REST}
-Poniższa tabela \ref{tab:rest} prezentuje jakie zapytania mogą być odbierane przez aplikację serwerową. Z racji tego, że w aplikacji wykorzystywane są typy generyczne w klasach kontrolerach urządzeń i komponentów komputera (implementacja \ref{controller_genericDevice} uproszczono tabele by pokazać ogólną formę zapytań. Wszystkie zapytania posiadające "`devices"' w ścieżce umożliwiają alternatywne wywołanie zapytania na podstawie typu sprzętu. Ogólna zasada jest taka aby zastąpić "`devices"' odpowiadającemu typowi sprzętu: "`computers"', "`tablets"', "`other-devices"'. Powoduje to, że zapytanie wykonywane jest przez kontroler tej klasy, a co za tym idzie ma określony typ. Możliwe jest też wykonanie zapytania nie zmieniając ścieżki. Wtedy takie zapytanie wykonywane jest na ogólnym rodzaju sprzętu. Przykładowo "`devices/all"' pobiera wszystkie sprzęty nie zwracając uwagi na typ, natomiast "`computers/all"' pobiera tylko sprzętu typu "`Computer"'. Podobne rozwiązanie wykorzystano w komponentach komputera. Dotyczy to zapytań mających w ścieżce: "`component"'. Tutaj należy zamienić "`component"' na jeden z trzech dostępnych typów komponentu: "`rams"', "`cpus"', "`storages"'. W tym wypadku nie ma możliwości wywołania zapytania zawierającego "`component"'.
+% TO DO: Opis do poprawy (bo zmieniono układ tabel)
+Poniższa tabela \ref{tab:rest1} prezentuje jakie zapytania mogą być odbierane przez aplikację serwerową. Z racji tego, że w aplikacji wykorzystywane są typy generyczne w klasach kontrolerach urządzeń i komponentów komputera (implementacja \ref{controller_genericDevice} uproszczono tabele by pokazać ogólną formę zapytań. Wszystkie zapytania posiadające "`devices"' w ścieżce umożliwiają alternatywne wywołanie zapytania na podstawie typu sprzętu. Ogólna zasada jest taka aby zastąpić "`devices"' odpowiadającemu typowi sprzętu: "`computers"', "`tablets"', "`other-devices"'. Powoduje to, że zapytanie wykonywane jest przez kontroler tej klasy, a co za tym idzie ma określony typ. Możliwe jest też wykonanie zapytania nie zmieniając ścieżki. Wtedy takie zapytanie wykonywane jest na ogólnym rodzaju sprzętu. Przykładowo "`devices/all"' pobiera wszystkie sprzęty nie zwracając uwagi na typ, natomiast "`computers/all"' pobiera tylko sprzętu typu "`Computer"'. Podobne rozwiązanie wykorzystano w komponentach komputera. Dotyczy to zapytań mających w ścieżce: "`component"'. Tutaj należy zamienić "`component"' na jeden z trzech dostępnych typów komponentu: "`rams"', "`cpus"', "`storages"'. W tym wypadku nie ma możliwości wywołania zapytania zawierającego "`component"'.
 
-\begin{table}[H]
+\begin{table}[H]\small
 	\centering
-\caption{Tabela prezentująca strukturę REST }
-\label{tab:rest}
-\begin{tabularx}{\linewidth}{|X|X|X|X|}
+\caption{Tabela prezentująca strukturę REST (cz.1)}
+\label{tab:rest1}
+\begin{tabularx}{\linewidth}{|X|l|p{3cm}|X|}
     \hline
     Ścieżka & Metoda & Parametry & Opis  \\
     \hline \hline
 		/devices/all 	& GET & - & Pobranie danych sprzętów na podstawie określonego typu \\
 		\hline
-		/devices/{id} & GET & identyfikator urządzenia 	& Pobranie danych wszystkich sprzętów\\
+		/devices/{id} & GET & id urządzenia 	& Pobranie danych wszystkich sprzętów\\
     \hline
-		/devices/{id}	& DELETE & identyfikator urządzenia 	& Usunięcie sprzętu\\
+		/devices/{id}	& DELETE & id urządzenia 	& Usunięcie sprzętu\\
     \hline
-		 /computers/update/id & PUT & Identyfikator sprzętu i zmienione dane sprzętu& aktualizacja danych komputera\\
+		 /computers/update/id & PUT & id sprzętu oraz zmienione dane sprzętu& aktualizacja danych komputera\\
 		\hline
-		 /tablets/update/id & PUT & Identyfikator sprzętu i zmienione dane sprzętu& aktualizacja danych tabletu\\
-		\hline
-		 
-		\end{tabularx}
-		\end{table}
-
-	\begin{table}[H]
-	\centering
-	\label{tab:rest}
-	\begin{tabularx}{\linewidth}{|X|X|X|X|}
-		/other-device/update/id & PUT & Identyfikator sprzętu i zmienione dane sprzętu& aktualizacja danych innego urządzenia\\
+		 /tablets/update/id & PUT & id sprzętu oraz zmienione dane sprzętu& aktualizacja danych tabletu\\
+		\hline	 
+		/other-device/update/id & PUT & id sprzętu i zmienione dane sprzętu & aktualizacja danych innego urządzenia\\
 		\hline
 			 /computers/add & POST	& dane komputera 	& Dodanie nowego komputera	\\
     \hline
@@ -40,28 +33,28 @@ Poniższa tabela \ref{tab:rest} prezentuje jakie zapytania mogą być odbierane 
     \hline
 		/other-device/add & POST	& dane innego urządzenia 	& Dodanie nowego urządzenia	\\
     \hline
-		/devices/by-office& GET	& identyfikator biura 	& Pobranie danych sprzętu znajdujących się w biurze\\
+		/devices/by-office& GET	& id biura 	& Pobranie danych sprzętu znajdujących się w biurze\\
     \hline
 		/devices/all-ready-to-lottery& GET	& - & Pobranie danych sprzętów które są gotowe do losowania\\
     \hline
 		
-		/devices/all-ready-to-lottery-by-officeId/id& GET	& Identyfikator biura & Pobranie danych sprzętów które są gotowe do losowania i znajdują się w danym biurze\\
+		/devices/all-ready-to-lottery-by-officeId/id& GET	& id biura & Pobranie danych sprzętów które są gotowe do losowania i znajdują się w danym biurze\\
     \hline
-		/devices/set-ready-to-lottery/id 		& PUT	& identyfikator sprzętu & Ustawienie gotowości sprzętu do losowania	\\
+		/devices/set-ready-to-lottery/id 		& PUT	& id sprzętu & Ustawienie gotowości sprzętu do losowania	\\
     \hline
-		/devices/set-not-ready-to-lottery/id & PUT	& identyfikator sprzętu & Ustawienie braku gotowości sprzętu do losowania	\\
+		/devices/set-not-ready-to-lottery/id & PUT	& id sprzętu & Ustawienie braku gotowości sprzętu do losowania	\\
     \hline
-		/devices/set-ordered/id & PUT	& identyfikator sprzętu & Ustawienie statusu sprzętu na dostarczone	do pracownika	\\
+		/devices/set-ordered/id & PUT	& id sprzętu & Ustawienie statusu sprzętu na dostarczone	do pracownika	\\
     \hline
-		/devices/set-not-ordered/id & PUT	& identyfikator sprzętu & Ustawienie statusu sprzętu na dostarczone	do pracownika	\\
+		/devices/set-not-ordered/id & PUT	& id sprzętu & Ustawienie statusu sprzętu na dostarczone	do pracownika	\\
     \hline
 		/components/all 	& GET & - & Pobranie danych wszystkich procesorów, ram lub dysków pamięci \\
 		\hline
-		/components/{id} & GET & identyfikator komponentu 	& Pobranie danych procesora, ram lub dysku pamięci\\
+		/components/{id} & GET & id komponentu 	& Pobranie danych procesora, ram lub dysku pamięci\\
     \hline
-		/components/{id}	& DELETE & identyfikator komponentu 	& Usunięcie procesora, ram lub dysku pamięci\\
+		/components/{id}	& DELETE & id komponentu 	& Usunięcie procesora, ram lub dysku pamięci\\
     \hline
-		 /components/update/id & PUT & Identyfikator sprzętu i zmienione dane sprzętu& aktualizacja danych komputera\\
+		 /components/update/id & PUT & id sprzętu oraz zmienione dane sprzętu& aktualizacja danych komputera\\
 		\hline
 		 /offices/all	& GET & - & Pobranie wszystkich biur w systemie\\
 		\hline
@@ -70,41 +63,42 @@ Poniższa tabela \ref{tab:rest} prezentuje jakie zapytania mogą być odbierane 
 		\end{tabularx}
 		\end{table}
 
-		\begin{table}[H]
+\begin{table}[H] \small
 	\centering
-	\label{tab:rest}
-	\begin{tabularx}{\linewidth}{|X|X|X|X|}
-	 
-		
+\caption{Tabela prezentująca strukturę REST (cz.2)}
+\label{tab:rest2}	 
+\begin{tabularx}{\linewidth}{|X|l|p{3cm}|X|}\hline
+    Ścieżka & Metoda & Parametry & Opis  \\
+    \hline \hline
 		 /users/all-standard	& GET & -& Pobranie wszystkich użytkowników z rolą pracownik w systemie\\
 		\hline
 		 /users/id & GET & - & Pobranie użytkownika\\
 		\hline
 		 /users/id & DELETE & - & Usunięcie użytkownika\\
 		\hline
-		 /participation/add & POST & identyfikator użytkownika i identyfikator urządzenia & Dodanie uczestnictwa użytkownika w loterii do wybranego sprzętu\\
+		 /participation/add & POST & id użytkownika oraz id urządzenia & Dodanie uczestnictwa użytkownika w loterii do wybranego sprzętu\\
 		\hline
 		 /participation/all& POST & - & Wyświetlenie wszystkich uczestników dla każdego sprzętu\\
 		\hline
 		 /participation/id & DELETE & - & Usunięcie uczestnictwa o zadanym id\\
 		\hline
-		 /participation/delete-by-user\_id-and-device\_id& DELETE & identyfikator użytkownika i identyfikator sprzętu & Usunięcie uczestnictwa spełniającego zadane kryteria\\
+		 /participation/delete-by-user\_id-and-device\_id& DELETE & id użytkownika i id sprzętu & Usunięcie uczestnictwa spełniającego zadane kryteria\\
 		\hline
 		 /participation/all-wins& GET & - & Wyświetlenie wszystkich zwycięskich uczestników\\
 		\hline
-		 /participation/user-lottery-history/id & GET& identyfikator użytkownika & Wyświetlenie historii uczestnictwa użytkownika o zadanym id\\
+		 /participation/user-lottery-history/id & GET& id użytkownika & Wyświetlenie historii uczestnictwa użytkownika o zadanym id\\
 		\hline
-		 /participation/user-win-history/id & GET& identyfikator użytkownika & Wyświetlenie historii zwycięstw użytkownika o zadanym id\\
+		 /participation/user-win-history/id & GET& id użytkownika & Wyświetlenie historii zwycięstw użytkownika o zadanym id\\
 		\hline
-		 /participation/user-lose-history/id & GET& identyfikator użytkownika & Wyświetlenie historii porażek użytkownika o zadanym id\\
+		 /participation/user-lose-history/id & GET& id użytkownika & Wyświetlenie historii porażek użytkownika o zadanym id\\
 		\hline
-		 /participation/user-pending-lottery/id & GET& identyfikator użytkownika & Wyświetlenie uczestnictwa które czeka na losowanie\\
+		 /participation/user-pending-lottery/id & GET& id użytkownika & Wyświetlenie uczestnictwa które czeka na losowanie\\
 		\hline
-		 /participation/device-participation/id& GET& identyfikator urządzenia & Wyświetlenie wszystkich użytkowników zapisanych na losowaniu urządzenia o zadanym id\\
+		 /participation/device-participation/id& GET& id urządzenia & Wyświetlenie wszystkich użytkowników zapisanych na losowaniu urządzenia o zadanym id\\
 		\hline
-		 /participation/check-if-user-in-lottery& GET& identyfikator urządzenia i identyfikator użytkownika& Sprawdzenie czy użytkownik bierze udział w losowaniu\\
+		 /participation/check-if-user-in-lottery& GET& id urządzenia oraz id użytkownika& Sprawdzenie czy użytkownik bierze udział w losowaniu\\
 		\hline
-		 /participation/select-random-winner/id& GET& identyfikator urządzenia& Losowanie zwycięzcy loterii dla urządzenia o zadanym id\\
+		 /participation/select-random-winner/id& GET& id urządzenia& Losowanie zwycięzcy loterii dla urządzenia o zadanym id\\
 		\hline
 \end{tabularx}
 \end{table}
