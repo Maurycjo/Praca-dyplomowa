@@ -52,22 +52,18 @@ body, html {
 
 
 .header-block {
-
-    background-color: #17B169; /* Kolor tła nagłówka */
-    text-align: left;
+    background-color: #17B169;
+    text-align: center;
     width: 100%;
     height: 50px;
     min-height: 10%;
     font-size: 200%;
     display: flex;
     align-items: center;
-    justify-content: center;
     color: white;
     border-top: 1px solid black;
     border-bottom: 2px gainsboro;
-
-
-
+    justify-content: center;
 }
 
 .operation-block {
@@ -79,5 +75,10 @@ body, html {
     z-index: 1;
     padding-bottom: 10px;
     border-bottom: 1px solid black;
+}
+
+.logout{
+    margin-right: auto;
 
 }
+

@@ -54,6 +54,10 @@ const ComputerComponentBar = ({ onComponentChange}) => {
         navigate("/users");
     };
 
+    const handleLogout = () =>{
+
+        navigate("/auth/login");
+    }
 
     return (
         <div>
@@ -70,6 +74,7 @@ const ComputerComponentBar = ({ onComponentChange}) => {
             <button type="button" onClick={handleAddRam}>Dodaj RAM</button>
             <button type="button" onClick={handleAddStorage}>Dodaj dysk</button>
             <button type="button" onClick={handleDisplayUsers}>Zarządzaj użytkownikami</button>
+            <button type="logout" onClick={handleLogout}>Wyloguj</button>
             <CpuForm trigger={addCpuPopup} setTrigger={setAddCpuPopup}></CpuForm>
             <RamForm trigger={addRamPopup} setTrigger={setAddRamPopup}></RamForm>
             <StorageForm trigger={addStoragePopup} setTrigger={setAddStoragePopup}></StorageForm>

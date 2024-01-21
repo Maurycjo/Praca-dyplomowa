@@ -8,12 +8,17 @@ const UsersInLotteryBar = ({ onSidebarChange }) => {
         navigate('/home');
     }
 
+    const handleLogout = () =>{
+
+        navigate("/auth/login");
+    }
 
 
 
     return (
         <div>
             <button type="button" onClick={handleBackToDevices}>Powrót do urządzeń</button>
+            <button type="logout" onClick={handleLogout}>Wyloguj</button>
         </div>
     );
 };

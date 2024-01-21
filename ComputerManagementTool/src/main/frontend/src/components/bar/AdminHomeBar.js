@@ -61,6 +61,10 @@ const AdminHomeBar = ({ onDeviceChange, onOfficeChange }) => {
         navigate("/components");
     }
 
+    const handleLogout = () =>{
+
+        navigate("/auth/login");
+    }
 
     return (
         <div>
@@ -83,6 +87,7 @@ const AdminHomeBar = ({ onDeviceChange, onOfficeChange }) => {
             <button type="button" onClick={handleAddComputer}>Dodaj urządzenie</button>
             <button type="button" onClick={handleDisplayComponents}>Przeglądaj komponenty</button>
             <button type="button" onClick={handleDisplayUsers}>Zarządzaj użytkownikami</button>
+            <button type="logout" onClick={handleLogout}>Wyloguj</button>
             <AddNewFormPopup trigger={addComputerPopup} setTrigger={setAddComputerPopup}></AddNewFormPopup>
         </div>
     );

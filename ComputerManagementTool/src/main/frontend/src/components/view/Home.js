@@ -569,12 +569,10 @@ const Home = () => {
                 deviceId: deviceId,
             }
         });
-
     };
-    const handleLogout = () =>{
 
-        navigate("/auth/login");
-    }
+
+
 
     return (
         <Container>
@@ -591,9 +589,8 @@ const Home = () => {
                     ) : (
                         <UserHomeBar onDeviceChange={handleDeviceChange} onOfficeCHange={handleOfficeChange}/>
                     )}
-
-                    <button onClick={handleLogout}>Wyloguj</button>
                 </div>
+
                     <div className="table-container">
                     <ReactTableScroll className="styled-table">
                         <table className="device table styled-table">

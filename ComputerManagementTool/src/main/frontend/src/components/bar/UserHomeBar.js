@@ -57,6 +57,11 @@ const UserHomeBar = ({ onDeviceChange, onOfficeChange }) => {
         });
     }
 
+    const handleLogout = () =>{
+
+        navigate("/auth/login");
+    }
+
 
     return (
         <div>
@@ -77,6 +82,7 @@ const UserHomeBar = ({ onDeviceChange, onOfficeChange }) => {
                 ))}
             </select>
             <button type="button" onClick={handleDisplayLottery}>Przeglądaj swoje loterie</button>
+            <button type="logout" onClick={handleLogout}>Wyloguj</button>
         </div>
     );
 };

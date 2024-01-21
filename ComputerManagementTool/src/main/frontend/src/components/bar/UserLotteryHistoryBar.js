@@ -30,6 +30,10 @@ const UserLotteryHistoryBar = ({ onOptionChange}) => {
         navigate("/home");
     }
 
+    const handleLogout = () =>{
+
+        navigate("/auth/login");
+    }
 
     return (
         <div>
@@ -43,6 +47,7 @@ const UserLotteryHistoryBar = ({ onOptionChange}) => {
 
 
             <button type="button" onClick={handleBackToHome}>Powrót</button>
+            <button type="logout" onClick={handleLogout}>Wyloguj</button>
         </div>
     );
 };
