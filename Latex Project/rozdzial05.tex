@@ -21,11 +21,11 @@ Poniższa tabela \ref{tab:rest1} prezentuje jakie zapytania mogą być odbierane
     \hline
 		/devices/{id}	& DELETE & id urządzenia 	& Usunięcie sprzętu\\
     \hline
-		 /computers/update/id & PUT & id sprzętu oraz zmienione dane sprzętu& aktualizacja danych komputera\\
+		 /computers/update/id & PATCH & id sprzętu oraz zmienione dane sprzętu& aktualizacja danych komputera\\
 		\hline
-		 /tablets/update/id & PUT & id sprzętu oraz zmienione dane sprzętu& aktualizacja danych tabletu\\
+		 /tablets/update/id & PATCH & id sprzętu oraz zmienione dane sprzętu& aktualizacja danych tabletu\\
 		\hline	 
-		/other-device/update/id & PUT & id sprzętu i zmienione dane sprzętu & aktualizacja danych innego urządzenia\\
+		/other-device/update/id & PATCH & id sprzętu i zmienione dane sprzętu & aktualizacja danych innego urządzenia\\
 		\hline
 			 /computers/add & POST	& dane komputera 	& Dodanie nowego komputera	\\
     \hline
@@ -124,14 +124,14 @@ Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona �
   \centering
 	\begin{tabular}{@{}lll@{}}
 	a) & b) & c) \\
-  \includegraphics[width=0.3\textwidth]{rys05/ogolne.pdf} & 
-	\includegraphics[width=0.3\textwidth]{rys05/controller.pdf} &
-	\includegraphics[width=0.3\textwidth]{rys05/dto.pdf} \\
+  \includegraphics[width=0.3\textwidth]{rys05/backend/ogolne.pdf} & 
+	\includegraphics[width=0.3\textwidth]{rys05/backend/controller.pdf} &
+	\includegraphics[width=0.3\textwidth]{rys05/backend/dto.pdf} \\
 
 	d) & e) & f) \\
-	\includegraphics[width=0.3\textwidth]{rys05/entity.pdf} &
-	\includegraphics[width=0.3\textwidth]{rys05/repository.pdf} &
-	\includegraphics[width=0.3\textwidth]{rys05/service.pdf}
+	\includegraphics[width=0.3\textwidth]{rys05/backend/entity.pdf} &
+	\includegraphics[width=0.3\textwidth]{rys05/backend/repository.pdf} &
+	\includegraphics[width=0.3\textwidth]{rys05/backend/service.pdf}
 	\end{tabular}
   \caption{Struktura projektu a) ogólna struktura, b) kontrolery, c) data transfer object, d) encje, e) repozytoria, f) serwisy}
   \label{backend_struktura:label}
@@ -339,23 +339,205 @@ public class TabletService extends GenericDeviceService<Tablet>{
 
         return genericDeviceRepository.save(tablet);
     }
-		\\pozostała część klasy
+		// Pozostała część klasy
 \end{lstlisting}
 
-Serwis klasy TabletService dziedziczy i parametryzuje metody klasy GenericDeviceService. Wykorzystuje on w linii 13 metode klasy nadrzędnej co upraszaq implementacje metody dodającej sprzęt(linia 9)
+Serwis klasy TabletService dziedziczy i parametryzuje metody klasy GenericDeviceService. Wykorzystuje on w linii 13 metodę klasy nadrzędnej co uprasza implementacje metody dodającej sprzęt(linia 9)
 
 
 
 \section {Aplikacja kliencka}
-%TODO wstęp
+Aplikacja kliencka jest aplikacją internetową dostarczającą przyjazny interfejs użytkownika. W aplikacji klienckiej napisanej w języku JavaScript z wykorzystaniem biblioteki React (tabela \ref{tab:zestawienie_narzędzi}) istnieją zdefiniowane zapytania REST do aplikacji serwerowej. Wykorzystując te zapytania na widoku widocznym dla użytkownika zostają podjęte specjalne akcje które ten widok aktualizują. Formularze pokazywane są w takiej formie, że po kliknięciu odpowiedniego przycisku ukazuje się formularz na danym widoku. Zestawienie widoków, ścieżek i roli pokazano w tabeli \ref{tab:zestawienie_widokow}
 
 \subsection{Struktura projektu}
+Ogólna struktura projektu została stworzona przez wywołanie komendy tworzącej aplikacje Reacta: npx create-react-app frontend. Następnie utworzono folder components który w sobie zawiera foldery przechowujące pliki JavaScript na podstawie pełnionych funkcji w projekcie. Foldery i odpowiadające im funkcje: 
+\begin {itemize}
+\item \textbf{auth} przechowuje pliki odpowiedzialne za obsługę i stylizacje widoków logowania i rejestracji
+	\begin{itemize}
+	\item Login.js - skrypt odpowiedzialny za widok i funkcjonalność logowania
+	\item Register.js - skrypt odpowiedzialny za widok i funkcjonalność rejestracji
+	\item Login.css - arkusz styli odpowiedzialny za stylizacje widoków logowania i rejestracji
+	\end{itemize}
+\item \textbf{bar} przechowuje skrypty odpowiedzialne za paski nawigacyjne poszczególnych widoków.
+	\begin{itemize}
+	\item AdminHomeBar.js - skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym administratora: Home.js
+	\item ComputerComponentsBar.js -skrypt odpowiedzialny za pasek nawigacyjny dla widoku komponentów: ComputerComponents.js
+	\item ManageUserBar.js -skrypt odpowiedzialny za pasek nawigacyjny widoku zarządzania użytkownikami: Users.js
+	\item UserHomeBar.js - skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym pracownika: Home.js
+	\item UserLotteryHistory -skrypt odpowiedzialny za pasek nawigacyjnym na widoku historii loterii użytkownika: UserLotteryHistory.js
+	\item UsersInLottery.js -skrypt odpowiedzialny za pasek nawigacyjny na widoku użytkowników biorących udział w loterii: UsersInLottery.js
+	\end{itemize}
+\item \textbf{computer\_components} przechowuje skrypty formularzy komponentów komputera które mogą dodawać lub modyfikować te komponenty
+	\begin{itemize}
+	\item CpuForm.js - formularz procesora
+	\item RamForm.js - formularz pamięci RAM
+	\item StorageForm.js - formularz pamięcu dyskowej
+	\end{itemize}
+\item \textbf{device\_form} przechowuje skrypty oraz arkusz styli odpowiedzialne za logikę formularzy dodawania, modyfikacji urządzeń
+	\begin{itemize}
+	\item AddNewFormPopup.js - formularz umożliwiający wybór formularza który dodaje komputer, tablet, lub inne urządzenie
+	\item ComputerForm.js -formularz komputera
+	\item DeviceForm.css - arkusz styli odpowiedzialny za stylizacje formularzy
+	\item FormPopup.js - skrypt odpowiedzialny za logikę i wybór rodzaju formularza(dodawanie, modyfikacja, informacje) urządzenia.
+	\item OtherDeviceForm - formularz innego urządzenia
+	\item TabletForm.js - formularz tabletu
+	\end{itemize}
+\item \textbf{view} przechowuje w sobie skrypty oraz arkusz styli odpowiedzialne za widoki aplikacji
+	\begin{itemize}
+	\item ComputerComponets.js -widok dostępny tylko dla administratora. Zawiera w sobie informacje o komponentach komputera w postaci tabeli
+	\item Home.css - arkusz styli odpowiedzialny za stylizacje widoków
+	\item Home.js - widok strony domowej, ma w sobie dwa warianty: Administartora i Pracownika
+	\item UserLotteryHistory.js - widok hostorii loterii użytkownika o zadanym ID. Dostępny dla pracownika i administratora.
+	\item Users.js - widok pracowników zarejestrowanych w systemie. Dostępny tylko dla administratora
+	\item UsersInLottery - widok pracowników biorących udział w loterii danego sprzętu. Dostępny tylko dal administratora.
+	\end{itemize}
+\end{itemize}
+
+Równolegle do folderu components w folderze src istnieją jeszcze dwa skrypty które są niezbędne do funkcjonowania aplikacji.
+\begin{itemize}
+	\item App.js zawiera w sobie scieżki url pod którymi dostępne są poszczególne widoki
+	\item index.js - funkcja główna programu
+\end{itemize}
+
+Strukturę projektu pokazano na Rysunku \ref{frontend_struktura:label}
+
+
+\begin{table}[htb] \small
+	\centering
+\caption{Zestawienie ścieżek url dostępnych w aplikacji klienckiej}
+\label{tab:zestawienie_widokow}
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    Ścieżka & Widok & Skrypt & Rola\\
+    \hline \hline
+    /auth/login & Logowanie &  Login.js & Przed nadaniem roli\\
+    \hline
+    /auth/register & Rejestracja & Register.js & Przed nadaniem roli\\
+    \hline
+    /home & Strona domowa z tabelą sprzętów & Home.js & Administrator lub Pracownik\\
+    \hline
+    /users & Tabela pracowników & Users.js & Administrator\\
+    \hline
+		/components & Tabela komponentów komputera& ComputerComponents.js & Administrator\\
+    \hline
+		/users-in-lottery & Tabela użytkowników biorących udział w loterii& UsersInLottery.js & Administrator lub Pracownik\\
+    \hline
+		/users-lottery-history & Tabela zawierająca historię loteri & UsersLotteryHistory.js & Administatro lub Pracownik\\
+
+    \hline
+\end{tabularx}
+\end{table}
+
+
+\begin{figure}[htb]
+  \centering
+	\begin{tabular}{@{}lll@{}}
+	a) & b) & c) \\
+  \includegraphics[width=0.3\textwidth]{rys05/frontend/frontend.pdf} & 
+	\includegraphics[width=0.3\textwidth]{rys05/frontend/auth.pdf} &
+	\includegraphics[width=0.3\textwidth]{rys05/frontend/bar.pdf} \\
+
+	d) & e) & f) \\
+	\includegraphics[width=0.3\textwidth]{rys05/frontend/components.pdf} &
+	\includegraphics[width=0.3\textwidth]{rys05/frontend/deviceform.pdf} &
+	\includegraphics[width=0.3\textwidth]{rys05/frontend/view.pdf}
+	\end{tabular}
+  \caption{Struktura projektu a) ogólna struktura, b) Logowanie i rejestracja, c) pasek nawigacyjny, d) formularze komponentów, e) formularze sprzętów, f) widoki stron}
+  \label{frontend_struktura:label}
+\end{figure}
+
 
 
 \subsection{Fragmenty implementacji}
+	\subsubsection{Ścieżki url dla widoków aplikacji}
+	
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle,  caption={Zdefiniowane ścieżki url widoków systemu }, label={app_frontend:label}]
+	
+	const App = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/auth/login" element={<Login />} />
+                <Route path="/auth/register" element={<Register />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Navigate to="/auth/login" />} />
+                <Route path="/auth/*" element={<Navigate to="/auth/login" />} />
+                <Route path="/users" element={<Users/>}/>
+                <Route path="/components" element={<ComputerComponents/>}/>
+                <Route path="/users-in-lottery" element={<UsersInLottery/>}/>
+                <Route path="/user-lottery-history" element={<UserLotteryHistory/>}/>
+            </Routes>
+        </Router>
+    );
+};
+	
+\end{lstlisting}
+Powyższy listing kodu \ref{app_frontend:label} definiuje ścieżki url pod którymi dostępne są poszczególne widoki~\ref{tab:zestawienie_widokow}
+
+
+\subsubsection{Sparametryzowany formularz urządzenia}
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle,  caption={Obsługa formularzy}, label={render_data:label}]
+
+function FormPopup(props){
+    
+ const {setTrigger, formType, deviceType, deviceId} = props;
+    
+  return (props.trigger) ? (
+    <div className="popup">
+      <div>
+         {deviceType === 'COMPUTER' && <ComputerForm setTrigger={props.setTrigger} formType={formType} deviceId={deviceId}/>}
+         {deviceType === 'TABLET' && <TabletForm setTrigger={props.setTrigger} formType={formType} deviceId={deviceId}/>}
+         {deviceType === 'OTHER' && <OtherDeviceForm setTrigger={props.setTrigger}  formType={formType} deviceId={deviceId} />}
+         {props.children}
+      </div>
+    </div>
+ ) : "";
+}
+
+export default FormPopup
+										
+\end{lstlisting}
+
+Powyższy listing kodu \ref{render_data:label} dla skryptu FormPopup.js  służy do dodawania różnych rodzajów formularza sprzętów z różnymi wariantami. Przyjmuje 4 argumenty. Przekazywanie tych parametrów odbywa się w linii 4 z wykorzystaniem "`props"'. Zmienna deviceType odpowiada dla jakiego urządzenia dotyczy formularz. Może on dotyczyć komputera, tableta lub innego urządzenia co pokazano w liniach 9-11. Zmienna setTrigger jest odpowiedzialna za to czy formularz jest aktualnie wyświetlany nad widokiem. Zmienna formType dotyczy wariant formularza. Istnieją 3 warianty jednego formularza i dotyczą one kolejno: dodawania nowego sprzętu, modyfikacji sprzętu oraz wyświetlania informacji o sprzęcie. Warianty formularza pokazano rysunku **referencja do rysunku**. Tak stworzona funkcja umożliwia zarządzanie formularzami które zostały zdefiniowane w plikach ComputerForm.js, TabletForm.js oraz OtherDeviceForm.js.
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle,  caption={Przykładowe zapytanie do serwera dla formularza komputera}, label={addComputer:label}]
+
+const handleAddComputer = async (e) =>{
+
+        try{
+            const compData ={
+                "deviceName" : formData.deviceName,
+                "price" : formData.price,
+                "description" : formData.description,
+                "age" : formData.age,
+                "officeAddress" : formData.office,
+                "serialNumber" : formData.serialNumber,
+                "model" : formData.model,
+                "operatingSystem" : formData.model,
+                "batteryLife" : formData.batteryLife,
+                "cpuName" : formData.cpu,
+                "storageName" : formData.storage,
+                "ramName" : formData.ram
+            };
+
+            const response = await axios.post('http://localhost:8080/computers/add', compData, {
+
+            });
+
+        }catch (error){
+            console.error('Bład dodawania komputera', error)
+        }
+
+\end{lstlisting}
+
+Powyższy listing kodu \ref{addComputer:label} ukazuje w jaki sposób aplikacje kliencka komunikuje się z serwerem. Po podaniu odpowiednich danych w formularzu i kliknięciu przycisku następuje wysłanie żądania typu POST do serwera które dodaje nowy komputer. 
+
+
 \subsubsection{Widoki aplikacji}
 %TODO opisy scieżek w aplikacji
-\subsubsection{Renderowanie danych w tabeli}
+
 
 \subsection{Instrukcja użytkowania}
 \subsubsection{Logowanie i rejestracja}
