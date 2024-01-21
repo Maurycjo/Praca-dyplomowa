@@ -44,7 +44,7 @@ public class TabletController  extends GenericDeviceController<Tablet>{
         }
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     @CrossOrigin(origins = "*")
     public ResponseEntity<Tablet> updateTablet(
             @PathVariable Integer id,

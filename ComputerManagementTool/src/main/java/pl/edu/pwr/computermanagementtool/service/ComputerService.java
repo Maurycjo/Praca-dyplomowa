@@ -85,10 +85,10 @@ public class ComputerService extends GenericDeviceService<Computer>  {
 
         Computer computer = updateDevice(id, deviceName, price, description, age, officeAddress);
 
-        if(serialNumber!=null)  computer.setSerialNumber(serialNumber);
-        if(model!=null)         computer.setModel(model);
-        if(operatingSystem!=null)computer.setOperatingSystem(operatingSystem);
-        if(batteryLife!=null)   computer.setBatteryLife(batteryLife);
+        computer.setSerialNumber(serialNumber);
+        computer.setModel(model);
+        computer.setOperatingSystem(operatingSystem);
+        computer.setBatteryLife(batteryLife);
 
 
             Optional<Office> officeOptional = officeRepository.findOfficeByAddress(officeAddress);
@@ -99,15 +99,21 @@ public class ComputerService extends GenericDeviceService<Computer>  {
         if(cpuName!=null){
             Cpu cpu = (Cpu) cpuService.addOrGetComponentWithName(cpuName, Cpu.class);
             computer.setCpu(cpu);
+        } else{
+            computer.setCpu(null);
         }
         if(storageName!=null){
             Storage storage = (Storage) storageService.addOrGetComponentWithName(storageName, Storage.class);
             computer.setStorage(storage);
+        }else{
+            computer.setStorage(null);
         }
 
         if(ramName!=null){
             Ram ram = (Ram) ramService.addOrGetComponentWithName(ramName, Ram.class);
             computer.setRam(ram);
+        }else{
+            computer.setRam(null);
         }
 
         return genericDeviceRepository.save(computer);

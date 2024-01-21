@@ -43,7 +43,7 @@ public class OtherDeviceController extends GenericDeviceController<OtherDevice> 
         }
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     @CrossOrigin(origins = "*")
     public ResponseEntity<OtherDevice> updateOtherDevice(
             @PathVariable Integer id,

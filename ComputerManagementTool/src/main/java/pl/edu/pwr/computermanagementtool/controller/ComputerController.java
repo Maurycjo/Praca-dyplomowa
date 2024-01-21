@@ -49,7 +49,7 @@ public class ComputerController extends GenericDeviceController<Computer>{
         }
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     @CrossOrigin(origins = "*")
     public ResponseEntity<Computer> updateComputer(
             @PathVariable Integer id,

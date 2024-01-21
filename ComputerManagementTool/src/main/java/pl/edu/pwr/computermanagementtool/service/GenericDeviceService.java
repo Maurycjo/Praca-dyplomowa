@@ -115,10 +115,10 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
         Optional<T> deviceOptional = genericDeviceRepository.findById(id);
         T device = deviceOptional.orElseThrow(()-> new RuntimeException("Device not found with id: " + id));
 
-        if(deviceName!=null)    device.setDeviceName(deviceName);
-        if(price!=null)         device.setPrice(price);
-        if(description!=null)   device.setDescription(description);
-        if(age!=null)           device.setAge(age);
+        device.setDeviceName(deviceName);
+        device.setPrice(price);
+        device.setDescription(description);
+        device.setAge(age);
 
 
         Optional<Office> officeOptional = officeRepository.findOfficeByAddress(officeAddress);

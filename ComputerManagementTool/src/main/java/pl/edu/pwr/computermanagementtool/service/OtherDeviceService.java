@@ -30,7 +30,7 @@ public class OtherDeviceService extends GenericDeviceService<OtherDevice> {
 
         OtherDevice otherDevice = updateDevice(id, deviceName, price, description, age, officeAddress);
 
-        if(additionalInfo!=null) otherDevice.setAdditionalInfo(additionalInfo);
+        otherDevice.setAdditionalInfo(additionalInfo);
 
 
 

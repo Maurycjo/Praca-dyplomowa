@@ -50,21 +50,42 @@ function ComputerForm(props){
             .catch(error => console.error("Error fetching offices:", error));
 
 
+        fetch('http://localhost:8080/cpus/all')
+            .then(response => response.json())
+            .then(data => {
+                setCpus(data);
 
-            fetch('http://localhost:8080/cpus/all')
-                .then(response => response.json())
-                .then(data => setCpus(data))
-                .catch(error => console.error("Erroe fetching offices:", error));
+                setFormData(prevState => ({
+                    ...prevState,
+                    cpu: null
+                }));
+            })
+            .catch(error => console.error("Error fetching cpus:", error));
 
-            fetch('http://localhost:8080/storages/all')
-                .then(response => response.json())
-                .then(data => setStorages(data))
-                .catch(error => console.error("Erroe fetching offices:", error));
 
-            fetch('http://localhost:8080/rams/all')
-                .then(response => response.json())
-                .then(data => setRams(data))
-                .catch(error => console.error("Erroe fetching offices:", error));
+        fetch('http://localhost:8080/storages/all')
+            .then(response => response.json())
+            .then(data => {
+                setStorages(data);
+
+                setFormData(prevState => ({
+                    ...prevState,
+                    storage: null
+                }));
+            })
+            .catch(error => console.error("Error fetching storages:", error));
+
+        fetch('http://localhost:8080/rams/all')
+            .then(response => response.json())
+            .then(data => {
+                setRams(data);
+
+                setFormData(prevState => ({
+                    ...prevState,
+                    ram: null
+                }));
+            })
+            .catch(error => console.error("Error fetching rams:", error));
 
 
         if(formType!=='addNew'){
@@ -85,23 +106,24 @@ function ComputerForm(props){
                         operatingSystem: responseData.operatingSystem,
                         batteryLife: responseData.batteryLife,
                         model: responseData.model,
-                        cpu: responseData.cpu===null ? 'Brak' : responseData.cpu,
-                        storage: responseData.storage===null ? 'Brak' : responseData.storage,
-                        ram: responseData.ram===null ? 'Brak' : responseData.ram
-                    }));
+                        cpu: responseData.cpu===null ? 'Brak' : responseData.cpu.name,
+                        storage: responseData.storage===null ? 'Brak' : responseData.storage.name,
+                        ram: responseData.ram===null ? 'Brak' : responseData.ram.name
+                    }))
                 })
                 .catch(error =>{
                     console.error("Error fetching data", error);
                 })
-
         }
-
 
     }, [formType]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+
+        const newValue = value ==="" ? null : value;
+
+        setFormData({ ...formData, [name]: newValue });
 
     };
 
@@ -134,9 +156,9 @@ function ComputerForm(props){
                 "model" : formData.model,
                 "operatingSystem" : formData.model,
                 "batteryLife" : formData.batteryLife,
-                "cpuName" : formData.cpuName,
-                "storageName" : formData.storageName,
-                "ramName" : formData.ramName
+                "cpuName" : formData.cpu,
+                "storageName" : formData.storage,
+                "ramName" : formData.ram
             };
 
             const response = await axios.post('http://localhost:8080/computers/add', compData, {
@@ -151,7 +173,6 @@ function ComputerForm(props){
 
     const handleModifyComputer = async (e) => {
         e.preventDefault();
-
         try {
 
             const compData ={
@@ -164,12 +185,12 @@ function ComputerForm(props){
                 "model" : formData.model,
                 "operatingSystem" : formData.model,
                 "batteryLife" : formData.batteryLife,
-                "cpuName" : formData.cpuName,
-                "storageName" : formData.storageName,
-                "ramName" : formData.ramName
+                "cpuName" : formData.cpu,
+                "storageName" : formData.storage,
+                "ramName" : formData.ram
             };
 
-            const response = await axios.put(`http://localhost:8080/computers/update/${deviceId}`, compData, {});
+            const response = await axios.patch(`http://localhost:8080/computers/update/${deviceId}`, compData, {});
 
         } catch (error) {
             console.error('Bład modyfikacji komputera', error)
@@ -183,7 +204,7 @@ function ComputerForm(props){
         <form className="computer-form">
 
             {formType==="information"&&(
-                <div>Informacje o komupterze</div>
+                <div>Informacje o komputerze</div>
             )}
 
             {formType==="modify"&&(
@@ -307,7 +328,7 @@ function ComputerForm(props){
                     <div className="form-label">
                         <select
                             className="form-input"
-                            name="cpuName"
+                            name="cpu"
                             value={formData.cpu}
                             onChange={handleChange}
                             disabled={formType === 'information'}
@@ -334,7 +355,7 @@ function ComputerForm(props){
                     <div className="form-label">
                         <select
                             className="form-input"
-                            name="storageName"
+                            name="storage"
                             value={formData.storage}
                             onChange={handleChange}
                             disabled={formType === 'information'}
@@ -361,7 +382,7 @@ function ComputerForm(props){
                     <div className="form-label">
                         <select
                             className="form-input"
-                            name="ramName"
+                            name="ram"
                             value={formData.ram}
                             onChange={handleChange}
                             disabled={formType === 'information'}

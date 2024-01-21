@@ -79,7 +79,7 @@ function TabletForm(props){
                 "batteryLife": formData.batteryLife,
             };
 
-            const response = await axios.post('http://localhost:8080/computers/add', tabletData, {});
+            const response = await axios.post('http://localhost:8080/tablets/add', tabletData, {});
 
         } catch (error) {
             console.error('Bład dodawania komputera', error)
@@ -104,7 +104,7 @@ function TabletForm(props){
                 "batteryLife": formData.batteryLife,
             };
 
-            const response = await axios.put(`http://localhost:8080/tablets/update/${deviceId}`, tabletData, {});
+            const response = await axios.patch(`http://localhost:8080/tablets/update/${deviceId}`, tabletData, {});
 
         } catch (error) {
             console.error('Bład modyfikacji tableta', error)
