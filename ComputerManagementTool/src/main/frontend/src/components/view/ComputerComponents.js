@@ -52,7 +52,7 @@ const ComputerComponents = () => {
                         <td>{device.name}</td>
                         <td>{device.price} zł</td>
                         <td>
-                            <button onClick={() => handleDelete(device.id)}>Usuń</button>
+                            <button onClick={() => handleDelete(device.id, selectedOption)}>Usuń</button>
                         </td>
                         <td>
                             <button onClick={() => handleEdit(device.id)}>Modyfikuj</button>
@@ -68,29 +68,46 @@ const ComputerComponents = () => {
 
 
 
-    const handleDelete = (deviceId) => {
+    const handleDelete = (id, option) => {
 
-        // fetch(`http://localhost:8080/devices/${deviceId}`, {
-        //     method: 'DELETE',
-        //     headers: {
-        //         'Content-type': 'application/json; charset=UTF-8',
-        //     },
-        // })
-        //     .then((res) => {
-        //         if (!res.ok) {
-        //             throw new Error('Wystąpił problem podczas usuwania urządzenia.');
-        //         }
-        //         return res.json();
-        //     })
-        //     .then((data) => {
-        //         console.log('Urządzenie zostało pomyślnie usunięte.');
-        //     })
-        //     .catch((err) => {
-        //         console.error(err.message);
-        //     });
-        //
-        // const updatedDevices = devices.filter((device) => device.id !== deviceId);
-        // setDevices(updatedDevices);
+        let url;
+
+        switch (option){
+
+            case 'cpus':
+                url = `http://localhost:8080/cpus/${id}`;
+                break;
+            case 'rams':
+                url = `http://localhost:8080/rams/${id}`;
+                break;
+            case 'storages':
+                url = `http://localhost:8080/storages/${id}`;
+                break;
+        }
+
+
+
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Wystąpił problem podczas usuwania');
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log('pomyślnie usunięte.');
+            })
+            .catch((err) => {
+                console.error(err.message);
+            });
+
+        const updatedComponents = components.filter((component) => component.id !== id);
+        setComponents(updatedComponents);
     };
 
     const handleEdit = (deviceId) => {

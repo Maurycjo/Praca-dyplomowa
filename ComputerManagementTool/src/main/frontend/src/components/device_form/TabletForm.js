@@ -26,8 +26,17 @@ function TabletForm(props){
     useEffect(() => {
         fetch('http://localhost:8080/offices/all')
             .then(response => response.json())
-            .then(data => setOffices(data))
-            .catch(error => console.error("Error fetching offices:", error));
+            .then(data => {
+                setOffices(data);
+
+                if (data.length > 0) {
+                    setFormData(prevState => ({
+                        ...prevState,
+                        office: data[0].address
+                    }));
+                }
+            })
+            .catch(error => console.error("Error fetching offices:", error))
 
         if(formType!=='addNew'){
 
@@ -64,7 +73,8 @@ function TabletForm(props){
     };
 
 
-    const handleAddTablet = async () => {
+    const handleAddTablet = async (e) => {
+        e.preventDefault();
 
         try {
 
@@ -177,7 +187,7 @@ function TabletForm(props){
                         <select
                             className="form-input"
                             name="office"
-                            value={formData.office.address}
+                            value={formData.office}
                             onChange={handleChange}
                             disabled={formType === 'information'}
                         >

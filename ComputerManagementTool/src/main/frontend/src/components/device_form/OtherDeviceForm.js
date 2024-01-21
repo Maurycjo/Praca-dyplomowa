@@ -24,7 +24,16 @@ function OtherDeviceForm(props){
     useEffect(() => {
         fetch('http://localhost:8080/offices/all')
             .then(response => response.json())
-            .then(data => setOffices(data))
+            .then(data => {
+                setOffices(data);
+
+                if (data.length > 0) {
+                    setFormData(prevState => ({
+                        ...prevState,
+                        office: data[0].address
+                    }));
+                }
+            })
             .catch(error => console.error("Error fetching offices:", error));
 
         if(formType!=='addNew'){
@@ -172,7 +181,7 @@ function OtherDeviceForm(props){
                         <select
                             className="form-input"
                             name="office"
-                            value={formData.office.address}
+                            value={formData.office}
                             onChange={handleChange}
                             disabled={formType === 'information'}
                         >

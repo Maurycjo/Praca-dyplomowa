@@ -7,14 +7,10 @@ import OtherDeviceForm from "./OtherDeviceForm";
 
 function FormPopup(props){
 
-
     const {setTrigger, formType, deviceType, deviceId} = props;
 
-
     return (props.trigger) ? (
-
         <div className="popup">
-
             {/*deviceType COMPUTER, TABLET, OTHER jest zwracany w requescie*/}
             <div>
                 {deviceType === 'COMPUTER' && <ComputerForm setTrigger={props.setTrigger} formType={formType} deviceId={deviceId}/>}

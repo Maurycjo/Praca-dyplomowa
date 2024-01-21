@@ -28,7 +28,6 @@ const Home = () => {
     const fetchData = async (option, office) => {
         let url;
 
-
         if (isAdmin) {
             switch (option) {
 
@@ -152,7 +151,6 @@ const Home = () => {
     };
     const renderDataForOption = (device, option) => {
 
-
         switch (option) {
             case 'all':
                 return (
@@ -169,7 +167,6 @@ const Home = () => {
                             {isAdmin &&(
                                 <button onClick={() => handleSetOrdered(device.id, device.ordered)}>Zmień</button>
                             )}
-
                         </td>
 
                         {isAdmin &&(
@@ -237,7 +234,7 @@ const Home = () => {
                         <td>{device.model}</td>
                         <td>{device.cpu ? device.cpu.name : 'Brak'}</td>
                         <td>{device.storage ? device.storage.name : 'Brak'}</td>
-                        <td>{device.ram ? device.storage.name : 'Brak'}</td>
+                        <td>{device.ram ? device.ram.name : 'Brak'}</td>
 
                         <td>
                             {device.ordered ? 'Tak' : 'Nie'}

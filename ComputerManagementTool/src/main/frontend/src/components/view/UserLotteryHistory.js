@@ -141,7 +141,7 @@ const UserLotteryHistory = () => {
             <div className="outer-position">
 
                 <div className="header-block">
-                    Historia loterii urzytkownika
+                    Historia loterii użytkownika
                 </div>
                 <div className="operation-block">
                     <FormPopup trigger={deviceFormPopup} setTrigger={setDeviceFormPopup} deviceType={currentDeviceType} deviceId={currentDeviceId} formType={currentFormType}></FormPopup>
