@@ -2,7 +2,7 @@
 
 \section{Wykorzystane technologie}
 
-Do przetestowania aplikacji wykorzystano Postmana i Lighthouse. Postman pozwoli sprawdzić czy zapytania oraz logika działają prawidłowo. Lighthouse pozwoli przeanalizować jakość strony internetowej
+Do przetestowania aplikacji wykorzystano \textbf{Postmana} i \textbf{Lighthouse} \ref{tab:zestawienie_narzędzi}. Postman pozwoli sprawdzić czy zapytania oraz logika działają prawidłowo. Lighthouse pozwoli przeanalizować jakość strony internetowej
 
 
 \section{Testowanie Restowych zapytań przy pomocy Postmana}
@@ -102,8 +102,32 @@ Scenariusz testowy 4 \ref{registerTest:label} pokazuje jak działa rejestracja u
 
 \begin{figure}[h]
 		\centering
-    \includegraphics[width=0.5\linewidth]{rys06/postmanTest/register.pdf}
+    \includegraphics[width=0.7\linewidth]{rys06/postmanTest/register.pdf}
     \caption{Scenariusz testowy 4, Rejestracja użytkownika}
     \label{registerTest:label}
 \end{figure}
+
+\newpage
+\section{Testowanie jakości strony internetowej systemu przy użyciu Lighthouse}
+
+Wykorzystanie Lighthouse \ref{tab:zestawienie_narzędzi} pozwala na zbadanie wydajności, dostępności i dobrych praktyk strony internetowej. Testowany widok był strony domowej, ponieważ na niej dzieje się większość logiki systemu. Testowanie odbyło się w dwóch wariantach: strony domowej administratora i strony domowej pracownika \ref{lh:label}
+
+\begin{figure}[htb]
+  \centering
+	\begin{tabular}{@{}ll@{}}
+	a) & b) \\
+  \includegraphics[width=0.5\textwidth]{rys06/lighthouse/adminLightHouse.pdf} & 
+	\includegraphics[width=0.5\textwidth]{rys06/lighthouse/workerLightHouse.pdf}
+	\end{tabular}
+  \caption{Test Lighthouse strony domowej, a) administratora, b) pracownika}
+  \label{lh:label}
+\end{figure}
+
+Wnioskując z testu widok aplikacji ma satysfakcjonujące parametry.
+\begin{itemize}
+\item \textbf{Wydajność (Performance)} jest na średnim poziomie. Pokazuje to że aplikacja mogła by być bardziej zoptymalizowana pod względem wydajności
+\item \textbf{Dostępność (Accessibility} jest na wysokim poziomie. Oznacza to, że osoby z różnymi niepełnosprawnościami nie miałyby większego problemu z posługiwaniem się aplikacją. Jednak tutaj jest możliwość optymalizacji by osiągnąć większy stopień zadowolenia tych użytkowników.
+\item \textbf{Dobre praktyki (Best Practices)} pokazuje, że test przeszedł test dobrych praktyk i storn a jest zgodna ze standardami.
+\item \textbf{SEO} - Pokazuje, że strona jest zoptymalizowana pod kątem wyszukiwarek internetowych
+\end{itemize}
 
