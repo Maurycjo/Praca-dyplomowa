@@ -543,8 +543,8 @@ Zdefiniowano widoki aplikacji i pogrupowano je ze względu na typ które pełni�
 	\item W-3 - Widok formularzy urządzeń z wariantami dotyczących funkcjonalności które pełnią, rysunek \ref{forms:label}
 	\item W-4 - Widok użytkowników i uczestników, rysunek \ref{manageUsers:label}
 	\item W-5 - Widok historii loterii użytkownika, rysunek \ref{lotteryHistory:label}
-	\item W-6 - Widok komponentów komputera, rysunek 
-	\item W-7 - Widok formularzy komponentów komputera, rysunek
+	\item W-6 - Widok komponentów komputera, rysunek \ref{components:label}
+	\item W-7 - Widok formularzy komponentów komputera, rysunek \ref{compForms:label}
 \end{itemize} 
 
 
@@ -622,7 +622,7 @@ Widok W-2c \ref{home:label} jest widokiem pracownika. Nie posiada on tak zaawans
 \end{figure}
 
 
-Formularze W-3 ukazane na rysunku \ref{forms:label} wyświetlane są jako wyskakujące okno. Każdy z trzech formularzy W-3a, W-3b, W-3c oprócz wersji podstawowej odpowiadający mu wariant W-3d i W3e. Wariant podstawowy W-3a, W-3b, W-3c odpowiada za dodawanie nowego sprzętu. Możliwa jest zmiana typu sprzętu wybierając opcje z listy rozwijanej. Wariant W-3d służy to modyfikacji urządzenia i po jego pojawieniu się posiada aktualne dane urządzenia. Wariant W-3e odpowiada za wyświetlanie informacji o urządzeniu. Możliwość zmieniania danych na tym formularzu jest zablokowana. Formularz W-3a oraz odpowiadający mu W-3d posiada przyciski "`Dodaj nowy procesor"', "`Dodaj nowy dysk"', "`Dodaj nowy ram"'. W przypadku gdy administrator nie znajdzie z list rozwijanych interesującego go komponentu może kliknąć odpowiedni przycisk. Kliknięcie to powoduje pojawienie się formularza dla odpowiadającego go przycisku W-7a, W-7b, W-7c. ref*** Po dodaniu komponentu z widoku W-7 możliwe jest teraz z listy rozwijanej wybranie dodanego komponentu. \newline
+Formularze W-3 ukazane na rysunku \ref{forms:label} wyświetlane są jako wyskakujące okno. Każdy z trzech formularzy W-3a, W-3b, W-3c oprócz wersji podstawowej odpowiadający mu wariant W-3d i W3e. Wariant podstawowy W-3a, W-3b, W-3c odpowiada za dodawanie nowego sprzętu. Możliwa jest zmiana typu sprzętu wybierając opcje z listy rozwijanej. Wariant W-3d służy to modyfikacji urządzenia i po jego pojawieniu się posiada aktualne dane urządzenia. Wariant W-3e odpowiada za wyświetlanie informacji o urządzeniu. Możliwość zmieniania danych na tym formularzu jest zablokowana. Formularz W-3a oraz odpowiadający mu W-3d posiada przyciski "`Dodaj nowy procesor"', "`Dodaj nowy dysk"', "`Dodaj nowy ram"'. W przypadku gdy administrator nie znajdzie z list rozwijanych interesującego go komponentu może kliknąć odpowiedni przycisk. Kliknięcie to powoduje pojawienie się formularza dla odpowiadającego go przycisku W-7a, W-7b, W-7c, rysunek \ref{compforms:label} Po dodaniu komponentu z widoku W-7 możliwe jest teraz z listy rozwijanej wybranie dodanego komponentu. \newline
 
 
 
@@ -652,7 +652,7 @@ Widok W-4b też jest widokiem tylko dostępnym dla administratora. Posiada on li
 
 \begin{figure}[h]
 		\centering
-    \includegraphics[width=0.7\linewidth]{rys05/view/lotteryHistory.pdf}
+    \includegraphics[width=\linewidth]{rys05/view/lotteryHistory.pdf}
     \caption{Widok W-5, Historia loteri pracownika}
     \label{lotteryHistory:label}
 \end{figure}
@@ -662,5 +662,44 @@ Widok W-5 pozwala wyświetlić historię loterii użytkownika, rysunek \ref{lott
 \begin {itemize}
 	\item Możliwe jest tutaj filtrowanie loterii na podstawie statusu uczestnika. Są dostępne 3 opcje: "`Wszystkie loterie użytkownika"', "`Wygrana"' i "`Trwająca"'
 	\item Kliknięcie przycisku "`Informacje"' wyświetla szczegółowe informacje o sprzęcie, wariant W-3e dla formularzy W-3a, W-3b, W-3c, rysunek \ref{forms:label} 
-	\item Kliknięcie przycisku "`Wypisz się"' możliwe jest wtedy kiedy loteria się jeszcze nie odbyła. Po kliknięcui tego przycisku pracownik rezygnuje z uczestnictwa w losowaniu wybranego sprzętu.
+	\item Kliknięcie przycisku "`Wypisz się"' możliwe jest wtedy kiedy loteria się jeszcze nie odbyła. Po kliknięciu tego przycisku pracownik rezygnuje z uczestnictwa w losowaniu wybranego sprzętu.
 \end{itemize} 
+
+
+
+
+\begin{figure}[h]
+		\centering
+    \includegraphics[width=\linewidth]{rys05/view/components.pdf}
+    \caption{Widok W-6, Widok komponentów komputera}
+    \label{components:label}
+\end{figure}
+
+Widok W-6 jest dostępny dla administratora. Pozwala mu na oszacowanie ceny sprzętu patrząc jakie komponenty mają cenę. Możliwe jest wybranie z listy rozwijanej jakiego rodzaju komponenty mają być wyświetlane. Do wyboru są: procesory, pamięci RAM oraz pamięci dyskowe.
+\begin{itemize}
+	\item Kliknięcie przycisku "`Dodaj procesor"' wyświetli formularz W-7a \ref{compforms:label} odpowiedzialny za dodanie procesora.
+	\item Kliknięcie przycisku "`Dodaj RAM"' Wyświetli formularz W-7b \ref{compforms:label} odpowiedzialny za dodanie pamięci RAM.
+	\item Kliknięcie przycisku "`Dodaj dysk"' Wyświetli formularz W-7c \ref{compforms:label} odpowiedzialny za dodawanie dysku pamięci.
+	\item Kliknięcie przycisku "`Zarządzaj użytkownikami"' przekieruje do widoku W-4a \ref{manageUsers:label}
+	\item Klikniecie przycisku usuń spowoduje usunięcie komponentu. Komputer posiadający usuwany komponent ustawia identyfikator odpowiedniego komponentu na wartość "`null"'
+\end{itemize} 
+
+W przypadku dodaniu komponentu, którego nazwa już istnieje następuje modyfikacja ceny.
+
+
+\begin{figure}[htb]
+  \centering
+	\begin{tabular}{@{}lll@{}}
+	a) & b) & c) \\
+  \includegraphics[width=0.35\textwidth]{rys05/view/addProc.pdf} & 
+	\includegraphics[width=0.35\textwidth]{rys05/view/addRam.pdf} &
+	\includegraphics[width=0.35\textwidth]{rys05/view/addStorage.pdf}
+	\end{tabular}
+  \caption{Widok formularzy komponentów W-7, a) procesor, b) ram, c) dysk pamięci}
+  \label{compforms:label}
+\end{figure}
+
+Widok W-7 \ref{compform:label} odpowiedzialny jest za widoki formularzy komponentów. Formularze te mogą zostać wyświetlone po kliknięciu odpowiedniego przycisku na widoku W-6 \ref{components:label} lub z przycisku dostępnego na formularzu komputera(widok W-5a, W-5e, \ref{forms:label}.
+
+
+
