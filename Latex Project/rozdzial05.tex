@@ -5,7 +5,7 @@
 
 \subsection{Struktura interfejsu REST}
 % TO DO: Opis do poprawy (bo zmieniono układ tabel)
-Poniższa tabela \ref{tab:rest1} prezentuje jakie zapytania mogą być odbierane przez aplikację serwerową. Z racji tego, że w aplikacji wykorzystywane są typy generyczne w klasach kontrolerach urządzeń i komponentów komputera (implementacja \ref{controller_genericDevice} uproszczono tabele by pokazać ogólną formę zapytań. Wszystkie zapytania posiadające "`devices"' w ścieżce umożliwiają alternatywne wywołanie zapytania na podstawie typu sprzętu. Ogólna zasada jest taka aby zastąpić "`devices"' odpowiadającemu typowi sprzętu: "`computers"', "`tablets"', "`other-devices"'. Powoduje to, że zapytanie wykonywane jest przez kontroler tej klasy, a co za tym idzie ma określony typ. Możliwe jest też wykonanie zapytania nie zmieniając ścieżki. Wtedy takie zapytanie wykonywane jest na ogólnym rodzaju sprzętu. Przykładowo "`devices/all"' pobiera wszystkie sprzęty nie zwracając uwagi na typ, natomiast "`computers/all"' pobiera tylko sprzętu typu "`Computer"'. Podobne rozwiązanie wykorzystano w komponentach komputera. Dotyczy to zapytań mających w ścieżce: "`component"'. Tutaj należy zamienić "`component"' na jeden z trzech dostępnych typów komponentu: "`rams"', "`cpus"', "`storages"'. W tym wypadku nie ma możliwości wywołania zapytania zawierającego "`component"'.
+Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą być odbierane przez aplikację serwerową. Z racji tego, że w aplikacji wykorzystywane są typy generyczne w klasach kontrolerach urządzeń i komponentów komputera (implementacja \ref{controller_genericDevice} uproszczono tabele by pokazać ogólną formę zapytań. Wszystkie zapytania posiadające "`\texttt{devices}"' w ścieżce umożliwiają alternatywne wywołanie zapytania na podstawie typu sprzętu. Ogólna zasada jest taka aby zastąpić "`\texttt{devices}"' odpowiadającemu typowi sprzętu: "`\texttt{computers}"', "`\texttt{tablets}"', "`\texttt{other-devices}"'. Powoduje to, że zapytanie wykonywane jest przez kontroler tej klasy, a co za tym idzie ma określony typ. Możliwe jest też wykonanie zapytania nie zmieniając ścieżki. Wtedy takie zapytanie wykonywane jest na ogólnym rodzaju sprzętu. Przykładowo "`\texttt{devices/all}"' pobiera wszystkie sprzęty nie zwracając uwagi na typ, natomiast "`\texttt{computers/all}"' pobiera tylko sprzętu typu "`\texttt{Computer}"'. Podobne rozwiązanie wykorzystano w komponentach komputera. Dotyczy to zapytań mających w ścieżce: "`\texttt{component}"'. Tutaj należy zamienić "`\texttt{component}"' na jeden z trzech dostępnych typów komponentu: "`\texttt{rams}"', "`\texttt{cpus}"', "`\texttt{storages}"'. W tym wypadku nie ma możliwości wywołania zapytania zawierającego "`\texttt{component}"'.
 
 \begin{table}[H]\small
 	\centering
@@ -109,14 +109,14 @@ Poniższa tabela \ref{tab:rest1} prezentuje jakie zapytania mogą być odbierane
 Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona żądania aplikacji klienckiej. Dostarcza ona funkcjonalność uwierzytelniania i autoryzacji. W wyniku zapytań wysłanych przez aplikację kliencką wyświetlane są w aplikacji odpowiednie dane. Możliwe jest też dodawanie i usuwanie odpowiednich rekordów. Implementacja odbywa się z wykorzystywaniem języka Java z frameworkami Spring oraz Hibernate \ref{tab:zestawienie_narzędzi} Graficzną reprezentacje struktury projektu aplikacji serwerowej pokazano na rysunku \ref{backend_struktura:label}
 
 \subsection{Struktura projektu}
-Ścieżka pakietowa wykorzystana jest odwróconą ścieżką domenową Politechniki Wrocławskiej oraz nazwy projektu: pl.edu.pwr.computermanagamenttool. Następnie pakiety które są dołączone do tej ścieżki odpowiadają funkcjom które pełnią klasy. Wyróżnia się tutaj pakiety:
+Ścieżka pakietowa wykorzystana jest odwróconą ścieżką domenową Politechniki Wrocławskiej oraz nazwy projektu: \texttt{pl.edu.pwr.computermanagamenttool}. Następnie pakiety które są dołączone do tej ścieżki odpowiadają funkcjom które pełnią klasy. Wyróżnia się tutaj pakiety:
 \begin{itemize}
-\item pl.edu.pwr.computermanagementtool - pakiet ogólny przechowywujący pozostałe pakiety. Klasa ComputerManagementToolApplication posiada metodę Main odpowiedzialną za uruchomienie aplikacji. Klasa JacksonConfig jest konfiguracją odpowiedzialną za serializacje formatu JSON. Natomiast klasa PasswordEncoderUtil jest odpowiedzialna za szyfrowanie haseł użytkowników korzystających z systemu.
-\item controller - pakiet przechowujący w sobie klasy kontrolerów odpowiedzialne za wykonywanie zapytań aplikacji za pomocą interfejsu REST
-\item dto - pakiet który jest odpowiedzialny za przechowywanie klas służących do przechowywania danych i ułatwiania ich przesyłania między różnymi częściami systemu. Wykorzystywany jest w klasach kontrolera.
-\item entity - pakiet przechowujący definicje encji reprezentowanych w bazie danych
-\item repository - pakiet przechowujący repozytoria służące do komunikacji z bazą danych.
-\item service - pakiet przechowujący serwisy które są odpowiedzialne za warstwę logiki biznesowej w systemie
+\item \texttt{pl.edu.pwr.computermanagementtool} - pakiet ogólny przechowywujący pozostałe pakiety. Klasa \texttt{ComputerManagementToolApplication} posiada metodę \texttt{Main}odpowiedzialną za uruchomienie aplikacji. Klasa \texttt{JacksonConfig} jest konfiguracją odpowiedzialną za serializację formatu JSON. Natomiast klasa \texttt{PasswordEncoderUtil} jest odpowiedzialna za szyfrowanie haseł użytkowników korzystających z systemu.
+\item \texttt{controller} - pakiet przechowujący w sobie klasy kontrolerów odpowiedzialne za wykonywanie zapytań aplikacji za pomocą interfejsu REST
+\item \texttt{dto} - pakiet który jest odpowiedzialny za przechowywanie klas służących do przechowywania danych i ułatwiania ich przesyłania między różnymi częściami systemu. Wykorzystywany jest w klasach kontrolera.
+\item \texttt{entity} - pakiet przechowujący definicje encji reprezentowanych w bazie danych
+\item \texttt{repository} - pakiet przechowujący repozytoria służące do komunikacji z bazą danych.
+\item \texttt{service} - pakiet przechowujący serwisy które są odpowiedzialne za warstwę logiki biznesowej w systemie
 \end{itemize}
 
 
@@ -160,7 +160,7 @@ public class DeviceCore {
 		// Pozostała część klasy
 
 \end{lstlisting}
-W linii 3 listingu klasy DeviceCore \ref{entity_deviceCore} określono schemat dziedziczenia TABLE\_PER\_CLASS. O sposobie dziedziczenia napisano w podrozdziale \ref{dzedziczenie_hibernate:label}. Linia 3 określa strategie generowania klucza. Hibernate tworzy wtedy specjalną tabelę w bazie danych która odpowiedzialna jest za przechowywanie unikalnych kluczy głownych dla encji sprzętu w aplikacji. W listingu kodu \ref{entity_computer} nie trzeba wtedy definować klucza.
+W linii 3 listingu klasy \texttt{DeviceCore} \ref{entity_deviceCore} określono schemat dziedziczenia TABLE\_PER\_CLASS. O sposobie dziedziczenia napisano w podrozdziale \ref{dzedziczenie_hibernate:label}. Linia 3 określa strategie generowania klucza. Hibernate tworzy wtedy specjalną tabelę w bazie danych która odpowiedzialna jest za przechowywanie unikalnych kluczy głownych dla encji sprzętu w aplikacji. W listingu kodu \ref{entity_computer} nie trzeba wtedy definować klucza.
 
 \begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa potomna: Computer, reprezentująca komputer}, label={entity_computer}]
 @Entity
@@ -179,7 +179,7 @@ public class Computer extends DeviceCore{
 		
 		// Pozostała część klasy
 \end{lstlisting}
-W linii 3 określone zostało dziedziczenie po klasie nadrzędnej reprezentującej rdzeń sprzętu. Pola które należy określić w tej klasie są unikalnymi polami tabeli computer. W linii 4 istnieje statyczna zmienna DEVICE\_TYPE która pomaga określić jakiego rodzaju dany sprzęt. Wykorzystywane jest to w aplikacji klienckiej.
+W linii 3 określone zostało dziedziczenie po klasie nadrzędnej reprezentującej rdzeń sprzętu. Pola które należy określić w tej klasie są unikalnymi polami tabeli \texttt{computer}. W linii 4 istnieje statyczna zmienna \texttt{DEVICE\_TYPE} która pomaga określić jakiego rodzaju dany sprzęt. Wykorzystywane jest to w aplikacji klienckiej.
 
 
 \subsubsection{Przykład kodu repozytorium dla urządzeń dziedziczącym po rdzeniu sprzętu}
@@ -194,7 +194,7 @@ public interface GenericDeviceRepository<T extends DeviceCore> extends JpaReposi
 }
 \end{lstlisting}
 
-W lini 1 adnotacja @NoRepositoryBean jest używana do oznaczenia interfejsów które nie mają mieć swojej instancji. Oznacza to, że nie jest on przeznaczony do utworzenia instancji repozytorium w trakcie uruchomiania aplikacji. W linii 4 i 5 poprzez zdefiniowanie metody możliwe jest wykonanie konkretego zapytania SQL do bazy danych. Z racji, że klasy sprzętu komputerowego mają zbliżone funkcjonalności nie trzeba dostarczać tych samych interfejsów we wszystkich repozytoriach tylko zastosować schemat dziedziczenia.
+W lini 1 adnotacja \texttt{@NoRepositoryBean} jest używana do oznaczenia interfejsów które nie mają mieć swojej instancji. Oznacza to, że nie jest on przeznaczony do utworzenia instancji repozytorium w trakcie uruchomiania aplikacji. W linii 4 i 5 poprzez zdefiniowanie metody możliwe jest wykonanie konkretnego zapytania SQL do bazy danych. Z racji, że klasy sprzętu komputerowego mają zbliżone funkcjonalności nie trzeba dostarczać tych samych interfejsów we wszystkich repozytoriach tylko zastosować schemat dziedziczenia.
 
 \subsubsection{Fragmenty implementacji klasy kontrolerów sprzętu}
 
@@ -244,7 +244,7 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
 		
 \end{lstlisting}
 
-Kontrolery pełnią istotną funkcje w systemie. Umożliwiają one definiowanie zapytań REST które będą wysyłane do serwera. Wykorzystując abstrakcje oraz wyrażenia generyczne możliwe jest wykonanie niektórych requestów bez konieczności ich implementacji w klasach potomnych.
+Kontrolery pełnią istotną funkcje w systemie. Umożliwiają one definiowanie zapytań REST które będą wysyłane do serwera. Wykorzystując abstrakcje oraz wyrażenia generyczne możliwe jest wykonanie niektórych zapytań bez konieczności ich implementacji w klasach potomnych.
 
 
 \begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa potomna reprezentująca ogólną postać sprzętu}, label={controller_device}]
@@ -258,7 +258,7 @@ public class DeviceCoreController extends GenericDeviceController<DeviceCore>{
 }
 \end{lstlisting}
 
-Powyższa klasa w listingu kodu \ref{controller_device} nie posiada własnych metod. Umożliwia jednak wykonywanie ogólnych operacji dotyczących sprzętu. Możliwe jest między innymi pobranie informacji dotyczące sprzętu bez względu na jego typ co idealanie obrazuje test **referencja do zapytania w postmanie**
+Powyższa klasa w listingu kodu \ref{controller_device} nie posiada własnych metod. Umożliwia jednak wykonywanie ogólnych operacji dotyczących sprzętu. Możliwe jest między innymi pobranie informacji dotyczące sprzętu bez względu na jego typ co idealnie obrazuje test **referencja do zapytania w postmanie**
 
 
 \subsubsection{Fragmenty implementacji klas serwisów sprzętu}
@@ -314,7 +314,7 @@ protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String d
 		// Pozostała część klasy
 
 \end{lstlisting}
-Serwisy są odpowiedzialne za warstwe logiki biznesowej systemu. W linii 12 widnieje metoda która pozwala na pobranie sprzętu. W linii 17 natomiast jest możliwe pobranie wszystkich sprzętów. Odbywa się to przy pomocy parametryzowanych typów danych T. Metoda zdefiniowana w linii 22 pozwala uprościć dodawanie sprzętu, implementując część logiki ustawiając parametry charakterystyczne dla rdzenia sprzętu. Jednak aby utworzyć odpowiedni typ niezbędne jest określenie jakiego typu będzie dodawane urządzenie, Dlatego w linii 22 metoda jako parametr przyjmuje Class<? extends DeviceCore> który oznacza typ aplikacji. Tak zdefiniowana metoda może zostać użyta do dodania sprzętu w kalsach potomnych co pokazano w listingu \ref{service_tablet}
+Serwisy są odpowiedzialne za warstwę logiki biznesowej systemu. W linii 12 widnieje metoda która pozwala na pobranie sprzętu. W linii 17 natomiast jest możliwe pobranie wszystkich sprzętów. Odbywa się to przy pomocy sparametryzowanych typów danych \texttt{T}. Metoda zdefiniowana w linii 22 pozwala uprościć dodawanie sprzętu, implementując część logiki ustawiając parametry charakterystyczne dla rdzenia sprzętu. Jednak aby utworzyć odpowiedni typ niezbędne jest określenie jakiego typu będzie dodawane urządzenie, Dlatego w linii 22 metoda jako parametr przyjmuje \texttt{Class<? extends DeviceCore>} który oznacza typ aplikacji. Tak zdefiniowana metoda może zostać użyta do dodania sprzętu w klasach potomnych co pokazano w listingu \ref{service_tablet}
 
 \begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa potomna serwisu tabletu: TabletService }, label={service_tablet}]
 
@@ -342,7 +342,7 @@ public class TabletService extends GenericDeviceService<Tablet>{
 		// Pozostała część klasy
 \end{lstlisting}
 
-Serwis klasy TabletService dziedziczy i parametryzuje metody klasy GenericDeviceService. Wykorzystuje on w linii 13 metodę klasy nadrzędnej co uprasza implementacje metody dodającej sprzęt(linia 9)
+Serwis klasy \texttt{TabletService} dziedziczy i parametryzuje metody klasy \texttt{GenericDeviceService}. Wykorzystuje on w linii 13 metodę klasy nadrzędnej co uprasza implementacje metody dodającej sprzęt(linia 9)
 
 
 
@@ -350,56 +350,56 @@ Serwis klasy TabletService dziedziczy i parametryzuje metody klasy GenericDevice
 Aplikacja kliencka jest aplikacją internetową dostarczającą przyjazny interfejs użytkownika. W aplikacji klienckiej napisanej w języku JavaScript z wykorzystaniem biblioteki React (tabela \ref{tab:zestawienie_narzędzi}) istnieją zdefiniowane zapytania REST do aplikacji serwerowej. Wykorzystując te zapytania na widoku widocznym dla użytkownika zostają podjęte specjalne akcje które ten widok aktualizują. Formularze pokazywane są w takiej formie, że po kliknięciu odpowiedniego przycisku ukazuje się formularz na danym widoku. Zestawienie widoków, ścieżek i roli pokazano w tabeli \ref{tab:zestawienie_widokow}
 
 \subsection{Struktura projektu}
-Ogólna struktura projektu została stworzona przez wywołanie komendy tworzącej aplikacje Reacta: npx create-react-app frontend. Następnie utworzono folder components który w sobie zawiera foldery przechowujące pliki JavaScript na podstawie pełnionych funkcji w projekcie. Foldery i odpowiadające im funkcje: 
+Ogólna struktura projektu została stworzona przez wywołanie komendy tworzącej aplikacje Reacta: \texttt{npx create-react-app frontend}. Następnie utworzono folder \texttt{components} który w sobie zawiera foldery przechowujące pliki JavaScript na podstawie pełnionych funkcji w projekcie. Foldery i odpowiadające im funkcje: 
 \begin {itemize}
-\item \textbf{auth} przechowuje pliki odpowiedzialne za obsługę i stylizacje widoków logowania i rejestracji
+\item \texttt{\textbf{auth}} przechowuje pliki odpowiedzialne za obsługę i stylizacje widoków logowania i rejestracji
 	\begin{itemize}
-	\item Login.js - skrypt odpowiedzialny za widok i funkcjonalność logowania
-	\item Register.js - skrypt odpowiedzialny za widok i funkcjonalność rejestracji
-	\item Login.css - arkusz styli odpowiedzialny za stylizacje widoków logowania i rejestracji
+	\item \texttt{Login.js} - skrypt odpowiedzialny za widok i funkcjonalność logowania
+	\item \texttt{Register.js} - skrypt odpowiedzialny za widok i funkcjonalność rejestracji
+	\item \texttt{Login.css} - arkusz styli odpowiedzialny za stylizacje widoków logowania i rejestracji
 	\end{itemize}
-\item \textbf{bar} przechowuje skrypty odpowiedzialne za paski nawigacyjne poszczególnych widoków.
+\item \texttt{\textbf{bar}} przechowuje skrypty odpowiedzialne za paski nawigacyjne poszczególnych widoków.
 	\begin{itemize}
-	\item AdminHomeBar.js - skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym administratora: Home.js
-	\item ComputerComponentsBar.js -skrypt odpowiedzialny za pasek nawigacyjny dla widoku komponentów: ComputerComponents.js
-	\item ManageUserBar.js -skrypt odpowiedzialny za pasek nawigacyjny widoku zarządzania użytkownikami: Users.js
-	\item UserHomeBar.js - skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym pracownika: Home.js
-	\item UserLotteryHistory -skrypt odpowiedzialny za pasek nawigacyjnym na widoku historii loterii użytkownika: UserLotteryHistory.js
-	\item UsersInLottery.js -skrypt odpowiedzialny za pasek nawigacyjny na widoku użytkowników biorących udział w loterii: UsersInLottery.js
+	\item \texttt{AdminHomeBar.js} - skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym administratora: \texttt{Home.js}
+	\item \texttt{ComputerComponentsBar.js} -skrypt odpowiedzialny za pasek nawigacyjny dla widoku komponentów: \texttt{ComputerComponents.js}
+	\item \texttt{ManageUserBar.js} -skrypt odpowiedzialny za pasek nawigacyjny widoku zarządzania użytkownikami: \texttt{Users.js}
+	\item \texttt{UserHomeBar.js} - skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym pracownika: \texttt{Home.js}
+	\item \texttt{UserLotteryHistory} -skrypt odpowiedzialny za pasek nawigacyjnym na widoku historii loterii użytkownika: \texttt{UserLotteryHistory.js}
+	\item \texttt{UsersInLottery.js} -skrypt odpowiedzialny za pasek nawigacyjny na widoku użytkowników biorących udział w loterii: \texttt{UsersInLottery.js}
 	\end{itemize}
-\item \textbf{computer\_components} przechowuje skrypty formularzy komponentów komputera które mogą dodawać lub modyfikować te komponenty
+\item \texttt{\textbf{computer\_components}} przechowuje skrypty formularzy komponentów komputera które mogą dodawać lub modyfikować te komponenty
 	\begin{itemize}
-	\item CpuForm.js - formularz procesora
-	\item RamForm.js - formularz pamięci RAM
-	\item StorageForm.js - formularz pamięcu dyskowej
+	\item \texttt{CpuForm.js} - formularz procesora
+	\item \texttt{RamForm.js} - formularz pamięci RAM
+	\item \texttt{StorageForm.js} - formularz pamięcu dyskowej
 	\end{itemize}
-\item \textbf{device\_form} przechowuje skrypty oraz arkusz styli odpowiedzialne za logikę formularzy dodawania, modyfikacji urządzeń
+\item \texttt{\textbf{device\_form}} przechowuje skrypty oraz arkusz styli odpowiedzialne za logikę formularzy dodawania, modyfikacji urządzeń
 	\begin{itemize}
-	\item AddNewFormPopup.js - formularz umożliwiający wybór formularza który dodaje komputer, tablet, lub inne urządzenie
-	\item ComputerForm.js -formularz komputera
-	\item DeviceForm.css - arkusz styli odpowiedzialny za stylizacje formularzy
-	\item FormPopup.js - skrypt odpowiedzialny za logikę i wybór rodzaju formularza(dodawanie, modyfikacja, informacje) urządzenia.
-	\item OtherDeviceForm - formularz innego urządzenia
-	\item TabletForm.js - formularz tabletu
+	\item \texttt{AddNewFormPopup.js} - formularz umożliwiający wybór formularza który dodaje komputer, tablet, lub inne urządzenie
+	\item \texttt{ComputerForm.js} -formularz komputera
+	\item \texttt{DeviceForm.css} - arkusz styli odpowiedzialny za stylizacje formularzy
+	\item \texttt{FormPopup.js} - skrypt odpowiedzialny za logikę i wybór rodzaju formularza(dodawanie, modyfikacja, informacje) urządzenia.
+	\item \texttt{OtherDeviceForm} - formularz innego urządzenia
+	\item \texttt{TabletForm.js} - formularz tabletu
 	\end{itemize}
-\item \textbf{view} przechowuje w sobie skrypty oraz arkusz styli odpowiedzialne za widoki aplikacji
+\item \texttt{\textbf{view}} przechowuje w sobie skrypty oraz arkusz styli odpowiedzialne za widoki aplikacji
 	\begin{itemize}
-	\item ComputerComponets.js -widok dostępny tylko dla administratora. Zawiera w sobie informacje o komponentach komputera w postaci tabeli
-	\item Home.css - arkusz styli odpowiedzialny za stylizacje widoków
-	\item Home.js - widok strony domowej, ma w sobie dwa warianty: Administartora i Pracownika
-	\item UserLotteryHistory.js - widok hostorii loterii użytkownika o zadanym ID. Dostępny dla pracownika i administratora.
-	\item Users.js - widok pracowników zarejestrowanych w systemie. Dostępny tylko dla administratora
-	\item UsersInLottery - widok pracowników biorących udział w loterii danego sprzętu. Dostępny tylko dal administratora.
+	\item \texttt{ComputerComponets.js} -widok dostępny tylko dla administratora. Zawiera w sobie informacje o komponentach komputera w postaci tabeli
+	\item \texttt{Home.css} - arkusz styli odpowiedzialny za stylizacje widoków
+	\item \texttt{Home.js} - widok strony domowej, ma w sobie dwa warianty: Administratora i Pracownika
+	\item \texttt{UserLotteryHistory.js} - widok historii loterii użytkownika o zadanym ID. Dostępny dla pracownika i administratora.
+	\item \texttt{Users.js} - widok pracowników zarejestrowanych w systemie. Dostępny tylko dla administratora
+	\item \texttt{UsersInLottery} - widok pracowników biorących udział w loterii danego sprzętu. Dostępny tylko dal administratora.
 	\end{itemize}
 \end{itemize}
 
-Równolegle do folderu components w folderze src istnieją jeszcze dwa skrypty które są niezbędne do funkcjonowania aplikacji.
+Równolegle do folderu \texttt{components} w folderze \texttt{src} istnieją jeszcze dwa skrypty które są niezbędne do funkcjonowania aplikacji.
 \begin{itemize}
-	\item App.js zawiera w sobie scieżki url pod którymi dostępne są poszczególne widoki
-	\item index.js - funkcja główna programu
+	\item \texttt{App.js} zawiera w sobie scieżki url pod którymi dostępne są poszczególne widoki
+	\item \texttt{index.js} - funkcja główna programu
 \end{itemize}
 
-Strukturę projektu pokazano na Rysunku \ref{frontend_struktura:label}
+Strukturę projektu pokazano na rysunku \ref{frontend_struktura:label}
 
 
 \begin{table}[htb] \small
@@ -500,7 +500,7 @@ export default FormPopup
 										
 \end{lstlisting}
 
-Powyższy listing kodu \ref{render_data:label} dla skryptu FormPopup.js  służy do dodawania różnych rodzajów formularza sprzętów z różnymi wariantami. Przyjmuje 4 argumenty. Przekazywanie tych parametrów odbywa się w linii 4 z wykorzystaniem "`props"'. Zmienna deviceType odpowiada dla jakiego urządzenia dotyczy formularz. Może on dotyczyć komputera, tableta lub innego urządzenia co pokazano w liniach 9-11. Zmienna setTrigger jest odpowiedzialna za to czy formularz jest aktualnie wyświetlany nad widokiem. Zmienna formType dotyczy wariant formularza. Istnieją 3 warianty jednego formularza i dotyczą one kolejno: dodawania nowego sprzętu, modyfikacji sprzętu oraz wyświetlania informacji o sprzęcie. Warianty formularza pokazano rysunku **referencja do rysunku**. Tak stworzona funkcja umożliwia zarządzanie formularzami które zostały zdefiniowane w plikach ComputerForm.js, TabletForm.js oraz OtherDeviceForm.js.
+Powyższy listing kodu \ref{render_data:label} dla skryptu \texttt{FormPopup.js}  służy do dodawania różnych rodzajów formularza sprzętów z różnymi wariantami. Przyjmuje 4 argumenty. Przekazywanie tych parametrów odbywa się w linii 4 z wykorzystaniem "`\texttt{props}"'. Zmienna \texttt{deviceType} odpowiada dla jakiego urządzenia dotyczy formularz. Może on dotyczyć komputera, tabletu lub innego urządzenia co pokazano w liniach 9-11. Zmienna \texttt{setTrigger} jest odpowiedzialna za to czy formularz jest aktualnie wyświetlany nad widokiem. Zmienna \texttt{formType} dotyczy wariant formularza. Istnieją 3 warianty jednego formularza i dotyczą one kolejno: dodawania nowego sprzętu, modyfikacji sprzętu oraz wyświetlania informacji o sprzęcie. Warianty formularza pokazano rysunku \ref{forms:label}. Tak stworzona funkcja umożliwia zarządzanie formularzami które zostały zdefiniowane w plikach \texttt{ComputerForm.js}, \texttt{TabletForm.js} oraz \texttt{OtherDeviceForm.js}.
 
 \begin{lstlisting}[language=JavaScript, style=JavaScriptStyle,  caption={Przykładowe zapytanie do serwera dla formularza komputera}, label={addComputer:label}]
 
@@ -583,7 +583,7 @@ Widok W-1 formularzy logowania i rejestracji pokazany na rysunku \ref{authview:l
 \end{figure}
 
 
-Na rysunkach \ref{home:label} pokazany jest widok W-2 który posiada tabelę urządzeń z loteriami. Na każdym widoku istnieje przycisk wyloguj odpowiedzialny za wylogowywanie i przekierowanie do widoku W-1a \ref{authview:label}.Na widokach stron domowych W-2 możliwe jest filtrowanie urządzeń po typie urządzenia oraz po biurze w którym się znajdują oraz wyświetlanie szczegółowych informacji o urządzeniu. W widoku W-2b pokazane zostały tylko komputery które znajdują się w biurze Grunwaldzka. Wyśiwetlanie informacji o urządzeniu pokazuje na widoku wariant formularza W-3e dla odpowiadającego typu urządzenia: W-3a, W-3b, W-3c, rysunek \ref{forms:label}. Widok W-1a jest widokiem administratora który posiada wiele funkcjonalności:
+Na rysunkach \ref{home:label} pokazany jest widok W-2 który posiada tabelę urządzeń z loteriami. Na każdym widoku istnieje przycisk wyloguj odpowiedzialny za wylogowywanie i przekierowanie do widoku W-1a \ref{authview:label}.Na widokach stron domowych W-2 możliwe jest filtrowanie urządzeń po typie urządzenia oraz po biurze w którym się znajdują oraz wyświetlanie szczegółowych informacji o urządzeniu. W widoku W-2b pokazane zostały tylko komputery które znajdują się w biurze Grunwaldzka. Wyświetlanie informacji o urządzeniu pokazuje na widoku wariant formularza W-3e dla odpowiadającego typu urządzenia: W-3a, W-3b, W-3c, rysunek \ref{forms:label}. Widok W-1a jest widokiem administratora który posiada wiele funkcjonalności:
 \begin{itemize}
 	\item Kliknięcie przycisku "`Dodaj urządzenie"' sprawia, że na ekranie wyświetlany jest formularz W-3a. Możliwa jest zmiana typu formularza na W-3b lub W-3c, która się odbywa poprzez wybór typu urządzenia z listy rozwijanej.
 	\item Kliknięcie przycisku "`Przeglądaj komponenty"' sprawia, że następuje przekierowanie do widoku komponentów W-6.
