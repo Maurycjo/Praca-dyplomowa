@@ -1,6 +1,6 @@
-\chapter{Wykorzystane technologie i narzędzia}
-Rozwijana aplikacja powstanie w oparciu o architekturę klient-serwer. Podczas implementacji tego typu aplikacji wyróżnia się technologie wykorzystywane do realizacji logiki biznesowej oraz technologie do realizacji interfejsu użytkownika. Ponadto sama implementacja odbywa się w środowisku deweloperskim, zapewniającym dostęp do niezbędnych narzędzi. Zdarza się jednak i tak, że te same technologie i narzędzia pojawiają się w na każdym etapie i przy implementacji różnych części aplikacji.
-W tabeli~\ref{tab:zestawienie_narzędzi} zamieszczono zestawienie głównych narzędzi i technologii wykorzystanych podczas realizacji pracy.
+\chapter{Wykorzystane narzędzia i~technologie}
+Rozwijana aplikacja powstanie w oparciu o architekturę klient-serwer. Podczas implementacji tego typu aplikacji wyróżnia się technologie wykorzystywane do realizacji logiki biznesowej oraz technologie służące do budowy interfejsu użytkownika. Ponadto sama implementacja odbywa się w środowisku deweloperskim, zapewniającym dostęp do niezbędnych narzędzi. Zdarza się jednak i tak, że te same technologie i narzędzia pojawiają się w na każdym etapie i przy implementacji różnych części aplikacji.
+W tabeli~\ref{tab:zestawienie_narzędzi} wymieniono główne narzędzia i technologie wykorzystanych podczas realizacji pracy.
 W kolejnych podrozdziałach podano szczegóły.
 
 
@@ -8,11 +8,11 @@ W kolejnych podrozdziałach podano szczegóły.
 	\centering
 \caption{Zestawienie wykorzystanych narzędzi i technologii wraz z ich wersjami i licencjami}
 \label{tab:zestawienie_narzędzi}
-\begin{tabularx}{\linewidth}{|X|X|X|}
+\begin{tabularx}{\linewidth}{|l|l|X|}
     \hline
     Technologia & Wersja & Licencja \\
     \hline \hline
-    Java & 17 Oracle OpenJDK 17.0.8 17 &  NFTC\\
+    Java & Oracle OpenJDK 17.0.8 17 &  NFTC\\
     \hline
     Maven & 3.9.5 & Apache License\\
     \hline
@@ -24,7 +24,7 @@ W kolejnych podrozdziałach podano szczegóły.
     \hline
 		React & 18.2.0 & MIT \\
     \hline
-		SQL Server Managment Studio & Management Studio 19 Standard Edition & Microsoft Software License\\
+		SQL Server Managment Studio & 19 Standard Edition & Microsoft Software License\\
 		 \hline
 		Lighthouse & 100.0.0.3 & Apache License 2.0\\
 
@@ -34,33 +34,28 @@ W kolejnych podrozdziałach podano szczegóły.
 
 \section{Warstwa logiki biznesowej}
 \subsection{Java}
-Java to termin, który w dziedzinie informatyki kojarzony jest z platformą do budowy aplikacji(ang. Java PLatform), obiektowym językiem programowania(ang. Java language) oraz z wirtualną maszyną (ang.~\emph{Java Virtual Machine}). Została wprowadzona przez firmę Sun Microsystems w roku 1995. Jest rozwijana aż do dzisiaj i doczekała się wielu wersji. 
+Java to termin, który w dziedzinie informatyki jest kojarzony z platformą do budowy aplikacji (ang.~\emph{Java Platform}), obiektowym językiem programowania (ang.~\emph{Java language}) oraz z wirtualną maszyną (ang.~\emph{Java Virtual Machine}). Technologia ta została opracowana przez firmę Sun Microsystems w roku 1995. Jest rozwijana aż do dzisiaj i doczekała się wielu wersji. 
 
-Rozwój Javy odbywa się w ramach JCP (ang.~\emph{Java Community Process}). Każdy użytkownik może brać udział w recenzowaniu i dostarczaniu informacji zwrotnej dla publikowanych specyfikacji JSR (ang.~\emph{Java Specification Request}). Specyfikacje składają się z powiązanych ze sobą dokumentów w których skład wchodzą specyfikacja platformy, specyfikacja języka i specyfikacja maszyny wirtualnej. Na podstawie tych specyfikacji wydawcy tworzą własne implementacje Javy.
+Rozwój Javy odbywa się w ramach JCP (ang.~\emph{Java Community Process}). Każdy użytkownik może brać udział w recenzowaniu i dostarczaniu informacji zwrotnej dla publikowanych specyfikacji JSR (ang.~\emph{Java Specification Request}). Specyfikacje składają się z powiązanych ze sobą dokumentów, w tym specyfikacji platformy, języka i  maszyny wirtualnej. Na podstawie tych specyfikacji wydawcy tworzą własne implementacje Javy.
 
-\subsubsection{Język Java}
-Java jako język jest współbieżnym, opartym na klasach, obiektowym językiem programowania. Java wykorzystuje tworzenie programów źródłowych kompilowanych do kodu bajtowego. Kod bajtowy jest interpretowany przez maszynę wirtualną Javy.
+\paragraph{Język Java} -- jest współbieżnym, opartym na klasach, obiektowym językiem programowania. Java wykorzystuje tworzenie programów źródłowych kompilowanych do kodu bajtowego. Kod bajtowy jest interpretowany przez maszynę wirtualną Javy.
 
-\subsubsection{Maszyna Wirtualna Javy}
-Maszyna wirtualna Javy jest zestawem aplikacji napisanych na tradycyjne urządzenia i systemy operacyjne. Jest środowiskiem  zdolnym do wykonywania kodu bajtowego Javy. Oferuje też automatyczne zarządzanie pamięcią przez garbage colector. Implementacja wirtualnej maszyny jest napisana w C++. Dostępna publicznie specyfikacja umożliwiła różnym producentom na tworzenie własnych wirtualnych maszyn przez co istnieje wiele różnych niezależnych wersji. To co łączy te wersje jest specyfikacja języka Java
+\paragraph{Maszyna Wirtualna Javy} -- jest zestawem aplikacji napisanych na tradycyjne urządzenia i systemy operacyjne. Jest środowiskiem  zdolnym do wykonywania kodu bajtowego Javy. Oferuje też automatyczne zarządzanie pamięcią przez garbage colector. Implementacja wirtualnej maszyny jest napisana w C++. Dostępna publicznie specyfikacja umożliwiła różnym producentom na tworzenie własnych wirtualnych maszyn przez co istnieje wiele różnych niezależnych wersji. Łączy je wszystkie zgodność ze specyfikacją języka Java.
 
-\subsubsection{Platforma Java}
-Java jako platforma oferuje programy, narzędzia które wspierają budowę i uruchomienie aplikacji. Aplikacja napisana w ramach pracy dyplomowej została stworzona w wersji Java 17. Wersja ta domyślnie została zainstalowana w środowisku programistycznym. Jest to wersja stabilna.
+\paragraph{Platforma Java} -- oferuje programy i narzędzia, które wspierają budowę oraz uruchomianie aplikacji. Aplikacja napisana w ramach pracy dyplomowej została stworzona w wersji Java 17. Wersja ta domyślnie została zainstalowana w środowisku programistycznym. Jest to wersja stabilna, o długim okresie wsparcia.
 
 \section{Frameworki Java}
-Framework to platforma programistyczna która jest szkieletem do budowy aplikacji. Dostarcza gotowe narzędzia, biblioteki i komponenty do wykonywania określonych zadań. Korzystając z frameworków można uprościć pisanie aplikacji, ponieważ narzędzia, biblioteki i komponenty dostarczają gotowe rozwiązania. Programista skupia się wtedy na specyficznych zadaniach bez konieczności implementacji rozwiązań które dostarcza framework. 
+Framework to platforma programistyczna, która jest szkieletem do budowy aplikacji. Dostarcza gotowe narzędzia, biblioteki i komponenty do wykonywania określonych zadań. Korzystając z frameworków można uprościć pisanie aplikacji, ponieważ narzędzia, biblioteki i komponenty dostarczają gotowe rozwiązania. Programista skupia się wtedy na specyficznych zadaniach, bez konieczności implementacji rozwiązań, które dostarcza framework. 
 
 \subsection{Spring oraz Spring Boot}
 % TO DO: jeśli to cytowanie, to powinno być zrobione przez \cite{} (Craig Walls: Spring w akcji. Wydanie V pdf)
-Spring Framework jest platformą która ma na celu uproszczenie tworzenia oprogramowania dla platformy Java. Spring oferuje kontener który jest określany mianem kontekstu aplikacji Springa. Odpowiedzialny jest za utworzenie komponentów aplikacji i zarządzanie nimi. Komponenty są powiązane w kontekście aplikacji i tworzą spójną całość. Operacja powiązania ze sobą komponentów bean jest oparta na wzorcu znanym jako wstrzykiwanie zależności. Zamiast zajmować się obsługą cyklu życiowego zależnych komponentów bean, w przypadku aplikacji stosującej wstrzykiwanie zależności następuje zdefiniowanie oddzielnej encji(kontenera) przeznaczonej do utworzenia i przechowywania wszystkich komponentów, które będą wstrzykiwane do potrzebujących ich komponentów bean. Najczęściej odbywa się to za pomocą argumentów konstruktora lub metod akcesora właściwości. 
+Spring Framework jest platformą stworzoną w celu uproszczenia tworzenia oprogramowania dla platformy Java. Spring oferuje kontener, który jest określany mianem kontekstu aplikacji Springa. Jest on odpowiedzialny za utworzenie komponentów aplikacji i zarządzanie nimi. Komponenty są powiązane w kontekście aplikacji i tworzą spójną całość. Operacja powiązania ze sobą komponentów (tzw.\ ziarenek, ang.~\emph{beans}) jest oparta na wzorcu znanym jako wstrzykiwanie zależności. W przypadku aplikacji stosującej wstrzykiwanie zależności zamiast obsługi cyklu życiowego zależnych komponentów bean następuje zdefiniowanie oddzielnej encji (kontenera) przeznaczonej do utworzenia i przechowywania wszystkich komponentów, które będą wstrzykiwane do potrzebujących ich komponentów bean. Najczęściej odbywa się to za pomocą argumentów konstruktora lub metod akcesora właściwości. 
 
-Spring Boot jest rozszerzeniem Springa który eliminuje konieczność konfiguracji środowiska charakterystyczną dla samego Springa. Oferuje on także wiele ciekawych funkcjonalności takich jak analiza wewnętrznego sposobu działania aplikacji w środowisku uruchomieniowym, elastyczną specyfikacje właściwości środowiska oraz dodatkowe możliwości w zakresie obsługi testów
+Spring Boot jest rozszerzeniem Springa, który eliminuje konieczność konfiguracji środowiska charakterystyczną dla samego Springa. Oferuje on także wiele ciekawych funkcji, takich jak: analiza wewnętrznego sposobu działania aplikacji w środowisku uruchomieniowym, elastyczna specyfikacje właściwości środowiska oraz dodatkowe możliwości w zakresie obsługi testów.
 
-\subsubsection{Spring Data}
-Podstawowy framework Spring jest dostarczony z prostymi możliwościami w zakresie obsługi trwałego magazynu danych, natomiast Spring Data oferuje funkcje która pozwala na zdefiniowaniu repozytorium danych aplikacji w postaci interfejsów Javy, używając konwencji nazw pod czas definiowania metod określających sposób przechowywania i pobierania danych. Spring Data pozwala na pracę z wieloma rodzajami baz danych m.in. relacyjnym użyciem API JPA(ang. java persistance api)
+\paragraph{Spring Data} -- w wesji podstawowej Spring jest dostarczony z prostymi możliwościami w zakresie obsługi trwałego magazynu danych. Moduł Spring Data oferuje funkcje, które pozwalają na zdefiniowaniu repozytorium danych aplikacji w postaci interfejsów Javy, używając konwencji nazw podczas definiowania metod określających sposób przechowywania i pobierania danych. Spring Data pozwala na pracę z wieloma rodzajami baz danych, m.in.\ z relacyjnym użyciem API JPA (ang. \emph{Java Persistance API})
 
-\subsubsection{Spring Web}
-Warstwa sieciowa Springa składa się z modułów Web, Web-Servlet, Web-Struts i Web-Portlet. Moduł Web w ramach frameworku Spring dostarcza podstawowe funkcje integracyjne zorientowane na sieć. Oferuje moduły do implementacji funkcji związanych z warstwą prezentacji, obsługą żądań HTTP, kontrolerami, widokami a także integracją z innymi modułami Springa.
+\paragraph{Spring Web} -- warstwa sieciowa Springa składa się z modułów Web, Web-Servlet, Web-Struts i Web-Portlet. Moduł Web w ramach frameworku Spring dostarcza podstawowe funkcje integracyjne zorientowane na sieć. Oferuje moduły do implementacji funkcji związanych z warstwą prezentacji, obsługą żądań HTTP, kontrolerami, widokami a także integracją z innymi modułami Springa.
 
 
 \subsection{Hibernate}
@@ -69,20 +64,22 @@ Hibernate jest frameworkiem służącym do realizacji warstwy dostępu do danych
 
 
 \section{Warstwa interfejsu użytkownika}
-\subsection{Javascript}
-JavaScript jest skryptowym językiem programowania, który jest powszechnie stosowany do tworzenia stron internetowych. Pozwala on na dynamiczne dodawanie funkcji dla stron internetowych. Wykonywany jest na przeglądarce internetowej, to znaczy, że kod JavaScript może być uruchomiany na różnych platformach i systemach operacyjnych. 
 
-\subsection{React}
-React jest biblioteką dla JavaScript. Wykorzystywana jest do tworzenia interfejsów graficznych aplikacji internetowych. Pozwala na budowanie dynamicznych i efektywnych aplikacji front-endowych. React pozwala na tworzenie interaktywnego interfejsu użytkownika, który reaguje na zmiany danych i efektywne odświeżanie widoku użytkownika.
+\subsection{Javascript i React}
+\paragraph{JavaScript} -- jest skryptowym językiem programowania, który jest powszechnie stosowany do tworzenia stron internetowych. Pozwala on na dynamiczne dodawanie funkcji dla stron internetowych. Wykonywany jest na przeglądarce internetowej, to znaczy, że kod JavaScript może być uruchomiany na różnych platformach i systemach operacyjnych. 
+
+\paragraph{React} -- jest biblioteką dla JavaScript. Wykorzystywana jest do tworzenia interfejsów graficznych aplikacji internetowych. Pozwala na budowanie dynamicznych i efektywnych aplikacji front-endowych. React pozwala na tworzenie interaktywnego interfejsu użytkownika, który reaguje na zmiany danych i efektywne odświeżanie widoku użytkownika.
 
 \subsection{Arkusze styli}
-Arkusze styli definiują sposób prezentacji i stylizacji dokumentów HTML lub XML. Używane są do oddzielenia treści strony do jej wyglądu. Pozwalają na zarządzanie wyglądem witryny. Najpopularniejszym językiem arkuszy styli jest CSS(Cascading Style Sheets), który wykorzystywany jest również w projektowanym systemie.
+Arkusze styli definiują sposób prezentacji i stylizacji dokumentów HTML lub XML. Używane są do oddzielenia treści strony do jej wyglądu. Pozwalają na zarządzanie wyglądem witryny. 
+\paragraph{CSS (ang.~\emph{Cascading Style Sheets}))} -- jest najpopularniejszym językiem arkuszy styli. Wykorzystano go również w projektowanym systemie.
+
 \section{Środowisko deweloperskie}
 \subsection{Maven}
-Apache Maven jest narzędziem oferującym automatyczną budowę oprogramowania na platformę Java. Poszczególne funkcje Mavena są realizowane poprzez wtyczki. Proces budowania kończy się osiągnięciem wybranego przez budującego celu. Cele umożliwiają między innymi na kompilacje, zbudowanie paczki dystrybucyjnej oraz na uruchomienie testów automatycznych. Maven korzysta z pliku POM(ang. Project Object Model). POM to dokument XML-owy o nazwie pom.xml który opisuje projekt. W pliku tym można zdefiniować zależności które będą wykorzystane w projekcie. 
+Apache Maven jest narzędziem oferującym automatyczną budowę oprogramowania na platformę Java. Poszczególne funkcje Mavena są realizowane poprzez wtyczki. Proces budowania kończy się osiągnięciem wybranego przez budującego celu. Cele umożliwiają między innymi na kompilacje, zbudowanie paczki dystrybucyjnej oraz na uruchomienie testów automatycznych. Maven korzysta z pliku POM (ang.~\emph{Project Object Model}). POM to dokument XML-owy o nazwie \texttt{pom.xml}, który opisuje projekt. W pliku tym można zdefiniować zależności które będą wykorzystane w projekcie. 
 
-\subsection{Intelij Idea}
-Intelij jest zintegrowanym środowiskiem programistycznym który oferuje wiele narzędzi pomagającym w programowaniu. W wersji ultimate która dostępna jest na licencji studenckiej występuje wsparcie do integracji i zarządzania bazą danych.
+\subsection{IntelliJ IDEA} % była literówka w nazwie środowiska!!!!
+IntelliJ IDEA jest zintegrowanym środowiskiem programistycznym który oferuje wiele narzędzi pomagającym w programowaniu. W wersji ultimate która dostępna jest na licencji studenckiej występuje wsparcie do integracji i zarządzania bazą danych.
 
 \subsection{SQL Server Managament Studio}
 \label{ssms:label}
@@ -92,5 +89,5 @@ SSMS jest aplikacją wydaną przez Microsoft. Służy ona zarządzania, konfigur
 Postman jest narzędziem do testowania interfejsów API. Umożliwia on wysyłanie zapytań HTTP dla różnych metod, takich jak GET, POST, PUT, PATCH, DELETE do serwera i analizowanie odpowiedzi. Pozwala on także zdefiniować tokeny których wymaga serwer w celu uwierzytelniania. Zwraca on także statusy HTTP wykonanych zapytań.
 
 \subsection{Lighthouse}
-Lighthouse jest otwartym narzędziem do analizy jakości stron internetowych. Pomaga deweloperom, projektantom i administratorom stron internetowych w ocenie i poprawie różnych aspektów stron internetowych
+Lighthouse jest otwartym narzędziem do analizy jakości stron internetowych. Pomaga deweloperom, projektantom i administratorom stron internetowych w ocenie i poprawie różnych aspektów stron internetowych.
 

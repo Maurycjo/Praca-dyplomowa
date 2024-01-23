@@ -8,13 +8,9 @@ Pomysł odsprzedaży wysłużonego sprzętu można zrealizować na różne sposo
 
 Wyniki inwentaryzacji sprzętu zwykle zapisywane są w postaci tabelarycznej. Do ich obsługi (edycji) wykorzystuje się narzędzia typu Office, a mówiąc dokładniej -- edytory arkuszy kalkulacyjnych. W podstawowym scenariuszu aby przygotować i przeprowadzić loterię wystarczy sięgać do odpowiedniego arkusza kalkulacyjnego i nanieść w nim odpowiednie zmiany. Zdarza się jednak, że informacje dotyczące danej loterii jest rozproszona pomiędzy kilkoma arkuszami. Dlatego lepszym rozwiązaniem byłoby uruchomienie osobnej aplikacji, działającej zgodnie z~przyjętymi w firmie regułami. Chęć zaimplementowania takiej aplikacji stała się motywem do zdefiniowana tematu oraz celu niniejszej pracy.
 
+Co prawda na rynku istnieją rozwiązania, które pozwalają zarządzać sprzętem komputerowym. Jednymi z ciekawszych są \textbf{OCS Inventory} oraz \textbf{Microsoft System Center Configuraton Manager}. Jednak oba te rozwiązania stworzono z myślą o zarządzaniu sprzętem, a nie o jego odsprzedaży. Ponadto z uwagi na mnogość oferowanych funkcji, skorzystanie z tych narzędzi jest zanadto skomplikowane, by opłacało się je wykorzystywać do sprzedaży urządzeń wewnątrz firmy. Warto jednak spojrzeć na ich możliwości przed przystąpieniem do implementacji własnej aplikacji.
 
-\section{Przegląd istniejących rozwiązań}
-
-Na rynku aplikacji istnieją rozwiązania które pozwalają zarządzać sprzętem komputerowym. Jednymi z ciekawszych są \textbf{OCS Inventory} oraz \textbf{Microsoft System Center Configuraton Manager}. Oba te rozwiązania zostały stworzone z myślą zarządzania sprzętem a nie jego odsprzedaży. Dodatkowo przez to, że posiadają tyle możliwości, skorzystanie z tych narzędzi jest skomplikowane, co sprawia że nie opłaca ich się wykorzystywać do sprzedaży urządzeń wewnątrz firmy. 
-
-\subsection{OCS Inventory}
-OCS Inventory jest darmowym oprogramowaniem które po instalacji jest w stanie pobrać informacje o sprzęcie. Informacje te dotyczą procesora, pamięci RAM, dysku twardego podłączonych urządzeń peryferyjnych, oprogramowania, kart sieciowych.
+\textbf{OCS Inventory} jest darmowym oprogramowaniem które po instalacji jest w stanie pobrać informacje o sprzęcie. Informacje te dotyczą procesora, pamięci RAM, dysku twardego podłączonych urządzeń peryferyjnych, oprogramowania, kart sieciowych.
 \newline
 Schemat działania
 \begin{itemize}
@@ -24,34 +20,35 @@ Schemat działania
 	\item Serwer wdrażania, który przechowuje wszystkie konfiguracje pakietów (Apache, ssl).
 \end{itemize}
 Rozwiązanie jest wieloplatformowe które działa na systemach: Windows, Mac, Linux oraz Android. Dodatkowo istnieje płatna wersja narzędzia która pozwala na pomoc administratorów OCS Inventory. Narzędzie pozwala na zbieranie danych w postaci tabelarycznej oraz generowania raportów dotyczących sprzętu. 
-\subsection{Microsoft System Center Configuration Manager}
-Firma Microsoft dostarcza bardzo dużego, płatnego rozwiązania, które pozwala na zarządzanie dużą grupą komputerów. Do możliwości narzędzia należą między innymi: zdalny dostęp, menadżer aktualizacji oraz monitorowania stanu technicznego urządzeń. Bardzo dużo możliwości dostarczanych przez ten produkt sprawia, że cena jest nieadekwatna gdy firma chce wykorzystywać to narzędzie tylko do inwentaryzacji sprzętu. Dodatkowe opłaty mogą zostać również wygenerowane przez to, że firma musi wyszkolić pracowników, którzy umieli by zarządzać tym oprogramowaniem.
+
+\textbf{Microsoft System Center Configuration Manager} jest bardzo dużym i płatnym rozwiązaniem dostarczanym przez firmę Microsoft. Pozwala ono na zarządzanie dużą grupą komputerów. Do możliwości narzędzia należą między innymi: zdalny dostęp, menadżer aktualizacji oraz monitorowania stanu technicznego urządzeń. Bardzo dużo możliwości dostarczanych przez ten produkt sprawia, że cena jest nieadekwatna gdy firma chce wykorzystywać to narzędzie tylko do inwentaryzacji sprzętu. Dodatkowe opłaty mogą zostać również wygenerowane przez to, że firma musi wyszkolić pracowników, którzy umieli by zarządzać tym oprogramowaniem.
+
 
 \section{Cel pracy}
-Celem  pracy jest stworzenie kompleksowego narzędzia, które umożliwi ocenę stanu technicznego urządzeń wycofywanych z użytku. Projekt ma na celu również skonstruowanie efektywnego systemu wyceny wartości tych urządzeń, a także dostarczenie wsparcia w procesie ich odsprzedaży.
+Celem  pracy jest stworzenie kompleksowego narzędzia umożliwiającego ocenę stanu technicznego urządzeń wycofywanych z użytku. Narzędzie to powinno pomóc w stworzeniu  efektywnego systemu wyceny wartości tych urządzeń oraz w procesie ich odsprzedaży.
 
-Projektowane narzędzie zakłada przeprowadzenie inwentaryzacji sprzętu, umożliwiając zapisanie stanu technicznego urządzeń oraz ewentualnych usterek, które zazwyczaj wymagają fizycznych oględzin. Po wdrożeniu, system powinien być dostępny na wybranej platformie internetowej, umożliwiając zalogowanym użytkownikom wykonywanie działań zgodnie z nadanymi uprawnieniami. Przewidziane akcje obejmują przeglądanie, modyfikowanie i usuwanie urządzeń oraz zarządzanie loteriami i użytkownikami. Dodatkowo, użytkownicy powinni mieć możliwość uczestniczenia w loteriach oraz przeprowadzania losowań.
+Projekt zakłada przeprowadzenie inwentaryzacji sprzętu, umożliwiając zapisanie stanu technicznego urządzeń oraz ewentualnych usterek, które zazwyczaj wymagają fizycznych oględzin. Po wdrożeniu, system powinien być dostępny na wybranej platformie internetowej, umożliwiając zalogowanym użytkownikom wykonywanie działań zgodnie z nadanymi uprawnieniami. Przewidziane akcje obejmują przeglądanie, modyfikowanie i usuwanie urządzeń oraz zarządzanie loteriami i użytkownikami. Dodatkowo, użytkownicy powinni mieć możliwość uczestniczenia w loteriach oraz przeprowadzania losowań.
 
 Rozwiązanie ma charakteryzować się przyjaznym interfejsem użytkownika, zapewniając łatwą nawigację nawet dla pracowników bez specjalistycznej wiedzy technicznej. Proces przeglądania sprzętu komputerowego powinien być intuicyjny, usprawniając monitorowanie stanu technicznego i statusu loterii. Prostota systemu ma wpłynąć na ogólną wygodę użytkowników oraz przyczynić się do redukcji kosztów związanych z procesem inwentaryzacji.
 
 \section{Zakres pracy}
-Projektowany system składać się będzie z dwóch kluczowych komponentów: \textbf{aplikacji klienckiej} oraz \textbf{aplikacji serwerowej}. Aplikacja serwerowa, będąca centralnym elementem systemu, będzie odpowiedzialna za komunikację z bazą danych oraz dostarczanie interfejsu REST. W celu zapewnienia bezpieczeństwa, wrażliwe dane, takie jak hasła, zostaną przechowywane w formie zaszyfrowanej.
+Projektowany system składać się będzie z dwóch kluczowych komponentów: \textbf{aplikacji klienckiej} oraz \textbf{aplikacji serwerowej}. 
+Aplikacja serwerowa, będąca centralnym elementem systemu, ma odpowiadać za komunikację z bazą danych oraz dostarczanie interfejsu REST konsumowanego przez aplikację kliencka. 
+Aplikacja kliencka dostarczyć ma interfejs użytkownika, poprzez który możliwe będzie przeglądanie, usuwanie oraz korekta danych dotyczących urządzeń, historii przeprowadzonych i aktualnych loterii. Dodatkowo, aplikacja kliencka umożliwi przeprowadzenie losowań oraz jednoznaczne wyłonienie zwycięzcy.
 
-Interfejs REST, udostępniany przez aplikację serwerową, umożliwi płynną komunikację pomiędzy aplikacją serwerową a kliencką. Aplikacja kliencka, z kolei, będzie stanowiła interfejs użytkownika, umożliwiając przeglądanie, usuwanie oraz korektę danych dotyczących urządzeń, historii przeprowadzonych i aktualnych loterii. Dodatkowo, aplikacja kliencka umożliwi przeprowadzenie losowań oraz jednoznaczne wyłonienie zwycięzcy.
-
-System został zaprojektowany z myślą o elastyczności i łatwości zarządzania danymi. Będzie umożliwiał dynamiczne dodawanie, usuwanie i modyfikację danych, zapewniając tym samym pełną funkcjonalność oraz dostosowanie do zmieniających się potrzeb użytkowników.
+Projekt ma powstać z myślą o elastyczności i łatwości zarządzania danymi. Będzie umożliwiał dynamiczne dodawanie, usuwanie i modyfikację danych, zapewniając tym samym pełną funkcjonalność oraz dostosowanie do zmieniających się potrzeb użytkowników. W celu zapewnienia bezpieczeństwa dane wrażliwe przetwarzane w systemie, takie jak hasła, będą szyfrowane.
 
 
 \section{Układ pracy}
 % DONE: Będzie trzeba dopisać, co zawierają kolejne rozdziały
 Praca składa się z 6 rozdziałów.
 \begin {itemize}
-	\item Rozdział 1 - skupia się na zagadnieniach związanych z celem i zakresem pracy. Posiada też przegląd istniejących rozwiązań które mają zbliżone funkcjonalności do projektowanego systemu
-	\item Rozdział 2 - skupia się na opisie wykorzystywanych narzędzi i technologii
-	\item Rozdział 3 - posiada wymagania funkcjonalne i niefunkcjonalne systemu. Wymagania funkcjonalne szczegółowo opisują jak ma działać system
-	\item Rozdział 4 - skupia się na zaprojektowaniu, stworzeniu i wdrożeniu bazy danych
-	\item Rozdział 5 - posiada szczegółowe informacje na temat struktury projektu aplikacji klienckiej i serwerowej. Opisane zostały w nim listingi kodu oraz wygląd i sposób działania systemu
-	\item Rozdział 6 - skupia się na przeprowadzeniu testów przy użyciu Postman i Lighthouse
+	\item Rozdział 1 -- skupia się na zagadnieniach związanych z celem i zakresem pracy. Posiada też przegląd istniejących rozwiązań które mają zbliżone funkcjonalności do projektowanego systemu.
+	\item Rozdział 2 -- skupia się na opisie wykorzystywanych narzędzi i technologii.
+	\item Rozdział 3 -- posiada wymagania funkcjonalne i niefunkcjonalne systemu. Wymagania funkcjonalne szczegółowo opisują jak ma działać system.
+	\item Rozdział 4 -- skupia się na zaprojektowaniu, stworzeniu i wdrożeniu bazy danych.
+	\item Rozdział 5 -- posiada szczegółowe informacje na temat struktury projektu aplikacji klienckiej i serwerowej. Opisane zostały w nim listingi kodu oraz wygląd i sposób działania systemu.
+	\item Rozdział 6 -- skupia się na przeprowadzeniu testów przy użyciu Postman i Lighthouse.
 \end{itemize}
 
 
