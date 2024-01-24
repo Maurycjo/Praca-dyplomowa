@@ -5,6 +5,7 @@
 
 \subsection{Struktura interfejsu REST}
 % TO DO: Opis do poprawy (bo zmieniono układ tabel)
+% DONE
 Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą być odbierane przez aplikację serwerową. Z racji tego, że w aplikacji wykorzystywane są typy generyczne w klasach kontrolerach urządzeń i komponentów komputera (implementacja \ref{controller_genericDevice} uproszczono tabele by pokazać ogólną formę zapytań. Wszystkie zapytania posiadające "`\texttt{devices}"' w ścieżce umożliwiają alternatywne wywołanie zapytania na podstawie typu sprzętu. Ogólna zasada jest taka aby zastąpić "`\texttt{devices}"' odpowiadającemu typowi sprzętu: "`\texttt{computers}"', "`\texttt{tablets}"', "`\texttt{other-devices}"'. Powoduje to, że zapytanie wykonywane jest przez kontroler tej klasy, a co za tym idzie ma określony typ. Możliwe jest też wykonanie zapytania nie zmieniając ścieżki. Wtedy takie zapytanie wykonywane jest na ogólnym rodzaju sprzętu. Przykładowo "`\texttt{devices/all}"' pobiera wszystkie sprzęty nie zwracając uwagi na typ, natomiast "`\texttt{computers/all}"' pobiera tylko sprzętu typu "`\texttt{Computer}"'. Podobne rozwiązanie wykorzystano w komponentach komputera. Dotyczy to zapytań mających w ścieżce: "`\texttt{component}"'. Tutaj należy zamienić "`\texttt{component}"' na jeden z trzech dostępnych typów komponentu: "`\texttt{rams}"', "`\texttt{cpus}"', "`\texttt{storages}"'. W tym wypadku nie ma możliwości wywołania zapytania zawierającego "`\texttt{component}"'.
 
 \begin{table}[H]\small
@@ -354,49 +355,49 @@ Ogólna struktura projektu została stworzona przez wywołanie komendy tworzące
 \begin {itemize}
 \item \texttt{\textbf{auth}} przechowuje pliki odpowiedzialne za obsługę i stylizacje widoków logowania i rejestracji
 	\begin{itemize}
-	\item \texttt{Login.js} - skrypt odpowiedzialny za widok i funkcjonalność logowania
-	\item \texttt{Register.js} - skrypt odpowiedzialny za widok i funkcjonalność rejestracji
-	\item \texttt{Login.css} - arkusz styli odpowiedzialny za stylizacje widoków logowania i rejestracji
+	\item \texttt{Login.js} -- skrypt odpowiedzialny za widok i funkcjonalność logowania
+	\item \texttt{Register.js} -- skrypt odpowiedzialny za widok i funkcjonalność rejestracji
+	\item \texttt{Login.css} -- arkusz styli odpowiedzialny za stylizacje widoków logowania i rejestracji
 	\end{itemize}
 \item \texttt{\textbf{bar}} przechowuje skrypty odpowiedzialne za paski nawigacyjne poszczególnych widoków.
 	\begin{itemize}
-	\item \texttt{AdminHomeBar.js} - skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym administratora: \texttt{Home.js}
-	\item \texttt{ComputerComponentsBar.js} -skrypt odpowiedzialny za pasek nawigacyjny dla widoku komponentów: \texttt{ComputerComponents.js}
-	\item \texttt{ManageUserBar.js} -skrypt odpowiedzialny za pasek nawigacyjny widoku zarządzania użytkownikami: \texttt{Users.js}
-	\item \texttt{UserHomeBar.js} - skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym pracownika: \texttt{Home.js}
-	\item \texttt{UserLotteryHistory} -skrypt odpowiedzialny za pasek nawigacyjnym na widoku historii loterii użytkownika: \texttt{UserLotteryHistory.js}
-	\item \texttt{UsersInLottery.js} -skrypt odpowiedzialny za pasek nawigacyjny na widoku użytkowników biorących udział w loterii: \texttt{UsersInLottery.js}
+	\item \texttt{AdminHomeBar.js} -- skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym administratora: \texttt{Home.js}
+	\item \texttt{ComputerComponentsBar.js} -- skrypt odpowiedzialny za pasek nawigacyjny dla widoku komponentów: \texttt{ComputerComponents.js}
+	\item \texttt{ManageUserBar.js} -- skrypt odpowiedzialny za pasek nawigacyjny widoku zarządzania użytkownikami: \texttt{Users.js}
+	\item \texttt{UserHomeBar.js} -- skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym pracownika: \texttt{Home.js}
+	\item \texttt{UserLotteryHistory} -- skrypt odpowiedzialny za pasek nawigacyjnym na widoku historii loterii użytkownika: \texttt{UserLotteryHistory.js}
+	\item \texttt{UsersInLottery.js} -- skrypt odpowiedzialny za pasek nawigacyjny na widoku użytkowników biorących udział w loterii: \texttt{UsersInLottery.js}
 	\end{itemize}
 \item \texttt{\textbf{computer\_components}} przechowuje skrypty formularzy komponentów komputera które mogą dodawać lub modyfikować te komponenty
 	\begin{itemize}
-	\item \texttt{CpuForm.js} - formularz procesora
-	\item \texttt{RamForm.js} - formularz pamięci RAM
-	\item \texttt{StorageForm.js} - formularz pamięcu dyskowej
+	\item \texttt{CpuForm.js} -- formularz procesora
+	\item \texttt{RamForm.js} -- formularz pamięci RAM
+	\item \texttt{StorageForm.js} -- formularz pamięcu dyskowej
 	\end{itemize}
 \item \texttt{\textbf{device\_form}} przechowuje skrypty oraz arkusz styli odpowiedzialne za logikę formularzy dodawania, modyfikacji urządzeń
 	\begin{itemize}
-	\item \texttt{AddNewFormPopup.js} - formularz umożliwiający wybór formularza który dodaje komputer, tablet, lub inne urządzenie
-	\item \texttt{ComputerForm.js} -formularz komputera
-	\item \texttt{DeviceForm.css} - arkusz styli odpowiedzialny za stylizacje formularzy
-	\item \texttt{FormPopup.js} - skrypt odpowiedzialny za logikę i wybór rodzaju formularza(dodawanie, modyfikacja, informacje) urządzenia.
-	\item \texttt{OtherDeviceForm} - formularz innego urządzenia
-	\item \texttt{TabletForm.js} - formularz tabletu
+	\item \texttt{AddNewFormPopup.js} -- formularz umożliwiający wybór formularza który dodaje komputer, tablet, lub inne urządzenie
+	\item \texttt{ComputerForm.js} -- formularz komputera
+	\item \texttt{DeviceForm.css} -- arkusz styli odpowiedzialny za stylizacje formularzy
+	\item \texttt{FormPopup.js} -- skrypt odpowiedzialny za logikę i wybór rodzaju formularza(dodawanie, modyfikacja, informacje) urządzenia.
+	\item \texttt{OtherDeviceForm} -- formularz innego urządzenia
+	\item \texttt{TabletForm.js} -- formularz tabletu
 	\end{itemize}
 \item \texttt{\textbf{view}} przechowuje w sobie skrypty oraz arkusz styli odpowiedzialne za widoki aplikacji
 	\begin{itemize}
-	\item \texttt{ComputerComponets.js} -widok dostępny tylko dla administratora. Zawiera w sobie informacje o komponentach komputera w postaci tabeli
-	\item \texttt{Home.css} - arkusz styli odpowiedzialny za stylizacje widoków
-	\item \texttt{Home.js} - widok strony domowej, ma w sobie dwa warianty: Administratora i Pracownika
-	\item \texttt{UserLotteryHistory.js} - widok historii loterii użytkownika o zadanym ID. Dostępny dla pracownika i administratora.
-	\item \texttt{Users.js} - widok pracowników zarejestrowanych w systemie. Dostępny tylko dla administratora
-	\item \texttt{UsersInLottery} - widok pracowników biorących udział w loterii danego sprzętu. Dostępny tylko dal administratora.
+	\item \texttt{ComputerComponets.js} -- widok dostępny tylko dla administratora. Zawiera w sobie informacje o komponentach komputera w postaci tabeli
+	\item \texttt{Home.css} -- arkusz styli odpowiedzialny za stylizacje widoków
+	\item \texttt{Home.js} -- widok strony domowej, ma w sobie dwa warianty: Administratora i Pracownika
+	\item \texttt{UserLotteryHistory.js} -- widok historii loterii użytkownika o zadanym ID. Dostępny dla pracownika i administratora.
+	\item \texttt{Users.js} -- widok pracowników zarejestrowanych w systemie. Dostępny tylko dla administratora
+	\item \texttt{UsersInLottery} -- widok pracowników biorących udział w loterii danego sprzętu. Dostępny tylko dal administratora.
 	\end{itemize}
 \end{itemize}
 
 Równolegle do folderu \texttt{components} w folderze \texttt{src} istnieją jeszcze dwa skrypty które są niezbędne do funkcjonowania aplikacji.
 \begin{itemize}
 	\item \texttt{App.js} zawiera w sobie scieżki url pod którymi dostępne są poszczególne widoki
-	\item \texttt{index.js} - funkcja główna programu
+	\item \texttt{index.js} -- funkcja główna programu
 \end{itemize}
 
 Strukturę projektu pokazano na rysunku \ref{frontend_struktura:label}
@@ -538,13 +539,13 @@ Powyższy listing kodu \ref{addComputer:label} ukazuje w jaki sposób aplikacje 
 
 Zdefiniowano widoki aplikacji i pogrupowano je ze względu na typ które pełnią.
 \begin{itemize}
-	\item W-1 - Widok logowania i rejestracji, rysunek \ref{authview:label}
-	\item W-2 - Widok strony domowej zawierający urządzenia oraz loterię tych urządzeń, rysunek \ref{home:label}
-	\item W-3 - Widok formularzy urządzeń z wariantami dotyczących funkcjonalności które pełnią, rysunek \ref{forms:label}
-	\item W-4 - Widok użytkowników i uczestników, rysunek \ref{manageUsers:label}
-	\item W-5 - Widok historii loterii użytkownika, rysunek \ref{lotteryHistory:label}
-	\item W-6 - Widok komponentów komputera, rysunek \ref{components:label}
-	\item W-7 - Widok formularzy komponentów komputera, rysunek \ref{compforms:label}
+	\item W-1 -- widok logowania i rejestracji, rysunek \ref{authview:label}
+	\item W-2 -- widok strony domowej zawierający urządzenia oraz loterię tych urządzeń, rysunek \ref{home:label}
+	\item W-3 -- widok formularzy urządzeń z wariantami dotyczących funkcjonalności które pełnią, rysunek \ref{forms:label}
+	\item W-4 -- widok użytkowników i uczestników, rysunek \ref{manageUsers:label}
+	\item W-5 -- widok historii loterii użytkownika, rysunek \ref{lotteryHistory:label}
+	\item W-6 -- widok komponentów komputera, rysunek \ref{components:label}
+	\item W-7 -- widok formularzy komponentów komputera, rysunek \ref{compforms:label}
 \end{itemize} 
 
 

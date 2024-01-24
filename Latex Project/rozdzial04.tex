@@ -32,9 +32,9 @@ Pozostałe tabele reprezentujące urządzenia rozszerzają informacje dostarczan
 	\item \texttt{model} -- model komputera,
 	\item \texttt{operatinng\_system} -- system operacyjny zainstalowany na komputerze,
 	\item \texttt{battery\_life} -- żywotność baterii,
-	\item \texttt{cpu\_id}-- identyfikator reprezentujący procesor posiadany przez komputer,
+	\item \texttt{cpu\_id} -- identyfikator reprezentujący procesor posiadany przez komputer,
 	\item \texttt{storage\_id} -- identyfikator reprezentujący dysk posiadany przez komputer,
-	\item \texttt{ram\_id }-- identyfikator reprezentujący pamięć RAM posiadaną przez komputer.
+	\item \texttt{ram\_id } -- identyfikator reprezentujący pamięć RAM posiadaną przez komputer.
 \end{itemize}
 
 
@@ -45,15 +45,16 @@ Tablet posiada dodatkowo informacje odnośnie:
 	\item \texttt{battery\_life} -- żywotność baterii.
 \end{itemize}
 % TO DO: proszę zwrócić uwagę na listy wyliczeniowe (myślniki, przecinki, wielkość liter jak w listach powyżej)
-
+% DONE
 Inne urządzenie natomiast posiada tylko pole \texttt{additional\_info}, które pozwala na podanie szczególnych informacji urządzenia.
 
 \subsection{Dziedziczenie tabel}
 \label{dzedziczenie_hibernate:label}
 Projektowany system powstał z myślą możliwości łatwego rozszerzania. Wykorzystanie tabeli \texttt{device\_core} ułatwi dodanie ewentualnych tabel potomnych. Kod tabeli nadrzędnej \texttt{device\_core} umożliwi wykonanie ogólnych operacji, co zapobiegnie powielaniu kodu oraz umożliwi dodanie tabel rozszerzających zakres danych zapisanych już w tabeli \texttt{device\_core}. 
 
-Ważnym aspektem projektu jest zapewnienie unikalności kluczy w kontekście schematu dziedziczenia, szczególnie w przypadku użycia Hibernate z modelem \emph{table~per~class}. W tym podejściu każda klasa dziedzicząca, tak jak \texttt{computer}, \texttt{tablet}, czy \texttt{other\_device}, ma swój własny identyfikator, ale także dziedziczy z klasy nadrzędnej. Hibernate automatycznie zarządza unikalnością kluczy dla całej hierarchii dziedziczenia, eliminując ryzyko konfliktów kluczy pomiędzy różnymi klasami. W praktyce, w bazie danych dla każdej klasy dziedziczącej, a także dla samej klasy \texttt{device\_core}, zostaną utworzone oddzielne tabele. Tabele te zawierają wszystkie pola związane z daną klasą, a Hibernate zarządza relacjami między nimi. W przypadku klasy \texttt{device\_core}, tabela zawiera podstawowe atrybuty wspólne dla wszystkich typów urządzeń, takie jak \texttt{device\_name, price, age} itp. Przykład implementacji takiego dziedziczenia znajduje się w listingach kodu \ref{entity_deviceCore} i \ref{entity_computer}.
+Ważnym aspektem projektu jest zapewnienie unikalności kluczy w kontekście schematu dziedziczenia, szczególnie w przypadku użycia Hibernate z modelem \emph{TABLE\_PER\_CLASS}. W tym podejściu każda klasa dziedzicząca, tak jak \texttt{computer}, \texttt{tablet}, czy \texttt{other\_device}, ma swój własny identyfikator, ale także dziedziczy z klasy nadrzędnej. Hibernate programowo zarządza unikalnością kluczy dla całej hierarchii dziedziczenia, eliminując ryzyko konfliktów kluczy pomiędzy różnymi klasami. Dzieje się to na poziomie aplikacji. W praktyce, w bazie danych dla każdej klasy dziedziczącej, a także dla samej klasy \texttt{device\_core}, zostaną utworzone oddzielne tabele wykorzystując zapytania SQL generowane przez Hibernate. Tabele te zawierają wszystkie pola związane z daną klasą, a Hibernate zarządza relacjami między nimi. W przypadku klasy \texttt{device\_core}, tabela zawiera podstawowe atrybuty wspólne dla wszystkich typów urządzeń, takie jak \texttt{device\_name, price, age} itp. Przykład implementacji takiego dziedziczenia znajduje się w listingach kodu \ref{entity_deviceCore} i \ref{entity_computer}.
 % TO DO: czy Hibernate robi to programowo (tj. jakimś specjalnym algorytmem)? Pytam, bo podobne rzeczy rozwiązuje się przez dołożenie do bazy danych triggerów
+% DONE dodałem, że Hibernate programowo generuje zapytania SQL i zarządza identyfikatorami tabel 
 
 Dla klas dziedziczących, takich jak \texttt{computer, tablet czy other\_device}, Hibernate generuje tabele z dodatkowymi kolumnami specyficznymi dla danej klasy, takimi jak \texttt{serial\_number} czy \texttt{screen\_size}. W efekcie każda tabela reprezentuje pełne zestawienie danych związanych z danym rodzajem urządzenia.
 

@@ -377,12 +377,58 @@ Projektowany system powinien zapewnieć szereg funkcji do potencjalnego wykorzys
 Etapem projektowania systemu jest zdefiniowanie wymagań niefunkcjonalnych. Poniżej wypisano listę podstawowych wymagań tego typu.
 % TO DO: wymagania powinny być w jakiś sposób walidowalne (muszą istnieć jakieś kryteria ich spełnienia). Jak więc można ocenić, czy poniższe wymagania rzeczywiście zostaną spełnione?
 % TO DO: zwykle w wymaganiach niefunkcjonalnych mówi się o technologiach użytych, o przewidywanym wolumenie danych, o przewidywanych obciążeniach, o wymaganej infrastrukturze itp.
+
+\subsection{Ogólnodostępność}
+
 \begin{itemize}
-	\item Ogólnodostępność -- system powinien być dostępny dla każdego użytkownika mającego dostęp do internetu. Powinien być zgodny z przeglądarkami internetowymi.
-	\item Niezawodność -- system powinien być niepodatny na awarie
-	\item Bezpieczeństwo -- korzystanie z systemu powinno korzystać z mechanizmu uwierzytelniania i autoryzacji. Wrażliwe dane użytkowników powinny być zaszyfrowane.
-	\item Wydajność -- czas oczekiwania na wykonanie operacji w systemie powinien być satysfakcjonujący dla użytkowników.
-	\item Koszty -- system powinien mieć niskie koszty utrzymania oraz łatwy w utrzymaniu
+	\item \textbf{Kryterium} Ogólnodostępność -- system powinien być dostępny dla każdego użytkownika mającego dostęp do internetu. Powinien być zgodny z przeglądarkami internetowymi.
+	\item \textbf{Mierzalne kryteria}
+		\begin{enumerate}
+			\item Czas odpowiedzi dla żądania użytkownika nie przekracza 2 sekund
+			\item Kompatybilność z przeglądarkami: Google Chrome, Mozilla Firefox, Microsoft Edge.
+			\item Responsywność interfejsu użytkownika na różnych urządzeniach (desktop, smartphone).
+		\end{enumerate}
+	Wykorzystanie biblioteki React \ref{tab:zestawienie_narzędzi} umożliwi spełnieni kryterium ogólnodostępności
+		
+\subsection{Niezawodność}
+	\item \textbf{Niezawodność} -- system powinien być niepodatny na awarie.
+	\item \textbf{Mierzalne kryteria}
+		\begin{enumerate}
+			\item Średni czas pomiędzy zaobserwowanymi awariami powinien wynosić co najmniej 30 dni.
+			\item Średni czas naprawy w przypadku awarii nie powinien przekraczać 1 godziny
+		\end{enumerate}
+	Niezawodność jest związana z działaniem aplikacji na środowisku chmurowym. 
+	
+	\subsection{Bezpieczeństwo}
+	
+	\item \textbf{Bezpieczeństwo} -- System powinien zabezpieczać dane użytkowników i posiadać mechanizmy uwierzytelniania i autoryzacji.
+	\item \textbf{Mierzalne kryteria}
+		\begin{enumerate}
+			\item Wrażliwe dane użytkowników przechowywane są w formie zaszyfrowanej
+			\item Mechanizmy sprawdzania bezpieczeństwa haseł użytkowników
+		\end{enumerate}
+		
+		Wykorzystanie logiki napisanej w aplikacji serwerowej w języku JAVA \ref{tab:zestawienie_narzędzi} powinno umożliwiać szyfrowanie i sprawdzenie bezpieczeństwa haseł
+		
+		\subsection{Wydajność}
+		\item \textbf{Wydajność} -- System powinien zapewniać satysfakcjonujący czas oczekiwania na wykonanie operacji
+	\item \textbf{Mierzalne kryteria}
+		\begin{enumerate}
+			\item Większość operacji użytkownika powinno być wykonane poniżej 3 sekund
+			\item Skalowalność systemu: możliwość obsłużenia równocześnie zalogowanych 100 użytkowników
+		\end{enumerate}
+		
+		Java, JavaScript umożliwiają szybkie wykonywanie operacji po stronie serwerowej i klienckiej.
+		
+		\subsection{Koszty}
+	\item \textbf{Koszty} -- System powinien mieć niskie koszty utrzymania oraz być łatwy w utrzymaniu
+	\item \textbf{Mierzalne kryteria}
+		\begin{enumerate}
+			\item Miesięczne koszty utrzymania nie powinny przekraczać określonego budżetu 
+			\item Wprowadzenie zmian przez deweloperów w systemie nie powinno generować dużych kosztów 
+		\end{enumerate}
+		
+	Koszty utrzymania są związane z wdrożeniem systemu na środowisko produkcyjne. Dokumentacja systemu umożliwia szybką identyfikacje potencjalnych problemów co powinno zredukować koszty
 \end{itemize}
  
 
