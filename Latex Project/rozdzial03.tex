@@ -4,372 +4,372 @@
 
 Projektowany system powinien zapewnieć szereg funkcji do potencjalnego wykorzystania przez jego użytkowników. Poniżej wypisano te funkcje w podziale z uwagi na ich zastosowanie. Dodatkowo dostarczono opis podstawowych przypadków ich użycia.
 \begin{enumerate}[label={\textbf{FR}-\bfseries\arabic*}]
-    \item \textbf{Zarządzanie użytkownikami}
+    \item \textbf{Zarządzanie użytkownikami:}
     \begin{enumerate}[label={FR-\arabic{enumi}.\arabic*},noparskip]
-        \item Rejestracja użytkownika
-        \item Logowanie użytkownika
-        \item Usuwanie pracownika
-        \item Wylogowywanie użytkownika
-				\item Przeglądanie zarejestrowanych pracowników
+        \item rejestracja użytkownika,
+        \item logowanie użytkownika,
+        \item usuwanie pracownika,
+        \item wylogowywanie użytkownika,
+				\item przeglądanie zarejestrowanych pracowników.
     \end{enumerate}
 		
-		\item \textbf{Zarządzanie sprzętem komputerowym}
+		\item \textbf{Zarządzanie sprzętem komputerowym:}
     \begin{enumerate}[label={FR-\arabic{enumi}.\arabic*},noparskip]
-        \item Przeglądanie sprzętu komputerowego
-        \item Dodawanie nowego sprzętu komputerowego
-        \item Modyfikacja sprzętu komputerowego
-        \item Usuwanie sprzętu komputerowego
-				\item Wyświetlanie szczegółowych informacji dotyczących sprzętu komputerowego
+        \item przeglądanie sprzętu komputerowego,
+        \item dodawanie nowego sprzętu komputerowego,
+        \item modyfikacja sprzętu komputerowego,
+        \item usuwanie sprzętu komputerowego,
+				\item wyświetlanie szczegółowych informacji dotyczących sprzętu komputerowego.
 		\end{enumerate}
 		
-		\item \textbf{Zarządzanie komponentami komputera}
+		\item \textbf{Zarządzanie komponentami komputera:}
 			\begin{enumerate}[label={FR-\arabic{enumi}.\arabic*},noparskip]		
-				\item Przeglądanie komponentów komputera
-				\item Dodawanie komponentu(procesora, ram, dysku) dla komputera
-				\item Modyfikacja komponentu komputera
-				\item Usuwanie komponentu komputera
+				\item przeglądanie komponentów komputera,
+				\item dodawanie komponentu(procesora, ram, dysku) dla komputera,
+				\item modyfikacja komponentu komputera,
+				\item usuwanie komponentu komputera.
     \end{enumerate}
 		
 		
 		\item \textbf{Zarządzanie loterią wybranego sprzętu komputerowego}
 		\begin{enumerate}[label={FR-\arabic{enumi}.\arabic*},noparskip]
-        \item Zmiana gotowości sprzętu do losowania
-        \item Zmiana statusu sprzętu na sprzedane lub niesprzedane
-				\item Wyświetlanie listy uczestników biorących udział w losowaniu
-        \item Losowanie zwycięzcy loterii
+        \item zmiana gotowości sprzętu do losowania,
+        \item zmiana statusu sprzętu na sprzedane lub niesprzedane,
+				\item wyświetlanie listy uczestników biorących udział w losowaniu,
+        \item losowanie zwycięzcy loterii.
     \end{enumerate}
 		
-		\item \textbf{Zarządzanie uczestnictem w loterii}
+		\item \textbf{Zarządzanie uczestnictwem w loterii}
 			\begin{enumerate}[label={FR-\arabic{enumi}.\arabic*},noparskip]
-        \item Przeglądanie historii loterii wybranego użytkownika
-        \item Zapisywanie się na loterię urządzenia
-				\item Wypisywanie się z loterii urządzenia
+        \item przeglądanie historii loterii wybranego użytkownika,
+        \item zapisywanie się na loterię urządzenia,
+				\item wypisywanie się z loterii urządzenia.
     \end{enumerate}
 \end{enumerate}
 
 \paragraph{\underline{FR-1.1 Rejestracja użytkownika}}\mbox{}\\[1mm]
 	\noindent\textbf{Opis:} Rejestracja użytkownika ze standardową rolą, przy użyciu maila, nazwy użytkownika, imienia, nazwiska, hasła i potwierdzenia hasła.\\
 	\noindent\textbf{Aktorzy:} Pracownik\\
-	\textbf{Warunki początkowe:} Brak\\
+	\textbf{Warunki początkowe:} Brak.\\
 	\textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Podanie w formularzu maila, nazwy użytkownika, Imienia, nazwiska, hasła i potwierdzenia hasła
-    \item Kliknięcie przycisku zarejestruj
-		\item Przekierowanie do okna logowania
+		\item Podanie w formularzu maila, nazwy użytkownika, Imienia, nazwiska, hasła i potwierdzenia hasła.
+    \item Kliknięcie przycisku zarejestruj.
+		\item Przekierowanie do okna logowania.
 	\end{enumerate}
 	\textbf{Przebieg alternatywny 1 (odrzucenie próby logowania):}
 	\begin{enumerate}[noparskip]\setcounter{enumi}{4}
-		\item Użytkownik wprowadził 2 różne hasła w polach hasło i powtórz hasło przez co rejestracja nie powiodła się
-		\item Użytkownik o zadanym mailu lub nazwie użytkownika istnieje przez co rejestracja nie powiodła się
+		\item Użytkownik wprowadził 2 różne hasła w polach hasło i powtórz hasło przez co rejestracja nie powiodła się.
+		\item Użytkownik o zadanym mailu lub nazwie użytkownika istnieje przez co rejestracja nie powiodła się.
 	\end{enumerate}	\mbox{}\\[-11mm]
 %%  \textbf{Warunki końcowe:} Brak. %\mbox{}\\[-4mm]
 
 \paragraph{\underline{FR-1.2 Logowanie użytkownika}}\mbox{}\\[1mm]
 	\noindent\textbf{Opis:} Logowanie użytkownika przy pomocy email lub nazwy użytkownika oraz hasła.\\
 	\noindent\textbf{Aktorzy:} Pracownik, Administrator\\
-	\textbf{Warunki początkowe:} Użytkownik został wcześniej zarejestrowany w systemie\\
+	\textbf{Warunki początkowe:} Użytkownik został wcześniej zarejestrowany w systemie.\\
 	\textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Podanie w formularzu nazwy użytkownika lub email oraz podanie hasła
-    \item Kliknięcie przycisku zaloguj
-		\item Nadanie użytkownikowi odpowiednich uprawnień
-		\item Przekierowanie na stronę domową
+		\item Podanie w formularzu nazwy użytkownika lub email oraz podanie hasła.
+    \item Kliknięcie przycisku zaloguj.
+		\item Nadanie użytkownikowi odpowiednich uprawnień.
+		\item Przekierowanie na stronę domową.
 	\end{enumerate} 
 	\indent \textbf{Przebieg alternatywny 1 (odrzucenie próby logowania):}
 	\begin{enumerate}[noparskip]\setcounter{enumi}{3}
-		\item Podane dane w formularzu są nieprawidłowe, przez co nie następuje logowanie i pozostaje na stronie logowania
+		\item Podane dane w formularzu są nieprawidłowe, przez co nie następuje logowanie i pozostaje na stronie logowania.
 	\end{enumerate}	\mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-1.3 Usuwanie pracownika}}\mbox{}\\[1mm]
 	\noindent\textbf{Opis:}	Administrator jako zarządca systemu może usunąć użytkownika.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-1.5 Przeglądanie zarejestrowanych pracowników	
+		\item FR-1.5 Przeglądanie zarejestrowanych pracowników.
 	\end{enumerate}
   \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku usuń na wierszu reprezentującym pracownika
-    \item Usunięcie z bazy danych pracownika oraz jego historii uczestnictwa w loteriach
+		\item Kliknięcie przycisku usuń na wierszu reprezentującym pracownika.
+    \item Usunięcie z bazy danych pracownika oraz jego historii uczestnictwa w loteriach.
 	\end{enumerate} \mbox{}\\[-11mm]
 
-\paragraph{\underline{FR-1.4 Wylogowywanie użytkownika}}\mbox{}\\[1mm]
+\paragraph{\underline{FR-1.4 Wylogowywanie użytkownika.}}\mbox{}\\[1mm]
 	\noindent\textbf{Opis:} Wylogowywanie z systemu\\
 	\noindent\textbf{Aktorzy:} Pracownik, Administrator\\
-	\textbf{Warunki początkowe:} Użytkownik został wcześniej zalogowany\\
+	\textbf{Warunki początkowe:} Użytkownik został wcześniej zalogowany.\\
 	\textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku wyloguj
-		\item Przejście na stronę logowania
+		\item Kliknięcie przycisku wyloguj.
+		\item Przejście na stronę logowania.
 	\end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-1.5 Przeglądanie zarejestrowanych pracowników}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Możliwe jest wyświetlanie wszystkich użytkowników z rolą Pracownik\\
+	\noindent\textbf{Opis:} Możliwe jest wyświetlanie wszystkich użytkowników z rolą Pracownik.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
 	\textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku zarządzaj użytkownikami
-		\item Wyświetlenie widoku użytkowników
+		\item Kliknięcie przycisku zarządzaj użytkownikami.
+		\item Wyświetlenie widoku użytkowników.
 	\end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-2.1 Przeglądanie sprzętu komputerowego}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Administrator widzi wszystkie sprzęty dodane w systemie, natomiast pracownik tylko te któe są gotowe do loterii\\
+	\noindent\textbf{Opis:} Administrator widzi wszystkie sprzęty dodane w systemie, natomiast pracownik tylko te które są gotowe do loterii.\\
 	\noindent\textbf{Aktorzy:} Pracownik, Administrator\\
-	\textbf{Warunki początkowe:} Użytkownik jest zalogowany w systemie\\
+	\textbf{Warunki początkowe:} Użytkownik jest zalogowany w systemie.\\
 	\textbf{Extend:} 
 	\begin{enumerate}[noparskip]
-		\item Filtrowanie jaki rodzaj sprzętu ma być wyświetlany na widoku lub wybranie wszystkich rodzajów
-		\item Filtrowanie sprzętu po biurze w jakim się znajdują
+		\item Filtrowanie jaki rodzaj sprzętu ma być wyświetlany na widoku lub wybranie wszystkich rodzajów.
+		\item Filtrowanie sprzętu po biurze w jakim się znajdują.
 	\end{enumerate}
 	\textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Wyświetlenie widoku sprzętów komputerowych na stronie domowej, z dostępnymi operacjami zarządzania sprzętem i loteriami tych sprzętów
+		\item Wyświetlenie widoku sprzętów komputerowych na stronie domowej, z dostępnymi operacjami zarządzania sprzętem i loteriami tych sprzętów.
 	\end{enumerate} 
 	\textbf{Przebieg alternatywny:}
 	\begin{enumerate}[noparskip]
-		\item[1b] Użytkownik o dostępie pracownika nie ma dostępu do operacji zarządzania sprzętem
+		\item[1b] Użytkownik o dostępie pracownika nie ma dostępu do operacji zarządzania sprzętem.
 	\end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-2.2 Dodanie nowego sprzętu komputerowego}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Administrator może dodawać 3 różne rodzaje urządzeń zdefiniowanych w systemie\\
+	\noindent\textbf{Opis:} Administrator może dodawać 3 różne rodzaje urządzeń zdefiniowanych w systemie.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
 	\textbf{Extend:} 
 	\begin{enumerate}[noparskip]
-		\item FR-3.2 Dodawanie komponentu dla komputera
+		\item FR-3.2 Dodawanie komponentu dla komputera.
 	\end{enumerate}
 	\textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku odpowiedzialnego za dodanie urządzenia
-    \item Wybranie z listy rozwijanej typu urządzenia które będzie dodawane
-		\item System wyświetla formularz z odpowiednim rodzajem urządzenia
-		\item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie
-		\item Dodanie urządzenia do systemu	\end{enumerate} 
+		\item Kliknięcie przycisku odpowiedzialnego za dodanie urządzenia.
+    \item Wybranie z listy rozwijanej typu urządzenia które będzie dodawane.
+		\item System wyświetla formularz z odpowiednim rodzajem urządzenia.
+		\item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie.
+		\item Dodanie urządzenia do systemu.	\end{enumerate} 
 	\textbf{Przebieg alternatywny:}
 	\begin{enumerate}[noparskip]\setcounter{enumi}{3}
-		\item Administrator nie znalazł w formularzu komputera; procesora, ram, lub dysku i postanowił dodać taki klikając odpowiedni przycisk: dodaj procesor, dodaj ram lub dodaj pamięć
-		\item Następuje teraz wykonanie przypadku FR-3.2 Dodawanie komponentu dla komputera
-		\item Kontynuacja uzupełniania formularza
-		\item Dodanie nowego komputera
+		\item Administrator nie znalazł w formularzu komputera; procesora, ram, lub dysku i postanowił dodać taki klikając odpowiedni przycisk: dodaj procesor, dodaj ram lub dodaj pamięć.
+		\item Następuje teraz wykonanie przypadku FR-3.2 Dodawanie komponentu dla komputera.
+		\item Kontynuacja uzupełniania formularza.
+		\item Dodanie nowego komputera.
 	\end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-2.3 Modyfikacja sprzętu komputerowego}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Możliwa jest korekta urządzeń lub podanie brakujących parametrów urządzenia\\
+	\noindent\textbf{Opis:} Możliwa jest korekta urządzeń lub podanie brakujących parametrów urządzenia.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-2.1 Przeglądanie sprzętu komputerowego
+		\item FR-2.1 Przeglądanie sprzętu komputerowego.
 	\end{enumerate}
 	\textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-    \item Kliknięcie przycisku modyfikuj na odpowiednim wierszu reprezentującym urządzenie
-	  \item System wykrywa odpowiedni rodzaj urządzenia i wyświetla formularz z poprzednimi danymi urządzenia
-	  \item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie
-	  \item Modyfikacja urządzenia
+    \item Kliknięcie przycisku modyfikuj na odpowiednim wierszu reprezentującym urządzenie.
+	  \item System wykrywa odpowiedni rodzaj urządzenia i wyświetla formularz z poprzednimi danymi urządzenia.
+	  \item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie.
+	  \item Modyfikacja urządzenia.
 	\end{enumerate} 
 	\textbf{Przebieg alternatywny:}
 	\begin{enumerate}[noparskip]\setcounter{enumi}{4}
-		\item Administrator nie znalazł w formularzu komputera; procesora, ram, lub dysku i postanowił dodać taki klikając odpowiedni przycisk: dodaj procesor, dodaj ram lub dodaj pamięć
-		\item Następuje teraz wykonanie przypadku FR-3.2 Dodawanie komponentu dla komputera
-		\item Kontynuacja uzupełniania formularza
-		\item Modyfikacja komputera
+		\item Administrator nie znalazł w formularzu komputera; procesora, ram, lub dysku i postanowił dodać taki klikając odpowiedni przycisk: dodaj procesor, dodaj ram lub dodaj pamięć.
+		\item Następuje teraz wykonanie przypadku FR-3.2 Dodawanie komponentu dla komputera.
+		\item Kontynuacja uzupełniania formularza.
+		\item Modyfikacja komputera.
 	\end{enumerate} \mbox{}\\[-11mm]
 	
 \paragraph{\underline{FR-2.4 Usuwanie sprzętu komputerowego}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Administrator może usuwać urządzenia\\
+	\noindent\textbf{Opis:} Administrator może usuwać urządzenia.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-2.1 Przeglądanie sprzętu komputerowego
+		\item FR-2.1 Przeglądanie sprzętu komputerowego.
 	\end{enumerate}
     \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku usuń na odpowiednim wierszu reprezentującym urządzenie
-		\item Usunięcie sprzętu z systemu
+		\item Kliknięcie przycisku usuń na odpowiednim wierszu reprezentującym urządzenie.
+		\item Usunięcie sprzętu z systemu.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-2.5 Wyświetlanie szczegółowych informacji dotyczących sprzętu}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Możliwe jest szczegółowe sprawdzenie dotyczące parametrów sprzętów w specjalnym formularzu\\
+	\noindent\textbf{Opis:} Możliwe jest szczegółowe sprawdzenie dotyczące parametrów sprzętów w specjalnym formularzu.\\
 	\noindent\textbf{Aktorzy:} Administrator, Pracownik\\
-	\textbf{Warunki początkowe:} Użytkownik został zalogowany do systemu\\
+	\textbf{Warunki początkowe:} Użytkownik został zalogowany do systemu.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-2.1 Przeglądanie sprzętu komputerowego
+		\item FR-2.1 Przeglądanie sprzętu komputerowego.
 	\end{enumerate}
   \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku informacji o urządzeniu na odpowiednim wierszu reprezentującym urządzenie
-		\item System wykrywa odpowiedni rodzaj urządzenia i wyświetla formularz urządzenia z zablokowanymi polami 
+		\item Kliknięcie przycisku informacji o urządzeniu na odpowiednim wierszu reprezentującym urządzenie.
+		\item System wykrywa odpowiedni rodzaj urządzenia i wyświetla formularz urządzenia z zablokowanymi polami.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-3.1 Przeglądanie komponentów komputera}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Do lepszego oszacowania ceny sprzętu Administrator ma widok komponentów które może posiadać komputer\\
+	\noindent\textbf{Opis:} Do lepszego oszacowania ceny sprzętu Administrator ma widok komponentów które może posiadać komputer.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
 	\textbf{Extend:}
     \begin{enumerate}[noparskip]
-		\item filtrowanie komponentów po rodzaju: procesor, ram, dysk pamięci
+		\item Filtrowanie komponentów po rodzaju: procesor, ram, dysk pamięci.
 	\end{enumerate}
   \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku odpowiedzialnego za widok komponentów
-		\item Wyświetlenie widoku na stronie
+		\item Kliknięcie przycisku odpowiedzialnego za widok komponentów.
+		\item Wyświetlenie widoku na stronie.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-3.2 Dodawanie nowego komponentu komputera}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Możliwe jest dodawanie komponentu na który składa się cena i nazwa\\
+	\noindent\textbf{Opis:} Możliwe jest dodawanie komponentu na który składa się cena i nazwa.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
   \textbf{Przebieg podstawowy:}
   \begin{enumerate}[noparskip]
-		\item Wykonanie przypadku FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera
-		\item Kliknięcie przycisku dodaj procesor, dodaj RAM lub dodaj dysk
-		\item System wyświetla formularz komponentu
-		\item Wpisanie nazwy i ceny komponentu
-		\item Dodanie komponentu do bazy danych
+		\item Wykonanie przypadku FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera.
+		\item Kliknięcie przycisku dodaj procesor, dodaj RAM lub dodaj dysk.
+		\item System wyświetla formularz komponentu.
+		\item Wpisanie nazwy i ceny komponentu.
+		\item Dodanie komponentu do bazy danych.
   \end{enumerate}
   \textbf{Przebieg podstawowy:}
   \begin{enumerate}[noparskip]
-		\item[1b] Administrator wykonuje dodanie z poziomu formularza dodawania komputera
-		\item[4] Administrator podał nazwę komponentu która istnieje w bazie danych
-		\item[5] Następuje modyfikacja podanej ceny istniejącego komponentu zamiast dodania nowego
+		\item[1b] Administrator wykonuje dodanie z poziomu formularza dodawania komputera.
+		\item[4] Administrator podał nazwę komponentu która istnieje w bazie danych.
+		\item[5] Następuje modyfikacja podanej ceny istniejącego komponentu zamiast dodania nowego.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-3.3 Modyfikacja komponentu komputera}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Możliwe jest modyfikowanie komponentu na który składa się cena i nazwa\\
+	\noindent\textbf{Opis:} Możliwe jest modyfikowanie komponentu na który składa się cena i nazwa.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera
+		\item FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera.
 	\end{enumerate}
   \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku modyfikuj na odpowiednim wierszu reprezentującym komponent
-		\item Modyfikacja komponentu w bazie danych
+		\item Kliknięcie przycisku modyfikuj na odpowiednim wierszu reprezentującym komponent.
+		\item Modyfikacja komponentu w bazie danych.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-3.4 Usuwanie komponentu komputera}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Możliwe jest usuwanie komponentów wchodzącym w skład komputera\\
+	\noindent\textbf{Opis:} Możliwe jest usuwanie komponentów wchodzącym w skład komputera.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera
+		\item FR-3.1 Przeglądanie komponentów(procesory, ram, dyski) komputera.
 	\end{enumerate}
     \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku usuń na odpowiednim wierszu reprezentującym komponent
-		\item Usunięcie komponentu z bazy, oraz ustawienie wszystkich odwołań w komputerach do danego komponentu na null
+		\item Kliknięcie przycisku usuń na odpowiednim wierszu reprezentującym komponent.
+		\item Usunięcie komponentu z bazy, oraz ustawienie wszystkich odwołań w komputerach do danego komponentu na null.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-4.1 Zmiana gotowości sprzętu do losowania}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Administrator zarządza urządzeniem i określa jego gotowość do loterii\\
+	\noindent\textbf{Opis:} Administrator zarządza urządzeniem i określa jego gotowość do loterii.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie nie zostało wcześniej wylosowane w loterii\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie nie zostało wcześniej wylosowane w loterii.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-2.1 Przeglądanie sprzętu komputerowego
+		\item FR-2.1 Przeglądanie sprzętu komputerowego.
 	\end{enumerate}
     \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku gotowości do losowania na odpowiednim wierszu reprezentującym urządzenie
-		\item Zmiana gotowości losowania na przeciwny do poprzedniego
+		\item Kliknięcie przycisku gotowości do losowania na odpowiednim wierszu reprezentującym urządzenie.
+		\item Zmiana gotowości losowania na przeciwny do poprzedniego.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-4.2 Zmiana statusu sprzętu na sprzedane lub niesprzedane}}\mbox{}\\[1mm]
 	\noindent\textbf{Opis:} Administrator kontroluje które sprzęty zostały już sprzedane i dostarczone do pracownika\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie zostało wylosowane w loterii\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie zostało wylosowane w loterii.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
 		\item FR-2.1 Przeglądanie sprzętu komputerowego
 	\end{enumerate}
   \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku odpowiedzialnego za zmianę statusu sprzedane na odpowiednim wierszu reprezentującym urządzenie
-		\item Aktualizacja statusu sprzedane urządzenia w systemie
+		\item Kliknięcie przycisku odpowiedzialnego za zmianę statusu sprzedane na odpowiednim wierszu reprezentującym urządzenie.
+		\item Aktualizacja statusu sprzedane urządzenia w systemie.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-4.3 Wyświetlanie listy uczestników biorącym udział w losowaniu}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Administrator sprawdza jacy użytkownicy biorą udział w losowaniu sprzętu\\
+	\noindent\textbf{Opis:} Administrator sprawdza jacy użytkownicy biorą udział w losowaniu sprzętu.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Status urządzenia został ustawiony na gotowe do losowania\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Status urządzenia został ustawiony na gotowe do losowania.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-2.1 Przeglądanie sprzętu komputerowego
+		\item FR-2.1 Przeglądanie sprzętu komputerowego.
 	\end{enumerate}
   \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku odpowiedzialnego za wyświetlanie listy uczestników na odpowiednim wierszu reprezentującym urządzenie
-		\item Przekierowanie do widoku użytkowników biorącym udział w losowaniu wybranego sprzętu
-		\item Wyświetlanie widoku uczestników losowania, oraz ich statusu dotyczącego czy już wygrali loterię
+		\item Kliknięcie przycisku odpowiedzialnego za wyświetlanie listy uczestników na odpowiednim wierszu reprezentującym urządzenie.
+		\item Przekierowanie do widoku użytkowników biorącym udział w losowaniu wybranego sprzętu.
+		\item Wyświetlanie widoku uczestników losowania, oraz ich statusu dotyczącego czy już wygrali loterię.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-4.4 Losowanie zwycięzcy loterii}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Administrator losuje zwycięzce spośród tych pracowników którzy zapisali się a loterię\\
+	\noindent\textbf{Opis:} Administrator losuje zwycięzce spośród tych pracowników którzy zapisali się a loterię.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Status urządzenia został ustawiony na gotowe do losowania, Przynajmniej jeden pracownik jest zapisany na losowanie\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Status urządzenia został ustawiony na gotowe do losowania, Przynajmniej jeden pracownik jest zapisany na losowanie.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-2.1 Przeglądanie sprzętu komputerowego
+		\item FR-2.1 Przeglądanie sprzętu komputerowego.
 	\end{enumerate}
   \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku odpowiedzialnego za losowanie zwycięzcy na odpowiednim wierszu reprezentującym urządzenie
-		\item Ustawienie daty losowania na dzisiejszą
-		\item Ustawienie wylosowanego pracownika jako zwycięzce losowania 
+		\item Kliknięcie przycisku odpowiedzialnego za losowanie zwycięzcy na odpowiednim wierszu reprezentującym urządzenie.
+		\item Ustawienie daty losowania na dzisiejszą.
+		\item Ustawienie wylosowanego pracownika jako zwycięzce losowania.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-5.1 Przeglądanie historii loterii wybranego użytkownika}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} W systemie istnieje filtrowanie dotyczących historii loterii\\
+	\noindent\textbf{Opis:} W systemie istnieje filtrowanie dotyczących historii loterii.\\
 	\noindent\textbf{Aktorzy:} Administrator, Pracownik\\
-	\textbf{Warunki początkowe:} Użytkownik został zalogowany w systemie\\
+	\textbf{Warunki początkowe:} Użytkownik został zalogowany w systemie.\\
 	\textbf{Extend:} 
 	\begin{enumerate}[noparskip]
-		\item Filtrowanie loterii po statusie uczestnika: wygrana, przegrana, trwająca
-		\item FR-2.5 Wyświetlanie szczegółowych informacji dotyczących sprzętu komputerowego
+		\item Filtrowanie loterii po statusie uczestnika: wygrana, przegrana, trwająca.
+		\item FR-2.5 Wyświetlanie szczegółowych informacji dotyczących sprzętu komputerowego.
 	\end{enumerate}
     \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Kliknięcie przycisku pokaż historie na odpowiednim wierszu reprezentującym użytkownika
-		\item Wyświetlenie sprzętu, daty loterii oraz statusu użytkownika w odniesieniu do bieżącej loterii 
+		\item Kliknięcie przycisku pokaż historie na odpowiednim wierszu reprezentującym użytkownika.
+		\item Wyświetlenie sprzętu, daty loterii oraz statusu użytkownika w odniesieniu do bieżącej loterii .
     \end{enumerate}
     \textbf{Przebieg alternatywny:}
 	\begin{enumerate}[noparskip]
-		\item [1b] Kliknięcie przycisku pokaż historie użytkownika który jest właśnie zalogowany
+		\item [1b] Kliknięcie przycisku pokaż historie użytkownika który jest właśnie zalogowany.
 	\end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-5.2 Zapisywanie się na loterię urządzenia}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Pracownik przeglądając specyfikacje sprzętu może być zainteresowany wzięciem udziału w loterii\\
+	\noindent\textbf{Opis:} Pracownik przeglądając specyfikacje sprzętu może być zainteresowany wzięciem udziału w loterii.\\
 	\noindent\textbf{Aktorzy:} Pracownik\\
-	\textbf{Warunki początkowe:} Pracownik został wcześniej zalogowany w systemie i posiada uprawnienia pracownika, sprzęt nie został wcześniej wylosowany, pracownik wcześniej nie zapisał się na loterię dotyczącego tego sprzętu\\
+	\textbf{Warunki początkowe:} Pracownik został wcześniej zalogowany w systemie i posiada uprawnienia pracownika, sprzęt nie został wcześniej wylosowany, pracownik wcześniej nie zapisał się na loterię dotyczącego tego sprzętu.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-2.1 Przeglądanie sprzętu komputerowego
+		\item FR-2.1 Przeglądanie sprzętu komputerowego.
 	\end{enumerate}
   \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Pracownik klika przycisk weź udział na odpowiednim wierszu reprezentującym urządzenie
-		\item Do systemu zostaje dodane uczestnictwo w loterii wybranego urządzenia
+		\item Pracownik klika przycisk weź udział na odpowiednim wierszu reprezentującym urządzenie.
+		\item Do systemu zostaje dodane uczestnictwo w loterii wybranego urządzenia.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-5.3 Wypisanie się z loterii}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Pracownik może chcieć się wypisać z loterii\\
+	\noindent\textbf{Opis:} Pracownik może chcieć się wypisać z loterii.\\
 	\noindent\textbf{Aktorzy:} Pracownik\\
-	\textbf{Warunki początkowe:} Pracownik został wcześniej zalogowany w systemie i posiada uprawnienia pracownika, sprzęt nie został wcześniej wylosowany, pracownik wcześniej zapisał się na loterię dotyczącego wybranego sprzętu\\
+	\textbf{Warunki początkowe:} Pracownik został wcześniej zalogowany w systemie i posiada uprawnienia pracownika, sprzęt nie został wcześniej wylosowany, pracownik wcześniej zapisał się na loterię dotyczącego wybranego sprzętu.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
-		\item FR-2.1 Przeglądanie sprzętu komputerowego
+		\item FR-2.1 Przeglądanie sprzętu komputerowego.
 	\end{enumerate}
   \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Pracownik klika przycisk wypisz się na odpowiednim wierszu reprezentującym urządzenie
-		\item Z systemu zostaje usunięte uczestnictwo w loterii wybranego urządzenia
+		\item Pracownik klika przycisk wypisz się na odpowiednim wierszu reprezentującym urządzenie.
+		\item Z systemu zostaje usunięte uczestnictwo w loterii wybranego urządzenia.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \section{Wymagania niefunkcjonalne}
@@ -384,18 +384,18 @@ Etapem projektowania systemu jest zdefiniowanie wymagań niefunkcjonalnych. Poni
 	\item \textbf{Kryterium} Ogólnodostępność -- system powinien być dostępny dla każdego użytkownika mającego dostęp do internetu. Powinien być zgodny z przeglądarkami internetowymi.
 	\item \textbf{Mierzalne kryteria}
 		\begin{enumerate}
-			\item Czas odpowiedzi dla żądania użytkownika nie przekracza 2 sekund
-			\item Kompatybilność z przeglądarkami: Google Chrome, Mozilla Firefox, Microsoft Edge.
-			\item Responsywność interfejsu użytkownika na różnych urządzeniach (desktop, smartphone).
+			\item czas odpowiedzi dla żądania użytkownika nie przekracza 2 sekund,
+			\item kompatybilność z przeglądarkami: Google Chrome, Mozilla Firefox, Microsoft Edge,
+			\item responsywność interfejsu użytkownika na różnych urządzeniach (desktop, smartphone).
 		\end{enumerate}
-	Wykorzystanie biblioteki React \ref{tab:zestawienie_narzędzi} umożliwi spełnieni kryterium ogólnodostępności
+	Wykorzystanie biblioteki React \ref{tab:zestawienie_narzędzi} umożliwi spełnieni kryterium ogólnodostępności.
 		
 \subsection{Niezawodność}
 	\item \textbf{Niezawodność} -- system powinien być niepodatny na awarie.
 	\item \textbf{Mierzalne kryteria}
 		\begin{enumerate}
-			\item Średni czas pomiędzy zaobserwowanymi awariami powinien wynosić co najmniej 30 dni.
-			\item Średni czas naprawy w przypadku awarii nie powinien przekraczać 1 godziny
+			\item średni czas pomiędzy zaobserwowanymi awariami powinien wynosić co najmniej 30 dni,
+			\item średni czas naprawy w przypadku awarii nie powinien przekraczać 1 godziny.
 		\end{enumerate}
 	Niezawodność jest związana z działaniem aplikacji na środowisku chmurowym. 
 	
@@ -404,31 +404,31 @@ Etapem projektowania systemu jest zdefiniowanie wymagań niefunkcjonalnych. Poni
 	\item \textbf{Bezpieczeństwo} -- System powinien zabezpieczać dane użytkowników i posiadać mechanizmy uwierzytelniania i autoryzacji.
 	\item \textbf{Mierzalne kryteria}
 		\begin{enumerate}
-			\item Wrażliwe dane użytkowników przechowywane są w formie zaszyfrowanej
-			\item Mechanizmy sprawdzania bezpieczeństwa haseł użytkowników
+			\item wrażliwe dane użytkowników przechowywane są w formie zaszyfrowanej,
+			\item mechanizmy sprawdzania bezpieczeństwa haseł użytkowników.
 		\end{enumerate}
 		
 		Wykorzystanie logiki napisanej w aplikacji serwerowej w języku JAVA \ref{tab:zestawienie_narzędzi} powinno umożliwiać szyfrowanie i sprawdzenie bezpieczeństwa haseł
 		
 		\subsection{Wydajność}
-		\item \textbf{Wydajność} -- System powinien zapewniać satysfakcjonujący czas oczekiwania na wykonanie operacji
+		\item \textbf{Wydajność} -- System powinien zapewniać satysfakcjonujący czas oczekiwania na wykonanie operacji.
 	\item \textbf{Mierzalne kryteria}
 		\begin{enumerate}
-			\item Większość operacji użytkownika powinno być wykonane poniżej 3 sekund
-			\item Skalowalność systemu: możliwość obsłużenia równocześnie zalogowanych 100 użytkowników
+			\item większość operacji użytkownika powinno być wykonane poniżej 3 sekund,
+			\item skalowalność systemu: możliwość obsłużenia równocześnie zalogowanych 100 użytkowników.
 		\end{enumerate}
 		
 		Java, JavaScript umożliwiają szybkie wykonywanie operacji po stronie serwerowej i klienckiej.
 		
 		\subsection{Koszty}
-	\item \textbf{Koszty} -- System powinien mieć niskie koszty utrzymania oraz być łatwy w utrzymaniu
+	\item \textbf{Koszty} -- System powinien mieć niskie koszty utrzymania oraz być łatwy w utrzymaniu.
 	\item \textbf{Mierzalne kryteria}
 		\begin{enumerate}
-			\item Miesięczne koszty utrzymania nie powinny przekraczać określonego budżetu 
-			\item Wprowadzenie zmian przez deweloperów w systemie nie powinno generować dużych kosztów 
+			\item miesięczne koszty utrzymania nie powinny przekraczać określonego budżetu,
+			\item wprowadzenie zmian przez deweloperów w systemie nie powinno generować dużych kosztów.
 		\end{enumerate}
 		
-	Koszty utrzymania są związane z wdrożeniem systemu na środowisko produkcyjne. Dokumentacja systemu umożliwia szybką identyfikacje potencjalnych problemów co powinno zredukować koszty
+	Koszty utrzymania są związane z wdrożeniem systemu na środowisko produkcyjne. Dokumentacja systemu umożliwia szybką identyfikacje potencjalnych problemów co powinno zredukować koszty.
 \end{itemize}
  
 
