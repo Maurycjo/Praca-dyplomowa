@@ -1,9 +1,5 @@
 \chapter{Testy aplikacji}
-
-\section{Wykorzystane technologie}
-
-Do przetestowania aplikacji wykorzystano \textbf{Postmana} i \textbf{Lighthouse} \ref{tab:zestawienie_narzędzi}. Postman pozwoli sprawdzić czy zapytania oraz logika działają prawidłowo. Lighthouse pozwoli przeanalizować jakość strony internetowej
-
+Do przetestowania aplikacji wykorzystano \textbf{Postmana} i \textbf{Lighthouse} \ref{tab:zestawienie_narzędzi}. Postman pozwolił sprawdzić czy zapytania oraz logika działają prawidłowo. Lighthouse pozwolił przeanalizować jakość strony internetowej.
 
 \section{Testowanie restowych zapytań przy pomocy Postmana}
 Wykorzystując Postmana można na bieżąco monitorować stan aplikacji poprzez wysyłanie odpowiednich zapytań oraz obserwację odpowiedzi. Przetestowano każde z dostępnych zapytań zdefiniowane w tabeli \ref{tab:rest1} i \ref{tab:rest2}. Testowanie odbywało się na bieżąco z rozwojem systemu. Umożliwiło to szybką identyfikacje problemów.
@@ -12,17 +8,17 @@ Wykorzystując Postmana można na bieżąco monitorować stan aplikacji poprzez 
   \centering
 	\begin{tabular}{@{}llll@{}}
 	a) & b) & c) & d) \\
-	\includegraphics[width=0.21\linewidth]{rys06/struct/byid.pdf} & 
-	\includegraphics[width=0.21\linewidth]{rys06/struct/alldevices.pdf} & 
-	\includegraphics[width=0.21\linewidth]{rys06/struct/byOffice.pdf} & 
-	\includegraphics[width=0.21\linewidth]{rys06/struct/add.pdf} \\
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.22\linewidth]{rys06/struct/byid.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.22\linewidth]{rys06/struct/alldevices.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.22\linewidth]{rys06/struct/byOffice.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.22\linewidth]{rys06/struct/add.pdf}}} \\
  
 	e) & f) & g) & h)\\
 	
-	\includegraphics[width=0.21\linewidth]{rys06/struct/update.pdf} & 
-	\includegraphics[width=0.21\linewidth]{rys06/struct/del.pdf} & 
-	\includegraphics[width=0.21\linewidth]{rys06/struct/lottery.pdf} & 
-	\includegraphics[width=0.21\linewidth]{rys06/struct/user.pdf} \\
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.22\linewidth]{rys06/struct/update.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.22\linewidth]{rys06/struct/del.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.22\linewidth]{rys06/struct/lottery.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.22\linewidth]{rys06/struct/user.pdf}}} \\
  
  
 	\end{tabular}
@@ -42,8 +38,8 @@ Na scenariuszu testowym 1 \ref{getByIdTest:label} przetestowano pobieranie infor
   \centering
 	\begin{tabular}{@{}ll@{}}
 	a) & b) \\
-  \includegraphics[width=0.5\textwidth]{rys06/postmanTest/compById.pdf} & 
-	\includegraphics[width=0.5\textwidth]{rys06/postmanTest/otherById.pdf}
+  \vtop{\vskip-2ex\hbox{\includegraphics[width=0.48\textwidth]{rys06/postmanTest/compById.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.48\textwidth]{rys06/postmanTest/otherById.pdf}}}
 	\end{tabular}
   \caption{Scenariusz testowy 1,pobieranie informacji o urządzeniu, a) komputer, b) inne urządzenie}
   \label{getByIdTest:label}
@@ -58,8 +54,8 @@ Na scenariuszu testowym 2 \ref{addModTest:label} najpierw dodano a potem zmodyfi
   \centering
 	\begin{tabular}{@{}ll@{}}
 	a) & b) \\
-  \includegraphics[width=0.45\textwidth]{rys06/postmanTest/addComp.pdf} & 
-	\includegraphics[width=0.45\textwidth]{rys06/postmanTest/patch.pdf}
+  \vtop{\vskip-2ex\hbox{\includegraphics[width=0.48\textwidth]{rys06/postmanTest/addComp.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.48\textwidth]{rys06/postmanTest/patch.pdf}}}
 	\end{tabular}
   \caption{Scenariusz testowy 2,Dodawanie i modyfikowanie komputera, a) dodawanie, b) modyfikacja}
   \label{addModTest:label}
@@ -73,7 +69,7 @@ W scenariuszu testowym 3 \ref{deleteTest:label} pokazano w jaki sposób jest usu
 
 \begin{figure}[h]
 		\centering
-    \includegraphics[width=0.45\linewidth]{rys06/postmanTest/delete.pdf}
+    \includegraphics[width=0.48\linewidth]{rys06/postmanTest/delete.pdf}
     \caption{Scenariusz testowy 3, Usuwanie urządzenia po ID}
     \label{deleteTest:label}
 \end{figure}
@@ -88,8 +84,8 @@ Jedną z głównych funkcjonalności aplikacji jest przeprowadzenie losowania. S
   \centering
 	\begin{tabular}{@{}ll@{}}
 	a) & b) \\
-  \includegraphics[width=0.5\textwidth]{rys06/postmanTest/winner.pdf} & 
-	\includegraphics[width=0.5\textwidth]{rys06/postmanTest/badWinner.pdf}
+  \vtop{\vskip-2ex\hbox{\includegraphics[width=0.48\textwidth]{rys06/postmanTest/winner.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.48\textwidth]{rys06/postmanTest/badWinner.pdf}}}
 	\end{tabular}
   \caption{Scenariusz testowy 3,Losowanie zwycięzcy, a) powodzenie, b) niepowodzenie}
   \label{winnerTest:label}
@@ -101,7 +97,7 @@ Scenariusz testowy 4 \ref{registerTest:label} pokazuje jak działa rejestracja u
 
 \begin{figure}[h]
 		\centering
-    \includegraphics[width=0.7\linewidth]{rys06/postmanTest/register.pdf}
+    \includegraphics[width=0.48\linewidth]{rys06/postmanTest/register.pdf}
     \caption{Scenariusz testowy 4, Rejestracja użytkownika}
     \label{registerTest:label}
 \end{figure}
@@ -115,8 +111,8 @@ Wykorzystanie Lighthouse \ref{tab:zestawienie_narzędzi} pozwala na zbadanie wyd
   \centering
 	\begin{tabular}{@{}ll@{}}
 	a) & b) \\
-  \includegraphics[width=0.5\textwidth]{rys06/lighthouse/adminLightHouse.pdf} & 
-	\includegraphics[width=0.5\textwidth]{rys06/lighthouse/workerLightHouse.pdf}
+  \vtop{\vskip-2ex\hbox{\includegraphics[width=0.48\textwidth]{rys06/lighthouse/adminLightHouse.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.48\textwidth]{rys06/lighthouse/workerLightHouse.pdf}}}
 	\end{tabular}
   \caption{Test Lighthouse strony domowej, a) administratora, b) pracownika}
   \label{lh:label}

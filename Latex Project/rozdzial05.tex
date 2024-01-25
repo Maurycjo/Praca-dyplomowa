@@ -6,7 +6,7 @@
 \subsection{Struktura interfejsu REST}
 % TO DO: Opis do poprawy (bo zmieniono układ tabel)
 % DONE
-Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą być odbierane przez aplikację serwerową. Z~racji tego, że w aplikacji wykorzystywane są typy generyczne w klasach kontrolerach urządzeń i komponentów komputera (implementacja \ref{controller_genericDevice} uproszczono tabele by pokazać ogólną formę zapytań. Wszystkie zapytania posiadające "`\texttt{devices}"' w ścieżce umożliwiają alternatywne wywołanie zapytania na podstawie typu sprzętu. Ogólna zasada jest taka aby zastąpić "`\texttt{devices}"' odpowiadającemu typowi sprzętu: "`\texttt{computers}"', "`\texttt{tablets}"', "`\texttt{other-devices}"'. Powoduje to, że zapytanie wykonywane jest przez kontroler tej klasy, a co za tym idzie ma określony typ. Możliwe jest też wykonanie zapytania nie zmieniając ścieżki. Wtedy takie zapytanie wykonywane jest na ogólnym rodzaju sprzętu. Przykładowo "`\texttt{devices/all}"' pobiera wszystkie sprzęty nie zwracając uwagi na typ, natomiast "`\texttt{computers/all}"' pobiera tylko sprzętu typu "`\texttt{Computer}"'. Podobne rozwiązanie wykorzystano w komponentach komputera. Dotyczy to zapytań mających w ścieżce: "`\texttt{component}"'. Tutaj należy zamienić "`\texttt{component}"' na jeden z trzech dostępnych typów komponentu: "`\texttt{rams}"', "`\texttt{cpus}"', "`\texttt{storages}"'. W tym wypadku nie ma możliwości wywołania zapytania zawierającego "`\texttt{component}"'.
+Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą być odbierane przez aplikację serwerową. Z~racji tego, że w aplikacji wykorzystywane są typy generyczne w klasach kontrolerach urządzeń i komponentów komputera (implementacja \ref{controller_genericDevice}) uproszczono tabele by pokazać ogólną formę zapytań. Wszystkie zapytania posiadające "`\texttt{devices}"' w ścieżce umożliwiają alternatywne wywołanie zapytania na podstawie typu sprzętu. Ogólna zasada jest taka aby zastąpić "`\texttt{devices}"' odpowiadającemu typowi sprzętu: "`\texttt{computers}"', "`\texttt{tablets}"', "`\texttt{other-devices}"'. Powoduje to, że zapytanie wykonywane jest przez kontroler tej klasy, a co za tym idzie ma określony typ. Możliwe jest też wykonanie zapytania nie zmieniając ścieżki. Wtedy takie zapytanie wykonywane jest na ogólnym rodzaju sprzętu. Przykładowo "`\texttt{devices/all}"' pobiera wszystkie sprzęty nie zwracając uwagi na typ, natomiast "`\texttt{computers/all}"' pobiera tylko sprzętu typu "`\texttt{Computer}"'. Podobne rozwiązanie wykorzystano w komponentach komputera. Dotyczy to zapytań mających w ścieżce: "`\texttt{component}"'. Tutaj należy zamienić "`\texttt{component}"' na jeden z trzech dostępnych typów komponentu: "`\texttt{rams}"', "`\texttt{cpus}"', "`\texttt{storages}"'. W tym wypadku nie ma możliwości wywołania zapytania zawierającego "`\texttt{component}"'.
 
 \begin{table}[H]\small
 	\centering
@@ -125,14 +125,14 @@ Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona �
   \centering
 	\begin{tabular}{@{}lll@{}}
 	a) & b) & c) \\
-  \includegraphics[width=0.33\textwidth]{rys05/backend/ogolne.pdf} & 
-	\includegraphics[width=0.33\textwidth]{rys05/backend/controller.pdf} &
-	\includegraphics[width=0.33\textwidth]{rys05/backend/dto.pdf} \\
+  \vtop{\vskip-2ex\hbox{\includegraphics[width=0.33\textwidth]{rys05/backend/ogolne.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.33\textwidth]{rys05/backend/controller.pdf}}} &
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.33\textwidth]{rys05/backend/dto.pdf}}} \\
 
 	d) & e) & f) \\
-	\includegraphics[width=0.33\textwidth]{rys05/backend/entity.pdf} &
-	\includegraphics[width=0.33\textwidth]{rys05/backend/repository.pdf} &
-	\includegraphics[width=0.33\textwidth]{rys05/backend/service.pdf}
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.33\textwidth]{rys05/backend/entity.pdf}}} &
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.33\textwidth]{rys05/backend/repository.pdf}}} &
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.33\textwidth]{rys05/backend/service.pdf}}}
 	\end{tabular}
   \caption{Struktura projektu a) ogólna struktura, b) kontrolery, c) data transfer object, d) encje, e) repozytoria, f) serwisy}
   \label{backend_struktura:label}
@@ -343,7 +343,7 @@ public class TabletService extends GenericDeviceService<Tablet>{
 		// Pozostała część klasy
 \end{lstlisting}
 
-Serwis klasy \texttt{TabletService} dziedziczy i parametryzuje metody klasy \texttt{GenericDeviceService}. Wykorzystuje on w linii 13 metodę klasy nadrzędnej co uprasza implementacje metody dodającej sprzęt(linia 9)
+Serwis klasy \texttt{TabletService} dziedziczy i parametryzuje metody klasy \texttt{GenericDeviceService}. Wykorzystuje on w linii 13 metodę klasy nadrzędnej co uprasza implementacje metody dodającej sprzęt (linia 9)
 
 
 
@@ -434,14 +434,14 @@ Strukturę projektu pokazano na rysunku \ref{frontend_struktura:label}
   \centering
 	\begin{tabular}{@{}lll@{}}
 	a) & b) & c) \\
-  \includegraphics[width=0.3\textwidth]{rys05/frontend/frontend.pdf} & 
-	\includegraphics[width=0.3\textwidth]{rys05/frontend/auth.pdf} &
-	\includegraphics[width=0.3\textwidth]{rys05/frontend/bar.pdf} \\
+  \vtop{\vskip-2ex\hbox{\includegraphics[width=0.27\textwidth]{rys05/frontend/frontend.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.3\textwidth]{rys05/frontend/auth.pdf}}} &
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.3\textwidth]{rys05/frontend/bar.pdf}}} \\
 
 	d) & e) & f) \\
-	\includegraphics[width=0.3\textwidth]{rys05/frontend/components.pdf} &
-	\includegraphics[width=0.3\textwidth]{rys05/frontend/deviceform.pdf} &
-	\includegraphics[width=0.3\textwidth]{rys05/frontend/view.pdf}
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.3\textwidth]{rys05/frontend/components.pdf}}} &
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.3\textwidth]{rys05/frontend/deviceform.pdf}}} &
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.3\textwidth]{rys05/frontend/view.pdf}}}
 	\end{tabular}
   \caption{Struktura projektu a) ogólna struktura, b) Logowanie i rejestracja, c) pasek nawigacyjny, d) formularze komponentów, e) formularze sprzętów, f) widoki stron}
   \label{frontend_struktura:label}
@@ -556,8 +556,8 @@ Zdefiniowano widoki aplikacji i pogrupowano je ze względu na typ które pełni�
   \centering
 	\begin{tabular}{@{}ll@{}}
 	a) & b) \\
-  \includegraphics[width=0.35\textwidth]{rys05/view/login.pdf} & 
-	\includegraphics[width=0.35\textwidth]{rys05/view/register.pdf}
+  \vtop{\vskip-2ex\hbox{\includegraphics[width=0.35\textwidth]{rys05/view/login.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.35\textwidth]{rys05/view/register.pdf}}}
 	\end{tabular}
   \caption{Widok W-1, Logowanie i Rejestracja a) logowanie, b) rejestracja}
   \label{authview:label}
@@ -692,9 +692,9 @@ W przypadku dodaniu komponentu, którego nazwa już istnieje następuje modyfika
   \centering
 	\begin{tabular}{@{}lll@{}}
 	a) & b) & c) \\
-  \includegraphics[width=0.35\textwidth]{rys05/view/addProc.pdf} & 
-	\includegraphics[width=0.35\textwidth]{rys05/view/addRam.pdf} &
-	\includegraphics[width=0.35\textwidth]{rys05/view/addStorage.pdf}
+  \includegraphics[width=0.31\textwidth]{rys05/view/addProc.pdf} & 
+	\includegraphics[width=0.31\textwidth]{rys05/view/addRam.pdf} &
+	\includegraphics[width=0.31\textwidth]{rys05/view/addStorage.pdf}
 	\end{tabular}
   \caption{Widok formularzy komponentów W-7, a) procesor, b) ram, c) dysk pamięci}
   \label{compforms:label}
