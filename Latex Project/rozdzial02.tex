@@ -38,7 +38,7 @@ Java to termin, który w dziedzinie informatyki jest kojarzony z platformą do b
 
 Rozwój Javy odbywa się w ramach JCP (ang.~\emph{Java Community Process}). Każdy użytkownik może brać udział w recenzowaniu i dostarczaniu informacji zwrotnej dla publikowanych specyfikacji JSR (ang.~\emph{Java Specification Request}). Specyfikacje składają się z powiązanych ze sobą dokumentów, w tym specyfikacji platformy, języka i  maszyny wirtualnej. Na podstawie tych specyfikacji wydawcy tworzą własne implementacje Javy.
 
-\paragraph{Język Java} -- jest współbieżnym, opartym na klasach, obiektowym językiem programowania. Java wykorzystuje tworzenie programów źródłowych kompilowanych do kodu bajtowego. Kod bajtowy jest interpretowany przez maszynę wirtualną Javy.
+\paragraph{Język Java} -- jest współbieżnym, opartym na klasach, obiektowym językiem programowania. Java wykorzystuje tworzenie programów źródłowych kompilowanych do kodu bajtowego. Kod bajtowy jest interpretowany przez maszynę wirtualną Javy. 
 
 \paragraph{Maszyna Wirtualna Javy} -- jest zestawem aplikacji napisanych na tradycyjne urządzenia i~systemy operacyjne. Jest środowiskiem  zdolnym do wykonywania kodu bajtowego Javy. Oferuje też automatyczne zarządzanie pamięcią przez garbage colector. Implementacja wirtualnej maszyny jest napisana w C++. Dostępna publicznie specyfikacja umożliwiła różnym producentom na tworzenie własnych wirtualnych maszyn przez co istnieje wiele różnych niezależnych wersji. Łączy je wszystkie zgodność ze specyfikacją języka Java.
 
@@ -49,9 +49,10 @@ Framework to platforma programistyczna, która jest szkieletem do budowy aplikac
 
 \subsection{Spring oraz Spring Boot}
 % TO DO: jeśli to cytowanie, to powinno być zrobione przez \cite{} (Craig Walls: Spring w akcji. Wydanie V pdf)
-Spring Framework jest platformą stworzoną w celu uproszczenia tworzenia oprogramowania dla platformy Java. Spring oferuje kontener, który jest określany mianem kontekstu aplikacji Springa. Jest on odpowiedzialny za utworzenie komponentów aplikacji i zarządzanie nimi. Komponenty są powiązane w kontekście aplikacji i tworzą spójną całość. Operacja powiązania ze sobą komponentów (tzw.\ ziarenek, ang.~\emph{beans}) jest oparta na wzorcu znanym jako wstrzykiwanie zależności. W przypadku aplikacji stosującej wstrzykiwanie zależności zamiast obsługi cyklu życiowego zależnych komponentów bean następuje zdefiniowanie oddzielnej encji (kontenera) przeznaczonej do utworzenia i przechowywania wszystkich komponentów, które będą wstrzykiwane do potrzebujących ich komponentów bean. Najczęściej odbywa się to za pomocą argumentów konstruktora lub metod akcesora właściwości. 
+% DONE odwołania do literatury przy pomocy numerów \cite{}
+Spring Framework  jest platformą stworzoną w celu uproszczenia tworzenia oprogramowania dla platformy Java co dobrze opisano w literaturze \cite{spring}. Spring oferuje kontener, który jest określany mianem kontekstu aplikacji Springa. Jest on odpowiedzialny za utworzenie komponentów aplikacji i zarządzanie nimi. Komponenty są powiązane w kontekście aplikacji i tworzą spójną całość. Operacja powiązania ze sobą komponentów (tzw.\ ziarenek, ang.~\emph{beans}) jest oparta na wzorcu znanym jako wstrzykiwanie zależności. W przypadku aplikacji stosującej wstrzykiwanie zależności zamiast obsługi cyklu życiowego zależnych komponentów bean następuje zdefiniowanie oddzielnej encji (kontenera) przeznaczonej do utworzenia i przechowywania wszystkich komponentów, które będą wstrzykiwane do potrzebujących ich komponentów bean. Najczęściej odbywa się to za pomocą argumentów konstruktora lub metod akcesora właściwości. 
 
-Spring Boot jest rozszerzeniem Springa, który eliminuje konieczność konfiguracji środowiska charakterystyczną dla samego Springa. Oferuje on także wiele ciekawych funkcji, takich jak: analiza wewnętrznego sposobu działania aplikacji w środowisku uruchomieniowym, elastyczna specyfikacje właściwości środowiska oraz dodatkowe możliwości w zakresie obsługi testów.
+Spring Boot jest rozszerzeniem Springa, który eliminuje konieczność konfiguracji środowiska charakterystyczną dla samego Springa. Oferuje on także wiele ciekawych funkcji, takich jak: analiza wewnętrznego sposobu działania aplikacji w środowisku uruchomieniowym, elastyczna specyfikacje właściwości środowiska oraz dodatkowe możliwości w zakresie obsługi testów. Więcej o Springu opisane jest w oficjalnej dokumentacji \cite{springDoc}
 
 \paragraph{Spring Data} -- w wesji podstawowej Spring jest dostarczony z prostymi możliwościami w zakresie obsługi trwałego magazynu danych. Moduł Spring Data oferuje funkcje, które pozwalają na zdefiniowaniu repozytorium danych aplikacji w postaci interfejsów Javy, używając konwencji nazw podczas definiowania metod określających sposób przechowywania i pobierania danych. Spring Data pozwala na pracę z wieloma rodzajami baz danych, m.in.\ z relacyjnym użyciem API JPA (ang. \emph{Java Persistance API})
 
@@ -60,7 +61,7 @@ Spring Boot jest rozszerzeniem Springa, który eliminuje konieczność konfigura
 
 \subsection{Hibernate}
 \label{hibernate:label}
-Hibernate jest frameworkiem służącym do realizacji warstwy dostępu do danych. Zapewnia on przede wszystkim translacje danych pomiędzy relacyjną bazą danych a światem obiektowym. Hibernate pozwala na automatyczne mapowanie obiektów Javy na wiersze z bazy danych oraz odczytywać rekordy z bazy i automatycznie tworzyć z nich obiekty. Wykorzystując Hibernate nie trzeba poświęcać uwagi na zapytania SQL do bazy danych bo framework robi to sam.
+Hibernate jest frameworkiem służącym do realizacji warstwy dostępu do danych. Zapewnia on przede wszystkim translacje danych pomiędzy relacyjną bazą danych a światem obiektowym co opisuje literatura \cite{JHibernate}. Hibernate pozwala na automatyczne mapowanie obiektów Javy na wiersze z bazy danych oraz odczytywać rekordy z bazy i automatycznie tworzyć z nich obiekty. Wykorzystując Hibernate nie trzeba poświęcać uwagi na zapytania SQL do bazy danych bo framework robi to sam.
 
 
 \section{Warstwa interfejsu użytkownika}
@@ -68,7 +69,7 @@ Hibernate jest frameworkiem służącym do realizacji warstwy dostępu do danych
 \subsection{Javascript i React}
 \paragraph{JavaScript} -- jest skryptowym językiem programowania, który jest powszechnie stosowany do tworzenia stron internetowych. Pozwala on na dynamiczne dodawanie funkcji dla stron internetowych. Wykonywany jest na przeglądarce internetowej, to znaczy, że kod JavaScript może być uruchomiany na różnych platformach i systemach operacyjnych. 
 
-\paragraph{React} -- jest biblioteką dla JavaScript. Wykorzystywana jest do tworzenia interfejsów graficznych aplikacji internetowych. Pozwala na budowanie dynamicznych i efektywnych aplikacji front-endowych. React pozwala na tworzenie interaktywnego interfejsu użytkownika, który reaguje na zmiany danych i efektywne odświeżanie widoku użytkownika.
+\paragraph{React} -- jest biblioteką dla JavaScript. Wykorzystywana jest do tworzenia interfejsów graficznych aplikacji internetowych. Pozwala na budowanie dynamicznych i efektywnych aplikacji front-endowych. React  pozwala na tworzenie interaktywnego interfejsu użytkownika, który reaguje na zmiany danych i efektywne odświeżanie widoku użytkownika co opisano w pozycji literaturowej \cite{react}. 
 
 \subsection{Arkusze styli}
 Arkusze styli definiują sposób prezentacji i stylizacji dokumentów HTML lub XML. Używane są do oddzielenia treści strony do jej wyglądu. Pozwalają na zarządzanie wyglądem witryny. 
@@ -83,10 +84,10 @@ IntelliJ IDEA jest zintegrowanym środowiskiem programistycznym który oferuje w
 
 \subsection{SQL Server Managament Studio}
 \label{ssms:label}
-SSMS jest aplikacją wydaną przez Microsoft. Służy ona zarządzania, konfigurowania i administrowania bazą danych. Umożliwia między innymi łączenie z serwerami baz danych SQL Server, projektowanie tabel i indeksów, zarządzanie relacjami, kontrolowanie uprawnień dostępu do danych.
+SSMS jest aplikacją wydaną przez Microsoft. Służy ona zarządzania, konfigurowania i administrowania bazą danych. Umożliwia między innymi łączenie z serwerami baz danych SQL Server, projektowanie tabel i indeksów, zarządzanie relacjami, kontrolowanie uprawnień dostępu do danych. Szczegółowa konfiguracja środowiska jest opisana w dokumentacji Microsoftu \cite{ssms}
 
 \subsection{Postman}
-Postman jest narzędziem do testowania interfejsów API. Umożliwia on wysyłanie zapytań HTTP dla różnych metod, takich jak GET, POST, PUT, PATCH, DELETE do serwera i analizowanie odpowiedzi. Pozwala on także zdefiniować tokeny których wymaga serwer w celu uwierzytelniania. Zwraca on także statusy HTTP wykonanych zapytań.
+Postman jest narzędziem do testowania interfejsów API. Umożliwia on wysyłanie zapytań \texttt{HTTP} dla różnych metod, takich jak \texttt{GET, POST, PUT, PATCH, DELETE} do serwera i analizowanie odpowiedzi. Pozwala on także zdefiniować tokeny których wymaga serwer w celu uwierzytelniania. Zwraca on także statusy \texttt{HTTP} wykonanych zapytań.
 
 \subsection{Lighthouse}
 Lighthouse jest otwartym narzędziem do analizy jakości stron internetowych. Pomaga deweloperom, projektantom i administratorom stron internetowych w ocenie i poprawie różnych aspektów stron internetowych.
