@@ -112,12 +112,12 @@ Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona �
 \subsection{Struktura projektu}
 Ścieżka pakietowa wykorzystana jest odwróconą ścieżką domenową Politechniki Wrocławskiej oraz nazwy projektu: \texttt{pl.edu.pwr.computermanagamenttool}. Następnie pakiety które są dołączone do tej ścieżki odpowiadają funkcjom które pełnią klasy. Wyróżnia się tutaj pakiety:
 \begin{itemize} %DONE wykorzystanie czcionki maszynowej 
-\item \texttt{pl.edu.pwr.computermanagementtool} - pakiet ogólny przechowywujący pozostałe pakiety. Klasa \texttt{ComputerManagementToolApplication} posiada metodę \texttt{Main}odpowiedzialną za uruchomienie aplikacji. Klasa \texttt{JacksonConfig} jest konfiguracją odpowiedzialną za serializację formatu JSON. Natomiast klasa \texttt{PasswordEncoderUtil} jest odpowiedzialna za szyfrowanie haseł użytkowników korzystających z systemu.
-\item \texttt{controller} -- pakiet przechowujący w sobie klasy kontrolerów odpowiedzialne za wykonywanie zapytań aplikacji za pomocą interfejsu REST
-\item \texttt{dto} -- pakiet który jest odpowiedzialny za przechowywanie klas służących do przechowywania danych i ułatwiania ich przesyłania między różnymi częściami systemu. Wykorzystywany jest w klasach kontrolera.
-\item \texttt{entity} -- pakiet przechowujący definicje encji reprezentowanych w bazie danych
-\item \texttt{repository} -- pakiet przechowujący repozytoria służące do komunikacji z bazą danych.
-\item \texttt{service} -- pakiet przechowujący serwisy które są odpowiedzialne za warstwę logiki biznesowej w systemie
+\item \texttt{pl.edu.pwr.computermanagementtool} - pakiet ogólny przechowywujący pozostałe pakiety. Klasa \texttt{ComputerManagementToolApplication} posiada metodę \texttt{Main}odpowiedzialną za uruchomienie aplikacji. Klasa \texttt{JacksonConfig} jest konfiguracją odpowiedzialną za serializację formatu JSON. Natomiast klasa \texttt{PasswordEncoderUtil} jest odpowiedzialna za szyfrowanie haseł użytkowników korzystających z systemu,
+\item \texttt{controller} -- pakiet przechowujący w sobie klasy kontrolerów odpowiedzialne za wykonywanie zapytań aplikacji za pomocą interfejsu REST,
+\item \texttt{dto} -- pakiet który jest odpowiedzialny za przechowywanie klas służących do przechowywania danych i ułatwiania ich przesyłania między różnymi częściami systemu. Wykorzystywany jest w klasach kontrolera,
+\item \texttt{entity} -- pakiet przechowujący definicje encji reprezentowanych w bazie danych,
+\item \texttt{repository} -- pakiet przechowujący repozytoria służące do komunikacji z bazą danych,
+\item \texttt{service} -- pakiet przechowujący serwisy które są odpowiedzialne za warstwę logiki biznesowej w systemie.
 \end{itemize}
 
 
@@ -520,12 +520,12 @@ const handleAddComputer = async (e) =>{
 \subsection{Instrukcja użytkowania}
 Zdefiniowano widoki aplikacji i pogrupowano je ze względu na typ które pełnią.
 \begin{itemize}
-	\item W-1 -- widok logowania i rejestracji (rysunek \ref{authview:label}).
-	\item W-2 -- widok strony domowej zawierający urządzenia oraz loterię tych urządzeń (rysunek \ref{home:label}).
-	\item W-3 -- widok formularzy urządzeń, z wyborem funkcji, które pełnią (rysunek \ref{forms:label}).
-	\item W-4 -- widok użytkowników i uczestników (rysunek \ref{manageUsers:label}).
-	\item W-5 -- widok historii loterii użytkownika (rysunek \ref{lotteryHistory:label}).
-	\item W-6 -- widok komponentów komputera (rysunek \ref{components:label}).
+	\item W-1 -- widok logowania i rejestracji (rysunek \ref{authview:label}),
+	\item W-2 -- widok strony domowej zawierający urządzenia oraz loterię tych urządzeń (rysunek \ref{home:label}),
+	\item W-3 -- widok formularzy urządzeń, z wyborem funkcji, które pełnią (rysunek \ref{forms:label}),
+	\item W-4 -- widok użytkowników i uczestników (rysunek \ref{manageUsers:label}),
+	\item W-5 -- widok historii loterii użytkownika (rysunek \ref{lotteryHistory:label}),
+	\item W-6 -- widok komponentów komputera (rysunek \ref{components:label}),
 	\item W-7 -- widok formularzy komponentów komputera (rysunek \ref{compforms:label}).
 \end{itemize} 
 
@@ -565,20 +565,20 @@ Wyświetlanie szczegółowych informacji o urządzeniu odbywa się na formularzu
 
 Widok W-2 jest widokiem administratora, oferującym wiele funkcji:
 \begin{itemize}
-	\item Kliknięcie przycisku "`Dodaj urządzenie"' sprawia, że na ekranie wyświetlany jest formularz W-3a. Możliwa jest zmiana typu formularza na W-3b lub W-3c, która się odbywa poprzez wybór typu urządzenia z listy rozwijanej.
-	\item Kliknięcie przycisku "`Przeglądaj komponenty"' sprawia, że następuje przekierowanie do widoku komponentów W-6.
-	\item Kliknięcie przycisku "`Zarządzaj użytkownikami"' przekierowuje do widoku zarejestrowanych pracowników W-4a (rysunek \ref{manageUsers:label}).
-	\item Kliknięcie przycisku "`Zmień"' w kolumnie czy sprzedany ustawia status sprzętu na sprzedany lub nie. Jest to informacja czy sprzęt został dostarczony do pracownika.
-	\item Kliknięcie przycisku w kolumnie "`Gotowy na losowanie"' możliwe jest tylko wtedy gdy losowanie się nie odbyło. Sprawia ono, że operacja "`Losuj"' w kolumnie loteria jest możliwa. Sprzęty które mają status gotowe do losowania są wyświetlane na widoku pracownika W-2c.
-	\item Kliknięcie przycisku "`Usuń"' usuwa z systemu odpowiedni sprzęt.
-	\item Kliknięcie przycisku "`Modyfikuj"' wyświetla na widoku wariant formularza W-3d (rysunek \ref{forms:label}). Wariant ten jest dostosowywany na podstawie odpowiadającemu mu rodzajowi sprzętu: W-3a, W-3b, W3-c.
-	\item Kliknięcie przycisku "`Wyświetl"' w kolumnie "`Lista uczestników"' przekierowuje do widoku pracowników biorących udział w loterii wybranego sprzętu W-4b (rysunek \ref{manageUsers:label}).
-	\item Kliknięcie przycisku "`Losuj"' w kolumnie loteria możliwe jest w przypadku gdy urządzenie jest gotowe do losowania oraz loteria się jeszcze nie odbyła. Następnie po kliknięciu przycisku ustawiana data losowania jest na dzisiejszą oraz losowany jest zwycięzca losowania. W~przypadku braku uczestników losowanie nie odbędzie się.
+	\item Kliknięcie przycisku "`Dodaj urządzenie"' sprawia, że na ekranie wyświetlany jest formularz W-3a. Możliwa jest zmiana typu formularza na W-3b lub W-3c, która się odbywa poprzez wybór typu urządzenia z listy rozwijanej,
+	\item kliknięcie przycisku "`Przeglądaj komponenty"' sprawia, że następuje przekierowanie do widoku komponentów W-6,
+	\item kliknięcie przycisku "`Zarządzaj użytkownikami"' przekierowuje do widoku zarejestrowanych pracowników W-4a (rysunek \ref{manageUsers:label}),
+	\item kliknięcie przycisku "`Zmień"' w kolumnie czy sprzedany ustawia status sprzętu na sprzedany lub nie. Jest to informacja czy sprzęt został dostarczony do pracownika,
+	\item kliknięcie przycisku w kolumnie "`Gotowy na losowanie"' możliwe jest tylko wtedy gdy losowanie się nie odbyło. Sprawia ono, że operacja "`Losuj"' w kolumnie loteria jest możliwa. Sprzęty które mają status gotowe do losowania są wyświetlane na widoku pracownika W-2c,
+	\item kliknięcie przycisku "`Usuń"' usuwa z systemu odpowiedni sprzęt,
+	\item kliknięcie przycisku "`Modyfikuj"' wyświetla na widoku wariant formularza W-3d (rysunek \ref{forms:label}). Wariant ten jest dostosowywany na podstawie odpowiadającemu mu rodzajowi sprzętu: W-3a, W-3b, W3-c,
+	\item kliknięcie przycisku "`Wyświetl"' w kolumnie "`Lista uczestników"' przekierowuje do widoku pracowników biorących udział w loterii wybranego sprzętu W-4b (rysunek \ref{manageUsers:label}),
+	\item kliknięcie przycisku "`Losuj"' w kolumnie loteria możliwe jest w przypadku gdy urządzenie jest gotowe do losowania oraz loteria się jeszcze nie odbyła. Następnie po kliknięciu przycisku ustawiana data losowania jest na dzisiejszą oraz losowany jest zwycięzca losowania. W~przypadku braku uczestników losowanie nie odbędzie się,
 \end{itemize}
-Widok W-2c (rysunek~\ref{home:label}) jest widokiem pracownika. Nie posiada on tak zaawansowanych funkcjonalności jak administrator. 
+Widok W-2c (rysunek~\ref{home:label}) jest widokiem pracownika. Nie posiada on tak zaawansowanych funkcjonalności jak administrator, 
 \begin{itemize}
-	\item Kliknięcie przycisku w kolumnie loteria umożliwia zapisywanie lub wypisywanie z uczestnictwa w losowaniu. Zapis na loterie możliwy jest wtedy kiedy losowanie się jeszcze nie odbyło.
-	\item Kliknięcie przycisku "`Przeglądaj swoje loterie"' przekierowuje do widoku W-5 (rysunek \ref{lotteryHistory:label}). Widok ten posiada historię loterii dla aktualnie zalogowanego użytkownika.
+	\item kliknięcie przycisku w kolumnie loteria umożliwia zapisywanie lub wypisywanie z uczestnictwa w losowaniu. Zapis na loterie możliwy jest wtedy kiedy losowanie się jeszcze nie odbyło,
+	\item kliknięcie przycisku "`Przeglądaj swoje loterie"' przekierowuje do widoku W-5 (rysunek \ref{lotteryHistory:label}). Widok ten posiada historię loterii dla aktualnie zalogowanego użytkownika.
 \end{itemize}
 
 
@@ -637,9 +637,9 @@ Widok W-4b też jest widokiem tylko dostępnym dla administratora. Posiada on li
 
 Widok W-5 pozwala wyświetlić historię loterii użytkownika (rysunek \ref{lotteryHistory:label}). Pozwala on na pracownikowi przeglądanie własnej historii. Administrator może skorzystać z tego widoku aby sprawdzić historię loterii wybranego pracownika.
 \begin {itemize}
-	\item Możliwe jest tutaj filtrowanie loterii na podstawie statusu uczestnika. Są dostępne 3 opcje: "`Wszystkie loterie użytkownika"', "`Wygrana"' i "`Trwająca"'.
-	\item Kliknięcie przycisku "`Informacje"' wyświetla szczegółowe informacje o sprzęcie, wariant \mbox{W-3e} dla formularzy W-3a, W-3b, W-3c (rysunek \ref{forms:label}).
-	\item Kliknięcie przycisku "`Wypisz się"' możliwe jest wtedy kiedy loteria się jeszcze nie odbyła. Po kliknięciu tego przycisku pracownik rezygnuje z uczestnictwa w losowaniu wybranego sprzętu.
+	\item możliwe jest tutaj filtrowanie loterii na podstawie statusu uczestnika. Są dostępne 3 opcje: "`Wszystkie loterie użytkownika"', "`Wygrana"' i "`Trwająca"',
+	\item kliknięcie przycisku "`Informacje"' wyświetla szczegółowe informacje o sprzęcie, wariant \mbox{W-3e} dla formularzy W-3a, W-3b, W-3c (rysunek \ref{forms:label}),
+	\item kliknięcie przycisku "`Wypisz się"' możliwe jest wtedy kiedy loteria się jeszcze nie odbyła. Po kliknięciu tego przycisku pracownik rezygnuje z uczestnictwa w losowaniu wybranego sprzętu.
 \end{itemize} 
 
 
@@ -654,11 +654,11 @@ Widok W-5 pozwala wyświetlić historię loterii użytkownika (rysunek \ref{lott
 
 Widok W-6 jest dostępny dla administratora. Pozwala mu na oszacowanie ceny sprzętu patrząc jakie komponenty mają cenę. Możliwe jest wybranie z listy rozwijanej jakiego rodzaju komponenty mają być wyświetlane. Do wyboru są: procesory, pamięci RAM oraz pamięci dyskowe.
 \begin{itemize}
-	\item Kliknięcie przycisku "`Dodaj procesor"' wyświetli formularz W-7a (rysunek \ref{compforms:label}c) odpowiedzialny za dodanie procesora.
-	\item Kliknięcie przycisku "`Dodaj RAM"' Wyświetli formularz W-7b (rysunek \ref{compforms:label}c) odpowiedzialny za dodanie pamięci RAM.
-	\item Kliknięcie przycisku "`Dodaj dysk"' Wyświetli formularz W-7c (rysunek \ref{compforms:label}c) odpowiedzialny za dodawanie dysku pamięci.
-	\item Kliknięcie przycisku "`Zarządzaj użytkownikami"' przekieruje do widoku W-4a (rysunek \ref{manageUsers:label}).
-	\item Klikniecie przycisku usuń spowoduje usunięcie komponentu. Komputer posiadający usuwany komponent ustawia identyfikator odpowiedniego komponentu na wartość "`\texttt{null}"'.
+	\item kliknięcie przycisku "`Dodaj procesor"' wyświetli formularz W-7a (rysunek \ref{compforms:label}c) odpowiedzialny za dodanie procesora,
+	\item kliknięcie przycisku "`Dodaj RAM"' Wyświetli formularz W-7b (rysunek \ref{compforms:label}c) odpowiedzialny za dodanie pamięci RAM,
+	\item kliknięcie przycisku "`Dodaj dysk"' Wyświetli formularz W-7c (rysunek \ref{compforms:label}c) odpowiedzialny za dodawanie dysku pamięci,
+	\item kliknięcie przycisku "`Zarządzaj użytkownikami"' przekieruje do widoku W-4a (rysunek \ref{manageUsers:label}),
+	\item klikniecie przycisku usuń spowoduje usunięcie komponentu. Komputer posiadający usuwany komponent ustawia identyfikator odpowiedniego komponentu na wartość "`\texttt{null}"'.
 \end{itemize} 
 
 W przypadku dodaniu komponentu, którego nazwa już istnieje następuje modyfikacja ceny.

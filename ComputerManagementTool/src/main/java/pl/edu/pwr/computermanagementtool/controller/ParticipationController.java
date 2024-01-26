@@ -98,24 +98,26 @@ public class ParticipationController {
     }
 
     @GetMapping("/select-random-winner/{deviceId}")
-    Participation getRandomWinner(@PathVariable int deviceId){
+    ResponseEntity<Participation> getRandomWinner(@PathVariable int deviceId){
 
         List<Participation> participationList = participationService.getAllParticipantsForDeviceWithId(deviceId);
 
 
-        if(participationList.isEmpty()){
-            return null;
-        }
+            if(participationList.isEmpty()){
 
-        Random rand = new Random();
-        Participation randomParticipant = participationList.get(rand.nextInt(participationList.size()));
+                return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
 
-        randomParticipant.setWinner(true);
-        deviceCoreService.setLotteryDateToToday(deviceId);
-        participationRepository.save(randomParticipant);
+            Random rand = new Random();
+            Participation randomParticipant = participationList.get(rand.nextInt(participationList.size()));
+
+            randomParticipant.setWinner(true);
+            deviceCoreService.setLotteryDateToToday(deviceId);
+            participationRepository.save(randomParticipant);
 
 
-        return randomParticipant;
+            return new ResponseEntity(randomParticipant, HttpStatus.FOUND);
+            
     }
 
 
