@@ -74,7 +74,6 @@ function TabletForm(props){
 
 
     const handleAddTablet = async (e) => {
-        e.preventDefault();
 
         try {
 
@@ -85,7 +84,7 @@ function TabletForm(props){
                 "age": formData.age,
                 "officeAddress": formData.office,
                 "screenSize": formData.screenSize,
-                "operatingSystem": formData.model,
+                "operatingSystem": formData.operatingSystem,
                 "batteryLife": formData.batteryLife,
             };
 
@@ -110,7 +109,7 @@ function TabletForm(props){
                 "age": formData.age,
                 "officeAddress": formData.office,
                 "screenSize": formData.screenSize,
-                "operatingSystem": formData.model,
+                "operatingSystem": formData.operatingSystem,
                 "batteryLife": formData.batteryLife,
             };
 
