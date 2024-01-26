@@ -2,10 +2,10 @@
 
 \section{Wymagane narzędzia}
 Aplikacja w formie minimalnego środowiska uruchomieniowego stworzona w pracy dyplomowej dostępną jest na repozytorium GitHub pod poniższym linkiem: \newline
- \textbf{https://github.com/Maurycjo/Praca-dyplomowa/tree/release}
-\newline
+ \url{https://github.com/Maurycjo/Praca-dyplomowa/tree/release}
 
-Do uruchomienia aplikacji niezbędne jest posiadanie następujących narzędzi \ref{tab:zestawienie_narzędzi}: 
+
+Do uruchomienia aplikacji niezbędne jest posiadanie następujących narzędzi )patrz tabela \ref{tab:zestawienie_narzędzi}): 
 \begin{itemize}
 	\item Java 17
 	\item Node v18.17.0
@@ -17,31 +17,16 @@ SSMS i SQL Server dostępne są na stronie Microsoftu.
 
 
 \section{Konfigurowanie środowiska}
-
-\begin{figure}[b]
+Wykorzystując narzędzie SQL Server Configuration Manager(instalowane z SQL Server) należy odblokować \textbf{TCP/IP} dla protokołu \textbf{MSSQLSERVER}. W właściwościach protokołu \textbf{TCP/IP}należy ustawić: TCP Dynamics Ports: \textbf{0} i pozostawić domyślny TCP Port: \textbf{1433}. Pokazano to na rysunku \ref{tcpip:label}.
+\begin{figure}[htb]
 		\centering
     \includegraphics[width=0.6\linewidth]{rysA/tcpip.pdf}
     \caption{Konfiguracja TCP/IP}
     \label{tcpip:label}
 \end{figure}
 
-Wykorzystując narzędzie SQL Server Configuration Manager(instalowane z SQL Server) należy odblokować \textbf{TCP/IP} dla protokołu \textbf{MSSQLSERVER}. W właściwościach protokołu \textbf{TCP/IP}należy ustawić: TCP Dynamics Ports: \textbf{0} i pozostawić domyślny TCP Port: \textbf{1433}. Pokazano to na rysunku \ref{tcpip:label}.
 
-
-\begin{figure}[htb]
-  \centering
-	\begin{tabular}{@{}lll@{}}
-	a) & b) & c) \\
-  \includegraphics[width=0.300\textwidth]{rysA/status.pdf} & 
-	\includegraphics[width=0.333\textwidth]{rysA/general.pdf} &
-	\includegraphics[width=0.320\textwidth]{rysA/enable.pdf}
-	\end{tabular}
-  \caption{Konfiguracja konta a) uprawnienia, b) zmiana hasła, c)typ uwierzytelniania }
-  \label{sa:label}
-\end{figure}
-
-\newpage
-\textbf{Konfiguracja konta:}
+\noindent \textbf{Konfiguracja konta:}
 \begin{itemize}
 \item należy zalogować się połączyć z serwerem SQL z użyciem Windows Authentication,
 \item w folderze Security/Logins dla użytkownika "`\textbf{sa}"' należy ustawić mozliwość logowania oraz dać możliwość łączenia się z bazą danych co pokazano na rysunku \ref{sa:label}a
@@ -51,16 +36,29 @@ Wykorzystując narzędzie SQL Server Configuration Manager(instalowane z SQL Ser
 \item teraz można logować się w SSMS przy użyciu SQL Server Authentication
 \end{itemize}
 
+\begin{figure}[htb]
+  \centering
+	\begin{tabular}{@{}ll@{}}
+	a) & b) \\
+  \vtop{\vskip-2ex\hbox{\includegraphics[width=0.4\textwidth]{rysA/status.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.42\textwidth]{rysA/general.pdf}}} \\
+	c) & \\
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.4\textwidth]{rysA/enable.pdf}}} & 
+	\end{tabular}
+  \caption{Konfiguracja konta a) uprawnienia, b) zmiana hasła, c) typ uwierzytelniania }
+  \label{sa:label}
+\end{figure}
+
 Następnym krokiem jest importowanie bazy danych. Skrypt zawierający model i dane znajduje się w pobranym z repozytorium folderze Sql. Należy w SSMS utworzyć bazę danych o~nazwie "`\textbf{\texttt{DeviceLotery}}"'. Następnie klikając prawym przyciskiem myszy na utworzoną bazę danych należy wybrać opcje "`\textbf{\emph{New Query}}"', przekopiować skrypt i kliknąć przycisk prawy przycisk myszy z opcją \textbf{\emph{execute}}.
 
-\textbf{Uruchamianie aplikacji serwerowej:}
+\noindent \textbf{Uruchamianie aplikacji serwerowej:}
 Należy z linii komend uruchomić komendę: \mbox{\texttt{java -jar ComputerManagementTool-0.0.1-SNAPSHOT.jar}}
 
-\textbf{Uruchamianie aplikacji klienckiej:}
+\noindent \textbf{Uruchamianie aplikacji klienckiej:}
 Należy zainstalować pakiet \texttt{serve} z wykorzystaniem komendy: \textbf{\texttt{npm install -g serve}}. Następnie należy wykonać polecenie \textbf{\texttt{serve -s build}}
 
-\textbf{Logowanie do aplikacji klienckiej:}
-W systemie istnieją konta z różnymi uprawnieniami. Poniższa tabela \ref{tab:loginKlient} przedstawia loginy, hasła i role w systemie. Możliwa jest rejestracja pracownika na widoku W-1b \ref{authview:label}
+\noindent \textbf{Logowanie do aplikacji klienckiej:}
+W systemie istnieją konta z różnymi uprawnieniami. W~tabeli \ref{tab:loginKlient} zebrano istniejące loginy, hasła i role. Możliwa jest rejestracja pracownika na widoku W-1b (rysunek \ref{authview:label}).
  
 
 \begin{table}[htb] \small

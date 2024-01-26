@@ -311,9 +311,9 @@ protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String d
 		
 		// Pozostała część klasy
 \end{lstlisting}
-W linii 12 widnieje metoda, która pozwala na pobranie sprzętu. W linii 17 natomiast jest możliwe pobranie wszystkich sprzętów. Odbywa się to przy pomocy sparametryzowanych typów danych \texttt{T}. Metoda zdefiniowana w linii 22 pozwala uprościć dodawanie sprzętu, implementując część logiki ustawiając parametry charakterystyczne dla rdzenia sprzętu. Jednak aby utworzyć odpowiedni typ niezbędne jest określenie jakiego typu będzie dodawane urządzenie. Dlatego w linii 22 metoda jako parametr przyjmuje \texttt{Class<? extends DeviceCore>}, który oznacza typ aplikacji. Tak zdefiniowana metoda może zostać użyta do dodania sprzętu w klasach potomnych co pokazano w listingu \ref{service_tablet}.
+W linii 12 widnieje metoda, która pozwala na pobranie sprzętu. W linii 17 natomiast jest możliwe pobranie wszystkich sprzętów. Odbywa się to przy pomocy sparametryzowanych typów danych \texttt{T}. Metoda zdefiniowana w linii 22 pozwala uprościć dodawanie sprzętu, implementując część logiki ustawiając parametry charakterystyczne dla rdzenia sprzętu. Jednak aby utworzyć odpowiedni typ niezbędne jest określenie jakiego typu będzie dodawane urządzenie. Dlatego w linii 22 metoda jako parametr przyjmuje \texttt{Class<? extends DeviceCore>}, który oznacza typ aplikacji. Tak zdefiniowana metoda może zostać użyta do dodania sprzętu w klasach potomnych co pokazano w listingu \ref{service_tablet_2}.
 
-\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa potomna serwisu tabletu: TabletService }, label={service_tablet}]
+\begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa potomna serwisu tabletu: TabletService }, label={service_tablet_2}]
 @Service
 public class TabletService extends GenericDeviceService<Tablet>{
 
