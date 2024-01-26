@@ -172,7 +172,6 @@ function ComputerForm(props){
     };
 
     const handleModifyComputer = async (e) => {
-        e.preventDefault();
         try {
 
             const compData ={
