@@ -107,13 +107,13 @@ Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą by
 
 
 \section{Aplikacja serwerowa}
-Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona żądania aplikacji klienckiej. Dostarcza ona funkcjonalność uwierzytelniania i autoryzacji. W wyniku zapytań wysłanych przez aplikację kliencką wyświetlane są w aplikacji odpowiednie dane. Możliwe jest też dodawanie i usuwanie odpowiednich rekordów. Implementacja odbywa się z wykorzystywaniem języka Java z frameworkami Spring oraz Hibernate \ref{tab:zestawienie_narzędzi} Graficzną reprezentacje struktury projektu aplikacji serwerowej pokazano na rysunku \ref{backend_struktura:label}
+Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona żądania aplikacji klienckiej. Dostarcza ona funkcjonalność uwierzytelniania i autoryzacji. W wyniku zapytań wysłanych przez aplikację kliencką wyświetlane są w aplikacji odpowiednie dane. Możliwe jest też dodawanie i usuwanie odpowiednich rekordów. Implementacja odbywa się z wykorzystywaniem języka Java z frameworkami Spring oraz Hibernate \ref{tab:zestawienie_narzędzi} z wykorzystaniem dobrych praktyk programowania przedstawionych w \cite{javaep}. Graficzną reprezentacje struktury projektu aplikacji serwerowej pokazano na rysunku \ref{backend_struktura:label}
 
 \subsection{Struktura projektu}
 Ścieżka pakietowa wykorzystana jest odwróconą ścieżką domenową Politechniki Wrocławskiej oraz nazwy projektu: \texttt{pl.edu.pwr.computermanagamenttool}. Następnie pakiety które są dołączone do tej ścieżki odpowiadają funkcjom które pełnią klasy. Wyróżnia się tutaj pakiety:
 \begin{itemize} %DONE wykorzystanie czcionki maszynowej 
 \item \texttt{pl.edu.pwr.computermanagementtool} - pakiet ogólny przechowywujący pozostałe pakiety. Klasa \texttt{ComputerManagementToolApplication} posiada metodę \texttt{Main}odpowiedzialną za uruchomienie aplikacji. Klasa \texttt{JacksonConfig} jest konfiguracją odpowiedzialną za serializację formatu JSON. Natomiast klasa \texttt{PasswordEncoderUtil} jest odpowiedzialna za szyfrowanie haseł użytkowników korzystających z systemu,
-\item \texttt{controller} -- pakiet przechowujący w sobie klasy kontrolerów odpowiedzialne za wykonywanie zapytań aplikacji za pomocą interfejsu REST,
+\item \texttt{controller} -- pakiet przechowujący w sobie klasy kontrolerów odpowiedzialne za wykonywanie zapytań aplikacji za pomocą interfejsu REST, implementacje kontrolerów odbywały się z pomocą materiałów \cite{springrest, javarest}.
 \item \texttt{dto} -- pakiet który jest odpowiedzialny za przechowywanie klas służących do przechowywania danych i ułatwiania ich przesyłania między różnymi częściami systemu. Wykorzystywany jest w klasach kontrolera,
 \item \texttt{entity} -- pakiet przechowujący definicje encji reprezentowanych w bazie danych,
 \item \texttt{repository} -- pakiet przechowujący repozytoria służące do komunikacji z bazą danych,
@@ -184,7 +184,7 @@ public class Computer extends DeviceCore{
 
 
 \subsubsection{Przykład kodu repozytorium dla urządzeń dziedziczącym po rdzeniu sprzętu}
-Repozytorium sprzętu komputerowego napisano z użyciem wyrażeń generycznych (patrz listing~\ref{repo_genericDevice}). Takie podejście przyczynia się do uproszczenia kodu oraz łatwiejszej jego rozbudowy.
+Repozytorium sprzętu komputerowego napisano z użyciem wyrażeń generycznych (patrz listing~\ref{repo_genericDevice}). Takie podejście przyczynia się do uproszczenia kodu oraz łatwiejszej jego rozbudowy. Definicja klas generycznych powstała przy pomocy artykułu \cite{generics}. 
 \begin{lstlisting}[language=Java, style=JavaStyle,  caption={Generyczne repozytorium sprzętu komputerowego:  GenericDeviceRepository}, label={repo_genericDevice}]
 @NoRepositoryBean
 public interface GenericDeviceRepository<T extends DeviceCore> extends JpaRepository<T, Integer> {
