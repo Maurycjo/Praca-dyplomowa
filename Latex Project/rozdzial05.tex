@@ -140,7 +140,7 @@ Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona �
 
 \subsection{Fragmenty implementacji}
 \subsubsection {Fragment kodu klas encji wykorzystującej schemat dziedziczenia}
-Na listingu \ref{entity_deviceCore} kodu klasy \texttt{DeviceCore} w linii 3 określono schemat dziedziczenia \mbox{TABLE\_PER\_CLASS}. O sposobie dziedziczenia napisano w podrozdziale \ref{dzedziczenie_hibernate:label}. Linia~3~określa strategie generowania klucza. Hibernate tworzy wtedy specjalną tabelę w bazie danych, która odpowiedzialna jest za przechowywanie unikalnych kluczy głównych dla encji sprzętu w~aplikacji. W kodzie pokazanym na listingu \ref{entity_computer} nie trzeba wtedy definiować klucza.
+Na listingu \ref{entity_deviceCore} kodu klasy \texttt{DeviceCore} w linii 3 określono schemat dziedziczenia \mbox{TABLE\_PER\_CLASS}. O sposobie dziedziczenia napisano w podrozdziale \ref{dzedziczenie_hibernate:label}. Linia~6~określa strategie generowania klucza. Hibernate tworzy wtedy specjalną tabelę w bazie danych, która odpowiedzialna jest za przechowywanie unikalnych kluczy głównych dla encji sprzętu w~aplikacji. W kodzie pokazanym na listingu \ref{entity_computer} nie trzeba wtedy definiować klucza.
 
 \begin{lstlisting}[language=Java, style=JavaStyle, caption={Klasa nadrzędna reprezentująca rdzeń sprzętu: \texttt{DeviceCore}}, label={entity_deviceCore}]
 @Entity
@@ -159,10 +159,11 @@ public class DeviceCore {
     private String deviceName;
 		
 		// Pozostała część klasy
-
 \end{lstlisting}
 
-Na listingu \ref{entity_computer} w linii 3 określone zostało dziedziczenie po klasie nadrzędnej reprezentującej rdzeń sprzętu. Pola które należy określić w tej klasie są unikalnymi polami tabeli \texttt{computer}. W linii 4 istnieje statyczna zmienna \texttt{DEVICE\_TYPE} która pomaga określić jakiego rodzaju dany sprzęt. Wykorzystywane jest to w aplikacji klienckiej.
+
+Na listingu \ref{entity_computer} w linii 3 określone zostało dziedziczenie po klasie nadrzędnej reprezentującej rdzeń sprzętu. Pola które należy określić w tej klasie są unikalnymi polami tabeli \texttt{computer}. W linii 5 istnieje statyczna zmienna \texttt{DEVICE\_TYPE} która pomaga określić jakiego rodzaju dany sprzęt. Wykorzystywane jest to w aplikacji klienckiej.
+
 
 \begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa potomna: Computer, reprezentująca komputer}, label={entity_computer}]
 @Entity
@@ -184,17 +185,18 @@ public class Computer extends DeviceCore{
 
 
 \subsubsection{Przykład kodu repozytorium dla urządzeń dziedziczącym po rdzeniu sprzętu}
-Repozytorium sprzętu komputerowego napisano z użyciem wyrażeń generycznych (patrz listing~\ref{repo_genericDevice}). Takie podejście przyczynia się do uproszczenia kodu oraz łatwiejszej jego rozbudowy. Definicja klas generycznych powstała przy pomocy artykułu \cite{generics}. 
+Repozytorium sprzętu komputerowego napisano z użyciem wyrażeń generycznych (patrz listing~\ref{repo_genericDevice}). Takie podejście przyczynia się do uproszczenia kodu oraz łatwiejszej jego rozbudowy. Definicja klas generycznych powstała przy pomocy artykułu \cite{generics}.
+Adnotacja \texttt{@NoRepositoryBean} z linii 1 jest używana do oznaczenia interfejsów, które nie mają mieć swojej instancji. Oznacza to, że nie jest on przeznaczony do utworzenia instancji repozytorium w trakcie uruchomiania aplikacji. W linii 4 i 5 poprzez zdefiniowanie metody możliwe jest wykonanie konkretnego zapytania SQL do bazy danych. Z racji, że klasy sprzętu komputerowego mają zbliżone funckie, nie trzeba dostarczać tych samych interfejsów we wszystkich repozytoriach, tylko zastosować schemat dziedziczenia.
+
 \begin{lstlisting}[language=Java, style=JavaStyle,  caption={Generyczne repozytorium sprzętu komputerowego:  GenericDeviceRepository}, label={repo_genericDevice}]
 @NoRepositoryBean
 public interface GenericDeviceRepository<T extends DeviceCore> extends JpaRepository<T, Integer> {
     
     List<T> findAllByReadyToLotteryIsTrue();
-    List<T> findAllByOfficeId(int officeId);
-}
+    List<T> findAllByOfficeId(int officeId);}
 \end{lstlisting}
 
-Adnotacja \texttt{@NoRepositoryBean} z linii 1 jest używana do oznaczenia interfejsów, które nie mają mieć swojej instancji. Oznacza to, że nie jest on przeznaczony do utworzenia instancji repozytorium w trakcie uruchomiania aplikacji. W linii 4 i 5 poprzez zdefiniowanie metody możliwe jest wykonanie konkretnego zapytania SQL do bazy danych. Z racji, że klasy sprzętu komputerowego mają zbliżone funckie, nie trzeba dostarczać tych samych interfejsów we wszystkich repozytoriach, tylko zastosować schemat dziedziczenia.
+
 
 \subsubsection{Fragmenty implementacji klasy kontrolerów sprzętu}
 Kontrolery pełnią istotną funkcje w systemie. Umożliwiają one definiowanie zapytań REST które będą wysyłane do serwera. Wykorzystując abstrakcje oraz wyrażenia generyczne możliwe jest wykonanie niektórych zapytań bez konieczności ich implementacji w klasach potomnych. Zaimplementowane kontrolery bazują na klasie abstrakcyjnej pokazanej na listingu~\ref{controller_genericDevice}.
@@ -209,25 +211,21 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
         this.genericDeviceService = genericDeviceService;
         this.genericRepository = genericRepository;
     }
-
     @GetMapping("/{id}")
     @CrossOrigin(origins = "*")
     T getOneBasicDevice(@PathVariable int id){
         return genericDeviceService.getDeviceById(id);
     }
-
     @GetMapping("/all")
     @CrossOrigin(origins = "*")
     List<T> getAllBasicDevices(){
         return genericDeviceService.getAllDevices();
     }
-
     @GetMapping("/all-ready-to-lottery")
     @CrossOrigin(origins = "*")
     List<T> getAllReadyToLotteryDevice(){
         return genericDeviceService.getAllReadyToLotteryDevices();
-    }
-		
+				}
 		// Pozostała część klasy
 		
 		@PutMapping("/set-ready-to-lottery/{id}")
@@ -237,12 +235,9 @@ public abstract class GenericDeviceController<T extends DeviceCore> {
             T updatedBasicDevice = genericDeviceService.setReadyToLottery(id);
             return new ResponseEntity<>(updatedBasicDevice, HttpStatus.OK);
         } catch (RuntimeException e){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);}}
 		
 		// Pozostała część klasy
-		
 \end{lstlisting}
 
 
@@ -273,12 +268,10 @@ public abstract class GenericDeviceService<T extends DeviceCore> {
         this.genericDeviceRepository = genericRepository;
         this.officeRepository = officeRepository;
     }
-
     public T getDeviceById(int id) {
         Optional<T> basicDeviceOptional = genericDeviceRepository.findById(id);
         return basicDeviceOptional.orElseThrow(()-> new RuntimeException("Device not found with id: " + id));
     }
-
     public List<T> getAllDevices() {
         return genericDeviceRepository.findAll();
     }
@@ -308,7 +301,6 @@ protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String d
 
         return deviceCore;
     }
-		
 		// Pozostała część klasy
 \end{lstlisting}
 W linii 12 widnieje metoda, która pozwala na pobranie sprzętu. W linii 17 natomiast jest możliwe pobranie wszystkich sprzętów. Odbywa się to przy pomocy sparametryzowanych typów danych \texttt{T}. Metoda zdefiniowana w linii 22 pozwala uprościć dodawanie sprzętu, implementując część logiki ustawiając parametry charakterystyczne dla rdzenia sprzętu. Jednak aby utworzyć odpowiedni typ niezbędne jest określenie jakiego typu będzie dodawane urządzenie. Dlatego w~linii 22 metoda jako parametr przyjmuje \texttt{Class<? extends DeviceCore>}, który oznacza typ sprzętu. Tak zdefiniowana metoda może zostać użyta do dodania sprzętu w klasach potomnych co pokazano w listingu \ref{service_tablet_2}.
@@ -320,13 +312,11 @@ public class TabletService extends GenericDeviceService<Tablet>{
     public TabletService(TabletRepository tabletRepository, OfficeRepository officeRepository){
         super(tabletRepository, officeRepository);
     }
-
     public Tablet addTablet(String deviceName, Double price, String description,
-                            Integer age, String officeAddress,
-                            String screenSize, String operatingSystem, String batteryLife){
+                     Integer age, String officeAddress, String screenSize,
+                             String operatingSystem, String batteryLife){
 
-        Tablet tablet = (Tablet) addDevice(Tablet.class, deviceName, price, description,
-                                                                age, officeAddress);
+        Tablet tablet = (Tablet) addDevice(Tablet.class, deviceName, price, description, age, officeAddress);
 
         tablet.setScreenSize(screenSize);
         tablet.setOperatingSystem(operatingSystem);
@@ -424,20 +414,20 @@ Strukturę projektu pokazano na rysunku \ref{frontend_struktura:label}.
   \centering
 	\begin{tabular}{@{}lll@{}}
 	a) & b) & c) \\
-  \vtop{\vskip-2ex\hbox{\includegraphics[width=0.27\textwidth]{rys05/frontend/frontend.pdf}}} & 
-	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.3\textwidth]{rys05/frontend/auth.pdf}}} &
-	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.3\textwidth]{rys05/frontend/bar.pdf}}} \\
+  \vtop{\vskip-2ex\hbox{\includegraphics[width=0.2\textwidth]{rys05/frontend/frontend.pdf}}} & 
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.25\textwidth]{rys05/frontend/auth.pdf}}} &
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.25\textwidth]{rys05/frontend/bar.pdf}}} \\
 
 	d) & e) & f) \\
-	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.3\textwidth]{rys05/frontend/components.pdf}}} &
-	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.3\textwidth]{rys05/frontend/deviceform.pdf}}} &
-	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.3\textwidth]{rys05/frontend/view.pdf}}}
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.25\textwidth]{rys05/frontend/components.pdf}}} &
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.25\textwidth]{rys05/frontend/deviceform.pdf}}} &
+	\vtop{\vskip-2ex\hbox{\includegraphics[width=0.25\textwidth]{rys05/frontend/view.pdf}}}
 	\end{tabular}
   \caption{Struktura projektu: a) ogólna struktura, b) Logowanie i rejestracja, c) pasek nawigacyjny, d) formularze komponentów, e) formularze sprzętów, f) widoki stron}
   \label{frontend_struktura:label}
 \end{figure}
 
-
+\newpage
 \subsection{Fragmenty implementacji}
 	\subsubsection{Ścieżki url dla widoków aplikacji}
 	Na listing kodu \ref{app_frontend:label} pokazano definicje ścieżek url, pod którymi dostępne są poszczególne widoki wymienione w tabeli~\ref{tab:zestawienie_widokow}.
