@@ -14,12 +14,12 @@ Co prawda na rynku istnieją rozwiązania, które pozwalają zarządzać sprzęt
 \newline
 Schemat działania
 \begin{itemize}
-	\item Serwer Bazodanowy przechowujący informacje o inwentarzu(mysql),
-	\item Serwer komunikacyjny, który obsługuje komunikacje HTTP między serwerem bazy danych a agentami (Apache, perl i mod\_perl),
-	\item Konsola administracyjna, która pozwala administratorom odpytywać serwer bazy danych za pomocą przeglądarki(Apache, php),
-	\item Serwer wdrażania, który przechowuje wszystkie konfiguracje pakietów (Apache, ssl).
+	\item serwer bazodanowy przechowujący informacje o inwentarzu(mysql),
+	\item serwer komunikacyjny, który obsługuje komunikacje HTTP między serwerem bazy danych a~agentami (Apache, perl i mod\_perl),
+	\item konsola administracyjna, która pozwala administratorom odpytywać serwer bazy danych za pomocą przeglądarki(Apache, php),
+	\item serwer wdrażania, który przechowuje wszystkie konfiguracje pakietów (Apache, ssl).
 \end{itemize}
-Rozwiązanie jest wieloplatformowe które działa na systemach: Windows, Mac, Linux oraz Android. Dodatkowo istnieje płatna wersja narzędzia która pozwala na pomoc administratorów OCS Inventory. Narzędzie pozwala na zbieranie danych w postaci tabelarycznej oraz generowania raportów dotyczących sprzętu. 
+Rozwiązanie jest wieloplatformowe, które działa na systemach: Windows, Mac, Linux oraz Android. Dodatkowo istnieje płatna wersja narzędzia, która pozwala na pomoc administratorów OCS Inventory. Narzędzie pozwala na zbieranie danych w postaci tabelarycznej oraz generowania raportów dotyczących sprzętu. 
 
 \textbf{Microsoft System Center Configuration Manager} jest bardzo dużym i płatnym rozwiązaniem dostarczanym przez firmę Microsoft. Pozwala ono na zarządzanie dużą grupą komputerów. Do możliwości narzędzia należą między innymi: zdalny dostęp, menadżer aktualizacji oraz monitorowania stanu technicznego urządzeń. Bardzo dużo możliwości dostarczanych przez ten produkt sprawia, że cena jest nieadekwatna gdy firma chce wykorzystywać to narzędzie tylko do inwentaryzacji sprzętu. Dodatkowe opłaty mogą zostać również wygenerowane przez to, że~firma musi wyszkolić pracowników, którzy umieli by zarządzać tym oprogramowaniem.
 
@@ -36,12 +36,12 @@ Projektowany system składać się będzie z dwóch kluczowych komponentów: \te
 Aplikacja serwerowa, będąca centralnym elementem systemu, ma odpowiadać za komunikację z bazą danych oraz dostarczanie interfejsu REST konsumowanego przez aplikację kliencka. 
 Aplikacja kliencka dostarczyć ma interfejs użytkownika, poprzez który możliwe będzie przeglądanie, usuwanie oraz korekta danych dotyczących urządzeń, historii przeprowadzonych i aktualnych loterii. Dodatkowo, aplikacja kliencka umożliwi przeprowadzenie losowań oraz jednoznaczne wyłonienie zwycięzcy.
 
-Projekt ma powstać z myślą o elastyczności i łatwości zarządzania danymi. Będzie umożliwiał dynamiczne dodawanie, usuwanie i modyfikację danych, zapewniając tym samym pełną funkcjonalność oraz dostosowanie do zmieniających się potrzeb użytkowników. W celu zapewnienia bezpieczeństwa dane wrażliwe przetwarzane w systemie, takie jak hasła, będą szyfrowane.
+Projekt ma powstać z myślą o elastyczności i łatwości zarządzania danymi. Będzie umożliwiał dynamiczne dodawanie, usuwanie i modyfikację danych, zapewniając tym samym pełną funkcjonalność oraz dostosowanie do zmieniających się potrzeb użytkowników. W celu zapewnienia bezpieczeństwa dane wrażliwe przetwarzane w systemie takie jak hasła, będą szyfrowane.
 
 
 \section{Układ pracy}
 % DONE: Będzie trzeba dopisać, co zawierają kolejne rozdziały
-Praca składa się z 6 rozdziałów.
+Praca składa się z 6 rozdziałów:
 \begin {itemize}
 	\item Rozdział 1 -- skupia się na zagadnieniach związanych z celem i zakresem pracy. Posiada też przegląd istniejących rozwiązań które mają zbliżone funkcjonalności do projektowanego systemu,
 	\item Rozdział 2 -- skupia się na opisie wykorzystywanych narzędzi i technologii,

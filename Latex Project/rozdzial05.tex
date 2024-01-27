@@ -6,7 +6,7 @@
 \subsection{Struktura interfejsu REST}
 % TO DO: Opis do poprawy (bo zmieniono układ tabel)
 % DONE
-Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą być odbierane przez aplikację serwerową. Z~racji tego, że w aplikacji wykorzystywane są typy generyczne w klasach kontrolerach urządzeń i komponentów komputera (implementacja \ref{controller_genericDevice}) uproszczono tabele by pokazać ogólną formę zapytań. Wszystkie zapytania posiadające "`\texttt{devices}"' w ścieżce umożliwiają alternatywne wywołanie zapytania na podstawie typu sprzętu. Ogólna zasada jest taka aby zastąpić "`\texttt{devices}"' odpowiadającemu typowi sprzętu: "`\texttt{computers}"', "`\texttt{tablets}"', "`\texttt{other-devices}"'. Powoduje to, że zapytanie wykonywane jest przez kontroler tej klasy, a co za tym idzie ma określony typ. Możliwe jest też wykonanie zapytania nie zmieniając ścieżki. Wtedy takie zapytanie wykonywane jest na ogólnym rodzaju sprzętu. Przykładowo "`\texttt{devices/all}"' pobiera wszystkie sprzęty nie zwracając uwagi na typ, natomiast "`\texttt{computers/all}"' pobiera tylko sprzętu typu "`\texttt{Computer}"'. Podobne rozwiązanie wykorzystano w komponentach komputera. Dotyczy to zapytań mających w ścieżce: "`\texttt{component}"'. Tutaj należy zamienić "`\texttt{component}"' na jeden z trzech dostępnych typów komponentu: "`\texttt{rams}"', "`\texttt{cpus}"', "`\texttt{storages}"'. W tym wypadku nie ma możliwości wywołania zapytania zawierającego "`\texttt{component}"'.
+Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą być odbierane przez aplikację serwerową. Z~racji tego, że w aplikacji wykorzystywane są typy generyczne w klasach kontrolerach urządzeń i komponentów komputera (implementacja \ref{controller_genericDevice}), uproszczono tabele by pokazać ogólną formę zapytań. Wszystkie zapytania posiadające "`\texttt{devices}"' w ścieżce umożliwiają alternatywne wywołanie zapytania na podstawie typu sprzętu. Ogólna zasada jest taka aby zastąpić "`\texttt{devices}"' odpowiadającemu typowi sprzętu: "`\texttt{computers}"', "`\texttt{tablets}"', "`\texttt{other-devices}"'. Powoduje to, że zapytanie wykonywane jest przez kontroler tej klasy, a co za tym idzie ma określony typ. Możliwe jest też wykonanie zapytania nie zmieniając ścieżki. Wtedy takie zapytanie wykonywane jest na ogólnym rodzaju sprzętu. Przykładowo "`\texttt{devices/all}"' pobiera wszystkie sprzęty nie zwracając uwagi na typ, natomiast "`\texttt{computers/all}"' pobiera tylko sprzętu typu "`\texttt{Computer}"'. Podobne rozwiązanie wykorzystano w komponentach komputera. Dotyczy to zapytań mających w ścieżce: "`\texttt{component}"'. Tutaj należy zamienić "`\texttt{component}"' na jeden z trzech dostępnych typów komponentu: "`\texttt{rams}"', "`\texttt{cpus}"', "`\texttt{storages}"'. W tym wypadku nie ma możliwości wywołania zapytania zawierającego "`\texttt{component}"'.
 
 \begin{table}[H]\small
 	\centering
@@ -22,11 +22,11 @@ Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą by
     \hline
 		/devices/{id}	& DELETE & id urządzenia 	& Usunięcie sprzętu\\
     \hline
-		 /computers/update/id & PATCH & id sprzętu oraz zmienione dane sprzętu& aktualizacja danych komputera\\
+		 /computers/update/id & PATCH & id sprzętu oraz zmienione dane sprzętu& Aktualizacja danych komputera\\
 		\hline
-		 /tablets/update/id & PATCH & id sprzętu oraz zmienione dane sprzętu& aktualizacja danych tabletu\\
+		 /tablets/update/id & PATCH & id sprzętu oraz zmienione dane sprzętu& Aktualizacja danych tabletu\\
 		\hline	 
-		/other-device/update/id & PATCH & id sprzętu i zmienione dane sprzętu & aktualizacja danych innego urządzenia\\
+		/other-device/update/id & PATCH & id sprzętu i zmienione dane sprzętu & Aktualizacja danych innego urządzenia\\
 		\hline
 			 /computers/add & POST	& dane komputera 	& Dodanie nowego komputera	\\
     \hline
@@ -36,10 +36,10 @@ Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą by
     \hline
 		/devices/by-office& GET	& id biura 	& Pobranie danych sprzętu znajdujących się w biurze\\
     \hline
-		/devices/all-ready-to-lottery& GET	& - & Pobranie danych sprzętów które są gotowe do losowania\\
+		/devices/all-ready-to-lottery& GET	& - & Pobranie danych sprzętów, które są gotowe do losowania\\
     \hline
 		
-		/devices/all-ready-to-lottery-by-officeId/id& GET	& id biura & Pobranie danych sprzętów które są gotowe do losowania i znajdują się w danym biurze\\
+		/devices/all-ready-to-lottery-by-officeId/id& GET	& id biura & Pobranie danych sprzętów, które są gotowe do losowania i znajdują się w danym biurze\\
     \hline
 		/devices/set-ready-to-lottery/id 		& PUT	& id sprzętu & Ustawienie gotowości sprzętu do losowania	\\
     \hline
@@ -55,7 +55,7 @@ Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą by
     \hline
 		/components/{id}	& DELETE & id komponentu 	& Usunięcie procesora, ram lub dysku pamięci\\
     \hline
-		 /components/update/id & PUT & id sprzętu oraz zmienione dane sprzętu& aktualizacja danych komputera\\
+		 /components/update/id & PUT & id sprzętu oraz zmienione dane sprzętu& Aktualizacja danych komputera\\
 		\hline
 		 /offices/all	& GET & - & Pobranie wszystkich biur w systemie\\
 		\hline
@@ -93,7 +93,7 @@ Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą by
 		\hline
 		 /participation/user-lose-history/id & GET& id użytkownika & Wyświetlenie historii porażek użytkownika o zadanym id\\
 		\hline
-		 /participation/user-pending-lottery/id & GET& id użytkownika & Wyświetlenie uczestnictwa które czeka na losowanie\\
+		 /participation/user-pending-lottery/id & GET& id użytkownika & Wyświetlenie uczestnictwa, które czeka na losowanie\\
 		\hline
 		 /participation/device-participation/id& GET& id urządzenia & Wyświetlenie wszystkich użytkowników zapisanych na losowaniu urządzenia o zadanym id\\
 		\hline
@@ -107,12 +107,12 @@ Tabele \ref{tab:rest1} oraz \ref{tab:rest2} prezentują jakie zapytania mogą by
 
 
 \section{Aplikacja serwerowa}
-Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona żądania aplikacji klienckiej. Dostarcza ona funkcjonalność uwierzytelniania i autoryzacji. W wyniku zapytań wysłanych przez aplikację kliencką wyświetlane są w aplikacji odpowiednie dane. Możliwe jest też dodawanie i usuwanie odpowiednich rekordów. Implementacja odbywa się z wykorzystywaniem języka Java z frameworkami Spring oraz Hibernate \ref{tab:zestawienie_narzędzi} z wykorzystaniem dobrych praktyk programowania przedstawionych w \cite{javaep}. Graficzną reprezentacje struktury projektu aplikacji serwerowej pokazano na rysunku \ref{backend_struktura:label}
+Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona żądania aplikacji klienckiej. Dostarcza ona funkcjonalność uwierzytelniania i autoryzacji. W wyniku zapytań wysłanych przez aplikację kliencką wyświetlane są w aplikacji odpowiednie dane. Możliwe jest też dodawanie i usuwanie odpowiednich rekordów. Implementacja odbywa się z wykorzystywaniem języka Java z frameworkami Spring oraz Hibernate \ref{tab:zestawienie_narzędzi} z wykorzystaniem dobrych praktyk programowania przedstawionych w literaturze \cite{javaep}. Graficzną reprezentacje struktury projektu aplikacji serwerowej pokazano na rysunku \ref{backend_struktura:label}
 
 \subsection{Struktura projektu}
-Ścieżka pakietowa wykorzystana jest odwróconą ścieżką domenową Politechniki Wrocławskiej oraz nazwy projektu: \texttt{pl.edu.pwr.computermanagamenttool}. Następnie pakiety które są dołączone do tej ścieżki odpowiadają funkcjom które pełnią klasy. Wyróżnia się tutaj pakiety:
+Ścieżka pakietowa wykorzystana jest odwróconą ścieżką domenową Politechniki Wrocławskiej oraz nazwy projektu: \texttt{pl.edu.pwr.computermanagamenttool}. Następnie pakiety, które są dołączone do tej ścieżki odpowiadają funkcjom które pełnią klasy. Wyróżnia się tutaj pakiety:
 \begin{itemize} %DONE wykorzystanie czcionki maszynowej 
-\item \texttt{pl.edu.pwr.computermanagementtool} - pakiet ogólny przechowywujący pozostałe pakiety. Klasa \texttt{ComputerManagementToolApplication} posiada metodę \texttt{Main}odpowiedzialną za uruchomienie aplikacji. Klasa \texttt{JacksonConfig} jest konfiguracją odpowiedzialną za serializację formatu JSON. Natomiast klasa \texttt{PasswordEncoderUtil} jest odpowiedzialna za szyfrowanie haseł użytkowników korzystających z systemu,
+\item \texttt{pl.edu.pwr.computermanagementtool} - pakiet ogólny przechowywujący pozostałe pakiety. Klasa \texttt{ComputerManagementToolApplication} posiada metodę \texttt{Main} odpowiedzialną za uruchomienie aplikacji. Klasa \texttt{JacksonConfig} jest konfiguracją odpowiedzialną za serializację formatu JSON. Natomiast klasa \texttt{PasswordEncoderUtil} jest odpowiedzialna za szyfrowanie haseł użytkowników korzystających z systemu,
 \item \texttt{controller} -- pakiet przechowujący w sobie klasy kontrolerów odpowiedzialne za wykonywanie zapytań aplikacji za pomocą interfejsu REST, implementacje kontrolerów odbywały się z pomocą materiałów \cite{springrest, javarest}.
 \item \texttt{dto} -- pakiet który jest odpowiedzialny za przechowywanie klas służących do przechowywania danych i ułatwiania ich przesyłania między różnymi częściami systemu. Wykorzystywany jest w klasach kontrolera,
 \item \texttt{entity} -- pakiet przechowujący definicje encji reprezentowanych w bazie danych,
@@ -140,7 +140,7 @@ Do zarządzania danymi wykorzystywana jest aplikacja serwerowa. Przetwarza ona �
 
 \subsection{Fragmenty implementacji}
 \subsubsection {Fragment kodu klas encji wykorzystującej schemat dziedziczenia}
-Na listingu \ref{entity_deviceCore} kodu klasy \texttt{DeviceCore} w linii 3 określono schemat dziedziczenia \mbox{TABLE\_PER\_CLASS}. O sposobie dziedziczenia napisano w podrozdziale \ref{dzedziczenie_hibernate:label}. Linia~3~określa strategie generowania klucza. Hibernate tworzy wtedy specjalną tabelę w bazie danych która odpowiedzialna jest za przechowywanie unikalnych kluczy głównych dla encji sprzętu w~aplikacji. W kodzie pokazanym na listingu \ref{entity_computer} nie trzeba wtedy definiować klucza.
+Na listingu \ref{entity_deviceCore} kodu klasy \texttt{DeviceCore} w linii 3 określono schemat dziedziczenia \mbox{TABLE\_PER\_CLASS}. O sposobie dziedziczenia napisano w podrozdziale \ref{dzedziczenie_hibernate:label}. Linia~3~określa strategie generowania klucza. Hibernate tworzy wtedy specjalną tabelę w bazie danych, która odpowiedzialna jest za przechowywanie unikalnych kluczy głównych dla encji sprzętu w~aplikacji. W kodzie pokazanym na listingu \ref{entity_computer} nie trzeba wtedy definiować klucza.
 
 \begin{lstlisting}[language=Java, style=JavaStyle, caption={Klasa nadrzędna reprezentująca rdzeń sprzętu: \texttt{DeviceCore}}, label={entity_deviceCore}]
 @Entity
@@ -311,7 +311,7 @@ protected DeviceCore addDevice(Class<? extends DeviceCore> deviceClass, String d
 		
 		// Pozostała część klasy
 \end{lstlisting}
-W linii 12 widnieje metoda, która pozwala na pobranie sprzętu. W linii 17 natomiast jest możliwe pobranie wszystkich sprzętów. Odbywa się to przy pomocy sparametryzowanych typów danych \texttt{T}. Metoda zdefiniowana w linii 22 pozwala uprościć dodawanie sprzętu, implementując część logiki ustawiając parametry charakterystyczne dla rdzenia sprzętu. Jednak aby utworzyć odpowiedni typ niezbędne jest określenie jakiego typu będzie dodawane urządzenie. Dlatego w linii 22 metoda jako parametr przyjmuje \texttt{Class<? extends DeviceCore>}, który oznacza typ aplikacji. Tak zdefiniowana metoda może zostać użyta do dodania sprzętu w klasach potomnych co pokazano w listingu \ref{service_tablet_2}.
+W linii 12 widnieje metoda, która pozwala na pobranie sprzętu. W linii 17 natomiast jest możliwe pobranie wszystkich sprzętów. Odbywa się to przy pomocy sparametryzowanych typów danych \texttt{T}. Metoda zdefiniowana w linii 22 pozwala uprościć dodawanie sprzętu, implementując część logiki ustawiając parametry charakterystyczne dla rdzenia sprzętu. Jednak aby utworzyć odpowiedni typ niezbędne jest określenie jakiego typu będzie dodawane urządzenie. Dlatego w~linii 22 metoda jako parametr przyjmuje \texttt{Class<? extends DeviceCore>}, który oznacza typ sprzętu. Tak zdefiniowana metoda może zostać użyta do dodania sprzętu w klasach potomnych co pokazano w listingu \ref{service_tablet_2}.
 
 \begin{lstlisting}[language=Java, style=JavaStyle,  caption={Klasa potomna serwisu tabletu: TabletService }, label={service_tablet_2}]
 @Service
@@ -350,7 +350,7 @@ Ogólna struktura projektu powstała na skutek wywołania komendy tworzącej apl
 	\begin{itemize}
 	\item \texttt{Login.js} -- skrypt odpowiedzialny za widok i funkcjonalność logowania,
 	\item \texttt{Register.js} -- skrypt odpowiedzialny za widok i funkcjonalność rejestracji,
-	\item \texttt{Login.css} -- arkusz styli odpowiedzialny za stylizacje widoków logowania i rejestracji,
+	\item \texttt{Login.css} -- arkusz styli odpowiedzialny za stylizacje widoków logowania i rejestracji.
 	\end{itemize}
 \item \texttt{\textbf{bar}} przechowuje skrypty odpowiedzialne za paski nawigacyjne poszczególnych widoków:
 	\begin{itemize}
@@ -359,22 +359,22 @@ Ogólna struktura projektu powstała na skutek wywołania komendy tworzącej apl
 	\item \texttt{ManageUserBar.js} -- skrypt odpowiedzialny za pasek nawigacyjny widoku zarządzania użytkownikami: \texttt{Users.js},
 	\item \texttt{UserHomeBar.js} -- skrypt odpowiedzialny za pasek nawigacyjny na widoku domowym pracownika: \texttt{Home.js},
 	\item \texttt{UserLotteryHistory} -- skrypt odpowiedzialny za pasek nawigacyjnym na widoku historii loterii użytkownika: \texttt{UserLotteryHistory.js},
-	\item \texttt{UsersInLottery.js} -- skrypt odpowiedzialny za pasek nawigacyjny na widoku użytkowników biorących udział w loterii: \texttt{UsersInLottery.js},
+	\item \texttt{UsersInLottery.js} -- skrypt odpowiedzialny za pasek nawigacyjny na widoku użytkowników biorących udział w loterii: \texttt{UsersInLottery.js}.
 	\end{itemize}
-\item \texttt{\textbf{computer\_components}} przechowuje skrypty formularzy komponentów komputera które mogą dodawać lub modyfikować te komponenty:
+\item \texttt{\textbf{computer\_components}} przechowuje skrypty formularzy komponentów komputera, które mogą dodawać lub modyfikować te komponenty:
 	\begin{itemize}
 	\item \texttt{CpuForm.js} -- formularz procesora,
 	\item \texttt{RamForm.js} -- formularz pamięci RAM,
-	\item \texttt{StorageForm.js} -- formularz pamięcu dyskowej,
+	\item \texttt{StorageForm.js} -- formularz pamięcu dyskowej.
 	\end{itemize}
 \item \texttt{\textbf{device\_form}} przechowuje skrypty oraz arkusz styli odpowiedzialne za logikę formularzy dodawania, modyfikacji urządzeń:
 	\begin{itemize}
-	\item \texttt{AddNewFormPopup.js} -- formularz umożliwiający wybór formularza który dodaje komputer, tablet, lub inne urządzenie
-	\item \texttt{ComputerForm.js} -- formularz komputera
-	\item \texttt{DeviceForm.css} -- arkusz styli odpowiedzialny za stylizacje formularzy
-	\item \texttt{FormPopup.js} -- skrypt odpowiedzialny za logikę i wybór rodzaju formularza(dodawanie, modyfikacja, informacje) urządzenia.
-	\item \texttt{OtherDeviceForm} -- formularz innego urządzenia
-	\item \texttt{TabletForm.js} -- formularz tabletu
+	\item \texttt{AddNewFormPopup.js} -- formularz umożliwiający wybór formularzam który dodaje komputer, tablet, lub inne urządzenie,
+	\item \texttt{ComputerForm.js} -- formularz komputera,
+	\item \texttt{DeviceForm.css} -- arkusz styli odpowiedzialny za stylizacje formularzy,
+	\item \texttt{FormPopup.js} -- skrypt odpowiedzialny za logikę i wybór rodzaju formularza(dodawanie, modyfikacja, informacje) urządzenia,
+	\item \texttt{OtherDeviceForm} -- formularz innego urządzenia,
+	\item \texttt{TabletForm.js} -- formularz tabletu.
 	\end{itemize}
 \item \texttt{\textbf{view}} przechowuje w sobie skrypty oraz arkusz styli odpowiedzialne za widoki aplikacji:
 	\begin{itemize}
@@ -461,7 +461,7 @@ Strukturę projektu pokazano na rysunku \ref{frontend_struktura:label}.
 
 
 \subsubsection{Sparametryzowany formularz urządzenia}
-Kod skryptu \texttt{FormPopup.js} przedstawiony na listingu \ref{render_data:label} służy do wyboru formularza na podstawie typu sprzętu oraz operacji wykonywanej przez formularz. Przyjmuje 4 argumenty. Przekazywanie tych parametrów odbywa się w linii 4 z wykorzystaniem "`\texttt{props}"'. Zmienna \texttt{deviceType} odpowiada dla jakiego urządzenia dotyczy formularz. Może on dotyczyć komputera, tabletu lub innego urządzenia co pokazano w liniach 9-11. Zmienna \texttt{setTrigger} jest odpowiedzialna za to czy formularz jest aktualnie wyświetlany na widoku. Zmienna \texttt{formType} dotyczy operacji reprezentowanej przez formularz. Istnieją 3 operacje: dodawania nowego sprzętu, modyfikacji sprzętu oraz wyświetlania informacji o sprzęcie. Tak stworzona funkcja umożliwia zarządzanie formularzami które zostały zdefiniowane w~skryptach \texttt{ComputerForm.js}, \texttt{TabletForm.js} oraz \texttt{OtherDeviceForm.js}.
+Kod skryptu \texttt{FormPopup.js} przedstawiony na listingu \ref{render_data:label} służy do wyboru formularza na podstawie typu sprzętu oraz operacji wykonywanej przez formularz. Przyjmuje 4 argumenty. Przekazywanie tych parametrów odbywa się w linii 4 z wykorzystaniem "`\texttt{props}"'. Zmienna \texttt{deviceType} odpowiada dla jakiego urządzenia dotyczy formularz. Może on dotyczyć komputera, tabletu lub innego urządzenia co pokazano w liniach 9-11. Zmienna \texttt{setTrigger} jest odpowiedzialna za to czy formularz jest aktualnie wyświetlany na widoku. Zmienna \texttt{formType} dotyczy operacji reprezentowanej przez formularz. Istnieją 3 operacje: dodawania nowego sprzętu, modyfikacji sprzętu oraz wyświetlania informacji o sprzęcie. Tak stworzona funkcja umożliwia zarządzanie formularzami, które zostały zdefiniowane w~skryptach \texttt{ComputerForm.js}, \texttt{TabletForm.js} oraz \texttt{OtherDeviceForm.js}.
 \begin{lstlisting}[language=JavaScript, style=JavaScriptStyle,  caption={Obsługa formularzy}, label={render_data:label}]
 function FormPopup(props){
     
@@ -527,7 +527,7 @@ Zdefiniowano widoki aplikacji i pogrupowano je ze względu na typ które pełni�
 \end{figure}
 
 \newpage
-Początkowym widokiem aplikacji jest widok z widok W-1 z formularzem logowania i rejestracji. Każdy użytkownik musi się zalogować podając poprawne dane logowania (rysunek \ref{authview:label}a). W przypadku braku konta możliwa jest rejestracja, klikając na odnośnik "`Nie masz konta? Zarejestruj się"'. Po kliknięciu odnośnika następuje przekierowanie na formularz rejestracji (rysunek \ref{authview:label}b). Po pomyślnym zarejestrowaniu następuje przekierowanie do formularza logowania. Możliwe jest też kliknięcie odnośnika "`Masz już konto? Zaloguj się"' aby przejść do formularza logowania.
+Początkowym widokiem aplikacji jest widok z widok W-1 z formularzem logowania i rejestracji. Każdy użytkownik musi się zalogować podając poprawne dane logowania (rysunek \ref{authview:label}a). W przypadku braku konta możliwa jest rejestracja, klikając na odnośnik \textbf{\mbox{"`Nie masz konta? Zarejestruj się"'}}. Po kliknięciu odnośnika następuje przekierowanie na formularz rejestracji (rysunek \ref{authview:label}b). Po pomyślnym zarejestrowaniu następuje przekierowanie do formularza logowania. Możliwe jest też kliknięcie odnośnika \textbf{"`Masz już konto? Zaloguj się"'} aby przejść do formularza logowania.
 \begin{figure}[H]
   \centering
 	\begin{tabular}{@{}lll@{}}
@@ -552,13 +552,13 @@ Wyświetlanie szczegółowych informacji o urządzeniu odbywa się na widoku for
 
 Widok W-2 jest widokiem administratora, oferującym wiele funkcji:
 \begin{itemize}
-	\item Kliknięcie przycisku "`Dodaj urządzenie"' sprawia, że na ekranie wyświetlany jest formularz W-3. Początkowo wyśiwetlany jest wariant W-3a ale istniej możliwość na zmianę typu formularza na wariant  W-3b lub W-3c poprzez odpowiedni wybór z listy rozwijanej,
+	\item Kliknięcie przycisku "`Dodaj urządzenie"' sprawia, że na ekranie wyświetlany jest formularz W-3. Początkowo wyświetlany jest wariant W-3a ale istniej możliwość na zmianę typu formularza na wariant  W-3b lub W-3c poprzez odpowiedni wybór z listy rozwijanej,
 	\item kliknięcie przycisku "`Przeglądaj komponenty"' sprawia, że następuje przekierowanie do widoku komponentów W-8,
 	\item kliknięcie przycisku "`Zarządzaj użytkownikami"' przekierowuje do widoku zarejestrowanych pracowników W-6a (rysunek \ref{manageUsers:label}),
 	\item kliknięcie przycisku "`Zmień"' w kolumnie czy sprzedany ustawia status sprzętu na sprzedany lub nie. Jest to informacja czy sprzęt został dostarczony do pracownika,
 	\item kliknięcie przycisku w kolumnie "`Gotowy na losowanie"' możliwe jest tylko wtedy gdy losowanie się nie odbyło. Sprawia ono, że operacja "`Losuj"' w kolumnie loteria jest możliwa. Sprzęty które mają status gotowe do losowania są wyświetlane na widoku pracownika W-2c,
 	\item kliknięcie przycisku "`Usuń"' usuwa z systemu odpowiedni sprzęt,
-	\item kliknięcie przycisku "`Modyfikuj"' wyświetla widok formularza modyfikacji W-4 (rysunek \ref{formsMod:label}). Wyśiwtlany jest jeden z formularzy W-4a, W-4b, W-4c na podstawie typu modyfikowanego urządzenia,
+	\item kliknięcie przycisku "`Modyfikuj"' wyświetla widok formularza modyfikacji W-4 (rysunek \ref{formsMod:label}). Wyświtlany jest jeden z formularzy W-4a, W-4b, W-4c na podstawie typu modyfikowanego urządzenia,
 	\item kliknięcie przycisku "`Wyświetl"' w kolumnie "`Lista uczestników"' przekierowuje do widoku pracowników biorących udział w loterii wybranego sprzętu W-6b (rysunek \ref{manageUsers:label}),
 	\item kliknięcie przycisku "`Losuj"' w kolumnie loteria możliwe jest w przypadku gdy urządzenie jest gotowe do losowania oraz loteria się jeszcze nie odbyła. Następnie po kliknięciu przycisku ustawiana data losowania jest na dzisiejszą oraz losowany jest zwycięzca losowania. W~przypadku braku uczestników losowanie nie odbędzie się,
 \end{itemize}
@@ -583,7 +583,7 @@ Widok W-2c (rysunek~\ref{home:label}) jest widokiem pracownika. Nie posiada on t
 \end{figure}
 
 
-Formularze W-3 ukazane na rysunku \ref{formsAdd:label} są dostępne tylko dla administratora. Wyświetlane są jako wyskakujące okno. Początkowym wariantem jest wariant W-3a służący za dodawanie komputera. Wariant można zmienić na dodawanie tabletu W-3b lub dodawanie innego urządzenia W-3c po przez wybór opcji z listy rozwijanej na formularzu. Na wariancie W-3a istnieje możliwość dodawania procesora, pamięci RAM i pamięci dyskowej po przez kliknięcie przycisku. Każdy przycisk powoduje otworzenie odpowiedniego formularza z widoku W-9. Ważnym aspektem takiego rozwiązania jest to, że jeżeli użytkownik nie znajdzie odpowiedniego: procesora, RAM lub dysku to może szybko je dodać. Po takim dodaniu następuje powrót do formularza, formularz zachowuje poprzedni stan, a lista rozwijana dotycząca dodawanego komponentu od razu zostaje uzupełniona o dodatkowe dane. Podobną funkcjonalność ma widok W-4a modyfikacji komputera \ref{formsMod:label}. 
+Formularze W-3 ukazane na rysunku \ref{formsAdd:label} są dostępne tylko dla administratora. Wyświetlane są jako wyskakujące okno. Początkowym wariantem jest wariant W-3a służący za dodawanie komputera. Wariant można zmienić na dodawanie tabletu W-3b lub dodawanie innego urządzenia W-3c po przez wybór opcji z listy rozwijanej na formularzu. Na wariancie W-3a istnieje możliwość dodawania procesora, pamięci RAM i pamięci dyskowej po przez kliknięcie przycisku. Każdy przycisk powoduje otworzenie odpowiedniego formularza z widoku W-9. Ważnym aspektem takiego rozwiązania jest to, że jeżeli użytkownik nie znajdzie odpowiedniego: procesora, RAM lub dysku to może szybko je dodać. Po takim dodaniu następuje powrót do formularza, formularz ten zachowuje poprzedni stan, a lista rozwijana dotycząca dodawanego komponentu od razu zostaje uzupełniona o dodatkowe dane. Podobną funkcjonalność ma widok W-4a modyfikacji komputera \ref{formsMod:label}. 
 
 
 \begin{figure}[H]
@@ -599,7 +599,7 @@ Formularze W-3 ukazane na rysunku \ref{formsAdd:label} są dostępne tylko dla a
   \label{formsMod:label}
 \end{figure}
 
-Formularze na widoku W-4 (rysunek \ref{formsMod:label}) są bardzo podobne do tych na widoku W-3 przedstawionych na rysunku\ref{formsAdd:label}.  Zasadniczą różnicą jest jednak to, że przy modyfikacji urządzenia od razu określony jest jego typ, przez co nie ma możliwości zmiany na formularza na inny typ, tak jak to było możliwe przez listę rozwijaną w widoku W-3. Drugim aspektem jest to, że formularze są już wypełnione o odpowiednie dane które zawiera modyfikowane urządzenie. Wymazanie takich danych sprawi to, że odpowiednie pola będą miały wartość \texttt{null}. W formularzu W-4a możliwe jest też dodanie odpowiedniego komponentu na podstawie jednego z trzech przycisku co działa w ten sam sposób jak formularzu W-3a \ref{formsAdd:label}. Formularze te również dostępne są tylko z poziomu administratora.
+Formularze na widoku W-4 (rysunek \ref{formsMod:label}) są bardzo podobne do tych na widoku W-3 przedstawionych na rysunku \ref{formsAdd:label}.  Zasadniczą różnicą jest jednak to, że przy modyfikacji urządzenia od razu określony jest jego typ, przez co nie ma możliwości zmiany na formularza na inny typ, tak jak to było możliwe przez listę rozwijaną w widoku W-3. Drugim aspektem jest to, że formularze są już wypełnione o odpowiednie dane, które zawiera modyfikowane urządzenie. Wymazanie takich danych sprawi to, że odpowiednie pola będą miały wartość \texttt{null}. W formularzu W-4a możliwe jest też dodanie odpowiedniego komponentu na podstawie jednego z trzech przycisków, co działa w ten sam sposób jak formularzu W-3a (rysunek \ref{formsAdd:label}). Formularze te również dostępne są tylko z poziomu administratora.
 
 
 \begin{figure}[H]
@@ -615,7 +615,7 @@ Formularze na widoku W-4 (rysunek \ref{formsMod:label}) są bardzo podobne do ty
   \label{formsInfo:label}
 \end{figure}
 
-Formularze na widoku W-5 (rysunek \ref{formsInfo:label}) podobne są do tych z widoków W-3 (rysunek \ref{formsAdd:label}) i W-4 (rysunek(\ref{formsMod:label}). Jednak w przeciwieństwie do nich nie dodają ani modyfikują danych. Z formularzy tych może korzystać również pracownik. Dane na takim formularzu są od razu uzupełnione i zablokowane. 
+Formularze na widoku W-5 (rysunek \ref{formsInfo:label}) podobne są do tych z widoków W-3 (rysunek \ref{formsAdd:label}) i W-4 (rysunek(\ref{formsMod:label}). Jednak w przeciwieństwie do nich nie dodają ani nie modyfikują danych. Z formularzy tych może korzystać również pracownik. Dane na takim formularzu są od razu uzupełnione, a możliwość ich edycji jest zablokowana. 
 
 \begin{figure}[H]
   \centering
@@ -635,10 +635,10 @@ Formularze na widoku W-5 (rysunek \ref{formsInfo:label}) podobne są do tych z w
 Widok W-6 (rysunek \ref{manageUsers:label}) posiada informacje o użytkownikach. W-6a jest widokiem dostępnym tylko dla administratora
 \begin{itemize}
 	\item kliknięcie przycisku powrót do urządzeń przekierowuje do strony domowej W-2 (rysunek \ref{home:label}),
-	\item kliknięcie przycisku "`Pokaż historię"' w kolumnie Historia loterii przekierowuje do widoku historii loterii  W-7 (rysunek \ref{lotteryHistory:label}) dla odpowiadającego pracownika,
+	\item kliknięcie przycisku "`Pokaż historię"' w kolumnie "`Historia loterii"' przekierowuje do widoku historii loterii  W-7 (rysunek \ref{lotteryHistory:label}) dla odpowiedniego pracownika,
 	\item kliknięcie przycisku "`Usuń użytkownika"' usuwa z systemu użytkownika.
 \end{itemize}
-Widok W-6b też jest widokiem tylko dostępnym dla administratora. Posiada on listę uczestników oraz informacje o wygranej przegranej każdego poszczególnego uczestnika dla wybranej loterii.
+Widok W-6b też jest widokiem tylko dostępnym dla administratora. Posiada on listę uczestników oraz informacje o wygranej dla każdego poszczególnego uczestnika wybranej loterii.
 
 
 \begin{figure}[H]

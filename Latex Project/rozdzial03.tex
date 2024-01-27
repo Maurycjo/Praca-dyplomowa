@@ -53,14 +53,14 @@ Projektowany system powinien zapewnieć szereg funkcji do potencjalnego wykorzys
 	\textbf{Warunki początkowe:} Brak.\\
 	\textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
-		\item Podanie w formularzu maila, nazwy użytkownika, Imienia, nazwiska, hasła i potwierdzenia hasła.
+		\item Podanie w formularzu maila, nazwy użytkownika, imienia, nazwiska, hasła i potwierdzenia hasła.
     \item Kliknięcie przycisku zarejestruj.
 		\item Przekierowanie do okna logowania.
 	\end{enumerate}
 	\textbf{Przebieg alternatywny 1 (odrzucenie próby logowania):}
 	\begin{enumerate}[noparskip]\setcounter{enumi}{4}
 		\item Użytkownik wprowadził 2 różne hasła w polach hasło i powtórz hasło przez co rejestracja nie powiodła się.
-		\item Użytkownik o zadanym mailu lub nazwie użytkownika istnieje przez co rejestracja nie powiodła się.
+		\item Użytkownik o zadanym mailu lub nazwie użytkownika istnieje, przez co rejestracja nie powiodła się.
 	\end{enumerate}	\mbox{}\\[-11mm]
 %%  \textbf{Warunki końcowe:} Brak. %\mbox{}\\[-4mm]
 
@@ -143,7 +143,7 @@ Projektowany system powinien zapewnieć szereg funkcji do potencjalnego wykorzys
 	\textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
 		\item Kliknięcie przycisku odpowiedzialnego za dodanie urządzenia.
-    \item Wybranie z listy rozwijanej typu urządzenia które będzie dodawane.
+    \item Wybranie z listy rozwijanej typu urządzenia, które będzie dodawane.
 		\item System wyświetla formularz z odpowiednim rodzajem urządzenia.
 		\item Wpisanie oraz wybranie odpowiednich parametrów reprezentujących urządzenie.
 		\item Dodanie urządzenia do systemu.	\end{enumerate} 
@@ -207,7 +207,7 @@ Projektowany system powinien zapewnieć szereg funkcji do potencjalnego wykorzys
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-3.1 Przeglądanie komponentów komputera}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Do lepszego oszacowania ceny sprzętu Administrator ma widok komponentów które może posiadać komputer.\\
+	\noindent\textbf{Opis:} Do lepszego oszacowania ceny sprzętu Administrator ma widok komponentów, które może posiadać komputer.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
 	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
 	\textbf{Extend:}
@@ -221,7 +221,7 @@ Projektowany system powinien zapewnieć szereg funkcji do potencjalnego wykorzys
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-3.2 Dodawanie nowego komponentu komputera}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Możliwe jest dodawanie komponentu na który składa się cena i nazwa.\\
+	\noindent\textbf{Opis:} Możliwe jest dodawanie komponentu, na który składa się cena i nazwa.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
 	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
   \textbf{Przebieg podstawowy:}
@@ -240,7 +240,7 @@ Projektowany system powinien zapewnieć szereg funkcji do potencjalnego wykorzys
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-3.3 Modyfikacja komponentu komputera}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Możliwe jest modyfikowanie komponentu na który składa się cena i nazwa.\\
+	\noindent\textbf{Opis:} Możliwe jest modyfikowanie komponentu, na który składa się cena i nazwa.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
 	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora.\\
 	\textbf{Include:} 
@@ -264,13 +264,13 @@ Projektowany system powinien zapewnieć szereg funkcji do potencjalnego wykorzys
     \textbf{Przebieg podstawowy:}
 	\begin{enumerate}[noparskip]
 		\item Kliknięcie przycisku usuń na odpowiednim wierszu reprezentującym komponent.
-		\item Usunięcie komponentu z bazy, oraz ustawienie wszystkich odwołań w komputerach do danego komponentu na null.
+		\item Usunięcie komponentu z bazy, oraz ustawienie wszystkich odwołań w komputerach do danego komponentu na \texttt{null}.
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-4.1 Zmiana gotowości sprzętu do losowania}}\mbox{}\\[1mm]
 	\noindent\textbf{Opis:} Administrator zarządza urządzeniem i określa jego gotowość do loterii.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie nie zostało wcześniej wylosowane w loterii.\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, urządzenie nie zostało wcześniej wylosowane w loterii.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
 		\item FR-2.1 Przeglądanie sprzętu komputerowego.
@@ -282,9 +282,9 @@ Projektowany system powinien zapewnieć szereg funkcji do potencjalnego wykorzys
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-4.2 Zmiana statusu sprzętu na sprzedane lub niesprzedane}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Administrator kontroluje które sprzęty zostały już sprzedane i dostarczone do pracownika\\
+	\noindent\textbf{Opis:} Administrator kontroluje, które sprzęty zostały już sprzedane i dostarczone do pracownika\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Urządzenie zostało wylosowane w loterii.\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, urządzenie zostało wylosowane w loterii.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
 		\item FR-2.1 Przeglądanie sprzętu komputerowego
@@ -311,9 +311,9 @@ Projektowany system powinien zapewnieć szereg funkcji do potencjalnego wykorzys
   \end{enumerate} \mbox{}\\[-11mm]
 
 \paragraph{\underline{FR-4.4 Losowanie zwycięzcy loterii}}\mbox{}\\[1mm]
-	\noindent\textbf{Opis:} Administrator losuje zwycięzce spośród tych pracowników którzy zapisali się a loterię.\\
+	\noindent\textbf{Opis:} Administrator losuje zwycięzcę spośród tych pracowników, którzy zapisali się a loterię.\\
 	\noindent\textbf{Aktorzy:} Administrator\\
-	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, Status urządzenia został ustawiony na gotowe do losowania, Przynajmniej jeden pracownik jest zapisany na losowanie.\\
+	\textbf{Warunki początkowe:} Administrator został wcześniej zarejestrowany w systemie i posiada uprawnienia administratora, status urządzenia został ustawiony na gotowe do losowania, przynajmniej jeden pracownik jest zapisany na losowanie.\\
 	\textbf{Include:} 
 	\begin{enumerate}[noparskip]
 		\item FR-2.1 Przeglądanie sprzętu komputerowego.
@@ -394,7 +394,7 @@ Etapem projektowania systemu jest zdefiniowanie wymagań niefunkcjonalnych. Poni
 	\item \textbf{Niezawodność} -- system powinien być niepodatny na awarie.
 	\item \textbf{Mierzalne kryteria}
 		\begin{enumerate}
-			\item średni czas pomiędzy zaobserwowanymi awariami powinien wynosić co najmniej 30 dni,
+			\item średni czas pomiędzy zaobserwowanymi awariami powinien wynosić co najmniej 30~dni,
 			\item średni czas naprawy w przypadku awarii nie powinien przekraczać 1 godziny.
 		\end{enumerate}
 	Niezawodność jest związana z działaniem aplikacji na środowisku chmurowym. 
@@ -408,7 +408,7 @@ Etapem projektowania systemu jest zdefiniowanie wymagań niefunkcjonalnych. Poni
 			\item mechanizmy sprawdzania bezpieczeństwa haseł użytkowników.
 		\end{enumerate}
 		
-		Wykorzystanie logiki napisanej w aplikacji serwerowej w języku JAVA \ref{tab:zestawienie_narzędzi} powinno umożliwiać szyfrowanie i sprawdzenie bezpieczeństwa haseł
+		Wykorzystanie logiki napisanej w aplikacji serwerowej w języku JAVA (tabela \ref{tab:zestawienie_narzędzi}) powinno umożliwiać szyfrowanie i sprawdzenie bezpieczeństwa haseł.
 		
 		\subsection{Wydajność}
 		\item \textbf{Wydajność} -- system powinien zapewniać satysfakcjonujący czas oczekiwania na wykonanie operacji.

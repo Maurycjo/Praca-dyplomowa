@@ -31,7 +31,7 @@ Wykorzystując Postmana można na bieżąco monitorować stan aplikacji poprzez 
 
 
 \subsubsection{Pobieranie informacji o sprzęcie}
-Na scenariuszu testowym 1 (rysunek \ref{getByIdTest:label}) przetestowano pobieranie informacji o urządzeniu. Wykorzystując zapytanie \texttt{localhost:8080/devices/{id}} metodą GET uzyskano na scenariuszu testowym 1a i 1b status 200 OK. Wyświetlane informacje świadczą o poprawności działania funkcjonalności pobierania informacji o sprzęcie. W scenariuszu 1a zostały wyświetlone informacje o komputerze a w 1b o innym urządzeniu. Odpowiedź zapytania jest zależna od tego jakie urządzenie o zadanym ID ma typ. Możliwe jest coś takiego po wykorzystaniu schematu dziedziczenia które dostarcza unikalnych kluczy dal poszczególnych typów sprzętów. Więcej na ten temat napisano w rozdziale \ref{dzedziczenie_hibernate:label}.
+Na scenariuszu testowym 1 (rysunek \ref{getByIdTest:label}) przetestowano pobieranie informacji o urządzeniu. Wykorzystując zapytanie \texttt{localhost:8080/devices/{id}} metodą GET uzyskano na scenariuszu testowym 1a i 1b status 200 OK. Wyświetlane informacje świadczą o poprawności działania pobierania informacji o sprzęcie. W scenariuszu 1a zostały wyświetlone informacje o komputerze a w 1b o innym urządzeniu. Odpowiedź zapytania jest zależna od tego jakie urządzenie o~zadanym ID ma typ. Możliwe jest coś takiego po wykorzystaniu schematu dziedziczenia, które dostarcza unikalnych kluczy dla poszczególnych typów sprzętów. Więcej na ten temat napisano w rozdziale \ref{dzedziczenie_hibernate:label}.
 
 
 \begin{figure}[H]
@@ -77,7 +77,7 @@ W scenariuszu testowym 3 (rysunek \ref{deleteTest:label}) pokazano w jaki sposó
 
 \subsubsection{Losowanie zwycięzcy}
 
-Jedną z głównych funkcjonalności aplikacji jest przeprowadzenie losowania. Scenariusz testowy 3 (rysunek \ref{winnerTest:label}) pokazuje w jaki sposób jest przeprowadzane losowanie. W przypadku kiedy loteria posiada zapisanych użytkowników, losowany jest zwycięzca, jako status HTTP uzyskiwany jest 200 OK. W scenariuszu 3b pokazano przypadek kiedy na loterię nie został zapisany żaden pracownik lub loteria nie została otworzona. Wtedy status HTTP jest 204 No Content. 
+Jedną z głównych funkcjonalności aplikacji jest przeprowadzenie losowania. Scenariusz testowy 3 (rysunek \ref{winnerTest:label}) pokazuje w jaki sposób jest przeprowadzane losowanie. W przypadku kiedy loteria posiada zapisanych użytkowników, losowany jest zwycięzca, i zwracany jest status \mbox{\texttt{HTTP 200 OK}}. W scenariuszu 3b pokazano przypadek kiedy na loterię nie został zapisany żaden pracownik lub loteria nie została otworzona. Wtedy  zwracany status \texttt{HTTP} to \texttt{204 No Content}. 
 
 
 \begin{figure}[H]
@@ -92,7 +92,7 @@ Jedną z głównych funkcjonalności aplikacji jest przeprowadzenie losowania. S
 \end{figure}
 
 \subsubsection{Rejestracja użytkownika}
-Scenariusz testowy 4 (rysunek \ref{registerTest:label}) pokazuje jak działa rejestracja użytkownika. Po utworzeniu takiego użytkownika zwracany jest status HTTP 201 Created. Użytkownik taki zapisywane hasło ma w~postaci zaszyfrowanej.
+Scenariusz testowy 4 (rysunek \ref{registerTest:label}) pokazuje jak działa rejestracja użytkownika. Po utworzeniu takiego użytkownika zwracany jest status \texttt{HTTP 201 Created}. Użytkownik taki zapisywane hasło ma w~postaci zaszyfrowanej.
 
 \begin{figure}[h]
 		\centering
@@ -119,9 +119,9 @@ Wykorzystanie Lighthouse \ref{tab:zestawienie_narzędzi} pozwala na zbadanie wyd
 
 Wnioskując z testu widok aplikacji ma satysfakcjonujące parametry.
 \begin{itemize}
-\item \textbf{Wydajność (ang.~\emph{Performance})} -- jest na średnim poziomie. Pokazuje to że aplikacja mogła by być bardziej zoptymalizowana pod względem wydajności
-\item \textbf{Dostępność (ang.~\emph{Accessibility})} -- jest na wysokim poziomie. Oznacza to, że osoby z różnymi niepełnosprawnościami nie miałyby większego problemu z posługiwaniem się aplikacją. Jednak tutaj jest możliwość optymalizacji by osiągnąć większy stopień zadowolenia tych użytkowników.
-\item \textbf{Dobre praktyki (ang.~\emph{Best Practices})} -- pokazuje, że test przeszedł test dobrych praktyk i strona jest zgodna ze standardami.
-\item \textbf{SEO} -- pokazuje, że strona jest zoptymalizowana pod kątem wyszukiwarek internetowych
+\item \textbf{Wydajność (ang.~\emph{Performance})} -- jest na średnim poziomie. Pokazuje to że aplikacja mogła by być bardziej zoptymalizowana pod względem wydajności,
+\item \textbf{Dostępność (ang.~\emph{Accessibility})} -- jest na wysokim poziomie. Oznacza to, że osoby z różnymi niepełnosprawnościami nie miałyby większego problemu z posługiwaniem się aplikacją. Jednak tutaj jest możliwość optymalizacji by osiągnąć większy stopień zadowolenia tych użytkowników,
+\item \textbf{Dobre praktyki (ang.~\emph{Best Practices})} -- pokazuje, że test przeszedł test dobrych praktyk i~strona jest zgodna ze standardami,
+\item \textbf{SEO} -- pokazuje, że strona jest zoptymalizowana pod kątem wyszukiwarek internetowych.
 \end{itemize}
 

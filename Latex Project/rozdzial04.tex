@@ -11,7 +11,7 @@ W celu zdefiniowania struktury bazy danych stworzono diagram związków encji ER
 \end{figure}
 Na diagramie tym zilustrowano, jakie typy danych są przechowywane w poszczególnych tabelach, a także jakie relacje zachodzą między tymi tabelami. Warto zaznaczyć, że ze względu na brak domyślnego wsparcia dla dziedziczenia tabel w relacyjnych bazach danych, zdecydowano się skorzystać z mechanizmu dziedziczenia dostępnego w Hibernate. Aspekt ten omówiono w dalszej części rozdziału.
 
-W systemie istnieją różne rodzaje urządzeń, z których każdy jest reprezentowany przez odpowiadającą mu tabelę w bazie danych. Trzy główne kategorie urządzeń to: \texttt{computer}, \texttt{table} oraz \texttt{other\_device}. Wszystkie te kategorie dziedziczą swoje cechy od wspólnej tabeli o nazwie \texttt{device\_core}, która stanowi rdzeń dla wszystkich urządzeń.
+W systemie istnieją różne rodzaje urządzeń, z których każdy jest reprezentowany przez odpowiadającą mu tabelę w bazie danych. Trzy główne kategorie urządzeń to: \texttt{computer}, \texttt{tablet} oraz \texttt{other\_device}. Wszystkie te kategorie dziedziczą swoje cechy od wspólnej tabeli o nazwie \texttt{device\_core}, która stanowi rdzeń dla wszystkich urządzeń.
 
 Wspólny rdzeń, reprezentowany przez tabelę \texttt{device\_core}, zawiera parametry, które są dziedziczone przez wszystkie rodzaje urządzeń. Dzięki tej strukturze, każda tabela reprezentująca konkretny typ urządzenia posiada te same podstawowe atrybuty, ułatwiając jednolite zarządzanie nimi w systemie. Parametry wspólne dla wszystkich typów urządzeń obejmują: 
 \begin{itemize}
@@ -20,13 +20,13 @@ Wspólny rdzeń, reprezentowany przez tabelę \texttt{device\_core}, zawiera par
 	\item \texttt{device\_name} --nazwa urządzenia,
 	\item \texttt{price} -- cena urządzenia,
 	\item \texttt{age} -- wiek urządzenia,
-	\item \texttt{office\_id} -- identyfikator biura w którym znajduje się urządzenie,
+	\item \texttt{office\_id} -- identyfikator biura, w którym znajduje się urządzenie,
 	\item \texttt{ready\_to\_lottery} -- informacja czy sprzęt jest gotowy do przeprowadzenia loterii,
-	\item \texttt{lottery\_date} -- data loterii w której odbyło się losowanie, jeżeli się nie odbyło to wartość jest pusta,
+	\item \texttt{lottery\_date} -- data loterii, w której odbyło się losowanie, jeżeli się nie odbyło to wartość jest pusta,
 	\item \texttt{is\_ordered} -- informacja czy sprzęt został już odebrany przez pracownika.
 \end{itemize}
 
-Pozostałe tabele reprezentujące urządzenia rozszerzają informacje dostarczane przez rdzeń. Komputer dodatkowo posiada informacje odnośnie
+Pozostałe tabele reprezentujące urządzenia rozszerzają informacje dostarczane przez rdzeń. Komputer dodatkowo posiada informacje odnośnie:
 \begin{itemize}
 	\item \texttt{serial\_number} -- numer seryjny komputera,
 	\item \texttt{model} -- model komputera,
@@ -63,7 +63,7 @@ Dla klas dziedziczących, takich jak \texttt{computer, tablet czy other\_device}
 \section{Tworzenie bazy danych}
 W tworzeniu baz danych istnieją dwa podejścia: \emph{code first} i \emph{database first}. W implementacji systemu wykorzystane zostało podejście \emph{database first}. Daje to w początkowym etapie projektowania większą przejrzystość danych. Po stworzeniu modelu można potem skorzystać z gotowych narzędzi, które pozwolą automatycznie wygenerować kod odzwierciedlający model danych.
 
-Przy tworzeniu bazy danych wykorzystywanym narzędziem jest SSMS \ref{ssms:label}. Na początek stworzono tabele na podstawie diagramu związków encji \ref{ErDiagram:label} oraz określono jej relacje. Przykład tworzenia encji oraz jej relacji znajduje się na rysunku \ref{ssms_tworzenie:label}
+Przy tworzeniu bazy danych wykorzystywanym narzędziem jest SSMS (tabela \ref{ssms:label}). Na początek stworzono tabele na podstawie diagramu związków encji \ref{ErDiagram:label} oraz określono jej relacje. Przykład tworzenia encji oraz jej relacji znajduje się na rysunku \ref{ssms_tworzenie:label}
 
 \begin{figure}[htb]
   \centering
@@ -87,5 +87,5 @@ Po stworzeniu wszystkich tabel możliwe jest wygenerowanie kodu. Wykorzystano do
     \label{generate:label}
 \end{figure}
 
-Tworzenie w ten sposób początkowej struktury projektu jest bardzo pomocne. Jednak kiedy definiuje się sposób dziedziczenia tabel, to jedynym sposobem jest zdefiniowanie relacji wykorzystując Hibernate. O sposobie dziedziczenia tabel przez Hibernate napisano na początku tego rozdziału \ref{dzedziczenie_hibernate:label}. Szczegóły implementacji dotyczące klasy \texttt{device\_core} opisano w podrozdziale \ref{entity_deviceCore}. Odpowiednia konfiguracja projektu umożliwia aktualizowanie struktury bazy danych. Możliwe dzięki temu jest wyeliminowanie nadmiarowego kodu oraz skorzystanie abstrakcji dostarczanej przez dziedziczenie. Gdy Hibernate zaktualizuje strukturę bazy danych w SSMS automatycznie powstają odpowiednie tabele i relacje klas sprzętu. Zarządzanie unikalnością kluczy dla tych klas też jest możliwa tylko z poziomu kodu.
+Tworzenie w ten sposób początkowej struktury projektu jest bardzo pomocne. Jednak kiedy definiuje się sposób dziedziczenia tabel, to jedynym sposobem jest zdefiniowanie relacji wykorzystując Hibernate. O sposobie dziedziczenia tabel przez Hibernate napisano na początku tego rozdziału \ref{dzedziczenie_hibernate:label}. Szczegóły implementacji dotyczące klasy \texttt{device\_core} opisano w podrozdziale \ref{entity_deviceCore}. Odpowiednia konfiguracja projektu umożliwia aktualizowanie struktury bazy danych. Możliwe dzięki temu jest wyeliminowanie nadmiarowego kodu oraz skorzystanie abstrakcji dostarczanej przez dziedziczenie. Gdy Hibernate zaktualizuje strukturę bazy danych, w~SSMS automatycznie powstają odpowiednie tabele i relacje klas sprzętu. Zarządzanie unikalnością kluczy dla tych klas też jest możliwa tylko z poziomu kodu.
  
